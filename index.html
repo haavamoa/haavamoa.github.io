@@ -1,16 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bryllupet 5. september 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Lato:wght@300;400&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf6f1;
+      --sand:  #f0e8dc;
+      --gold:  #b8975a;
+      --brown: #5c4a2a;
+      --text:  #3a3027;
+      --muted: #7a6a58;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .ornament { color: var(--gold); font-size: 1.6rem; letter-spacing: 0.3em; margin-bottom: 20px; }
+
+    h1 {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      color: var(--brown);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .ampersand {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .date {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 50px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brown);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 40px;
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .nav-link:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      margin-top: 60px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
 <body>
+  <div class="ornament">✦ ✦ ✦</div>
+  <h1>[Navn 1] <span class="ampersand">&amp;</span> [Navn 2]</h1>
+  <p class="date">5. september 2026</p>
 
-<h2>JavaScript Alert</h2>
+  <nav class="nav-links">
+    <a class="nav-link" href="/praktisk-informasjon/">
+      📋 &nbsp;Praktisk informasjon
+    </a>
+  </nav>
 
-<button onclick="myFunction()">Try it</button>
-
-<script>
-function myFunction() {
-  alert("I am an alert box!");
-}
-</script>
-
+  <p class="footer-note">Vi gleder oss til å feire denne dagen med deg! 🤍</p>
 </body>
 </html>
