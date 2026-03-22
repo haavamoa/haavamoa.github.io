@@ -353,14 +353,42 @@
       object-position: center 60%;
     }
 
-    /* ── QR code ────────────────────────────────────────────── */
+    /* ── QR card ────────────────────────────────────────────── */
+    .qr-card-wrap {
+      text-align: center;
+      padding: 20px 0 8px;
+    }
+
+    .qr-card-title {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--brown);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .qr-card-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+
     .qr-code {
       display: block;
-      max-width: 260px;
+      max-width: 320px;
       width: 100%;
-      margin: 20px auto 0;
+      margin: 0 auto;
       border-radius: var(--radius);
-      box-shadow: 0 2px 12px rgba(109, 116, 92, 0.15);
+      box-shadow: 0 6px 28px rgba(109, 116, 92, 0.18);
+    }
+
+    .qr-card-caption {
+      margin-top: 18px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
     }
 
     /* ── Responsive ─────────────────────────────────────────── */
@@ -671,26 +699,18 @@
     <div class="ornament-divider">· · · ✦ · · ·</div>
 
     <!-- 7. QR-KODE -->
-    <div class="section-card" style="text-align: center;">
-      <div class="section-header" style="justify-content: center;">
-        <div class="section-icon">📲</div>
-        <div>
-          <span class="section-number">07 &nbsp;—&nbsp; Del siden</span>
-          <h2 class="section-title">QR-kode</h2>
-        </div>
+    <div class="section-card">
+      <div class="qr-card-wrap">
+        <p class="qr-card-title">Del bryllupssiden</p>
+        <p class="qr-card-subtitle">Scan QR-koden eller gå til&nbsp;haavamoa.github.io/bryllup</p>
+        <img
+          class="qr-code"
+          src="qr.png"
+          alt="QR-kode til bryllupssiden haavamoa.github.io/bryllup"
+          loading="lazy"
+        />
+        <p class="qr-card-caption">· · · ✦ · · ·</p>
       </div>
-
-      <p>
-        Del bryllupssiden med andre ved å scanne QR-koden nedenfor,
-        eller gå til <strong>haavamoa.github.io/bryllup</strong>.
-      </p>
-
-      <img
-        class="qr-code"
-        src="qr.png"
-        alt="QR-kode til bryllupssiden haavamoa.github.io/bryllup"
-        loading="lazy"
-      />
     </div>
 
   </main>
