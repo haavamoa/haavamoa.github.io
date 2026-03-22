@@ -353,6 +353,16 @@
       object-position: center 60%;
     }
 
+    /* ── QR code ────────────────────────────────────────────── */
+    .qr-code {
+      display: block;
+      max-width: 260px;
+      width: 100%;
+      margin: 20px auto 0;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(109, 116, 92, 0.15);
+    }
+
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 600px) {
       .venue-photo { width: calc(100% + 40px); margin-left: -20px; margin-right: -20px; height: 220px; }
@@ -656,6 +666,31 @@
           Ta kontakt med toastmaster i god tid før bryllupsdagen.
         </p>
       </div>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 7. QR-KODE -->
+    <div class="section-card" style="text-align: center;">
+      <div class="section-header" style="justify-content: center;">
+        <div class="section-icon">📲</div>
+        <div>
+          <span class="section-number">07 &nbsp;—&nbsp; Del siden</span>
+          <h2 class="section-title">QR-kode</h2>
+        </div>
+      </div>
+
+      <p>
+        Del bryllupssiden med andre ved å scanne QR-koden nedenfor,
+        eller gå til <strong>haavamoa.github.io/bryllup</strong>.
+      </p>
+
+      <img
+        class="qr-code"
+        src="qr.png"
+        alt="QR-kode til bryllupssiden haavamoa.github.io/bryllup"
+        loading="lazy"
+      />
     </div>
 
   </main>
