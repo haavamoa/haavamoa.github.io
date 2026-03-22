@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Praktisk informasjon – Bryllupet 5. september 2026</title>
+  <title>Ida og Håvard bryllup 5. september 2026</title>
   <style>
     /* ── Fonts ──────────────────────────────────────────────── */
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
@@ -12,15 +12,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:   #faf6f1;
-      --sand:    #f0e8dc;
-      --gold:    #b8975a;
-      --gold-dk: #8a6e3c;
-      --brown:   #5c4a2a;
-      --text:    #3a3027;
-      --muted:   #7a6a58;
+      --cream:   #f8f5f0;
+      --sand:    #ede8df;
+      --gold:    #cba979;
+      --gold-dk: #b86830;
+      --brown:   #6d745c;
+      --accent:  #c46e58;
+      --text:    #2f2e29;
+      --muted:   #6e6b62;
       --white:   #ffffff;
-      --border:  #e0d5c5;
+      --border:  #ddd7cc;
       --radius:  12px;
     }
 
@@ -50,7 +51,7 @@
       content: '';
       position: absolute;
       border-radius: 50%;
-      background: rgba(184, 151, 90, 0.12);
+      background: rgba(203, 169, 121, 0.12);
     }
     header::before { width: 400px; height: 400px; top: -120px; left: -100px; }
     header::after  { width: 300px; height: 300px; bottom: -80px; right: -60px; }
@@ -103,7 +104,7 @@
       border-radius: var(--radius);
       padding: 36px 40px;
       margin-bottom: 32px;
-      box-shadow: 0 2px 12px rgba(92, 74, 42, 0.07);
+      box-shadow: 0 2px 12px rgba(109, 116, 92, 0.07);
     }
 
     .section-card:last-child { margin-bottom: 0; }
@@ -195,7 +196,7 @@
     /* ── Info boxes ─────────────────────────────────────────── */
     .info-box {
       background: var(--sand);
-      border-left: 4px solid var(--gold);
+      border-left: 4px solid var(--accent);
       border-radius: 0 8px 8px 0;
       padding: 14px 18px;
       margin: 16px 0;
@@ -307,8 +308,8 @@
     }
 
     .tag {
-      background: var(--brown);
-      color: var(--cream);
+      background: var(--accent);
+      color: var(--white);
       border-radius: 20px;
       padding: 5px 16px;
       font-size: 0.82rem;
@@ -342,8 +343,19 @@
       margin-bottom: 6px;
     }
 
+    /* ── Venue photo ────────────────────────────────────────── */
+    .venue-photo {
+      width: calc(100% + 80px);
+      margin: 22px -40px 24px;
+      display: block;
+      height: 320px;
+      object-fit: cover;
+      object-position: center 60%;
+    }
+
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 600px) {
+      .venue-photo { width: calc(100% + 40px); margin-left: -20px; margin-right: -20px; height: 220px; }
       .section-card { padding: 26px 20px; }
       .btn-secondary { margin-left: 0; margin-top: 10px; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -357,7 +369,7 @@
   ══════════════════════════════════════════════════════════════ -->
   <header>
     <span class="header-ornament">✦ ✦ ✦</span>
-    <h1>Praktisk informasjon</h1>
+    <h1>Ida og Håvard bryllup 5. september 2026</h1>
     <p class="subtitle">Bryllup &nbsp;·&nbsp; 5. september 2026</p>
   </header>
 
@@ -370,20 +382,36 @@
   ══════════════════════════════════════════════════════════════ -->
   <main>
 
-    <!-- 1. OVERNATTING -->
+    <!-- 1. STED & HOTELL -->
     <div class="section-card">
       <div class="section-header">
-        <div class="section-icon">🏨</div>
+        <div class="section-icon">📍</div>
         <div>
-          <span class="section-number">01 &nbsp;—&nbsp; Overnatting</span>
-          <h2 class="section-title">Hotell &amp; innkvartering</h2>
+          <span class="section-number">01 &nbsp;—&nbsp; Sted &amp; hotell</span>
+          <h2 class="section-title">Jegtvolden Fjordhotell</h2>
         </div>
       </div>
 
+      <img
+        class="venue-photo"
+        src="https://github.com/user-attachments/assets/602e7ee5-5c57-437e-9bfb-ed2efac5fe86"
+        alt="Jegtvolden Fjordhotell sett fra luften"
+        loading="lazy"
+      />
+
+      <p>
+        Hele bryllupet — vielse, mottakelse og fest — foregår på
+        <strong>
+          <a href="https://www.jegtvolden.no" target="_blank" rel="noopener noreferrer">
+            Jegtvolden Fjordhotell
+          </a>
+        </strong>,
+        Jektvollvegen 89, 7670 Inderøy.
+      </p>
+
       <p>
         Vi har reservert et antall rom til våre gjester på hotellet.
-        Romblokken er tilgjengelig til en <strong>spesialpris for bryllupsgjester</strong>
-        – husk å bestille i god tid, da antall reserverte rom er begrenset.
+        Husk å bestille i god tid, da antall reserverte rom er begrenset.
       </p>
 
       <div class="info-box">
@@ -395,15 +423,13 @@
 
       <div class="info-box">
         <p>
-          ℹ️ Du kan velge å overnatte <strong>natt til lørdag</strong> (fredag → lørdag)
-          og/eller <strong>natt til søndag</strong> (lørdag → søndag). Velg de nettene
-          som passer deg best under bestilling.
+          ℹ️ Det er mulig å overnatte fra <strong>fredag</strong> eller fra <strong>lørdag</strong>.
         </p>
       </div>
 
       <div class="date-pills">
-        <span class="date-pill">Fredag 4. sep → Lørdag 5. sep</span>
-        <span class="date-pill">Lørdag 5. sep → Søndag 6. sep</span>
+        <span class="date-pill">Fredag 4. sep</span>
+        <span class="date-pill">Lørdag 5. sep</span>
       </div>
 
       <a
@@ -460,72 +486,29 @@
 
     <div class="ornament-divider">· · · ✦ · · ·</div>
 
-    <!-- 3. DRESSCODE -->
+    <!-- 3. DRESSKODE -->
     <div class="section-card">
       <div class="section-header">
-        <div class="section-icon">👗</div>
+        <div class="section-icon">👔</div>
         <div>
-          <span class="section-number">03 &nbsp;—&nbsp; Antrekk</span>
-          <h2 class="section-title">Dresscode</h2>
+          <span class="section-number">03 &nbsp;—&nbsp; Dresskode</span>
+          <h2 class="section-title">Antrekk</h2>
         </div>
       </div>
 
       <p>
-        Vi ønsker at alle ser seg pene og festkledde ut på vår store dag.
-        Antrekket bør gjenspeile en formell bryllupsfeiring.
+        Vi ønsker at gjestene kler seg <strong>pent</strong> til bryllupet.
       </p>
-
-      <div class="tag-list">
-        <span class="tag">Mørk dress / smoking</span>
-        <span class="tag">Cocktailkjole / lang kjole</span>
-        <span class="tag">Formell festantrekk</span>
-      </div>
-
-      <div class="info-box" style="margin-top: 16px;">
-        <p>
-          🌿 <strong>Tips:</strong> Unngå hvitt, elfenbein og lysegrønt – dette er
-          forbeholdt brudepar og brudeoppfølge.
-        </p>
-      </div>
     </div>
 
     <div class="ornament-divider">· · · ✦ · · ·</div>
 
-    <!-- 4. STED OG TRANSPORT -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-icon">📍</div>
-        <div>
-          <span class="section-number">04 &nbsp;—&nbsp; Sted &amp; transport</span>
-          <h2 class="section-title">Slik kommer du deg dit</h2>
-        </div>
-      </div>
-
-      <p>
-        Både vielse og fest foregår på samme sted:<br />
-        <strong>
-          <a href="https://www.jegtvolden.no" target="_blank" rel="noopener noreferrer">
-            Jegtvolden Fjordhotell
-          </a>
-        </strong><br />
-        Jektvollvegen 89, 7670 Inderøy
-      </p>
-
-      <div class="info-box">
-        <p>
-          🚗 <strong>Parkering:</strong> Gratis parkering er tilgjengelig ved hotellet.
-        </p>
-      </div>
-    </div>
-
-    <div class="ornament-divider">· · · ✦ · · ·</div>
-
-    <!-- 5. PROGRAM -->
+    <!-- 4. PROGRAM -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-icon">📋</div>
         <div>
-          <span class="section-number">05 &nbsp;—&nbsp; Program</span>
+          <span class="section-number">04 &nbsp;—&nbsp; Program</span>
           <h2 class="section-title">Dagen i korte trekk</h2>
         </div>
       </div>
@@ -537,7 +520,7 @@
         </li>
         <li>
           <span class="program-time">13:00</span>
-          <span class="program-desc">Samling med familien i hagen – aperitiff og frukt</span>
+          <span class="program-desc">Brudeparet fotograferes og gjester mingler</span>
         </li>
         <li>
           <span class="program-time">16:00</span>
@@ -572,12 +555,12 @@
 
     <div class="ornament-divider">· · · ✦ · · ·</div>
 
-    <!-- 6. MAT OG ALLERGIER -->
+    <!-- 5. MAT OG ALLERGIER -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-icon">🍽️</div>
         <div>
-          <span class="section-number">06 &nbsp;—&nbsp; Mat &amp; allergier</span>
+          <span class="section-number">05 &nbsp;—&nbsp; Mat &amp; allergier</span>
           <h2 class="section-title">Matpreferanser</h2>
         </div>
       </div>
@@ -596,12 +579,12 @@
 
     <div class="ornament-divider">· · · ✦ · · ·</div>
 
-    <!-- 7. KONTAKTPERSONER -->
+    <!-- 6. KONTAKTPERSONER -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-icon">📞</div>
         <div>
-          <span class="section-number">07 &nbsp;—&nbsp; Kontakt</span>
+          <span class="section-number">06 &nbsp;—&nbsp; Kontakt</span>
           <h2 class="section-title">Kontaktpersoner</h2>
         </div>
       </div>
@@ -634,6 +617,38 @@
           <div class="contact-role">Toastmaster</div>
           <a href="tel:+4795276375">
             📱 &nbsp;+47 952 76 375
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-name">Ida Aunan Ulvik</div>
+          <div class="contact-role">Forlover (brud)</div>
+          <a href="tel:+4793856427">
+            📱 &nbsp;+47 938 56 427
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-name">Julie Ringstad</div>
+          <div class="contact-role">Forlover (brud)</div>
+          <a href="tel:+4798097334">
+            📱 &nbsp;+47 980 97 334
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-name">Simen Løveng</div>
+          <div class="contact-role">Forlover (brudgom)</div>
+          <a href="tel:+4792429932">
+            📱 &nbsp;+47 924 29 932
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-name">Grete Moås</div>
+          <div class="contact-role">Forlover (brudgom)</div>
+          <a href="tel:+4797984303">
+            📱 &nbsp;+47 979 84 303
           </a>
         </div>
 
