@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praktisk informasjon – Bryllupet 5. september 2026</title>
+  <style>
+    /* ── Fonts ──────────────────────────────────────────────── */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
+
+    /* ── Reset & base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #faf6f1;
+      --sand:    #f0e8dc;
+      --gold:    #b8975a;
+      --gold-dk: #8a6e3c;
+      --brown:   #5c4a2a;
+      --text:    #3a3027;
+      --muted:   #7a6a58;
+      --white:   #ffffff;
+      --border:  #e0d5c5;
+      --radius:  12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── Header / Hero ──────────────────────────────────────── */
+    header {
+      background: var(--brown);
+      color: var(--cream);
+      text-align: center;
+      padding: 60px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(184, 151, 90, 0.12);
+    }
+    header::before { width: 400px; height: 400px; top: -120px; left: -100px; }
+    header::after  { width: 300px; height: 300px; bottom: -80px; right: -60px; }
+
+    .header-ornament {
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: rgba(250, 246, 241, 0.75);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── Intro banner ───────────────────────────────────────── */
+    .intro-banner {
+      background: var(--gold);
+      color: var(--white);
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    /* ── Section cards ──────────────────────────────────────── */
+    .section-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(92, 74, 42, 0.07);
+    }
+
+    .section-card:last-child { margin-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--sand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .section-number {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.65rem;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.2;
+    }
+
+    /* ── Typography inside cards ────────────────────────────── */
+    .section-card p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .section-card p:last-child { margin-bottom: 0; }
+
+    .section-card strong { color: var(--text); font-weight: 700; }
+
+    /* ── Buttons / CTAs ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 18px;
+    }
+
+    .btn:hover {
+      background: var(--gold-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      margin-left: 10px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    /* ── Info boxes ─────────────────────────────────────────── */
+    .info-box {
+      background: var(--sand);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: var(--text) !important;
+      font-size: 0.92rem;
+    }
+
+    /* ── Date pills ─────────────────────────────────────────── */
+    .date-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .date-pill {
+      background: var(--sand);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 6px 18px;
+      font-size: 0.88rem;
+      color: var(--brown);
+      font-weight: 700;
+    }
+
+    /* ── Contact grid ───────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .contact-card {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      text-align: center;
+    }
+
+    .contact-card .contact-name {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.35rem;
+      color: var(--brown);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .contact-card .contact-role {
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .contact-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .contact-card a:hover { color: var(--gold); }
+
+    /* ── Program list ───────────────────────────────────────── */
+    .program-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    .program-list li {
+      display: flex;
+      gap: 20px;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border);
+      align-items: baseline;
+    }
+
+    .program-list li:last-child { border-bottom: none; }
+
+    .program-time {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.05rem;
+      color: var(--gold);
+      font-weight: 600;
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .program-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ── Tag list (dress code etc.) ─────────────────────────── */
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      background: var(--brown);
+      color: var(--cream);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Divider ornament ───────────────────────────────────── */
+    .ornament-divider {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.3rem;
+      letter-spacing: 0.5em;
+      margin: 8px 0 24px;
+      opacity: 0.6;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--brown);
+      color: rgba(250, 246, 241, 0.65);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer .footer-names {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .section-card { padding: 26px 20px; }
+      .btn-secondary { margin-left: 0; margin-top: 10px; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════════════════ -->
+  <header>
+    <span class="header-ornament">✦ ✦ ✦</span>
+    <h1>Praktisk informasjon</h1>
+    <p class="subtitle">Bryllup &nbsp;·&nbsp; 5. september 2026</p>
+  </header>
+
+  <div class="intro-banner">
+    Vi gleder oss til å feire denne dagen sammen med dere! 🤍
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════════════════════════ -->
+  <main>
+
+    <!-- 1. OVERNATTING -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">🏨</div>
+        <div>
+          <span class="section-number">01 &nbsp;—&nbsp; Overnatting</span>
+          <h2 class="section-title">Hotell &amp; innkvartering</h2>
+        </div>
+      </div>
+
+      <p>
+        Vi har reservert et antall rom til våre gjester på hotellet.
+        Romblokken er tilgjengelig til en <strong>spesialpris for bryllupsgjester</strong>
+        – husk å bestille i god tid, da antall reserverte rom er begrenset.
+      </p>
+
+      <div class="info-box">
+        <p>
+          ⚠️ <strong>Bestillingsfrist: 4. juli 2026.</strong> Etter denne datoen slippes
+          ubestilte rom og gjester må bestille på ordinære vilkår.
+        </p>
+      </div>
+
+      <div class="info-box">
+        <p>
+          ℹ️ Du kan velge å overnatte <strong>natt til lørdag</strong> (fredag → lørdag)
+          og/eller <strong>natt til søndag</strong> (lørdag → søndag). Velg de nettene
+          som passer deg best under bestilling.
+        </p>
+      </div>
+
+      <div class="date-pills">
+        <span class="date-pill">Fredag 4. sep → Lørdag 5. sep</span>
+        <span class="date-pill">Lørdag 5. sep → Søndag 6. sep</span>
+      </div>
+
+      <a
+        class="btn"
+        href="https://app.mews.com/distributor/4d5b9ca4-b9d3-4396-aeb1-b0f600d72ff8?mewsAvailabilityBlockId=a873fe53-2cdf-41da-a906-b3d300ac312d&mewsStart=2026-09-05&mewsEnd=2026-09-06"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🛏️ &nbsp;Book rom
+      </a>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 2. GAVELISTE -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">🎁</div>
+        <div>
+          <span class="section-number">02 &nbsp;—&nbsp; Gaveliste</span>
+          <h2 class="section-title">Ønskeliste</h2>
+        </div>
+      </div>
+
+      <p>
+        Vi har satt sammen en ønskeliste som oppdateres løpende frem mot bryllupsdagen.
+        Vi setter stor pris på alle tanker og gaver, store som små!
+      </p>
+
+      <div class="info-box">
+        <p>
+          💡 <strong>Lenkene er veiledende.</strong> Du står fritt til å anskaffe
+          gaven der det passer deg best – i butikk, på nett, brukt eller nytt.
+          Det viktigste er tanken bak! 🤍
+        </p>
+      </div>
+
+      <div class="info-box">
+        <p>
+          ✅ <strong>Husk å huke av</strong> for det du har kjøpt, slik at vi unngår
+          doble gaver. Pengegaver trenger ikke avhukes.
+        </p>
+      </div>
+
+      <a
+        class="btn"
+        href="https://onskeskyen.no/s/en90dj"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🎀 &nbsp;Se gavelisten
+      </a>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 3. DRESSCODE -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">👗</div>
+        <div>
+          <span class="section-number">03 &nbsp;—&nbsp; Antrekk</span>
+          <h2 class="section-title">Dresscode</h2>
+        </div>
+      </div>
+
+      <p>
+        Vi ønsker at alle ser seg pene og festkledde ut på vår store dag.
+        Antrekket bør gjenspeile en formell bryllupsfeiring.
+      </p>
+
+      <div class="tag-list">
+        <span class="tag">Mørk dress / smoking</span>
+        <span class="tag">Cocktailkjole / lang kjole</span>
+        <span class="tag">Formell festantrekk</span>
+      </div>
+
+      <div class="info-box" style="margin-top: 16px;">
+        <p>
+          🌿 <strong>Tips:</strong> Unngå hvitt, elfenbein og lysegrønt – dette er
+          forbeholdt brudepar og brudeoppfølge.
+        </p>
+      </div>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 4. STED OG TRANSPORT -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">📍</div>
+        <div>
+          <span class="section-number">04 &nbsp;—&nbsp; Sted &amp; transport</span>
+          <h2 class="section-title">Slik kommer du deg dit</h2>
+        </div>
+      </div>
+
+      <p>
+        Både vielse og fest foregår på samme sted:<br />
+        <strong>
+          <a href="https://www.jegtvolden.no" target="_blank" rel="noopener noreferrer">
+            Jegtvolden Fjordhotell
+          </a>
+        </strong><br />
+        Jektvollvegen 89, 7670 Inderøy
+      </p>
+
+      <div class="info-box">
+        <p>
+          🚗 <strong>Parkering:</strong> Gratis parkering er tilgjengelig ved hotellet.
+        </p>
+      </div>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 5. PROGRAM -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <span class="section-number">05 &nbsp;—&nbsp; Program</span>
+          <h2 class="section-title">Dagen i korte trekk</h2>
+        </div>
+      </div>
+
+      <ul class="program-list">
+        <li>
+          <span class="program-time">12:00</span>
+          <span class="program-desc">Vielse i hagen på Jegtvolden Fjordhotell</span>
+        </li>
+        <li>
+          <span class="program-time">13:00</span>
+          <span class="program-desc">Samling med familien i hagen – aperitiff og frukt</span>
+        </li>
+        <li>
+          <span class="program-time">16:00</span>
+          <span class="program-desc">Går til bords</span>
+        </li>
+        <li>
+          <span class="program-time">19:00</span>
+          <span class="program-desc">Kakebord med kaffe og avec i buffetområdet</span>
+        </li>
+        <li>
+          <span class="program-time">20:00</span>
+          <span class="program-desc">Snacks settes på bordet</span>
+        </li>
+        <li>
+          <span class="program-time">00:00</span>
+          <span class="program-desc">Nattmat</span>
+        </li>
+        <li>
+          <span class="program-time">01:30</span>
+          <span class="program-desc">Baren stenger</span>
+        </li>
+        <li>
+          <span class="program-time">Søndag 10:00</span>
+          <span class="program-desc">Felles frokost</span>
+        </li>
+      </ul>
+
+      <p style="margin-top: 16px; font-size: 0.88rem;">
+        * Tidspunktene er omtrentlige og kan endre seg noe.
+      </p>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 6. MAT OG ALLERGIER -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">🍽️</div>
+        <div>
+          <span class="section-number">06 &nbsp;—&nbsp; Mat &amp; allergier</span>
+          <h2 class="section-title">Matpreferanser</h2>
+        </div>
+      </div>
+
+      <p>
+        Vi vil gjerne at alle skal ha det godt ved middagsbordet!
+        Dersom du har <strong>matallergier, intoleranse eller er vegetarianer/veganer</strong>,
+        ber vi deg gi oss beskjed <strong>senest 14 dager før arrangementet</strong>
+        – gjerne tidligere om du allerede vet det.
+      </p>
+
+      <p>
+        Meld fra til brudepar eller toastmaster direkte.
+      </p>
+    </div>
+
+    <div class="ornament-divider">· · · ✦ · · ·</div>
+
+    <!-- 7. KONTAKTPERSONER -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">📞</div>
+        <div>
+          <span class="section-number">07 &nbsp;—&nbsp; Kontakt</span>
+          <h2 class="section-title">Kontaktpersoner</h2>
+        </div>
+      </div>
+
+      <p>
+        Har du spørsmål om bryllupet? Ta gjerne kontakt med oss eller
+        toastmaster direkte.
+      </p>
+
+      <div class="contact-grid">
+
+        <div class="contact-card">
+          <div class="contact-name">Håvard Moås</div>
+          <div class="contact-role">Brudgom</div>
+          <a href="tel:+4791358081">
+            📱 &nbsp;+47 913 58 081
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-name">Ida Ringstad</div>
+          <div class="contact-role">Brud</div>
+          <a href="tel:+4740474445">
+            📱 &nbsp;+47 404 74 445
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-name">Randi Eggen</div>
+          <div class="contact-role">Toastmaster</div>
+          <a href="tel:+4795276375">
+            📱 &nbsp;+47 952 76 375
+          </a>
+        </div>
+
+      </div>
+
+      <div class="info-box" style="margin-top: 22px;">
+        <p>
+          🎤 <strong>Ønsker du å holde tale eller fremføre noe?</strong>
+          Ta kontakt med toastmaster i god tid før bryllupsdagen.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-names">Ida Ringstad &amp; Håvard Moås</div>
+    <p>5. september 2026 &nbsp;·&nbsp; Gleder oss til å se deg! 🤍</p>
+  </footer>
+
+</body>
+</html>
