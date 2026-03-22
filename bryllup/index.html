@@ -342,8 +342,19 @@
       margin-bottom: 6px;
     }
 
+    /* ── Venue photo ────────────────────────────────────────── */
+    .venue-photo {
+      width: calc(100% + 80px);
+      margin: 22px -40px 24px;
+      display: block;
+      height: 320px;
+      object-fit: cover;
+      object-position: center 60%;
+    }
+
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 600px) {
+      .venue-photo { width: calc(100% + 40px); margin-left: -20px; margin-right: -20px; height: 220px; }
       .section-card { padding: 26px 20px; }
       .btn-secondary { margin-left: 0; margin-top: 10px; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -465,6 +476,13 @@
           <h2 class="section-title">Slik kommer du deg dit</h2>
         </div>
       </div>
+
+      <img
+        class="venue-photo"
+        src="https://images.squarespace-cdn.com/content/v1/6579dc9f3e25292764ed9c81/734a976f-b0ee-4d98-b813-55c2daf538fe/Jegtevolden_Drone_Sep24_081.jpg"
+        alt="Jegtvolden Fjordhotell sett fra luften"
+        loading="lazy"
+      />
 
       <p>
         Både vielse og fest foregår på samme sted:<br />
