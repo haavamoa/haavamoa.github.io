@@ -38,10 +38,10 @@
 
     /* ── Header / Hero ──────────────────────────────────────── */
     header {
-      background: var(--brown);
+      background: linear-gradient(160deg, #8a907a 0%, #6d745c 50%, #5c634e 100%);
       color: var(--cream);
       text-align: center;
-      padding: 60px 20px 50px;
+      padding: 80px 20px 60px;
       position: relative;
       overflow: hidden;
     }
@@ -51,33 +51,35 @@
       content: '';
       position: absolute;
       border-radius: 50%;
-      background: rgba(203, 169, 121, 0.12);
+      background: rgba(203, 169, 121, 0.08);
     }
     header::before { width: 400px; height: 400px; top: -120px; left: -100px; }
     header::after  { width: 300px; height: 300px; bottom: -80px; right: -60px; }
 
     .header-ornament {
-      font-size: 1.8rem;
+      font-size: 1.2rem;
       color: var(--gold);
       letter-spacing: 0.15em;
-      margin-bottom: 10px;
+      margin: 12px 0;
       display: block;
     }
 
     header h1 {
       font-family: 'Cormorant Garamond', 'Georgia', serif;
       font-weight: 300;
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      letter-spacing: 0.04em;
-      line-height: 1.2;
-      margin-bottom: 10px;
+      font-style: italic;
+      font-size: clamp(3rem, 8vw, 5rem);
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: 0;
     }
 
     header .subtitle {
-      font-size: 1rem;
-      color: rgba(250, 246, 241, 0.75);
-      letter-spacing: 0.12em;
+      font-size: 0.95rem;
+      color: rgba(250, 246, 241, 0.7);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      font-weight: 300;
     }
 
     /* ── Intro banner ───────────────────────────────────────── */
@@ -368,13 +370,14 @@
        HEADER
   ══════════════════════════════════════════════════════════════ -->
   <header>
-    <span class="header-ornament">✦ ✦ ✦</span>
-    <h1>Ida og Håvard bryllup 5. september 2026</h1>
-    <p class="subtitle">Bryllup &nbsp;·&nbsp; 5. september 2026</p>
+    <p class="subtitle">Vi gifter oss!</p>
+    <h1>Ida &amp; Håvard</h1>
+    <span class="header-ornament">♥</span>
+    <p class="subtitle">5. september 2026 &nbsp;·&nbsp; Inderøy</p>
   </header>
 
   <div class="intro-banner">
-    Vi gleder oss til å feire denne dagen sammen med dere! 🤍
+    Svar utbedes innen 15. august 2026 — send SMS til <a href="#kontakt" style="color: var(--white); text-decoration: underline;">Ida eller Håvard</a> 💌
   </div>
 
   <!-- ══════════════════════════════════════════════════════════
@@ -428,7 +431,7 @@
       </div>
 
       <div class="date-pills">
-        <span class="date-pill">Fredag 4. sep</span>
+        <span class="date-pill">Fredag 4.</span>
         <span class="date-pill">Lørdag 5. sep</span>
       </div>
 
@@ -442,72 +445,14 @@
       </a>
     </div>
 
-    <div class="ornament-divider">· · · ✦ · · ·</div>
+    <div class="ornament-divider">· · · ♥ · · ·</div>
 
-    <!-- 2. GAVELISTE -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-icon">🎁</div>
-        <div>
-          <span class="section-number">02 &nbsp;—&nbsp; Gaveliste</span>
-          <h2 class="section-title">Ønskeliste</h2>
-        </div>
-      </div>
-
-      <p>
-        Vi har satt sammen en ønskeliste som oppdateres løpende frem mot bryllupsdagen.
-      </p>
-
-      <div class="info-box">
-        <p>
-          💡 <strong>Lenkene er veiledende.</strong> Du står fritt til å anskaffe
-          gaven der det passer deg best – i butikk, på nett, brukt eller nytt.
-          Det viktigste er tanken bak! 🤍
-        </p>
-      </div>
-
-      <div class="info-box">
-        <p>
-          ✅ <strong>Husk å huke av</strong> for det du har kjøpt, slik at vi unngår
-          doble gaver. Pengegaver trenger ikke avhukes.
-        </p>
-      </div>
-
-      <a
-        class="btn"
-        href="https://onskeskyen.no/s/en90dj"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        🎀 &nbsp;Se gavelisten
-      </a>
-    </div>
-
-    <div class="ornament-divider">· · · ✦ · · ·</div>
-
-    <!-- 3. DRESSKODE -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-icon">👔</div>
-        <div>
-          <span class="section-number">03 &nbsp;—&nbsp; Dresskode</span>
-          <h2 class="section-title">Antrekk</h2>
-        </div>
-      </div>
-
-      <p>
-        Vi ønsker at gjestene kler seg <strong>pent</strong> til bryllupet.
-      </p>
-    </div>
-
-    <div class="ornament-divider">· · · ✦ · · ·</div>
-
-    <!-- 4. PROGRAM -->
+    <!-- 2. PROGRAM -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-icon">📋</div>
         <div>
-          <span class="section-number">04 &nbsp;—&nbsp; Program</span>
+          <span class="section-number">02 &nbsp;—&nbsp; Program</span>
           <h2 class="section-title">Dagen i korte trekk</h2>
         </div>
       </div>
@@ -549,14 +494,55 @@
       </p>
     </div>
 
-    <div class="ornament-divider">· · · ✦ · · ·</div>
+    <div class="ornament-divider">· · · ♥ · · ·</div>
 
-    <!-- 5. MAT OG ALLERGIER -->
+    <!-- 3. GAVELISTE -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">🎁</div>
+        <div>
+          <span class="section-number">03 &nbsp;—&nbsp; Gaveliste</span>
+          <h2 class="section-title">Ønskeliste</h2>
+        </div>
+      </div>
+
+      <p>
+        Vi har satt sammen en ønskeliste som oppdateres løpende frem mot bryllupsdagen.
+      </p>
+
+      <div class="info-box">
+        <p>
+          💡 <strong>Lenkene er veiledende.</strong> Du står fritt til å anskaffe
+          gaven der det passer deg best – i butikk, på nett, brukt eller nytt.
+          Det viktigste er tanken bak! ♥
+        </p>
+      </div>
+
+      <div class="info-box">
+        <p>
+          ✅ <strong>Husk å huke av</strong> for det du har kjøpt, slik at vi unngår
+          doble gaver. Pengegaver trenger ikke avhukes.
+        </p>
+      </div>
+
+      <a
+        class="btn"
+        href="https://onskeskyen.no/s/en90dj"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🎀 &nbsp;Se gavelisten
+      </a>
+    </div>
+
+    <div class="ornament-divider">· · · ♥ · · ·</div>
+
+    <!-- 4. MAT OG ALLERGIER -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-icon">🍽️</div>
         <div>
-          <span class="section-number">05 &nbsp;—&nbsp; Mat &amp; allergier</span>
+          <span class="section-number">04 &nbsp;—&nbsp; Mat &amp; allergier</span>
           <h2 class="section-title">Matpreferanser</h2>
         </div>
       </div>
@@ -573,14 +559,59 @@
       </p>
     </div>
 
-    <div class="ornament-divider">· · · ✦ · · ·</div>
+    <div class="ornament-divider">· · · ♥ · · ·</div>
 
-    <!-- 6. KONTAKTPERSONER -->
+    <!-- 5. DRESSKODE -->
     <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">👔</div>
+        <div>
+          <span class="section-number">05 &nbsp;—&nbsp; Dresskode</span>
+          <h2 class="section-title">Antrekk</h2>
+        </div>
+      </div>
+
+      <p>
+        Vi ønsker at gjestene kler seg <strong>pent</strong> til bryllupet.
+      </p>
+    </div>
+
+    <div class="ornament-divider">· · · ♥ · · ·</div>
+
+    <!-- 6. TALER & INNSLAG -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-icon">🎤</div>
+        <div>
+          <span class="section-number">06 &nbsp;—&nbsp; Taler &amp; innslag</span>
+          <h2 class="section-title">Ønsker du å bidra?</h2>
+        </div>
+      </div>
+
+      <p>
+        Har du lyst til å holde en tale, fremføre en sang, eller bidra med et annet innslag under festen?
+        Vi setter stor pris på det!
+      </p>
+
+      <p>
+        Ta kontakt med toastmaster <strong>i god tid</strong> før bryllupsdagen, slik at vi kan planlegge programmet.
+      </p>
+
+      <div class="info-box">
+        <p>
+          📋 Kontakt toastmaster <a href="#kontakt" style="color: var(--gold-dk);">Randi eller Linus</a> for å melde inn ditt bidrag.
+        </p>
+      </div>
+    </div>
+
+    <div class="ornament-divider">· · · ♥ · · ·</div>
+
+    <!-- 7. KONTAKTPERSONER -->
+    <div class="section-card" id="kontakt">
       <div class="section-header">
         <div class="section-icon">📞</div>
         <div>
-          <span class="section-number">06 &nbsp;—&nbsp; Kontakt</span>
+          <span class="section-number">07 &nbsp;—&nbsp; Kontakt</span>
           <h2 class="section-title">Kontaktpersoner</h2>
         </div>
       </div>
@@ -657,13 +688,6 @@
         </div>
 
       </div>
-
-      <div class="info-box" style="margin-top: 22px;">
-        <p>
-          🎤 <strong>Ønsker du å holde tale eller fremføre noe?</strong>
-          Ta kontakt med toastmaster i god tid før bryllupsdagen.
-        </p>
-      </div>
     </div>
 
   </main>
@@ -673,7 +697,7 @@
   ══════════════════════════════════════════════════════════════ -->
   <footer>
     <div class="footer-names">Ida Ringstad &amp; Håvard Moås</div>
-    <p>5. september 2026 &nbsp;·&nbsp; Gleder oss til å se deg! 🤍</p>
+    <p>5. september 2026 &nbsp;·&nbsp; Gleder oss til å se deg! ♥</p>
   </footer>
 
 </body>
