@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bordplassering - Ida og Håvard</title>
+  <style>
+    :root {
+      --ink: #17221f;
+      --muted: #68736f;
+      --paper: #ffffff;
+      --page: #eef2ef;
+      --line: #cdd7d2;
+      --green: #2d5c4f;
+      --green-soft: #e4eee9;
+      --blue: #3b628c;
+      --blue-soft: #e8eff7;
+      --coral: #b95043;
+      --coral-soft: #faece9;
+      --gold: #98711f;
+      --gold-soft: #f7edce;
+      --media: #594e71;
+      --media-soft: #eeeaf4;
+    }
+
+    * {
+      box-sizing: border-box;
+      letter-spacing: 0;
+    }
+
+    html {
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Avenir Next", Avenir, "Gill Sans", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background-color: var(--page);
+      background-image:
+        linear-gradient(rgba(45, 92, 79, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 92, 79, 0.035) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .masthead,
+    main,
+    .page-footer {
+      width: min(1760px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 48px 0 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+    }
+
+    .summary {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .print-button {
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid var(--green);
+      border-radius: 5px;
+      background: var(--green);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .print-button:hover,
+    .print-button:focus-visible {
+      background: #21473d;
+      outline: 3px solid rgba(45, 92, 79, 0.2);
+      outline-offset: 2px;
+    }
+
+    main {
+      padding: 32px 0 64px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+    }
+
+    .section-heading p {
+      max-width: 620px;
+      margin-bottom: 2px;
+      color: var(--muted);
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .room-section {
+      margin-bottom: 64px;
+    }
+
+    .room-scroll {
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .room-shell {
+      min-width: 1050px;
+      padding: 28px 34px 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      box-shadow: 0 14px 38px rgba(23, 34, 31, 0.08);
+    }
+
+    .door-label {
+      width: max-content;
+      margin: 0 auto 18px;
+      padding: 0 16px 7px;
+      border-bottom: 5px solid var(--blue);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .room-plan {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(155px, 1fr)) minmax(135px, 0.72fr);
+      grid-template-rows: 164px 164px;
+      gap: 22px 28px;
+      align-items: center;
+    }
+
+    .overview-table {
+      display: grid;
+      place-items: center;
+      width: 142px;
+      aspect-ratio: 1;
+      justify-self: center;
+      border: 6px solid #d4e2dc;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(45, 92, 79, 0.17);
+    }
+
+    .overview-table.bottom {
+      transform: translateX(24px);
+    }
+
+    .overview-table strong {
+      display: block;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 1.55rem;
+      line-height: 1;
+    }
+
+    .overview-table span {
+      display: block;
+      max-width: 106px;
+      margin-top: 7px;
+      font-size: 0.68rem;
+      line-height: 1.2;
+    }
+
+    .open-lane {
+      display: grid;
+      grid-column: 5;
+      grid-row: 1 / 3;
+      place-items: center;
+      min-height: 100%;
+      padding: 20px;
+      border: 1px dashed #9cafaa;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .venue-labels {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(155px, 1fr)) minmax(135px, 0.72fr);
+      gap: 28px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .venue-label {
+      padding-top: 10px;
+      border-top: 5px solid var(--blue);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .legend li {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border: 2px solid currentColor;
+      border-radius: 2px;
+      background: white;
+    }
+
+    .swatch.female {
+      color: var(--coral);
+      background: var(--coral-soft);
+    }
+
+    .swatch.male {
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .swatch.key {
+      color: var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .swatch.media {
+      color: var(--media);
+      background: var(--media-soft);
+    }
+
+    .table-rows {
+      display: grid;
+      gap: 28px;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .table-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+      box-shadow: 0 10px 30px rgba(23, 34, 31, 0.07);
+    }
+
+    .table-card__header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 20px 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table-index {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .table-card h3 {
+      margin-bottom: 2px;
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .table-card__subtitle {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .table-meta {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .table-meta strong {
+      display: block;
+      color: var(--ink);
+      font-size: 1.15rem;
+    }
+
+    .seat-map-frame {
+      overflow-x: auto;
+    }
+
+    .seat-map {
+      position: relative;
+      width: 100%;
+      min-width: 560px;
+      aspect-ratio: 1;
+      container-type: inline-size;
+    }
+
+    .round-table {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      width: 35%;
+      aspect-ratio: 1;
+      place-content: center;
+      transform: translate(-50%, -50%);
+      border: 8px solid #d4e2dc;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      text-align: center;
+      box-shadow:
+        0 0 0 1px #9bb8ad,
+        0 12px 24px rgba(45, 92, 79, 0.18);
+    }
+
+    .round-table strong {
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.35rem, 3cqw, 2rem);
+    }
+
+    .round-table span {
+      margin-top: 4px;
+      font-size: 0.7rem;
+      opacity: 0.82;
+      text-transform: uppercase;
+    }
+
+    .seat {
+      position: absolute;
+      top: var(--y);
+      left: var(--x);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 6px;
+      align-items: center;
+      width: 19%;
+      min-height: 44px;
+      padding: 6px 7px;
+      transform: translate(-50%, -50%);
+      border: 1px solid var(--line);
+      border-left-width: 4px;
+      border-radius: 5px;
+      background: white;
+      box-shadow: 0 4px 10px rgba(23, 34, 31, 0.08);
+      font-size: 0.72rem;
+      line-height: 1.1;
+      text-align: left;
+    }
+
+    .seat[data-gender="female"] {
+      border-left-color: var(--coral);
+      background: var(--coral-soft);
+    }
+
+    .seat[data-gender="male"] {
+      border-left-color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .seat[data-role="key"] {
+      border-color: var(--gold);
+      border-left-color: var(--gold);
+      background: var(--gold-soft);
+      box-shadow: 0 0 0 2px rgba(152, 113, 31, 0.18);
+    }
+
+    .seat[data-role="media"] {
+      border-color: var(--media);
+      border-left-color: var(--media);
+      background: var(--media-soft);
+    }
+
+    .seat[data-optional="true"] {
+      border-style: dashed;
+    }
+
+    .seat-number {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--muted);
+      font-size: 0.62rem;
+      font-weight: 800;
+    }
+
+    .seat-name {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      font-weight: 700;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0 36px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .validation[data-valid="true"] {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    @media (max-width: 1180px) {
+      .table-row {
+        grid-template-columns: 1fr;
+      }
+
+      .table-card {
+        width: min(760px, 100%);
+        margin-inline: auto;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .masthead,
+      main,
+      .page-footer {
+        width: min(100% - 24px, 1760px);
+      }
+
+      .masthead {
+        align-items: flex-start;
+        padding-top: 28px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .room-section {
+        margin-bottom: 44px;
+      }
+
+      .table-card__header {
+        padding-inline: 14px;
+      }
+
+      .page-footer {
+        display: block;
+      }
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 8mm;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .masthead,
+      main,
+      .page-footer {
+        width: 100%;
+      }
+
+      .masthead {
+        padding: 0 0 5mm;
+      }
+
+      h1 {
+        font-size: 26pt;
+      }
+
+      .print-button {
+        display: none;
+      }
+
+      main {
+        padding: 6mm 0 0;
+      }
+
+      .room-section {
+        min-height: 170mm;
+        margin: 0;
+        break-after: page;
+      }
+
+      .room-scroll,
+      .seat-map-frame {
+        overflow: visible;
+      }
+
+      .room-shell {
+        min-width: 0;
+        box-shadow: none;
+      }
+
+      .room-plan {
+        grid-template-columns: repeat(4, 1fr) 0.72fr;
+      }
+
+      .table-rows {
+        display: block;
+      }
+
+      .table-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7mm;
+        min-height: 185mm;
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .table-row:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .table-card {
+        align-self: start;
+        width: 100%;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .table-card__header {
+        padding: 3mm 3.5mm 2.5mm;
+      }
+
+      .table-index {
+        width: 9mm;
+        height: 9mm;
+        font-size: 11pt;
+      }
+
+      .table-card h3 {
+        font-size: 12pt;
+      }
+
+      .seat-map {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .round-table {
+        border-width: 5px;
+      }
+
+      .round-table strong {
+        font-size: 15pt;
+      }
+
+      .seat {
+        min-height: 8mm;
+        padding: 1mm 1.2mm;
+        border-left-width: 3px;
+        box-shadow: none;
+        font-size: 7.2pt;
+      }
+
+      .seat-number {
+        width: 4.2mm;
+        height: 4.2mm;
+        font-size: 6pt;
+      }
+
+      .page-footer {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Bordplassering · forslag 1</p>
+      <h1>Ida &amp; Håvard</h1>
+      <p class="summary">80 oppførte middagsgjester · 4 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
+    </div>
+    <button class="print-button" type="button" id="printButton">Skriv ut</button>
+  </header>
+
+  <main>
+    <section class="room-section" aria-labelledby="roomTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Romoversikt</p>
+          <h2 id="roomTitle">Nærhet til brudeparet</h2>
+        </div>
+        <p>Bord 2 ligger nærmest bord 1. Familie og toastmastere følger ved bord 3 og 4, mens vennebordene ligger mot danseplatten og den frie ferdselen.</p>
+      </div>
+
+      <div class="room-scroll">
+        <div class="room-shell">
+          <div class="door-label">Dør mot haven</div>
+          <div class="room-plan" id="roomPlan">
+            <div class="open-lane">Danseplatt<br>/ fri ferdsel</div>
+          </div>
+          <div class="venue-labels" aria-hidden="true">
+            <div class="venue-label">Havestue 1</div>
+            <div class="venue-label">Havestue 2</div>
+            <div class="venue-label">Havestue 3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="seatingTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Stolplassering</p>
+          <h2 id="seatingTitle">Rundt bordene</h2>
+        </div>
+        <ul class="legend" aria-label="Tegnforklaring">
+          <li><span class="swatch female" aria-hidden="true"></span>Kvinne</li>
+          <li><span class="swatch male" aria-hidden="true"></span>Mann</li>
+          <li><span class="swatch key" aria-hidden="true"></span>Nøkkelplass</li>
+          <li><span class="swatch media" aria-hidden="true"></span>Foto og film</li>
+        </ul>
+      </div>
+
+      <div class="table-rows" id="tableRows"></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>Alle gjester vender inn mot bordet. Stolnummer leses med klokken.</span>
+    <span class="validation" id="validation"></span>
+  </footer>
+
+  <script>
+    const tables = [
+      {
+        number: 1,
+        title: "Brudepar, foreldre og barn",
+        locked: true,
+        startAngle: -54,
+        seats: [
+          { id: "idar", name: "Idar", gender: "male" },
+          { id: "ida-brud", name: "Ida (brud)", gender: "female", role: "key" },
+          { id: "haavard", name: "Håvard", gender: "male", role: "key" },
+          { id: "sissel", name: "Sissel", gender: "female" },
+          { id: "oddvar", name: "Oddvar", gender: "male" },
+          { id: "vilja", name: "Vilja", gender: "female" },
+          { id: "leon", name: "Leon", gender: "male" },
+          { id: "sofie", name: "Sofie", gender: "female" },
+          { id: "vida", name: "Vida", gender: "female" },
+          { id: "tine", name: "Tine", gender: "female" }
+        ]
+      },
+      {
+        number: 2,
+        title: "Forlovere og søsken",
+        locked: true,
+        startAngle: 90,
+        seats: [
+          { id: "miguel", name: "Miguel", gender: "male" },
+          { id: "grete", name: "Grete", gender: "female", role: "key" },
+          { id: "simen", name: "Simen", gender: "male", role: "key" },
+          { id: "siri", name: "Siri", gender: "female" },
+          { id: "kristoffer", name: "Kristoffer", gender: "male" },
+          { id: "ida-forlover", name: "Ida (forlover)", gender: "female", role: "key" },
+          { id: "emil", name: "Emil", gender: "male" },
+          { id: "julie-forlover", name: "Julie (forlover)", gender: "female", role: "key" },
+          { id: "lars", name: "Lars?", gender: "male", optional: true },
+          { id: "julie-lars", name: "Julie (Lars)?", gender: "female", optional: true }
+        ]
+      },
+      {
+        number: 3,
+        title: "Tanter og onkler",
+        locked: true,
+        startAngle: 0,
+        seats: [
+          { id: "lillian", name: "Lillian", gender: "female" },
+          { id: "inge", name: "Inge", gender: "male" },
+          { id: "maj-oddny", name: "Maj Oddny", gender: "female" },
+          { id: "alf-dagfinn", name: "Alf Dagfinn", gender: "male" },
+          { id: "ingebjoerg", name: "Ingebjørg", gender: "female" },
+          { id: "hallgeir", name: "Hallgeir", gender: "male" },
+          { id: "gerd", name: "Gerd", gender: "female" },
+          { id: "john", name: "John", gender: "male" },
+          { id: "anne-lise", name: "Anne Lise", gender: "female" },
+          { id: "kjell-idar", name: "Kjell Idar", gender: "male" },
+          { id: "aase", name: "Aase", gender: "female" }
+        ]
+      },
+      {
+        number: 4,
+        title: "Toastmastere og søskenbarn",
+        locked: true,
+        startAngle: 216,
+        seats: [
+          { id: "rune", name: "Rune", gender: "male" },
+          { id: "randi", name: "Randi", gender: "female", role: "key" },
+          { id: "linus", name: "Linus", gender: "male", role: "key" },
+          { id: "tone", name: "Tone", gender: "female" },
+          { id: "jan-aage", name: "Jan Åge", gender: "male" },
+          { id: "monica", name: "Monica", gender: "female" },
+          { id: "vegar", name: "Vegar", gender: "male" },
+          { id: "hege", name: "Hege", gender: "female" },
+          { id: "patrik", name: "Patrik", gender: "male" },
+          { id: "kjetil", name: "Kjetil", gender: "male" }
+        ]
+      },
+      {
+        number: 5,
+        title: "Håvards venner",
+        locked: false,
+        startAngle: 22.5,
+        seats: [
+          { id: "magnus", name: "Magnus", gender: "male" },
+          { id: "andrea", name: "Andrea", gender: "female" },
+          { id: "marius", name: "Marius", gender: "male" },
+          { id: "kine", name: "Kine", gender: "female" },
+          { id: "hallstein", name: "Hallstein", gender: "male" },
+          { id: "liv-jorunn", name: "Liv Jorunn", gender: "female" },
+          { id: "lasse", name: "Lasse", gender: "male" },
+          { id: "dea", name: "Dea", gender: "female" }
+        ]
+      },
+      {
+        number: 6,
+        title: "Idas venner",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "stian", name: "Stian", gender: "male" },
+          { id: "heidi", name: "Heidi", gender: "female" },
+          { id: "malin", name: "Malin", gender: "female" },
+          { id: "kristina", name: "Kristina", gender: "female" },
+          { id: "levin", name: "Levin", gender: "male" },
+          { id: "marte-levin", name: "Marte", gender: "female" },
+          { id: "ingrid", name: "Ingrid", gender: "female" },
+          { id: "martin", name: "Martin", gender: "male" },
+          { id: "cathrine", name: "Cathrine", gender: "female" },
+          { id: "vilma", name: "Vilma", gender: "female" },
+          { id: "ebba", name: "Ebba", gender: "female" }
+        ]
+      },
+      {
+        number: 7,
+        title: "Håvards venner",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "runar", name: "Runar", gender: "male" },
+          { id: "vilde", name: "Vilde", gender: "female" },
+          { id: "erik", name: "Erik", gender: "male" },
+          { id: "trine", name: "Trine", gender: "female" },
+          { id: "simon", name: "Simon", gender: "male" },
+          { id: "andreas", name: "Andreas?", gender: "male", optional: true },
+          { id: "elise", name: "Elise?", gender: "female", optional: true },
+          { id: "tore", name: "Tore", gender: "male" }
+        ]
+      },
+      {
+        number: 8,
+        title: "Idas venner · foto og film",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "max", name: "Max", gender: "male" },
+          { id: "christine", name: "Christine", gender: "female" },
+          { id: "stine", name: "Stine", gender: "female" },
+          { id: "marte-fotograf", name: "Marte (fotograf)", gender: "female", role: "media" },
+          { id: "fredrik", name: "Fredrik", gender: "male", role: "media" },
+          { id: "camilla", name: "Camilla", gender: "female" },
+          { id: "tonje", name: "Tonje", gender: "female" },
+          { id: "vidar", name: "Vidar", gender: "male" },
+          { id: "linn", name: "Linn", gender: "female" },
+          { id: "dan", name: "Dan", gender: "male" },
+          { id: "brita", name: "Brita", gender: "female" },
+          { id: "eskil", name: "Eskil", gender: "male" }
+        ]
+      }
+    ];
+
+    const roomOrder = [2, 4, 6, 8, 1, 3, 5, 7];
+    const roomPlan = document.querySelector("#roomPlan");
+    const tableRows = document.querySelector("#tableRows");
+    const validation = document.querySelector("#validation");
+
+    function renderRoomPlan() {
+      roomOrder.forEach((number, index) => {
+        const table = tables.find((item) => item.number === number);
+        const item = document.createElement("div");
+        item.className = `overview-table ${index >= 4 ? "bottom" : "top"}`;
+        item.style.gridColumn = String((index % 4) + 1);
+        item.style.gridRow = index < 4 ? "1" : "2";
+        item.innerHTML = `<div><strong>${table.number}</strong><span>${table.title}<br>${table.seats.length} gjester</span></div>`;
+        roomPlan.appendChild(item);
+      });
+    }
+
+    function createTableCard(table) {
+      const card = document.createElement("article");
+      card.className = "table-card";
+      card.dataset.table = String(table.number);
+
+      const header = document.createElement("header");
+      header.className = "table-card__header";
+      header.innerHTML = `
+        <span class="table-index" aria-hidden="true">${table.number}</span>
+        <div>
+          <h3>Bord ${table.number}</h3>
+          <p class="table-card__subtitle">${table.title}</p>
+        </div>
+        <span class="table-meta"><strong>${table.seats.length}</strong>${table.locked ? "fordeling låst" : "gjester"}</span>
+      `;
+
+      const frame = document.createElement("div");
+      frame.className = "seat-map-frame";
+
+      const map = document.createElement("div");
+      map.className = "seat-map";
+      map.setAttribute("aria-label", `Stolplassering for bord ${table.number}, lest med klokken`);
+
+      const center = document.createElement("div");
+      center.className = "round-table";
+      center.innerHTML = `<strong>Bord ${table.number}</strong><span>Med klokken</span>`;
+      map.appendChild(center);
+
+      const seatCount = table.seats.length;
+      const radius = seatCount >= 11 ? 39 : seatCount >= 9 ? 38.5 : 38;
+
+      table.seats.forEach((person, index) => {
+        const angle = table.startAngle + (index * 360 / seatCount);
+        const radians = (angle - 90) * Math.PI / 180;
+        const x = 50 + Math.cos(radians) * radius;
+        const y = 50 + Math.sin(radians) * radius;
+
+        const seat = document.createElement("div");
+        seat.className = "seat";
+        seat.dataset.personId = person.id;
+        seat.dataset.gender = person.gender;
+        seat.dataset.role = person.role || "guest";
+        seat.dataset.optional = person.optional ? "true" : "false";
+        seat.style.setProperty("--x", `${x.toFixed(3)}%`);
+        seat.style.setProperty("--y", `${y.toFixed(3)}%`);
+        seat.setAttribute("aria-label", `Plass ${index + 1}: ${person.name}`);
+        seat.innerHTML = `<span class="seat-number">${index + 1}</span><span class="seat-name">${person.name}</span>`;
+        map.appendChild(seat);
+      });
+
+      frame.appendChild(map);
+      card.append(header, frame);
+      return card;
+    }
+
+    function renderTables() {
+      for (let index = 0; index < tables.length; index += 2) {
+        const row = document.createElement("div");
+        row.className = "table-row";
+        row.append(createTableCard(tables[index]), createTableCard(tables[index + 1]));
+        tableRows.appendChild(row);
+      }
+    }
+
+    function validateGuests() {
+      const people = tables.flatMap((table) => table.seats);
+      const ids = new Set(people.map((person) => person.id));
+      const isValid = people.length === 80 && ids.size === 80;
+      validation.dataset.valid = String(isValid);
+      validation.textContent = isValid
+        ? "Kontrollert: 80 unike plasser"
+        : `Kontrollfeil: ${people.length} plasser, ${ids.size} unike id-er`;
+
+      if (!isValid) {
+        throw new Error(validation.textContent);
+      }
+    }
+
+    document.querySelector("#printButton").addEventListener("click", () => window.print());
+    renderRoomPlan();
+    renderTables();
+    validateGuests();
+  </script>
+</body>
+</html>
