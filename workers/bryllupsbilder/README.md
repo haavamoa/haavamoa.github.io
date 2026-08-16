@@ -21,6 +21,11 @@ navnefeltet fokus og scrolles mykt til midten av skjermen, slik at navn og
 opplastingsknapp er tilgjengelige uten manuell scrolling.
 Alle opplastede bilder vises med 10 piksler avrundede hjørner i
 forhåndsvisning, administrasjon, slideshow, spotlight og returanimasjon.
+Gjestene kan også skrive en valgfri hilsen på inntil 140 tegn. Navn og hilsen
+lagres i GitHub Release-assetens `label` som metadata, for eksempel
+`Hilsen fra Kari: Gratulerer med dagen!`. Worker-en returnerer dette som egne
+`author`- og `greeting`-felt. Kontrolltegn fjernes før lagring, og eksisterende
+`Bilde fra …`-labels uten hilsen støttes fortsatt.
 
 ## 1. Opprett lagringsstedet
 
@@ -145,6 +150,11 @@ inn i en slideshowkomposisjon, og eventuelle flere nye bilder behandles i kø.
 Effektene popper frem i ledig plass ved siden av eller under motivet og faller
 deretter ut av nettleservinduet uten å dekke bildet. Hele motivet vises uten
 hvite felt rundt portrettbilder.
+
+Hvis bildet har en hilsen, vises den også i adminoversikten og som en ticker
+som glir over festskjermen mens bildet står i spotlight. Avsenderen vises etter
+hilsenen. Tickerens varighet tilpasses tekstlengden mellom 9 og 17 sekunder, så
+hele teksten rekker over skjermen før 20-sekunders spotlighten avsluttes.
 
 **Party mode** slås av og på med en diskret switch i festskjermens topplinje.
 Modusen fader inn en sakte bevegelig bakgrunn med flere diskofarger samtidig,

@@ -472,7 +472,7 @@ function nowInSeconds() {
 
 function cleanGuestName(value) {
   return String(value ?? "")
-    .replace(/[\r\n\t]/g, " ")
+    .replace(/[\u0000-\u001f\u007f]/g, " ")
     .replace(/:/g, " ")
     .replace(/\s+/g, " ")
     .trim()
@@ -481,7 +481,7 @@ function cleanGuestName(value) {
 
 function cleanGreeting(value) {
   return String(value ?? "")
-    .replace(/[\r\n\t]/g, " ")
+    .replace(/[\u0000-\u001f\u007f]/g, " ")
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, 140);

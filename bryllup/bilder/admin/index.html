@@ -216,6 +216,18 @@
       font-size: 0.76rem;
     }
 
+    .photo-greeting {
+      margin: 0 0 13px;
+      padding: 9px 11px;
+      border-left: 3px solid var(--gold);
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
     .delete-button {
       width: 100%;
       background: transparent;
@@ -673,6 +685,36 @@
 
     .display-footer-heart { color: var(--coral); }
 
+    .greeting-ticker {
+      position: fixed;
+      z-index: 7;
+      right: 0;
+      bottom: 58px;
+      left: 0;
+      overflow: hidden;
+      padding: 10px 0 11px;
+      border-top: 1px solid rgba(203, 169, 121, 0.32);
+      border-bottom: 1px solid rgba(203, 169, 121, 0.32);
+      background: rgba(17, 20, 15, 0.72);
+      backdrop-filter: blur(7px);
+      pointer-events: none;
+    }
+
+    .greeting-ticker[hidden] { display: none; }
+
+    .greeting-track {
+      width: max-content;
+      margin: 0;
+      color: var(--white);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.2rem, 2.4vw, 2rem);
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0;
+      white-space: nowrap;
+      animation: greeting-scroll var(--greeting-duration, 14s) linear infinite;
+    }
+
     .celebration-effects {
       position: absolute;
       z-index: 4;
@@ -752,6 +794,11 @@
       100% { opacity: 0; transform: translate3d(var(--end-drift, -18px), var(--fall-distance, 70vh), 0) rotate(var(--turn)) scale(0.78); }
     }
 
+    @keyframes greeting-scroll {
+      from { transform: translateX(100vw); }
+      to { transform: translateX(-100%); }
+    }
+
     button:focus-visible,
     a:focus-visible {
       outline: 3px solid rgba(196, 110, 88, 0.4);
@@ -791,6 +838,7 @@
       .celebration-effects,
       .party-ambience,
       .party-lights { display: none; }
+      .greeting-track { animation: none; transform: none; white-space: normal; text-align: center; }
     }
   </style>
 </head>
@@ -870,6 +918,10 @@
 
     <div class="celebration-effects" id="celebrationEffects" aria-hidden="true"></div>
 
+    <div class="greeting-ticker" id="greetingTicker" hidden>
+      <p class="greeting-track" id="greetingTrack"></p>
+    </div>
+
     <div class="display-footer">
       <span id="displayCount">0 bilder</span>
       <span class="display-footer-heart" aria-hidden="true">♥</span>
@@ -918,6 +970,8 @@
     const displayPhotoTime = document.getElementById('displayPhotoTime');
     const displayCount = document.getElementById('displayCount');
     const celebrationEffects = document.getElementById('celebrationEffects');
+    const greetingTicker = document.getElementById('greetingTicker');
+    const greetingTrack = document.getElementById('greetingTrack');
     const partyAmbience = document.getElementById('partyAmbience');
     const objectUrls = new Map();
     const imageOrientations = new Map();
@@ -1025,13 +1079,18 @@
         meta.className = 'photo-meta';
         meta.textContent = `${formatDate(asset.createdAt)} · ${formatSize(asset.size)}`;
 
+        const greeting = document.createElement('p');
+        greeting.className = 'photo-greeting';
+        greeting.textContent = asset.greeting || '';
+        greeting.hidden = !asset.greeting;
+
         const deleteButton = document.createElement('button');
         deleteButton.className = 'delete-button';
         deleteButton.type = 'button';
         deleteButton.textContent = 'Slett bilde';
         deleteButton.addEventListener('click', () => deleteAsset(asset, deleteButton));
 
-        details.append(label, meta, deleteButton);
+        details.append(label, meta, greeting, deleteButton);
         card.append(frame, details);
         gallery.append(card);
         loadPreview(asset, frame);
@@ -1077,6 +1136,7 @@
       knownDisplayIds = new Set(assets.map((asset) => asset.id));
       document.body.classList.add('display-mode');
       displayView.hidden = false;
+      hideGreeting();
       applyPartyMode();
 
       if (document.fullscreenEnabled && !document.fullscreenElement) {
@@ -1114,6 +1174,7 @@
       displayView.classList.remove('celebrate');
       displayStage.classList.remove('has-spotlight');
       displayPhoto.hidden = true;
+      hideGreeting();
       document.querySelectorAll('.returning-photo').forEach((image) => image.remove());
       photoWall.querySelectorAll('.is-spotlight-source').forEach((tile) => {
         tile.classList.remove('is-spotlight-source');
@@ -1180,7 +1241,14 @@
 
     function getAssetSignature(assetList) {
       return assetList
-        .map((asset) => `${asset.id}:${asset.createdAt}:${asset.size}:${asset.label || ''}`)
+        .map((asset) => [
+          asset.id,
+          asset.createdAt,
+          asset.size,
+          asset.label || '',
+          asset.author || '',
+          asset.greeting || '',
+        ].join(':'))
         .join('|');
     }
 
@@ -1422,6 +1490,7 @@
         currentDisplayAssetId = asset.id;
         displayPhotoLabel.textContent = asset.label || 'Bilde fra en gjest';
         displayPhotoTime.textContent = formatDate(asset.createdAt);
+        showGreeting(asset);
         displayEmpty.hidden = true;
         displayPhoto.hidden = false;
         displayPhoto.classList.remove('is-new');
@@ -1447,6 +1516,7 @@
       displayPhoto.hidden = true;
       displayEmpty.hidden = false;
       displayStage.classList.remove('has-spotlight');
+      hideGreeting();
       clearTimeout(spotlightTimer);
     }
 
@@ -1478,6 +1548,7 @@
       displayView.append(returningImage);
 
       displayPhoto.hidden = true;
+      hideGreeting();
       displayStage.classList.remove('has-spotlight');
 
       if (targetRect) {
@@ -1517,6 +1588,30 @@
       spotlightTransitioning = false;
       scheduleNextSlideshow();
       showNextSpotlight();
+    }
+
+    function showGreeting(asset) {
+      const greeting = String(asset.greeting || '').trim();
+      if (!greeting) {
+        hideGreeting();
+        return;
+      }
+
+      const author = String(asset.author || '').trim();
+      greetingTrack.textContent = author ? `«${greeting}» — ${author}` : `«${greeting}»`;
+      greetingTrack.style.setProperty(
+        '--greeting-duration',
+        `${Math.max(9, Math.min(17, 7 + greeting.length * 0.07))}s`,
+      );
+      greetingTicker.hidden = false;
+      greetingTrack.style.animation = 'none';
+      void greetingTrack.offsetWidth;
+      greetingTrack.style.removeProperty('animation');
+    }
+
+    function hideGreeting() {
+      greetingTicker.hidden = true;
+      greetingTrack.textContent = '';
     }
 
     async function waitForSlideshowIdle() {

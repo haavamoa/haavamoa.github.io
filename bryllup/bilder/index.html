@@ -265,7 +265,8 @@
     }
 
     input[type='text'],
-    input[type='password'] {
+    input[type='password'],
+    textarea {
       width: 100%;
       min-height: 48px;
       border: 1px solid var(--border);
@@ -274,6 +275,12 @@
       color: var(--text);
       font: 400 1rem/1.2 'Lato', sans-serif;
       padding: 11px 13px;
+    }
+
+    textarea {
+      min-height: 82px;
+      resize: vertical;
+      line-height: 1.45;
     }
 
     input:focus-visible,
@@ -381,6 +388,11 @@
           <input id="guestName" name="name" type="text" maxlength="60" autocomplete="name" />
         </div>
 
+        <div class="field">
+          <label for="greeting">Hilsen <span class="optional">(valgfritt)</span></label>
+          <textarea id="greeting" name="greeting" maxlength="140" placeholder="Skriv en kort hilsen til brudeparet"></textarea>
+        </div>
+
         <p class="privacy-note">Bildene lagres i et privat GitHub-repo på Håvards GitHub.com-profil og er ikke offentlig tilgjengelige.</p>
 
         <button class="submit-button" id="submitButton" type="submit" disabled>Last opp bilde</button>
@@ -443,6 +455,7 @@
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
       formData.append('name', document.getElementById('guestName').value);
+      formData.append('greeting', document.getElementById('greeting').value);
 
       setUploading(true);
       showStatus('Laster opp bildet …');
