@@ -334,14 +334,99 @@
 
     .display-stage {
       min-height: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-wall {
+      --wall-columns: 4;
+      --wall-rows: 3;
+      position: absolute;
+      z-index: 1;
+      inset: 6px 4vw 12px;
+      display: grid;
+      grid-template-columns: repeat(var(--wall-columns), minmax(0, 1fr));
+      grid-template-rows: repeat(var(--wall-rows), minmax(0, 1fr));
+      gap: clamp(5px, 0.7vw, 12px);
+      transition: filter 700ms ease, transform 900ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms ease;
+    }
+
+    .wall-photo {
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.88);
+      border-radius: 4px;
+      background: #2a2e26;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+      animation: wall-photo-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--wall-delay, 0ms) both;
+    }
+
+    .wall-photo:nth-child(4n + 1) { transform: rotate(-0.7deg); }
+    .wall-photo:nth-child(4n + 3) { transform: rotate(0.65deg); }
+
+    .wall-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .wall-photo.is-returned {
+      z-index: 2;
+      animation: wall-photo-return 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .wall-photo.is-spotlight-source {
+      opacity: 0;
+      transition: opacity 350ms ease;
+    }
+
+    .returning-photo {
+      position: fixed;
+      z-index: 30;
+      display: block;
+      margin: 0;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.5));
+    }
+
+    .spotlight-scrim {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      background: rgba(9, 11, 8, 0.76);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 650ms ease;
+    }
+
+    .display-stage.has-spotlight .photo-wall {
+      filter: brightness(0.36) saturate(0.58);
+      transform: scale(0.975);
+      opacity: 0.82;
+    }
+
+    .display-stage.has-spotlight .spotlight-scrim { opacity: 1; }
+
+    .wall-loading {
       display: grid;
       place-items: center;
-      padding: 4px 6vw 14px;
-      position: relative;
+      height: 100%;
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.72rem;
     }
 
     .display-empty {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      display: grid;
+      align-content: center;
       max-width: 760px;
+      margin: auto;
       text-align: center;
     }
 
@@ -371,13 +456,17 @@
     }
 
     .display-photo {
-      width: min(88vw, 1500px);
-      height: 100%;
+      width: min(78vw, 1280px);
+      height: calc(100% - 28px);
       min-height: 0;
+      position: absolute;
+      z-index: 3;
+      inset: 0;
       display: grid;
       grid-template-rows: minmax(0, 1fr) auto;
       place-items: center;
       gap: 12px;
+      margin: auto;
       transform-origin: center 70%;
     }
 
@@ -387,11 +476,6 @@
       min-height: 0;
       display: grid;
       place-items: center;
-      padding: 12px;
-      border: 1px solid rgba(203, 169, 121, 0.5);
-      border-radius: 5px;
-      background: var(--white);
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
     }
 
     .display-image-frame img {
@@ -399,7 +483,7 @@
       height: 100%;
       min-height: 0;
       display: block;
-      background: var(--white);
+      filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.52));
       object-fit: contain;
     }
 
@@ -434,7 +518,6 @@
       font-size: 0.78rem;
     }
 
-    .display-photo.is-entering { animation: photo-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
     .display-photo.is-new { animation: new-photo-enter 1300ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
     .display-footer {
@@ -484,14 +567,19 @@
       50% { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes photo-enter {
-      from { opacity: 0; transform: translateY(32px) scale(0.94) rotate(-1.4deg); }
-      65% { opacity: 1; transform: translateY(-5px) scale(1.012) rotate(0.5deg); }
-      to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+    @keyframes wall-photo-enter {
+      from { opacity: 0; scale: 0.82; }
+      to { opacity: 1; scale: 1; }
+    }
+
+    @keyframes wall-photo-return {
+      0% { filter: brightness(1.8) saturate(1.35); scale: 0.72; }
+      55% { filter: brightness(1.25) saturate(1.15); scale: 1.08; }
+      100% { filter: brightness(1) saturate(1); scale: 1; }
     }
 
     @keyframes new-photo-enter {
-      0% { opacity: 0; transform: translateY(90px) scale(0.72) rotate(-5deg); filter: saturate(0.6); }
+      0% { opacity: 1; transform: translateY(90px) scale(0.72) rotate(-5deg); filter: saturate(0.6); }
       55% { opacity: 1; transform: translateY(-12px) scale(1.035) rotate(1.5deg); filter: saturate(1.15); }
       76% { transform: translateY(5px) scale(0.99) rotate(-0.5deg); }
       100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: saturate(1); }
@@ -520,8 +608,8 @@
       .photo-details { padding: 11px; }
       .display-topbar { grid-template-columns: 1fr auto; padding: 16px 22px 8px; }
       .live-indicator { display: none; }
-      .display-stage { padding-inline: 24px; }
-      .display-photo { width: 100%; }
+      .photo-wall { inset-inline: 12px; }
+      .display-photo { width: calc(100% - 32px); }
       .display-view::after { inset: 10px; }
     }
 
@@ -530,8 +618,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .display-photo.is-entering,
       .display-photo.is-new,
+      .wall-photo,
+      .wall-photo.is-returned,
       .live-dot { animation: none; }
       .confetti { display: none; }
     }
@@ -580,6 +669,9 @@
     </div>
 
     <div class="display-stage">
+      <div class="photo-wall" id="photoWall" aria-label="Alle opplastede bilder"></div>
+      <div class="spotlight-scrim" aria-hidden="true"></div>
+
       <div class="display-empty" id="displayEmpty">
         <span class="display-empty-mark" aria-hidden="true">♥</span>
         <h2>Venter på kveldens første bilde</h2>
@@ -621,6 +713,8 @@
     const emptyState = document.getElementById('emptyState');
     const pageMessage = document.getElementById('pageMessage');
     const displayView = document.getElementById('displayView');
+    const displayStage = document.querySelector('.display-stage');
+    const photoWall = document.getElementById('photoWall');
     const exitDisplayButton = document.getElementById('exitDisplayButton');
     const displayEmpty = document.getElementById('displayEmpty');
     const displayPhoto = document.getElementById('displayPhoto');
@@ -633,13 +727,14 @@
     let session = sessionStorage.getItem(sessionKey) || '';
     let assets = [];
     let displayActive = false;
-    let displayIndex = -1;
     let currentDisplayAssetId = null;
     let displayPollTimer = null;
-    let displaySlideTimer = null;
+    let spotlightTimer = null;
     let celebrationTimer = null;
     let displayRefreshInProgress = false;
     let knownDisplayIds = new Set();
+    let spotlightQueue = [];
+    let spotlightTransitioning = false;
 
     loginButton.href = `${apiBase}/auth/github`;
     displayButton.addEventListener('click', startDisplay);
@@ -760,8 +855,9 @@
 
     async function startDisplay() {
       displayActive = true;
-      displayIndex = -1;
       currentDisplayAssetId = null;
+      spotlightQueue = [];
+      spotlightTransitioning = false;
       knownDisplayIds = new Set(assets.map((asset) => asset.id));
       document.body.classList.add('display-mode');
       displayView.hidden = false;
@@ -779,12 +875,20 @@
     function stopDisplay(refreshAdmin = true) {
       displayActive = false;
       clearInterval(displayPollTimer);
-      clearTimeout(displaySlideTimer);
+      clearTimeout(spotlightTimer);
       clearTimeout(celebrationTimer);
       displayPollTimer = null;
-      displaySlideTimer = null;
+      spotlightTimer = null;
       celebrationTimer = null;
+      spotlightQueue = [];
+      spotlightTransitioning = false;
       displayView.classList.remove('celebrate');
+      displayStage.classList.remove('has-spotlight');
+      displayPhoto.hidden = true;
+      document.querySelectorAll('.returning-photo').forEach((image) => image.remove());
+      photoWall.querySelectorAll('.is-spotlight-source').forEach((tile) => {
+        tile.classList.remove('is-spotlight-source');
+      });
       displayView.hidden = true;
       document.body.classList.remove('display-mode');
 
@@ -818,13 +922,14 @@
         for (const asset of incomingAssets) knownDisplayIds.add(asset.id);
         assets = incomingAssets;
         updateDisplayCount();
+        renderPhotoWall();
 
         if (assets.length === 0) {
           showDisplayEmpty();
         } else if (newAssets.length > 0) {
-          await showDisplayAsset(newAssets[0], true);
-        } else if (initialLoad || !assets.some((asset) => asset.id === currentDisplayAssetId)) {
-          await showDisplayAsset(assets[0], false);
+          queueNewAssets(newAssets);
+        } else {
+          displayEmpty.hidden = true;
         }
       } catch (error) {
         displayCount.textContent = error.message || 'Kunne ikke oppdatere bildene';
@@ -833,7 +938,69 @@
       }
     }
 
-    async function showDisplayAsset(asset, isNew) {
+    function renderPhotoWall() {
+      const activeIds = new Set(assets.map((asset) => String(asset.id)));
+      for (const tile of photoWall.querySelectorAll('.wall-photo')) {
+        if (!activeIds.has(tile.dataset.assetId)) tile.remove();
+      }
+
+      const stageRect = displayStage.getBoundingClientRect();
+      const ratio = Math.max(1, stageRect.width / Math.max(stageRect.height, 1));
+      const columns = Math.max(1, Math.ceil(Math.sqrt(Math.max(assets.length, 1) * ratio)));
+      const rows = Math.max(1, Math.ceil(Math.max(assets.length, 1) / columns));
+      photoWall.style.setProperty('--wall-columns', columns);
+      photoWall.style.setProperty('--wall-rows', rows);
+
+      assets.forEach((asset, index) => {
+        let tile = photoWall.querySelector(`[data-asset-id="${asset.id}"]`);
+        if (!tile) {
+          tile = document.createElement('figure');
+          tile.className = 'wall-photo';
+          tile.dataset.assetId = asset.id;
+          tile.style.setProperty('--wall-delay', `${Math.min(index * 45, 600)}ms`);
+          const loading = document.createElement('span');
+          loading.className = 'wall-loading';
+          loading.textContent = 'Laster …';
+          tile.append(loading);
+          loadWallPhoto(asset, tile);
+        }
+
+        tile.classList.toggle('is-spotlight-source', asset.id === currentDisplayAssetId);
+        photoWall.append(tile);
+      });
+
+      displayEmpty.hidden = assets.length > 0;
+    }
+
+    async function loadWallPhoto(asset, tile) {
+      try {
+        const objectUrl = await getAssetObjectUrl(asset);
+        if (!displayActive || !tile.isConnected) return;
+
+        const image = document.createElement('img');
+        image.alt = asset.label || 'Opplastet bryllupsbilde';
+        image.src = objectUrl;
+        tile.replaceChildren(image);
+      } catch {
+        if (tile.isConnected) tile.replaceChildren('Kunne ikke laste');
+      }
+    }
+
+    function queueNewAssets(newAssets) {
+      for (const asset of [...newAssets].reverse()) {
+        const alreadyQueued = spotlightQueue.some((candidate) => candidate.id === asset.id);
+        if (asset.id !== currentDisplayAssetId && !alreadyQueued) spotlightQueue.push(asset);
+      }
+      showNextSpotlight();
+    }
+
+    function showNextSpotlight() {
+      if (!displayActive || currentDisplayAssetId || spotlightTransitioning) return;
+      const nextAsset = spotlightQueue.shift();
+      if (nextAsset) showSpotlightAsset(nextAsset);
+    }
+
+    async function showSpotlightAsset(asset) {
       if (!displayActive || !asset) return;
 
       try {
@@ -854,47 +1021,88 @@
         if (!displayActive) return;
 
         currentDisplayAssetId = asset.id;
-        displayIndex = assets.findIndex((candidate) => candidate.id === asset.id);
         displayPhotoLabel.textContent = asset.label || 'Bilde fra en gjest';
         displayPhotoTime.textContent = formatDate(asset.createdAt);
         displayEmpty.hidden = true;
         displayPhoto.hidden = false;
-        displayPhoto.classList.remove('is-entering', 'is-new');
+        displayPhoto.classList.remove('is-new');
         void displayPhoto.offsetWidth;
-        displayPhoto.classList.add(isNew ? 'is-new' : 'is-entering');
+        displayPhoto.classList.add('is-new');
+        displayStage.classList.add('has-spotlight');
+        const sourceTile = photoWall.querySelector(`[data-asset-id="${asset.id}"]`);
+        sourceTile?.classList.add('is-spotlight-source');
 
-        if (isNew) celebrateNewPhoto();
-        scheduleNextDisplayAsset();
-        preloadNextDisplayAsset();
+        celebrateNewPhoto();
+        clearTimeout(spotlightTimer);
+        spotlightTimer = setTimeout(returnSpotlightToWall, 60000);
       } catch {
-        scheduleNextDisplayAsset();
+        currentDisplayAssetId = null;
+        showNextSpotlight();
       }
     }
 
     function showDisplayEmpty() {
       currentDisplayAssetId = null;
-      displayIndex = -1;
       displayPhoto.hidden = true;
       displayEmpty.hidden = false;
-      clearTimeout(displaySlideTimer);
+      displayStage.classList.remove('has-spotlight');
+      clearTimeout(spotlightTimer);
     }
 
-    function scheduleNextDisplayAsset() {
-      clearTimeout(displaySlideTimer);
-      if (!displayActive || assets.length < 2) return;
-      displaySlideTimer = setTimeout(showNextDisplayAsset, 11000);
-    }
+    async function returnSpotlightToWall() {
+      if (!displayActive || !currentDisplayAssetId || spotlightTransitioning) return;
+      spotlightTransitioning = true;
+      clearTimeout(spotlightTimer);
 
-    function showNextDisplayAsset() {
-      if (!displayActive || assets.length === 0) return;
-      displayIndex = (displayIndex + 1) % assets.length;
-      showDisplayAsset(assets[displayIndex], false);
-    }
+      const returningAssetId = currentDisplayAssetId;
+      const targetTile = photoWall.querySelector(`[data-asset-id="${returningAssetId}"]`);
+      const sourceRect = displayImage.getBoundingClientRect();
+      const targetRect = targetTile?.getBoundingClientRect();
+      const returningImage = displayImage.cloneNode();
+      returningImage.className = 'returning-photo';
+      Object.assign(returningImage.style, {
+        left: `${sourceRect.left}px`,
+        top: `${sourceRect.top}px`,
+        width: `${sourceRect.width}px`,
+        height: `${sourceRect.height}px`,
+      });
+      displayView.append(returningImage);
 
-    function preloadNextDisplayAsset() {
-      if (assets.length < 2) return;
-      const nextIndex = (displayIndex + 1) % assets.length;
-      getAssetObjectUrl(assets[nextIndex]).catch(() => {});
+      displayPhoto.hidden = true;
+      displayStage.classList.remove('has-spotlight');
+
+      if (targetRect) {
+        await returningImage.animate([
+          {
+            left: `${sourceRect.left}px`,
+            top: `${sourceRect.top}px`,
+            width: `${sourceRect.width}px`,
+            height: `${sourceRect.height}px`,
+            borderRadius: '4px',
+            opacity: 1,
+          },
+          {
+            left: `${targetRect.left}px`,
+            top: `${targetRect.top}px`,
+            width: `${targetRect.width}px`,
+            height: `${targetRect.height}px`,
+            borderRadius: '4px',
+            opacity: 0.92,
+          },
+        ], {
+          duration: 1200,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          fill: 'forwards',
+        }).finished.catch(() => {});
+      }
+
+      returningImage.remove();
+      targetTile?.classList.remove('is-spotlight-source');
+      targetTile?.classList.add('is-returned');
+      setTimeout(() => targetTile?.classList.remove('is-returned'), 1200);
+      currentDisplayAssetId = null;
+      spotlightTransitioning = false;
+      showNextSpotlight();
     }
 
     function updateDisplayCount() {
