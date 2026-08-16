@@ -132,6 +132,9 @@ sekund. Landskapsbilder og kvadratiske bilder vises alltid alene, mens to
 portrettbilder kan vises ved siden av hverandre. Bildene ligger direkte på
 bakgrunnen uten ramme eller egen flate. Neste lag lastes ferdig før det
 kryssfades inn over 1,8 sekunder, så bakgrunnen blir aldri blank.
+Hvert motiv får en eksplisitt contain-størrelse beregnet fra naturlig
+bildeformat og tilgjengelig flis. Den avrundede wrapperen følger derfor selve
+motivet, og ingen overgangstilstand kan skalere bildet utenfor slideshowflaten.
 
 Listen oppdateres hvert åttende sekund. Et nytt bilde settes inn på en tilfeldig
 plass i slideshowkøen og løftes samtidig frem over den pågående bakgrunnen i
@@ -143,17 +146,20 @@ Effektene popper frem i ledig plass ved siden av eller under motivet og faller
 deretter ut av nettleservinduet uten å dekke bildet. Hele motivet vises uten
 hvite felt rundt portrettbilder.
 
-**Party mode** kan slås av og på fra festskjermens topplinje. Modusen fader inn
-en sakte bevegelig bakgrunn med flere diskofarger samtidig, gir bildene
-neonglød og legger til egne tilfeldige temaer med diskokule, dans, musikk,
-festkonfetti og neonlys. Valget lagres lokalt i nettleseren og gjenbrukes neste
-gang visningen åpnes. Mellom bildehendelsene dukker enkelte partyemoji tilfeldig
+**Party mode** slås av og på med en diskret switch i festskjermens topplinje.
+Modusen fader inn en sakte bevegelig bakgrunn med flere diskofarger samtidig,
+gir bildene neonglød og legger til egne tilfeldige temaer med diskokule, dans,
+musikk, festkonfetti og neonlys. «Ida & Håvard» skifter mykt mellom tilfeldige,
+lesbare festfarger hvert 2,8–5,2 sekund. Valget lagres lokalt i nettleseren og
+gjenbrukes neste gang visningen åpnes. Den ytterste rammen har 14 piksler
+avrundede hjørner. Mellom bildehendelsene dukker enkelte partyemoji tilfeldig
 opp og flyr tvers over, svever opp eller popper inn og driver bort. Frekvensen
 og antallet holdes lavt, med omtrent 4–9 sekunder mellom hver effekt og sjelden
 mer enn én samtidig. Alle ambient-effekter stoppes og fjernes når party mode
 slås av.
 
-Party mode sender også sporadisk én eller to myke lyskasterkjegler over bildene.
+Party mode sender også sporadisk én eller to myke lyskasterkjegler over hele
+festskjermen, inkludert topplinje, slideshow og footer.
 Lysene velger tilfeldig mellom cyan, blått, lilla, magenta, grønt og gull, og
 sveiper i ulik retning over 5–9 sekunder før de fader ut. `screen`-blending og
 moderat opacity gjør lysene synlige uten å vaske ut motivene. Lyskasterne har

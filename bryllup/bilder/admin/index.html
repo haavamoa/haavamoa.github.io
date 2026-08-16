@@ -455,7 +455,7 @@
       display: grid;
       gap: clamp(8px, 1vw, 16px);
       opacity: 0;
-      transform: scale(1.025);
+      transform: scale(0.985);
       transition: opacity 1800ms cubic-bezier(0.4, 0, 0.2, 1), transform 2200ms cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
     }
@@ -487,22 +487,22 @@
     }
 
     .wall-photo img {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       display: block;
       border-radius: var(--image-radius);
-      object-fit: cover;
+      object-fit: fill;
+    }
+
+    .slideshow-image-shell {
+      max-width: 100%;
+      max-height: 100%;
+      overflow: hidden;
+      border-radius: var(--image-radius);
       filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.36));
     }
 
-    .slideshow-slide.layout-single .wall-photo img,
-    .slideshow-slide.layout-portraits .wall-photo img {
-      object-fit: contain;
-    }
-
-    .party-mode .wall-photo img {
+    .party-mode .slideshow-image-shell {
       filter: drop-shadow(0 0 14px rgba(59, 220, 255, 0.52)) drop-shadow(0 0 24px rgba(246, 67, 159, 0.3));
     }
 
@@ -950,6 +950,8 @@
     logoutButton.addEventListener('click', () => logOut());
     partyModeButton.addEventListener('click', togglePartyMode);
     exitDisplayButton.addEventListener('click', () => stopDisplay());
+    document.addEventListener('fullscreenchange', resizeSlideshowImages);
+    window.addEventListener('resize', resizeSlideshowImages);
     applyPartyMode();
 
     const hash = new URLSearchParams(location.hash.slice(1));
@@ -1211,6 +1213,7 @@
         if (!displayActive) return;
         nextSlide.append(...tiles);
         photoWall.append(nextSlide);
+        sizeSlideshowImages(nextSlide);
 
         const currentSlide = photoWall.querySelector('.slideshow-slide.is-active');
         if (currentSlide) {
@@ -1294,6 +1297,8 @@
       const tile = document.createElement('figure');
       tile.className = 'wall-photo';
       tile.dataset.assetId = asset.id;
+      const shell = document.createElement('div');
+      shell.className = 'slideshow-image-shell';
       const image = document.createElement('img');
       image.alt = asset.label || 'Opplastet bryllupsbilde';
       image.src = await getAssetObjectUrl(asset);
@@ -1306,8 +1311,33 @@
           new Promise((resolve) => setTimeout(resolve, 1800)),
         ]);
       }
-      tile.append(image);
+      shell.append(image);
+      tile.append(shell);
       return tile;
+    }
+
+    function sizeSlideshowImages(slide) {
+      for (const tile of slide.querySelectorAll('.wall-photo')) {
+        const shell = tile.querySelector('.slideshow-image-shell');
+        const image = shell?.querySelector('img');
+        if (!shell || !image || !image.naturalWidth || !image.naturalHeight) continue;
+
+        const tileWidth = tile.clientWidth;
+        const tileHeight = tile.clientHeight;
+        const sourceRatio = image.naturalWidth / image.naturalHeight;
+        const tileRatio = tileWidth / Math.max(tileHeight, 1);
+        const width = sourceRatio > tileRatio ? tileWidth : tileHeight * sourceRatio;
+        const height = sourceRatio > tileRatio ? tileWidth / sourceRatio : tileHeight;
+        shell.style.width = `${Math.min(width, tileWidth)}px`;
+        shell.style.height = `${Math.min(height, tileHeight)}px`;
+      }
+    }
+
+    function resizeSlideshowImages() {
+      if (!displayActive) return;
+      requestAnimationFrame(() => {
+        photoWall.querySelectorAll('.slideshow-slide').forEach(sizeSlideshowImages);
+      });
     }
 
     async function getImageOrientation(asset) {
@@ -1434,7 +1464,9 @@
         `.slideshow-slide.is-active [data-asset-id="${returningAssetId}"]`,
       );
       const sourceRect = displayImage.getBoundingClientRect();
-      const targetRect = targetTile?.getBoundingClientRect();
+      const targetRect = targetTile
+        ?.querySelector('.slideshow-image-shell')
+        ?.getBoundingClientRect();
       const returningImage = displayImage.cloneNode();
       returningImage.className = 'returning-photo';
       Object.assign(returningImage.style, {
