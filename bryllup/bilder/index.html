@@ -525,13 +525,20 @@
       if (!matchMedia('(max-width: 520px)').matches) return;
 
       const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      guestNameInput.focus({ preventScroll: true });
+      placeGuestNameCaret();
       requestAnimationFrame(() => {
         guestNameInput.scrollIntoView({
           behavior: reducedMotion ? 'auto' : 'smooth',
           block: 'center',
         });
+        setTimeout(placeGuestNameCaret, reducedMotion ? 0 : 350);
       });
+    }
+
+    function placeGuestNameCaret() {
+      guestNameInput.focus({ preventScroll: true });
+      const caretPosition = guestNameInput.value.length;
+      guestNameInput.setSelectionRange(caretPosition, caretPosition);
     }
 
     function getUploadClientId() {
