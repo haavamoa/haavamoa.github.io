@@ -98,9 +98,14 @@ export default {
     }
 
     const guestName = cleanGuestName(formData.get("name"));
+    const greeting = cleanGreeting(formData.get("greeting"));
     const date = new Date().toISOString().slice(0, 10);
     const assetName = `bryllup-${date}-${crypto.randomUUID()}.${imageType.extension}`;
-    const assetLabel = guestName ? `Bilde fra ${guestName}` : "Bilde fra en gjest";
+    const assetLabel = greeting
+      ? `Hilsen fra ${guestName || "en gjest"}: ${greeting}`
+      : guestName
+        ? `Bilde fra ${guestName}`
+        : "Bilde fra en gjest";
     const uploadUrl = new URL(
       `https://uploads.github.com/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/releases/${encodeURIComponent(env.GITHUB_RELEASE_ID)}/assets`,
     );
@@ -273,14 +278,19 @@ async function handleAdminRequest(request, url, env, corsHeaders) {
 
     return jsonResponse(
       {
-        assets: assets.map((asset) => ({
-          id: asset.id,
-          name: asset.name,
-          label: asset.label,
-          contentType: asset.content_type,
-          size: asset.size,
-          createdAt: asset.created_at,
-        })),
+        assets: assets.map((asset) => {
+          const metadata = parseAssetMetadata(asset.label);
+          return {
+            id: asset.id,
+            name: asset.name,
+            label: metadata.label,
+            author: metadata.author,
+            greeting: metadata.greeting,
+            contentType: asset.content_type,
+            size: asset.size,
+            createdAt: asset.created_at,
+          };
+        }),
       },
       200,
       corsHeaders,
@@ -463,9 +473,43 @@ function nowInSeconds() {
 function cleanGuestName(value) {
   return String(value ?? "")
     .replace(/[\r\n\t]/g, " ")
+    .replace(/:/g, " ")
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, 60);
+}
+
+function cleanGreeting(value) {
+  return String(value ?? "")
+    .replace(/[\r\n\t]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 140);
+}
+
+function parseAssetMetadata(label) {
+  const value = String(label ?? "");
+  if (value.startsWith("Hilsen fra ")) {
+    const separatorIndex = value.indexOf(": ");
+    if (separatorIndex > 11) {
+      const authorValue = value.slice(11, separatorIndex);
+      const author = authorValue === "en gjest" ? "" : authorValue;
+      return {
+        author,
+        greeting: value.slice(separatorIndex + 2),
+        label: author ? `Bilde fra ${author}` : "Bilde fra en gjest",
+      };
+    }
+  }
+
+  const author = value.startsWith("Bilde fra ") && value !== "Bilde fra en gjest"
+    ? value.slice(10)
+    : "";
+  return {
+    author,
+    greeting: "",
+    label: value || "Bilde fra en gjest",
+  };
 }
 
 async function detectImageType(file) {
