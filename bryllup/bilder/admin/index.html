@@ -23,6 +23,7 @@
       --white: #ffffff;
       --border: #d8d1c5;
       --error: #a53f34;
+      --image-radius: 10px;
     }
 
     body {
@@ -193,6 +194,7 @@
       width: 100%;
       height: 100%;
       display: block;
+      border-radius: var(--image-radius);
       object-fit: cover;
     }
 
@@ -384,6 +386,28 @@
       transition: filter 700ms ease, transform 900ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms ease;
     }
 
+    .party-lights {
+      position: absolute;
+      z-index: 2;
+      inset: -15% -8%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .light-beam {
+      position: absolute;
+      top: -8%;
+      left: var(--beam-x, 50%);
+      width: var(--beam-width, 34vw);
+      height: 125%;
+      opacity: 0;
+      transform-origin: 50% 0;
+      clip-path: polygon(47% 0, 53% 0, 100% 100%, 0 100%);
+      filter: blur(14px);
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+    }
+
     .slideshow-slide {
       position: absolute;
       inset: 0;
@@ -407,28 +431,13 @@
 
     .slideshow-slide.layout-single { grid-template: 1fr / 1fr; }
     .slideshow-slide.layout-portraits { grid-template: 1fr / repeat(2, minmax(0, 1fr)); }
-    .slideshow-slide.layout-landscapes { grid-template: repeat(2, minmax(0, 1fr)) / 1fr; }
-    .slideshow-slide.layout-collage {
-      grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
-    }
-
-    .slideshow-slide.layout-collage .wall-photo:first-child { grid-row: 1 / -1; }
-
     .wall-photo {
       min-width: 0;
       min-height: 0;
+      display: grid;
+      place-items: center;
       margin: 0;
-      overflow: hidden;
-      border: 3px solid rgba(255, 255, 255, 0.88);
-      border-radius: 4px;
-      background: #2a2e26;
-      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
-      transition: border-color 900ms ease, box-shadow 900ms ease;
-    }
-
-    .party-mode .wall-photo {
-      border-color: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 0 18px rgba(59, 220, 255, 0.44), 0 0 36px rgba(246, 67, 159, 0.28);
+      overflow: visible;
     }
 
     .party-mode .display-brand {
@@ -437,16 +446,23 @@
     }
 
     .wall-photo img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
       display: block;
+      border-radius: var(--image-radius);
       object-fit: cover;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.36));
     }
 
     .slideshow-slide.layout-single .wall-photo img,
-    .slideshow-slide.layout-portraits .wall-photo img,
-    .slideshow-slide.layout-landscapes .wall-photo img {
+    .slideshow-slide.layout-portraits .wall-photo img {
       object-fit: contain;
+    }
+
+    .party-mode .wall-photo img {
+      filter: drop-shadow(0 0 14px rgba(59, 220, 255, 0.52)) drop-shadow(0 0 24px rgba(246, 67, 159, 0.3));
     }
 
     .wall-photo.is-returned {
@@ -464,6 +480,7 @@
       z-index: 30;
       display: block;
       margin: 0;
+      border-radius: var(--image-radius);
       object-fit: contain;
       pointer-events: none;
       filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.5));
@@ -556,10 +573,13 @@
     }
 
     .display-image-frame img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
       min-height: 0;
       display: block;
+      border-radius: var(--image-radius);
       filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.52));
       object-fit: contain;
     }
@@ -644,8 +664,8 @@
       --turn: 540deg;
       --half-turn: 270deg;
       position: absolute;
-      top: -40px;
-      left: var(--x);
+      top: var(--start-y, 50%);
+      left: var(--start-x, 50%);
       font-size: var(--size, 1.6rem);
       line-height: 1;
       text-shadow: 0 4px 10px rgba(0, 0, 0, 0.24);
@@ -682,10 +702,11 @@
     }
 
     @keyframes wedding-effect-fall {
-      0% { opacity: 0; transform: translate3d(0, -30px, 0) rotate(0) scale(0.65); }
-      8% { opacity: 1; }
-      45% { opacity: 1; transform: translate3d(var(--drift, 25px), 48vh, 0) rotate(var(--half-turn)) scale(1.12); }
-      100% { opacity: 0; transform: translate3d(var(--end-drift, -18px), 105vh, 0) rotate(var(--turn)) scale(0.85); }
+      0% { opacity: 0; transform: translate3d(0, 12px, 0) rotate(-12deg) scale(0.18); }
+      16% { opacity: 1; transform: translate3d(var(--drift, 16px), -18px, 0) rotate(10deg) scale(1.28); }
+      30% { opacity: 1; transform: translate3d(var(--mid-drift, 7px), 0, 0) rotate(-5deg) scale(1); }
+      72% { opacity: 0.92; }
+      100% { opacity: 0; transform: translate3d(var(--end-drift, -18px), var(--fall-distance, 70vh), 0) rotate(var(--turn)) scale(0.78); }
     }
 
     button:focus-visible,
@@ -725,7 +746,8 @@
       .wall-photo.is-returned,
       .live-dot { animation: none; }
       .celebration-effects,
-      .party-ambience { display: none; }
+      .party-ambience,
+      .party-lights { display: none; }
     }
   </style>
 </head>
@@ -778,6 +800,7 @@
     </div>
 
     <div class="display-stage">
+      <div class="party-lights" id="partyLights" aria-hidden="true"></div>
       <div class="photo-wall" id="photoWall" aria-label="Tilfeldig visning av opplastede bilder"></div>
       <div class="party-ambience" id="partyAmbience" aria-hidden="true"></div>
       <div class="spotlight-scrim" aria-hidden="true"></div>
@@ -799,8 +822,9 @@
         </figcaption>
       </figure>
 
-      <div class="celebration-effects" id="celebrationEffects" aria-hidden="true"></div>
     </div>
+
+    <div class="celebration-effects" id="celebrationEffects" aria-hidden="true"></div>
 
     <div class="display-footer">
       <span id="displayCount">0 bilder</span>
@@ -838,6 +862,7 @@
     const pageMessage = document.getElementById('pageMessage');
     const displayView = document.getElementById('displayView');
     const displayStage = document.querySelector('.display-stage');
+    const partyLights = document.getElementById('partyLights');
     const photoWall = document.getElementById('photoWall');
     const partyModeButton = document.getElementById('partyModeButton');
     const exitDisplayButton = document.getElementById('exitDisplayButton');
@@ -860,6 +885,7 @@
     let spotlightTimer = null;
     let celebrationTimer = null;
     let ambientEffectTimer = null;
+    let ambientLightTimer = null;
     let displayRefreshInProgress = false;
     let knownDisplayIds = new Set();
     let displayAssetSignature = '';
@@ -1021,11 +1047,13 @@
       clearTimeout(spotlightTimer);
       clearTimeout(celebrationTimer);
       stopPartyAmbience();
+      stopPartyLights();
       displayPollTimer = null;
       slideshowTimer = null;
       spotlightTimer = null;
       celebrationTimer = null;
       ambientEffectTimer = null;
+      ambientLightTimer = null;
       spotlightQueue = [];
       spotlightTransitioning = false;
       slideshowDeck = [];
@@ -1171,17 +1199,13 @@
       const portraits = shuffle(
         orientations.filter((item) => item.orientation === 'portrait').map((item) => item.asset),
       );
-      const landscapes = shuffle(
-        orientations.filter((item) => item.orientation === 'landscape').map((item) => item.asset),
-      );
       if (forcedAsset) {
         const orientation = await getImageOrientation(forcedAsset);
-        if (orientation === 'square') return { layout: 'single', assets: [forcedAsset] };
-        const partners = orientation === 'portrait' ? portraits : landscapes;
-        const partner = partners.find((asset) => asset.id !== forcedAsset.id);
+        if (orientation !== 'portrait') return { layout: 'single', assets: [forcedAsset] };
+        const partner = portraits.find((asset) => asset.id !== forcedAsset.id);
         if (partner) {
           return {
-            layout: orientation === 'portrait' ? 'portraits' : 'landscapes',
+            layout: 'portraits',
             assets: [forcedAsset, partner],
           };
         }
@@ -1190,15 +1214,11 @@
 
       const choices = ['single'];
       if (portraits.length >= 2) choices.push('portraits', 'portraits');
-      if (landscapes.length >= 2) choices.push('landscapes', 'landscapes');
-      if (assets.length >= 3) choices.push('collage');
       const layout = choices[Math.floor(Math.random() * choices.length)];
-      const count = layout === 'single' ? 1 : layout === 'collage' ? Math.min(3, assets.length) : 2;
+      const count = layout === 'single' ? 1 : 2;
       const candidates = layout === 'portraits'
         ? portraits
-        : layout === 'landscapes'
-          ? landscapes
-          : drawFromSlideshowDeck(count);
+        : drawFromSlideshowDeck(count);
 
       return { layout, assets: candidates.slice(0, count) };
     }
@@ -1386,7 +1406,7 @@
             top: `${sourceRect.top}px`,
             width: `${sourceRect.width}px`,
             height: `${sourceRect.height}px`,
-            borderRadius: '4px',
+            borderRadius: '10px',
             opacity: 1,
           },
           {
@@ -1394,7 +1414,7 @@
             top: `${targetRect.top}px`,
             width: `${targetRect.width}px`,
             height: `${targetRect.height}px`,
-            borderRadius: '4px',
+            borderRadius: '10px',
             opacity: 0.92,
           },
         ], {
@@ -1448,20 +1468,79 @@
       celebrationEffects.dataset.theme = theme.name;
       celebrationEffects.replaceChildren();
 
-      for (let index = 0; index < 38; index += 1) {
+      const effectLayerRect = celebrationEffects.getBoundingClientRect();
+      const imageRect = getContainedImageRect(displayImage);
+      for (let index = 0; index < 26; index += 1) {
         const piece = document.createElement('span');
         piece.className = 'effect-piece';
         piece.textContent = theme.symbols[index % theme.symbols.length];
-        piece.style.setProperty('--x', `${4 + ((index * 37) % 92)}%`);
         piece.style.setProperty('--delay', `${(index % 10) * 65}ms`);
         piece.style.setProperty('--duration', `${4200 + (index % 7) * 260}ms`);
         piece.style.setProperty('--turn', `${index % 2 === 0 ? 540 : -540}deg`);
         piece.style.setProperty('--half-turn', `${index % 2 === 0 ? 270 : -270}deg`);
-        piece.style.setProperty('--drift', `${-70 + ((index * 43) % 140)}px`);
-        piece.style.setProperty('--end-drift', `${70 - ((index * 29) % 140)}px`);
         piece.style.setProperty('--size', `${1.15 + (index % 5) * 0.22}rem`);
+        positionCelebrationPiece(piece, index, effectLayerRect, imageRect);
         celebrationEffects.append(piece);
       }
+    }
+
+    function getContainedImageRect(image) {
+      const box = image.getBoundingClientRect();
+      const sourceRatio = image.naturalWidth / Math.max(image.naturalHeight, 1);
+      const boxRatio = box.width / Math.max(box.height, 1);
+
+      if (!image.naturalWidth || !image.naturalHeight) return box;
+      if (sourceRatio > boxRatio) {
+        const height = box.width / sourceRatio;
+        return new DOMRect(box.left, box.top + (box.height - height) / 2, box.width, height);
+      }
+
+      const width = box.height * sourceRatio;
+      return new DOMRect(box.left + (box.width - width) / 2, box.top, width, box.height);
+    }
+
+    function positionCelebrationPiece(piece, index, layerRect, imageRect) {
+      const leftSpace = imageRect.left - layerRect.left;
+      const rightSpace = layerRect.right - imageRect.right;
+      const bottomSpace = layerRect.bottom - imageRect.bottom;
+      const regions = [];
+      if (leftSpace >= 54) regions.push('left');
+      if (rightSpace >= 54) regions.push('right');
+      if (bottomSpace >= 46) regions.push('bottom');
+      if (regions.length === 0) regions.push(index % 2 === 0 ? 'left' : 'right');
+
+      const region = regions[index % regions.length];
+      const relativeImage = {
+        left: imageRect.left - layerRect.left,
+        right: imageRect.right - layerRect.left,
+        top: imageRect.top - layerRect.top,
+        bottom: imageRect.bottom - layerRect.top,
+      };
+      let startX;
+      let startY;
+      let drift;
+
+      if (region === 'left') {
+        startX = 10 + Math.random() * Math.max(18, relativeImage.left - 40);
+        startY = relativeImage.top + Math.random() * Math.max(30, imageRect.height * 0.78);
+        drift = -18 - Math.random() * 46;
+      } else if (region === 'right') {
+        startX = relativeImage.right + 18 + Math.random() * Math.max(18, rightSpace - 42);
+        startY = relativeImage.top + Math.random() * Math.max(30, imageRect.height * 0.78);
+        drift = 18 + Math.random() * 46;
+      } else {
+        startX = relativeImage.left + Math.random() * Math.max(30, imageRect.width);
+        startY = Math.min(layerRect.height - 32, relativeImage.bottom + 12 + Math.random() * 24);
+        drift = -24 + Math.random() * 48;
+      }
+
+      piece.style.setProperty('--start-x', `${Math.max(8, Math.min(layerRect.width - 42, startX))}px`);
+      piece.style.setProperty('--start-y', `${Math.max(8, Math.min(layerRect.height - 28, startY))}px`);
+      piece.style.setProperty('--drift', `${drift}px`);
+      piece.style.setProperty('--mid-drift', `${drift * 0.45}px`);
+      piece.style.setProperty('--end-drift', `${drift * 1.35}px`);
+      piece.style.setProperty('--fall-distance', `${Math.max(90, layerRect.height - startY + 90)}px`);
+      piece.dataset.region = region;
     }
 
     function togglePartyMode() {
@@ -1478,8 +1557,10 @@
       partyModeButton.title = partyMode ? 'Slå av party mode' : 'Slå på party mode';
       if (displayActive && partyMode) {
         schedulePartyAmbience();
+        schedulePartyLights();
       } else {
         stopPartyAmbience();
+        stopPartyLights();
       }
     }
 
@@ -1569,6 +1650,63 @@
         emoji.getAnimations().forEach((animation) => animation.cancel());
       }
       partyAmbience.replaceChildren();
+    }
+
+    function schedulePartyLights() {
+      clearTimeout(ambientLightTimer);
+      if (
+        !displayActive ||
+        !partyMode ||
+        matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) return;
+
+      ambientLightTimer = setTimeout(() => {
+        const amount = Math.random() < 0.34 ? 2 : 1;
+        for (let index = 0; index < amount; index += 1) spawnPartyLight(index, amount);
+        schedulePartyLights();
+      }, 5200 + Math.random() * 7800);
+    }
+
+    function spawnPartyLight(index = 0, amount = 1) {
+      if (!displayActive || !partyMode || partyLights.childElementCount >= 4) return;
+
+      const hues = [38, 118, 188, 222, 276, 318, 346];
+      const hue = hues[Math.floor(Math.random() * hues.length)];
+      const beam = document.createElement('span');
+      beam.className = 'light-beam';
+      const origin = amount === 2
+        ? (index === 0 ? 18 + Math.random() * 20 : 62 + Math.random() * 20)
+        : 12 + Math.random() * 76;
+      const width = 32 + Math.random() * 28;
+      beam.style.setProperty('--beam-x', `${origin}%`);
+      beam.style.setProperty('--beam-width', `${width}vw`);
+      beam.style.background = `linear-gradient(180deg, hsla(${hue}, 100%, 88%, 0.68) 0%, hsla(${hue}, 100%, 70%, 0.34) 36%, hsla(${hue}, 96%, 62%, 0.16) 68%, hsla(${hue}, 100%, 55%, 0) 100%)`;
+      partyLights.append(beam);
+
+      const startAngle = -24 + Math.random() * 48;
+      const travel = (Math.random() < 0.5 ? -1 : 1) * (18 + Math.random() * 34);
+      const duration = 5200 + Math.random() * 3800;
+      const animation = beam.animate([
+        { opacity: 0, transform: `translateX(-50%) rotate(${startAngle}deg) scaleX(0.72)` },
+        { opacity: 0.4, transform: `translateX(-50%) rotate(${startAngle + travel * 0.3}deg) scaleX(1)`, offset: 0.22 },
+        { opacity: 0.32, transform: `translateX(-50%) rotate(${startAngle + travel * 0.72}deg) scaleX(1.08)`, offset: 0.72 },
+        { opacity: 0, transform: `translateX(-50%) rotate(${startAngle + travel}deg) scaleX(0.82)` },
+      ], {
+        duration,
+        easing: 'cubic-bezier(0.37, 0, 0.63, 1)',
+        fill: 'forwards',
+      });
+      animation.finished.catch(() => {}).finally(() => beam.remove());
+      setTimeout(() => beam.remove(), duration + 600);
+    }
+
+    function stopPartyLights() {
+      clearTimeout(ambientLightTimer);
+      ambientLightTimer = null;
+      for (const beam of partyLights.children) {
+        beam.getAnimations().forEach((animation) => animation.cancel());
+      }
+      partyLights.replaceChildren();
     }
 
     async function deleteAsset(asset, button) {

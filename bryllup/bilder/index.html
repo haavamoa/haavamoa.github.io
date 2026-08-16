@@ -25,6 +25,7 @@
       --border: #d8d1c5;
       --success: #3f704d;
       --error: #a53f34;
+      --image-radius: 10px;
     }
 
     html { background: var(--cream); }
@@ -221,14 +222,16 @@
       position: relative;
     }
 
-    .has-preview .preview-wrap { display: block; }
+    .has-preview .preview-wrap { display: grid; place-items: center; }
     .has-preview .picker-actions { display: none; }
 
     .preview-image {
-      width: 100%;
-      min-height: 220px;
+      width: auto;
+      height: auto;
+      max-width: 100%;
       max-height: 430px;
       display: block;
+      border-radius: var(--image-radius);
       object-fit: contain;
     }
 
@@ -333,7 +336,7 @@
       .picker { min-height: 280px; }
       .picker.has-preview { min-height: 0; }
       .preview-wrap { height: min(34vh, 250px); min-height: 0; }
-      .preview-image { height: 100%; min-height: 0; max-height: none; }
+      .preview-image { width: auto; height: auto; max-width: 100%; max-height: 100%; min-height: 0; }
       .form-fields { padding: 24px 20px 25px; }
     }
 
