@@ -167,12 +167,6 @@
       line-height: 1.2;
     }
 
-    .picker-help {
-      margin: 0 0 20px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
     .choice-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -369,7 +363,6 @@
         <div class="picker-actions">
           <div class="camera-mark" aria-hidden="true">◎</div>
           <h2 class="picker-title">Velg et øyeblikk</h2>
-          <p class="picker-help">JPEG, PNG, WebP, HEIC eller AVIF · maks 15 MB</p>
           <div class="choice-row">
             <label class="choice-button" for="cameraInput">Ta bilde</label>
             <label class="choice-button secondary" for="galleryInput">Velg bilde</label>
@@ -391,7 +384,7 @@
           <input id="guestName" name="name" type="text" maxlength="60" autocomplete="name" />
         </div>
 
-        <p class="privacy-note">Bildet lagres privat hos Ida og Håvard. Ikke last opp bilder andre kan oppleve som ubehagelige.</p>
+        <p class="privacy-note">Bildene lagres i et privat GitHub-repo på Håvards GitHub.com-profil og er ikke offentlig tilgjengelige.</p>
 
         <button class="submit-button" id="submitButton" type="submit" disabled>Last opp bilde</button>
         <p class="status" id="status" role="status" aria-live="polite"></p>
