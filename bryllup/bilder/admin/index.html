@@ -568,7 +568,7 @@
     }
 
     @keyframes wall-photo-enter {
-      from { opacity: 0; scale: 0.82; }
+      from { opacity: 1; scale: 0.82; }
       to { opacity: 1; scale: 1; }
     }
 
@@ -1072,7 +1072,7 @@
       displayStage.classList.remove('has-spotlight');
 
       if (targetRect) {
-        await returningImage.animate([
+        const returnAnimation = returningImage.animate([
           {
             left: `${sourceRect.left}px`,
             top: `${sourceRect.top}px`,
@@ -1093,7 +1093,11 @@
           duration: 1200,
           easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
           fill: 'forwards',
-        }).finished.catch(() => {});
+        });
+        await Promise.race([
+          returnAnimation.finished.catch(() => {}),
+          new Promise((resolve) => setTimeout(resolve, 1600)),
+        ]);
       }
 
       returningImage.remove();
