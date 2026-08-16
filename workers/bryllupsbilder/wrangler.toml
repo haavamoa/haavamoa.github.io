@@ -1,0 +1,25 @@
+name = "bryllupsbilder"
+main = "index.js"
+compatibility_date = "2026-08-16"
+
+[vars]
+ALLOWED_ORIGINS = "https://haavamoa.github.io"
+GITHUB_OWNER = "haavamoa"
+GITHUB_REPO = "bryllupsbilder-2026"
+GITHUB_RELEASE_ID = "371313329"
+
+[[ratelimits]]
+name = "UPLOAD_RATE_LIMITER"
+namespace_id = "26090501"
+
+	[ratelimits.simple]
+	limit = 10
+	period = 60
+
+[[ratelimits]]
+name = "GLOBAL_RATE_LIMITER"
+namespace_id = "26090502"
+
+	[ratelimits.simple]
+	limit = 100
+	period = 60

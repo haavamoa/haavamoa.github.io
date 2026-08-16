@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6d745c" />
+  <meta name="upload-endpoint" content="https://bryllupsbilder.bryllupsbilder.workers.dev/upload" />
+  <title>Del bilder · Ida og Håvard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@400;600&family=Lato:wght@300;400;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --cream: #f8f5f0;
+      --sand: #ede8df;
+      --gold: #cba979;
+      --gold-dark: #9a642f;
+      --olive: #6d745c;
+      --olive-dark: #4d5440;
+      --coral: #c46e58;
+      --text: #2f2e29;
+      --muted: #68665e;
+      --white: #ffffff;
+      --border: #d8d1c5;
+      --success: #3f704d;
+      --error: #a53f34;
+    }
+
+    html { background: var(--cream); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        repeating-linear-gradient(135deg, transparent 0, transparent 18px, rgba(109, 116, 92, 0.035) 18px, rgba(109, 116, 92, 0.035) 19px),
+        var(--cream);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .hero {
+      min-height: 250px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: url('https://github.com/user-attachments/assets/602e7ee5-5c57-437e-9bfb-ed2efac5fe86') center 58% / cover no-repeat;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(38, 42, 32, 0.58);
+    }
+
+    .hero-content {
+      position: relative;
+      width: min(680px, calc(100% - 40px));
+      padding: 50px 0 42px;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      z-index: 1;
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible { text-decoration: underline; }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.7rem, 12vw, 4.6rem);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .hero p:last-child {
+      max-width: 520px;
+      margin: 15px auto 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.98rem;
+    }
+
+    main {
+      width: min(680px, calc(100% - 32px));
+      margin: -20px auto 0;
+      padding: 0 0 64px;
+      position: relative;
+    }
+
+    .upload-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px rgba(66, 61, 51, 0.12);
+      overflow: hidden;
+    }
+
+    .picker {
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      padding: 30px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--sand);
+      text-align: center;
+      transition: background 160ms ease, outline-color 160ms ease;
+    }
+
+    .picker.is-dragging {
+      background: #e4e8dc;
+      outline: 3px solid var(--gold);
+      outline-offset: -3px;
+    }
+
+    .picker.has-preview {
+      min-height: 0;
+      padding: 0;
+      background: #24251f;
+    }
+
+    .picker-actions { width: min(100%, 390px); }
+
+    .camera-mark {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border: 2px solid var(--gold-dark);
+      border-radius: 50%;
+      color: var(--gold-dark);
+      font-family: Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .picker-title {
+      margin: 0 0 4px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .picker-help {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .choice-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .choice-button,
+    .submit-button,
+    .change-button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 6px;
+      font: 700 0.88rem/1 'Lato', sans-serif;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+
+    .choice-button {
+      background: var(--olive);
+      color: var(--white);
+      padding: 0 14px;
+    }
+
+    .choice-button.secondary {
+      background: var(--white);
+      border: 1px solid var(--olive);
+      color: var(--olive-dark);
+    }
+
+    .choice-button:hover,
+    .choice-button:focus-visible,
+    .submit-button:hover,
+    .submit-button:focus-visible { background: var(--olive-dark); }
+
+    .choice-button.secondary:hover,
+    .choice-button.secondary:focus-visible { background: #e4e8dc; }
+
+    .choice-button:active,
+    .submit-button:active,
+    .change-button:active { transform: translateY(1px); }
+
+    .preview-wrap {
+      display: none;
+      width: 100%;
+      min-height: 220px;
+      position: relative;
+    }
+
+    .has-preview .preview-wrap { display: block; }
+    .has-preview .picker-actions { display: none; }
+
+    .preview-image {
+      width: 100%;
+      min-height: 220px;
+      max-height: 430px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .change-button {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      min-height: 42px;
+      padding: 0 17px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--text);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-fields { padding: 28px 30px 30px; }
+
+    .field { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .optional {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 400;
+    }
+
+    input[type='text'],
+    input[type='password'] {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: var(--cream);
+      color: var(--text);
+      font: 400 1rem/1.2 'Lato', sans-serif;
+      padding: 11px 13px;
+    }
+
+    input:focus-visible,
+    button:focus-visible,
+    .choice-button:focus-visible {
+      outline: 3px solid rgba(196, 110, 88, 0.4);
+      outline-offset: 2px;
+    }
+
+    .privacy-note {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .submit-button {
+      width: 100%;
+      background: var(--coral);
+      color: var(--white);
+      padding: 0 20px;
+    }
+
+    .submit-button:hover,
+    .submit-button:focus-visible { background: #a95442; }
+
+    .submit-button:disabled {
+      background: #aaa79f;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      display: none;
+      margin: 16px 0 0;
+      border-left: 4px solid var(--olive);
+      padding: 10px 12px;
+      background: #edf1e8;
+      color: var(--olive-dark);
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    .status.is-visible { display: block; }
+    .status.is-error { border-color: var(--error); background: #faece9; color: var(--error); }
+    .status.is-success { border-color: var(--success); background: #e8f2ea; color: var(--success); }
+
+    .afterword {
+      margin: 24px auto 0;
+      color: var(--muted);
+      text-align: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 520px) {
+      .hero { min-height: 230px; }
+      .hero-content { padding-top: 62px; }
+      .choice-row { grid-template-columns: 1fr; }
+      .picker { min-height: 280px; }
+      .form-fields { padding: 24px 20px 25px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <a class="back-link" href="../">← Bryllupsinfo</a>
+    <div class="hero-content">
+      <p class="eyebrow">Ida &amp; Håvard · 5. september 2026</p>
+      <h1>Del bildene dine</h1>
+      <p>Hjelp oss å samle de små og store øyeblikkene fra dagen.</p>
+    </div>
+  </header>
+
+  <main>
+    <form class="upload-panel" id="uploadForm" novalidate>
+      <div class="picker" id="picker">
+        <div class="picker-actions">
+          <div class="camera-mark" aria-hidden="true">◎</div>
+          <h2 class="picker-title">Velg et øyeblikk</h2>
+          <p class="picker-help">JPEG, PNG, WebP, HEIC eller AVIF · maks 15 MB</p>
+          <div class="choice-row">
+            <label class="choice-button" for="cameraInput">Ta bilde</label>
+            <label class="choice-button secondary" for="galleryInput">Velg bilde</label>
+          </div>
+        </div>
+
+        <div class="preview-wrap">
+          <img class="preview-image" id="previewImage" alt="Forhåndsvisning av valgt bilde" />
+          <button class="change-button" id="changeButton" type="button">Bytt bilde</button>
+        </div>
+      </div>
+
+      <input class="file-input" id="cameraInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif" capture="environment" />
+      <input class="file-input" id="galleryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif" />
+
+      <div class="form-fields">
+        <div class="field">
+          <label for="guestName">Navnet ditt <span class="optional">(valgfritt)</span></label>
+          <input id="guestName" name="name" type="text" maxlength="60" autocomplete="name" />
+        </div>
+
+        <p class="privacy-note">Bildet lagres privat hos Ida og Håvard. Ikke last opp bilder andre kan oppleve som ubehagelige.</p>
+
+        <button class="submit-button" id="submitButton" type="submit" disabled>Last opp bilde</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <p class="afterword">Takk for at du deler dagen med oss ♥</p>
+  </main>
+
+  <script>
+    const MAX_FILE_BYTES = 15 * 1024 * 1024;
+    const uploadEndpoint = document.querySelector('meta[name="upload-endpoint"]').content;
+    const form = document.getElementById('uploadForm');
+    const picker = document.getElementById('picker');
+    const cameraInput = document.getElementById('cameraInput');
+    const galleryInput = document.getElementById('galleryInput');
+    const previewImage = document.getElementById('previewImage');
+    const changeButton = document.getElementById('changeButton');
+    const submitButton = document.getElementById('submitButton');
+    const status = document.getElementById('status');
+    const uploadClientId = getUploadClientId();
+    let selectedFile = null;
+    let previewUrl = null;
+
+    cameraInput.addEventListener('change', () => selectFile(cameraInput.files[0]));
+    galleryInput.addEventListener('change', () => selectFile(galleryInput.files[0]));
+    changeButton.addEventListener('click', resetFile);
+
+    for (const eventName of ['dragenter', 'dragover']) {
+      picker.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        picker.classList.add('is-dragging');
+      });
+    }
+
+    for (const eventName of ['dragleave', 'drop']) {
+      picker.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        picker.classList.remove('is-dragging');
+      });
+    }
+
+    picker.addEventListener('drop', (event) => selectFile(event.dataTransfer.files[0]));
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!selectedFile) {
+        showStatus('Velg et bilde først.', 'error');
+        return;
+      }
+
+      if (uploadEndpoint.includes('REPLACE-ME')) {
+        showStatus('Opplastingen er ikke åpnet ennå. Prøv igjen senere.', 'error');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('image', selectedFile, selectedFile.name);
+      formData.append('name', document.getElementById('guestName').value);
+
+      setUploading(true);
+      showStatus('Laster opp bildet …');
+
+      try {
+        const response = await fetch(uploadEndpoint, {
+          method: 'POST',
+          headers: { 'X-Upload-Client': uploadClientId },
+          body: formData,
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Opplastingen mislyktes. Prøv igjen.');
+        }
+
+        showStatus(result.message || 'Bildet er lastet opp. Tusen takk!', 'success');
+        form.reset();
+        resetFile(false);
+      } catch (error) {
+        showStatus(error.message || 'Kunne ikke laste opp bildet. Sjekk nettet og prøv igjen.', 'error');
+      } finally {
+        setUploading(false);
+      }
+    });
+
+    function selectFile(file) {
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        showStatus('Velg en bildefil.', 'error');
+        return;
+      }
+
+      if (file.size > MAX_FILE_BYTES) {
+        showStatus('Bildet er for stort. Maks størrelse er 15 MB.', 'error');
+        return;
+      }
+
+      selectedFile = file;
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      previewUrl = URL.createObjectURL(file);
+      previewImage.src = previewUrl;
+      picker.classList.add('has-preview');
+      submitButton.disabled = false;
+      hideStatus();
+    }
+
+    function resetFile(clearStatus = true) {
+      selectedFile = null;
+      cameraInput.value = '';
+      galleryInput.value = '';
+      picker.classList.remove('has-preview');
+      submitButton.disabled = true;
+      previewImage.removeAttribute('src');
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      previewUrl = null;
+      if (clearStatus) hideStatus();
+    }
+
+    function setUploading(isUploading) {
+      submitButton.disabled = isUploading || !selectedFile;
+      submitButton.textContent = isUploading ? 'Laster opp …' : 'Last opp bilde';
+      cameraInput.disabled = isUploading;
+      galleryInput.disabled = isUploading;
+    }
+
+    function showStatus(message, type = '') {
+      status.textContent = message;
+      status.className = `status is-visible${type ? ` is-${type}` : ''}`;
+    }
+
+    function hideStatus() {
+      status.textContent = '';
+      status.className = 'status';
+    }
+
+    function getUploadClientId() {
+      const storageKey = 'bryllup-upload-client';
+
+      try {
+        const storedId = localStorage.getItem(storageKey);
+        if (storedId) return storedId;
+
+        const newId = crypto.randomUUID();
+        localStorage.setItem(storageKey, newId);
+        return newId;
+      } catch {
+        return crypto.randomUUID();
+      }
+    }
+  </script>
+</body>
+</html>
