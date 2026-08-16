@@ -124,7 +124,7 @@ konfigurerte Release-en før GitHub-asseten fjernes permanent.
 Etter innlogging kan **Vis på skjerm** velges fra bildeoversikten. Nettleseren
 går i fullskjerm og viser alle bilder samtidig i en levende bildevegg. Listen
 oppdateres hvert åttende sekund. Et nytt bilde løftes frem over veggen med en
-egen introduksjonsanimasjon og konfetti, blir stående i omtrent ett minutt og
+egen introduksjonsanimasjon og konfetti, blir stående i 20 sekunder og
 animeres deretter tilbake til sin flis. Flere nye bilder legges i kø. Hele
 motivet vises uten hvite felt rundt portrettbilder.
 
