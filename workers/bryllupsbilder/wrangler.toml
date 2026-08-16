@@ -7,6 +7,13 @@ ALLOWED_ORIGINS = "https://haavamoa.github.io"
 GITHUB_OWNER = "haavamoa"
 GITHUB_REPO = "bryllupsbilder-2026"
 GITHUB_RELEASE_ID = "371313329"
+ADMIN_GITHUB_LOGIN = "haavamoa"
+ADMIN_URL = "https://haavamoa.github.io/bryllup/bilder/admin/"
+GITHUB_OAUTH_CALLBACK_URL = "https://bryllupsbilder.bryllupsbilder.workers.dev/auth/callback"
+GITHUB_OAUTH_CLIENT_ID = "Ov23liTpyUx9wmLpWG46"
+
+[secrets]
+required = [ "ADMIN_SESSION_SECRET", "GITHUB_OAUTH_CLIENT_SECRET", "GITHUB_TOKEN" ]
 
 [[ratelimits]]
 name = "UPLOAD_RATE_LIMITER"

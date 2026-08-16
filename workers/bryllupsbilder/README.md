@@ -72,6 +72,53 @@ Ved lokal testing må den lokale origin-en midlertidig legges til som en
 kommaseparert verdi i `ALLOWED_ORIGINS`, for eksempel
 `https://haavamoa.github.io,http://localhost:8000`.
 
+## 5. Konfigurer privat bildeoversikt
+
+Administrasjonssiden ligger på:
+
+```text
+https://haavamoa.github.io/bryllup/bilder/admin/
+```
+
+Den bruker GitHub OAuth kun til å bekrefte identiteten. OAuth-tokenet brukes
+ikke til bilderepoet og sendes aldri til administrasjonssiden. Worker-en gir
+kun tilgang når GitHub-brukernavnet matcher `ADMIN_GITHUB_LOGIN`.
+
+1. Gå til GitHub **Settings → Developer settings → OAuth Apps** og velg
+   **New OAuth App**.
+2. Fyll inn:
+
+   ```text
+   Application name: Bryllupsbilder administrasjon
+   Homepage URL: https://haavamoa.github.io/bryllup/bilder/admin/
+   Authorization callback URL: https://bryllupsbilder.bryllupsbilder.workers.dev/auth/callback
+   ```
+
+3. Kopier **Client ID** inn som `GITHUB_OAUTH_CLIENT_ID` i `wrangler.toml`.
+4. Opprett en **Client secret** i OAuth App-en og registrer den direkte i
+   Cloudflare:
+
+   ```sh
+   npx wrangler secret put GITHUB_OAUTH_CLIENT_SECRET
+   ```
+
+5. Opprett en tilfeldig signeringsnøkkel på minst 32 tegn og registrer den:
+
+   ```sh
+   npx wrangler secret put ADMIN_SESSION_SECRET
+   ```
+
+6. Publiser den oppdaterte Worker-en:
+
+   ```sh
+   npx wrangler deploy
+   ```
+
+Adminøkten varer i åtte timer, oppbevares i nettleserfanens `sessionStorage`
+og fjernes ved utlogging eller når fanen lukkes. Bilder vises gjennom en
+autorisert Worker-proxy. Sletting kontrollerer at bildet tilhører den
+konfigurerte Release-en før GitHub-asseten fjernes permanent.
+
 ## Etter bryllupet
 
 Last ned Release-assetene, deaktiver Worker-en og slett GitHub-tokenet. Bildene
