@@ -128,6 +128,11 @@ egen introduksjonsanimasjon og konfetti, blir stående i omtrent ett minutt og
 animeres deretter tilbake til sin flis. Flere nye bilder legges i kø. Hele
 motivet vises uten hvite felt rundt portrettbilder.
 
+Polling sammenligner den mottatte bildelisten med forrige resultat. Når listen
+er uendret, berøres verken bildeveggen, DOM-elementene eller den lokale
+bildecachen. Skjermen oppdateres derfor bare når et bilde faktisk er lagt til,
+fjernet eller endret.
+
 Visningen bruker samme private adminøkt og offentliggjør ingen bilde-URL-er.
 Velg **Avslutt visning** for å gå tilbake til administrasjon og sletting.
 

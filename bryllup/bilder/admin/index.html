@@ -730,6 +730,7 @@
     let celebrationTimer = null;
     let displayRefreshInProgress = false;
     let knownDisplayIds = new Set();
+    let displayAssetSignature = '';
     let spotlightQueue = [];
     let spotlightTransitioning = false;
 
@@ -738,6 +739,12 @@
     refreshButton.addEventListener('click', loadAssets);
     logoutButton.addEventListener('click', () => logOut());
     exitDisplayButton.addEventListener('click', () => stopDisplay());
+    document.addEventListener('fullscreenchange', () => {
+      if (displayActive) requestAnimationFrame(renderPhotoWall);
+    });
+    window.addEventListener('resize', () => {
+      if (displayActive) requestAnimationFrame(renderPhotoWall);
+    });
 
     const hash = new URLSearchParams(location.hash.slice(1));
     if (hash.get('session')) {
@@ -855,6 +862,7 @@
       currentDisplayAssetId = null;
       spotlightQueue = [];
       spotlightTransitioning = false;
+      displayAssetSignature = '';
       knownDisplayIds = new Set(assets.map((asset) => asset.id));
       document.body.classList.add('display-mode');
       displayView.hidden = false;
@@ -879,6 +887,7 @@
       celebrationTimer = null;
       spotlightQueue = [];
       spotlightTransitioning = false;
+      displayAssetSignature = '';
       displayView.classList.remove('celebrate');
       displayStage.classList.remove('has-spotlight');
       displayPhoto.hidden = true;
@@ -912,10 +921,14 @@
         if (!response.ok) throw new Error(result.error || 'Kunne ikke oppdatere bildene.');
 
         const incomingAssets = result.assets || [];
+        const incomingSignature = getAssetSignature(incomingAssets);
+        if (!initialLoad && incomingSignature === displayAssetSignature) return;
+
         const newAssets = initialLoad
           ? []
           : incomingAssets.filter((asset) => !knownDisplayIds.has(asset.id));
 
+        displayAssetSignature = incomingSignature;
         for (const asset of incomingAssets) knownDisplayIds.add(asset.id);
         assets = incomingAssets;
         updateDisplayCount();
@@ -933,6 +946,12 @@
       } finally {
         displayRefreshInProgress = false;
       }
+    }
+
+    function getAssetSignature(assetList) {
+      return assetList
+        .map((asset) => `${asset.id}:${asset.createdAt}:${asset.size}:${asset.label || ''}`)
+        .join('|');
     }
 
     function renderPhotoWall() {
