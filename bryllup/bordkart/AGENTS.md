@@ -1,4 +1,4 @@
-# Arbeidsregler for BORDPLASSERING
+# Arbeidsregler for bordkartet
 
 Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 
@@ -6,7 +6,8 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 
 - Dette er en statisk GitHub Pages-side uten byggesteg.
 - `index.html` er den publiserte stolplanen.
-- Behold ruten og mappenavnet `BORDPLASSERING`.
+- Behold den publiserte ruten `/bryllup/bordkart/`.
+- Den gamle ruten `/bordplassering/` skal videresende hit.
 - Hold `index.html`, `bordfordeling.md` og `arbeidsutkast.md` synkronisert.
 
 ## Faste begrensninger

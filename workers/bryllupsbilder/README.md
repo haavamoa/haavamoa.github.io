@@ -114,7 +114,7 @@ kun tilgang når GitHub-brukernavnet matcher `ADMIN_GITHUB_LOGIN`.
    npx wrangler deploy
    ```
 
-Adminøkten varer i åtte timer, oppbevares i nettleserfanens `sessionStorage`
+Adminøkten varer i 18 timer, oppbevares i nettleserfanens `sessionStorage`
 og fjernes ved utlogging eller når fanen lukkes. Bilder vises gjennom en
 autorisert Worker-proxy. Sletting kontrollerer at bildet tilhører den
 konfigurerte Release-en før GitHub-asseten fjernes permanent.

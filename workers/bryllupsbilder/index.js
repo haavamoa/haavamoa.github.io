@@ -1,6 +1,6 @@
 const MAX_FILE_BYTES = 15 * 1024 * 1024;
 const MAX_REQUEST_BYTES = MAX_FILE_BYTES + 1024 * 1024;
-const ADMIN_SESSION_SECONDS = 8 * 60 * 60;
+const ADMIN_SESSION_SECONDS = 18 * 60 * 60;
 
 export default {
   async fetch(request, env) {

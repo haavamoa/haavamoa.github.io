@@ -1,4 +1,4 @@
-# Arbeidsnotater for bordplasseringen
+# Arbeidsnotater for bordkartet
 
 Sist oppdatert: 16. august 2026.
 
@@ -6,13 +6,14 @@ Dette dokumentet samler beslutninger, relasjoner og regler fra arbeidsøkten som
 
 ## Publisering og filer
 
-- Publisert rute: `https://haavamoa.github.io/BORDPLASSERING/`
+- Publisert rute: `https://haavamoa.github.io/bryllup/bordkart/`
+- Den gamle ruten `https://haavamoa.github.io/bordplassering/` videresender til bordkartet.
 - `index.html` er den publiserte, visuelle stolplanen og fasiten for rekkefølgen rundt bordene.
 - `bordfordeling.md` er den korte oversikten med gjester og sum per bord.
 - `arbeidsutkast.md` inneholder bakgrunn, relasjonsbegrunnelser og romskisse.
 - `AGENTS.md` inneholder faste arbeidsregler for fremtidige kodeøkter.
 - Nettsiden er statisk og selvstendig. Den har ingen byggprosess eller eksterne avhengigheter.
-- GitHub Pages-ruten er versalsensitiv. Mappen skal fortsatt hete `BORDPLASSERING`.
+- GitHub Pages-ruten er versalsensitiv. Den publiserte mappen skal hete `bryllup/bordkart`.
 
 ## Gjeldende status
 

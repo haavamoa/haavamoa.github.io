@@ -241,6 +241,268 @@
     .message.is-error { border-color: #d9aaa2; background: #faece9; color: var(--error); }
     .message[hidden], .empty-state[hidden] { display: none; }
 
+    .display-view[hidden] { display: none; }
+
+    body.display-mode { overflow: hidden; background: #171a15; }
+    body.display-mode > header,
+    body.display-mode > main { display: none; }
+
+    .display-view {
+      position: fixed;
+      z-index: 20;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      background: #171a15;
+      color: var(--white);
+      isolation: isolate;
+    }
+
+    .display-view::before {
+      content: '';
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background:
+        repeating-linear-gradient(120deg, transparent 0, transparent 44px, rgba(203, 169, 121, 0.045) 44px, rgba(203, 169, 121, 0.045) 46px),
+        #171a15;
+    }
+
+    .display-view::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 18px;
+      border: 1px solid rgba(203, 169, 121, 0.28);
+      pointer-events: none;
+    }
+
+    .display-topbar {
+      min-height: 84px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 18px 36px 12px;
+    }
+
+    .display-brand {
+      margin: 0;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #76b681;
+      box-shadow: 0 0 0 5px rgba(118, 182, 129, 0.12);
+      animation: live-pulse 2.2s ease-in-out infinite;
+    }
+
+    .exit-display-button {
+      justify-self: end;
+      min-height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 4px;
+      background: rgba(23, 26, 21, 0.62);
+      color: rgba(255, 255, 255, 0.82);
+      padding: 0 15px;
+      font: 700 0.78rem/1 'Lato', sans-serif;
+      cursor: pointer;
+    }
+
+    .exit-display-button:hover,
+    .exit-display-button:focus-visible { background: var(--white); color: var(--text); }
+
+    .display-stage {
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      padding: 4px 6vw 14px;
+      position: relative;
+    }
+
+    .display-empty {
+      max-width: 760px;
+      text-align: center;
+    }
+
+    .display-empty[hidden],
+    .display-photo[hidden] { display: none; }
+
+    .display-empty-mark {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--coral);
+      font-size: 3.5rem;
+    }
+
+    .display-empty h2 {
+      margin: 0 0 8px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .display-empty p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: clamp(1rem, 1.7vw, 1.35rem);
+    }
+
+    .display-photo {
+      width: min(88vw, 1500px);
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      place-items: center;
+      gap: 12px;
+      transform-origin: center 70%;
+    }
+
+    .display-image-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 1px solid rgba(203, 169, 121, 0.5);
+      border-radius: 5px;
+      background: var(--white);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.42);
+    }
+
+    .display-image-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: block;
+      background: var(--white);
+      object-fit: contain;
+    }
+
+    .display-caption {
+      text-align: center;
+    }
+
+    .new-photo-label {
+      display: none;
+      margin: 0 0 5px;
+      color: var(--coral);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .display-photo.is-new .new-photo-label { display: block; }
+
+    .display-photo-label {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.45rem, 2.8vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.05;
+    }
+
+    .display-photo-time {
+      margin: 4px 0 0;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.78rem;
+    }
+
+    .display-photo.is-entering { animation: photo-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .display-photo.is-new { animation: new-photo-enter 1300ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    .display-footer {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 10px 36px 18px;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.8rem;
+    }
+
+    .display-footer-heart { color: var(--coral); }
+
+    .confetti {
+      position: absolute;
+      z-index: 4;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .confetti-piece {
+      --x: 50%;
+      --delay: 0ms;
+      --duration: 2300ms;
+      --turn: 540deg;
+      width: 10px;
+      height: 24px;
+      position: absolute;
+      top: -40px;
+      left: var(--x);
+      border-radius: 2px;
+      background: var(--gold);
+      opacity: 0;
+    }
+
+    .confetti-piece:nth-child(3n + 1) { background: var(--coral); }
+    .confetti-piece:nth-child(3n + 2) { width: 7px; height: 18px; background: #7fb08a; }
+    .display-view.celebrate .confetti-piece {
+      animation: confetti-fall var(--duration) cubic-bezier(0.2, 0.65, 0.35, 1) var(--delay) both;
+    }
+
+    @keyframes live-pulse {
+      0%, 100% { opacity: 0.65; transform: scale(0.86); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes photo-enter {
+      from { opacity: 0; transform: translateY(32px) scale(0.94) rotate(-1.4deg); }
+      65% { opacity: 1; transform: translateY(-5px) scale(1.012) rotate(0.5deg); }
+      to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+    }
+
+    @keyframes new-photo-enter {
+      0% { opacity: 0; transform: translateY(90px) scale(0.72) rotate(-5deg); filter: saturate(0.6); }
+      55% { opacity: 1; transform: translateY(-12px) scale(1.035) rotate(1.5deg); filter: saturate(1.15); }
+      76% { transform: translateY(5px) scale(0.99) rotate(-0.5deg); }
+      100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: saturate(1); }
+    }
+
+    @keyframes confetti-fall {
+      0% { opacity: 0; transform: translate3d(0, -30px, 0) rotate(0); }
+      8% { opacity: 1; }
+      100% { opacity: 0; transform: translate3d(40px, 105vh, 0) rotate(var(--turn)); }
+    }
+
     button:focus-visible,
     a:focus-visible {
       outline: 3px solid rgba(196, 110, 88, 0.4);
@@ -256,10 +518,22 @@
       .toolbar-button { flex: 1; }
       .gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
       .photo-details { padding: 11px; }
+      .display-topbar { grid-template-columns: 1fr auto; padding: 16px 22px 8px; }
+      .live-indicator { display: none; }
+      .display-stage { padding-inline: 24px; }
+      .display-photo { width: 100%; }
+      .display-view::after { inset: 10px; }
     }
 
     @media (max-width: 380px) {
       .gallery { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .display-photo.is-entering,
+      .display-photo.is-new,
+      .live-dot { animation: none; }
+      .confetti { display: none; }
     }
   </style>
 </head>
@@ -287,6 +561,7 @@
       <div class="toolbar">
         <p class="count" id="photoCount">Henter bilder …</p>
         <div class="toolbar-actions">
+          <button class="toolbar-button" id="displayButton" type="button">Vis på skjerm</button>
           <button class="toolbar-button" id="refreshButton" type="button">Oppdater</button>
           <button class="toolbar-button" id="logoutButton" type="button">Logg ut</button>
         </div>
@@ -297,25 +572,80 @@
     </section>
   </main>
 
+  <section class="display-view" id="displayView" aria-label="Bildevisning for festskjerm" hidden>
+    <div class="display-topbar">
+      <p class="display-brand">Ida &amp; Håvard</p>
+      <p class="live-indicator"><span class="live-dot" aria-hidden="true"></span>Oppdateres automatisk</p>
+      <button class="exit-display-button" id="exitDisplayButton" type="button">Avslutt visning</button>
+    </div>
+
+    <div class="display-stage">
+      <div class="display-empty" id="displayEmpty">
+        <span class="display-empty-mark" aria-hidden="true">♥</span>
+        <h2>Venter på kveldens første bilde</h2>
+        <p>Nye øyeblikk dukker opp her helt av seg selv.</p>
+      </div>
+
+      <figure class="display-photo" id="displayPhoto" hidden>
+        <div class="display-image-frame">
+          <img id="displayImage" alt="" />
+        </div>
+        <figcaption class="display-caption">
+          <p class="new-photo-label">Nytt bilde!</p>
+          <p class="display-photo-label" id="displayPhotoLabel"></p>
+          <p class="display-photo-time" id="displayPhotoTime"></p>
+        </figcaption>
+      </figure>
+
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+    </div>
+
+    <div class="display-footer">
+      <span id="displayCount">0 bilder</span>
+      <span class="display-footer-heart" aria-hidden="true">♥</span>
+      <span>5. september 2026</span>
+    </div>
+  </section>
+
   <script>
     const apiBase = document.querySelector('meta[name="admin-api"]').content;
     const sessionKey = 'bryllup-admin-session';
     const loginPanel = document.getElementById('loginPanel');
     const adminView = document.getElementById('adminView');
     const loginButton = document.getElementById('loginButton');
+    const displayButton = document.getElementById('displayButton');
     const refreshButton = document.getElementById('refreshButton');
     const logoutButton = document.getElementById('logoutButton');
     const photoCount = document.getElementById('photoCount');
     const gallery = document.getElementById('gallery');
     const emptyState = document.getElementById('emptyState');
     const pageMessage = document.getElementById('pageMessage');
+    const displayView = document.getElementById('displayView');
+    const exitDisplayButton = document.getElementById('exitDisplayButton');
+    const displayEmpty = document.getElementById('displayEmpty');
+    const displayPhoto = document.getElementById('displayPhoto');
+    const displayImage = document.getElementById('displayImage');
+    const displayPhotoLabel = document.getElementById('displayPhotoLabel');
+    const displayPhotoTime = document.getElementById('displayPhotoTime');
+    const displayCount = document.getElementById('displayCount');
+    const confetti = document.getElementById('confetti');
     const objectUrls = new Map();
     let session = sessionStorage.getItem(sessionKey) || '';
     let assets = [];
+    let displayActive = false;
+    let displayIndex = -1;
+    let currentDisplayAssetId = null;
+    let displayPollTimer = null;
+    let displaySlideTimer = null;
+    let celebrationTimer = null;
+    let displayRefreshInProgress = false;
+    let knownDisplayIds = new Set();
 
     loginButton.href = `${apiBase}/auth/github`;
+    displayButton.addEventListener('click', startDisplay);
     refreshButton.addEventListener('click', loadAssets);
     logoutButton.addEventListener('click', () => logOut());
+    exitDisplayButton.addEventListener('click', () => stopDisplay());
 
     const hash = new URLSearchParams(location.hash.slice(1));
     if (hash.get('session')) {
@@ -403,11 +733,7 @@
 
     async function loadPreview(asset, frame) {
       try {
-        const response = await adminFetch(`/admin/assets/${asset.id}/content`);
-        if (!response.ok) throw new Error();
-
-        const objectUrl = URL.createObjectURL(await response.blob());
-        objectUrls.set(asset.id, objectUrl);
+        const objectUrl = await getAssetObjectUrl(asset);
         const image = document.createElement('img');
         image.alt = asset.label || 'Opplastet bryllupsbilde';
         image.loading = 'lazy';
@@ -418,6 +744,182 @@
         frame.replaceChildren(image);
       } catch {
         frame.textContent = 'Kunne ikke laste bildet';
+      }
+    }
+
+    async function getAssetObjectUrl(asset) {
+      if (objectUrls.has(asset.id)) return objectUrls.get(asset.id);
+
+      const response = await adminFetch(`/admin/assets/${asset.id}/content`);
+      if (!response.ok) throw new Error('Kunne ikke hente bildet.');
+
+      const objectUrl = URL.createObjectURL(await response.blob());
+      objectUrls.set(asset.id, objectUrl);
+      return objectUrl;
+    }
+
+    async function startDisplay() {
+      displayActive = true;
+      displayIndex = -1;
+      currentDisplayAssetId = null;
+      knownDisplayIds = new Set(assets.map((asset) => asset.id));
+      document.body.classList.add('display-mode');
+      displayView.hidden = false;
+      createConfetti();
+
+      if (document.fullscreenEnabled && !document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+
+      await refreshDisplayAssets(true);
+      if (!displayActive) return;
+      displayPollTimer = setInterval(() => refreshDisplayAssets(false), 8000);
+    }
+
+    function stopDisplay(refreshAdmin = true) {
+      displayActive = false;
+      clearInterval(displayPollTimer);
+      clearTimeout(displaySlideTimer);
+      clearTimeout(celebrationTimer);
+      displayPollTimer = null;
+      displaySlideTimer = null;
+      celebrationTimer = null;
+      displayView.classList.remove('celebrate');
+      displayView.hidden = true;
+      document.body.classList.remove('display-mode');
+
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+
+      if (refreshAdmin && session) loadAssets();
+    }
+
+    async function refreshDisplayAssets(initialLoad) {
+      if (!displayActive || displayRefreshInProgress) return;
+      displayRefreshInProgress = true;
+
+      try {
+        const response = await adminFetch('/admin/assets');
+        if (response.status === 401) {
+          stopDisplay(false);
+          logOut('Økten er utløpt. Logg inn på nytt.');
+          return;
+        }
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || 'Kunne ikke oppdatere bildene.');
+
+        const incomingAssets = result.assets || [];
+        const newAssets = initialLoad
+          ? []
+          : incomingAssets.filter((asset) => !knownDisplayIds.has(asset.id));
+
+        for (const asset of incomingAssets) knownDisplayIds.add(asset.id);
+        assets = incomingAssets;
+        updateDisplayCount();
+
+        if (assets.length === 0) {
+          showDisplayEmpty();
+        } else if (newAssets.length > 0) {
+          await showDisplayAsset(newAssets[0], true);
+        } else if (initialLoad || !assets.some((asset) => asset.id === currentDisplayAssetId)) {
+          await showDisplayAsset(assets[0], false);
+        }
+      } catch (error) {
+        displayCount.textContent = error.message || 'Kunne ikke oppdatere bildene';
+      } finally {
+        displayRefreshInProgress = false;
+      }
+    }
+
+    async function showDisplayAsset(asset, isNew) {
+      if (!displayActive || !asset) return;
+
+      try {
+        const objectUrl = await getAssetObjectUrl(asset);
+        if (!displayActive) return;
+
+        displayImage.src = objectUrl;
+        displayImage.alt = asset.label || 'Opplastet bryllupsbilde';
+        if (!displayImage.complete) {
+          await Promise.race([
+            new Promise((resolve) => {
+              displayImage.addEventListener('load', resolve, { once: true });
+              displayImage.addEventListener('error', resolve, { once: true });
+            }),
+            new Promise((resolve) => setTimeout(resolve, 1500)),
+          ]);
+        }
+        if (!displayActive) return;
+
+        currentDisplayAssetId = asset.id;
+        displayIndex = assets.findIndex((candidate) => candidate.id === asset.id);
+        displayPhotoLabel.textContent = asset.label || 'Bilde fra en gjest';
+        displayPhotoTime.textContent = formatDate(asset.createdAt);
+        displayEmpty.hidden = true;
+        displayPhoto.hidden = false;
+        displayPhoto.classList.remove('is-entering', 'is-new');
+        void displayPhoto.offsetWidth;
+        displayPhoto.classList.add(isNew ? 'is-new' : 'is-entering');
+
+        if (isNew) celebrateNewPhoto();
+        scheduleNextDisplayAsset();
+        preloadNextDisplayAsset();
+      } catch {
+        scheduleNextDisplayAsset();
+      }
+    }
+
+    function showDisplayEmpty() {
+      currentDisplayAssetId = null;
+      displayIndex = -1;
+      displayPhoto.hidden = true;
+      displayEmpty.hidden = false;
+      clearTimeout(displaySlideTimer);
+    }
+
+    function scheduleNextDisplayAsset() {
+      clearTimeout(displaySlideTimer);
+      if (!displayActive || assets.length < 2) return;
+      displaySlideTimer = setTimeout(showNextDisplayAsset, 11000);
+    }
+
+    function showNextDisplayAsset() {
+      if (!displayActive || assets.length === 0) return;
+      displayIndex = (displayIndex + 1) % assets.length;
+      showDisplayAsset(assets[displayIndex], false);
+    }
+
+    function preloadNextDisplayAsset() {
+      if (assets.length < 2) return;
+      const nextIndex = (displayIndex + 1) % assets.length;
+      getAssetObjectUrl(assets[nextIndex]).catch(() => {});
+    }
+
+    function updateDisplayCount() {
+      displayCount.textContent = `${assets.length} ${assets.length === 1 ? 'bilde' : 'bilder'} fra dagen`;
+    }
+
+    function celebrateNewPhoto() {
+      clearTimeout(celebrationTimer);
+      displayView.classList.remove('celebrate');
+      void displayView.offsetWidth;
+      displayView.classList.add('celebrate');
+      celebrationTimer = setTimeout(() => displayView.classList.remove('celebrate'), 3400);
+    }
+
+    function createConfetti() {
+      if (confetti.childElementCount > 0) return;
+
+      for (let index = 0; index < 24; index += 1) {
+        const piece = document.createElement('span');
+        piece.className = 'confetti-piece';
+        piece.style.setProperty('--x', `${4 + ((index * 37) % 92)}%`);
+        piece.style.setProperty('--delay', `${(index % 8) * 75}ms`);
+        piece.style.setProperty('--duration', `${2100 + (index % 6) * 170}ms`);
+        piece.style.setProperty('--turn', `${index % 2 === 0 ? 540 : -540}deg`);
+        confetti.append(piece);
       }
     }
 
@@ -469,6 +971,7 @@
     }
 
     function logOut(message = '') {
+      if (displayActive) stopDisplay(false);
       session = '';
       assets = [];
       sessionStorage.removeItem(sessionKey);
@@ -484,6 +987,7 @@
     }
 
     function setToolbarBusy(isBusy) {
+      displayButton.disabled = isBusy;
       refreshButton.disabled = isBusy;
       refreshButton.textContent = isBusy ? 'Oppdaterer …' : 'Oppdater';
     }
