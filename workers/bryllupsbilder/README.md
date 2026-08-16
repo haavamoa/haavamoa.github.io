@@ -140,6 +140,8 @@ kryssfades inn over 1,8 sekunder, så bakgrunnen blir aldri blank.
 Hvert motiv får en eksplisitt contain-størrelse beregnet fra naturlig
 bildeformat og tilgjengelig flis. Den avrundede wrapperen følger derfor selve
 motivet, og ingen overgangstilstand kan skalere bildet utenfor slideshowflaten.
+Ved layoutbytte fader gammel komposisjon helt ut og fjernes før neste fader inn.
+Det finnes derfor aldri bilder fra to forskjellige layouts samtidig.
 
 Listen oppdateres hvert åttende sekund. Et nytt bilde settes inn på en tilfeldig
 plass i slideshowkøen og løftes samtidig frem over den pågående bakgrunnen i
@@ -151,10 +153,16 @@ Effektene popper frem i ledig plass ved siden av eller under motivet og faller
 deretter ut av nettleservinduet uten å dekke bildet. Hele motivet vises uten
 hvite felt rundt portrettbilder.
 
-Hvis bildet har en hilsen, vises den også i adminoversikten og som en ticker
-som glir over festskjermen mens bildet står i spotlight. Avsenderen vises etter
-hilsenen. Tickerens varighet tilpasses tekstlengden mellom 9 og 17 sekunder, så
-hele teksten rekker over skjermen før 20-sekunders spotlighten avsluttes.
+Hvis bildet har en hilsen, vises den også i adminoversikten og som en ticker i
+den nederste raden på festskjermen. Footeren flyttes automatisk over hilsenen,
+og bildeområdet blir tilsvarende lavere slik at teksten aldri dekker motivet.
+Når et nytt bilde står i spotlight, prioriteres dette bildets hilsen. I
+slideshowet vises hilsenen til hvert synlige bilde sekvensielt; ved to
+portrettbilder ruller første hilsen ferdig, deretter andre. Avsenderen vises
+etter hilsenen. Tickerens varighet tilpasses tekstlengden mellom 9 og 17
+sekunder, og slideshowet bytter først etter at alle hilsener i komposisjonen er
+ferdige. Tickerbakgrunnen er helt ugjennomsiktig, slik at bakgrunnsmønster,
+slideshow og lyskastere ikke skinner gjennom teksten.
 
 **Party mode** slås av og på med en diskret switch i festskjermens topplinje.
 Modusen fader inn en sakte bevegelig bakgrunn med flere diskofarger samtidig,

@@ -266,7 +266,7 @@
       z-index: 20;
       inset: 0;
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto minmax(0, 1fr) auto auto;
       overflow: hidden;
       background:
         repeating-linear-gradient(120deg, transparent 0, transparent 44px, rgba(203, 169, 121, 0.045) 44px, rgba(203, 169, 121, 0.045) 46px),
@@ -468,7 +468,7 @@
       gap: clamp(8px, 1vw, 16px);
       opacity: 0;
       transform: scale(0.985);
-      transition: opacity 1800ms cubic-bezier(0.4, 0, 0.2, 1), transform 2200ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 850ms cubic-bezier(0.4, 0, 0.2, 1), transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
     }
 
@@ -480,7 +480,11 @@
 
     .slideshow-slide.is-initial { transition: none; }
 
-    .slideshow-slide.is-previous { z-index: 1; }
+    .slideshow-slide.is-leaving {
+      z-index: 2;
+      opacity: 0;
+      transform: scale(0.992);
+    }
 
     .slideshow-slide.layout-single { grid-template: 1fr / 1fr; }
     .slideshow-slide.layout-portraits { grid-template: 1fr / repeat(2, minmax(0, 1fr)); }
@@ -686,17 +690,14 @@
     .display-footer-heart { color: var(--coral); }
 
     .greeting-ticker {
-      position: fixed;
+      position: relative;
       z-index: 7;
-      right: 0;
-      bottom: 58px;
-      left: 0;
+      width: 100%;
       overflow: hidden;
       padding: 10px 0 11px;
       border-top: 1px solid rgba(203, 169, 121, 0.32);
       border-bottom: 1px solid rgba(203, 169, 121, 0.32);
-      background: rgba(17, 20, 15, 0.72);
-      backdrop-filter: blur(7px);
+      background: #11140f;
       pointer-events: none;
     }
 
@@ -918,14 +919,14 @@
 
     <div class="celebration-effects" id="celebrationEffects" aria-hidden="true"></div>
 
-    <div class="greeting-ticker" id="greetingTicker" hidden>
-      <p class="greeting-track" id="greetingTrack"></p>
-    </div>
-
     <div class="display-footer">
       <span id="displayCount">0 bilder</span>
       <span class="display-footer-heart" aria-hidden="true">♥</span>
       <span>5. september 2026</span>
+    </div>
+
+    <div class="greeting-ticker" id="greetingTicker" hidden>
+      <p class="greeting-track" id="greetingTrack"></p>
     </div>
   </section>
 
@@ -983,6 +984,8 @@
     let slideshowTimer = null;
     let spotlightTimer = null;
     let celebrationTimer = null;
+    let greetingSequenceTimer = null;
+    let greetingSequenceVersion = 0;
     let ambientEffectTimer = null;
     let ambientLightTimer = null;
     let partyBrandTimer = null;
@@ -1004,8 +1007,8 @@
     logoutButton.addEventListener('click', () => logOut());
     partyModeButton.addEventListener('click', togglePartyMode);
     exitDisplayButton.addEventListener('click', () => stopDisplay());
-    document.addEventListener('fullscreenchange', resizeSlideshowImages);
-    window.addEventListener('resize', resizeSlideshowImages);
+    document.addEventListener('fullscreenchange', resizePresentationImages);
+    window.addEventListener('resize', resizePresentationImages);
     applyPartyMode();
 
     const hash = new URLSearchParams(location.hash.slice(1));
@@ -1146,7 +1149,6 @@
       await refreshDisplayAssets(true);
       if (!displayActive) return;
       displayPollTimer = setInterval(() => refreshDisplayAssets(false), 8000);
-      scheduleNextSlideshow();
     }
 
     function stopDisplay(refreshAdmin = true) {
@@ -1155,6 +1157,7 @@
       clearTimeout(slideshowTimer);
       clearTimeout(spotlightTimer);
       clearTimeout(celebrationTimer);
+      cancelGreetingSequence();
       stopPartyAmbience();
       stopPartyLights();
       stopPartyBrandColors();
@@ -1162,6 +1165,7 @@
       slideshowTimer = null;
       spotlightTimer = null;
       celebrationTimer = null;
+      greetingSequenceTimer = null;
       ambientEffectTimer = null;
       ambientLightTimer = null;
       partyBrandTimer = null;
@@ -1280,24 +1284,38 @@
         );
         if (!displayActive) return;
         nextSlide.append(...tiles);
-        photoWall.append(nextSlide);
-        sizeSlideshowImages(nextSlide);
 
         const currentSlide = photoWall.querySelector('.slideshow-slide.is-active');
         if (currentSlide) {
+          if (!currentDisplayAssetId) {
+            cancelGreetingSequence();
+            hideGreeting();
+          }
           currentSlide.classList.remove('is-active');
-          currentSlide.classList.add('is-previous');
-          requestAnimationFrame(() => nextSlide.classList.add('is-active'));
-        } else {
+          currentSlide.classList.add('is-leaving');
+          await Promise.race([
+            new Promise((resolve) => {
+              currentSlide.addEventListener('transitionend', resolve, { once: true });
+            }),
+            new Promise((resolve) => setTimeout(resolve, 1050)),
+          ]);
+          currentSlide.remove();
+        }
+        if (!displayActive) return;
+
+        photoWall.append(nextSlide);
+        sizeSlideshowImages(nextSlide);
+        if (!currentSlide) {
           nextSlide.classList.add('is-active', 'is-initial');
+          requestAnimationFrame(() => nextSlide.classList.remove('is-initial'));
+        } else {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => nextSlide.classList.add('is-active'));
+          });
         }
         currentSlideAssetIds = composition.assets.map((asset) => asset.id);
         displayEmpty.hidden = true;
-
-        setTimeout(() => {
-          currentSlide?.remove();
-          nextSlide.classList.remove('is-initial', 'is-previous');
-        }, 2400);
+        scheduleSlidePresentation(composition.assets);
       } catch (error) {
         console.error('Kunne ikke bygge slideshow:', error);
       } finally {
@@ -1408,6 +1426,25 @@
       });
     }
 
+    function sizeSpotlightImage() {
+      if (displayPhoto.hidden || !displayImage.naturalWidth || !displayImage.naturalHeight) return;
+
+      const frame = displayImage.closest('.display-image-frame');
+      const frameWidth = frame.clientWidth;
+      const frameHeight = frame.clientHeight;
+      const sourceRatio = displayImage.naturalWidth / displayImage.naturalHeight;
+      const frameRatio = frameWidth / Math.max(frameHeight, 1);
+      const width = sourceRatio > frameRatio ? frameWidth : frameHeight * sourceRatio;
+      const height = sourceRatio > frameRatio ? frameWidth / sourceRatio : frameHeight;
+      displayImage.style.width = `${Math.min(width, frameWidth)}px`;
+      displayImage.style.height = `${Math.min(height, frameHeight)}px`;
+    }
+
+    function resizePresentationImages() {
+      resizeSlideshowImages();
+      requestAnimationFrame(sizeSpotlightImage);
+    }
+
     async function getImageOrientation(asset) {
       if (imageOrientations.has(asset.id)) return imageOrientations.get(asset.id);
 
@@ -1440,8 +1477,54 @@
       if (!displayActive || assets.length === 0) return;
       slideshowTimer = setTimeout(async () => {
         await renderNextSlideshow();
-        scheduleNextSlideshow();
       }, 12000);
+    }
+
+    function scheduleSlidePresentation(slideAssets) {
+      cancelGreetingSequence();
+      clearTimeout(slideshowTimer);
+
+      if (currentDisplayAssetId) {
+        scheduleNextSlideshow();
+        return;
+      }
+
+      const greetingAssets = slideAssets.filter((asset) => String(asset.greeting || '').trim());
+      if (greetingAssets.length === 0) {
+        hideGreeting();
+        scheduleNextSlideshow();
+        return;
+      }
+
+      const version = greetingSequenceVersion;
+      let index = 0;
+      const showNext = () => {
+        if (
+          version !== greetingSequenceVersion ||
+          !displayActive ||
+          currentDisplayAssetId
+        ) return;
+
+        if (index >= greetingAssets.length) {
+          hideGreeting();
+          slideshowTimer = setTimeout(() => renderNextSlideshow(), 1000);
+          return;
+        }
+
+        const duration = showGreeting(greetingAssets[index]);
+        index += 1;
+        greetingSequenceTimer = setTimeout(() => {
+          hideGreeting();
+          greetingSequenceTimer = setTimeout(showNext, 700);
+        }, duration * 1000);
+      };
+      showNext();
+    }
+
+    function cancelGreetingSequence() {
+      greetingSequenceVersion += 1;
+      clearTimeout(greetingSequenceTimer);
+      greetingSequenceTimer = null;
     }
 
     function shuffle(values) {
@@ -1488,11 +1571,17 @@
         if (!displayActive) return;
 
         currentDisplayAssetId = asset.id;
+        cancelGreetingSequence();
+        scheduleNextSlideshow();
         displayPhotoLabel.textContent = asset.label || 'Bilde fra en gjest';
         displayPhotoTime.textContent = formatDate(asset.createdAt);
         showGreeting(asset);
         displayEmpty.hidden = true;
         displayPhoto.hidden = false;
+        requestAnimationFrame(() => {
+          sizeSpotlightImage();
+          requestAnimationFrame(sizeSpotlightImage);
+        });
         displayPhoto.classList.remove('is-new');
         void displayPhoto.offsetWidth;
         displayPhoto.classList.add('is-new');
@@ -1516,6 +1605,7 @@
       displayPhoto.hidden = true;
       displayEmpty.hidden = false;
       displayStage.classList.remove('has-spotlight');
+      cancelGreetingSequence();
       hideGreeting();
       clearTimeout(spotlightTimer);
     }
@@ -1586,7 +1676,11 @@
       setTimeout(() => targetTile?.classList.remove('is-returned'), 1200);
       currentDisplayAssetId = null;
       spotlightTransitioning = false;
-      scheduleNextSlideshow();
+      scheduleSlidePresentation(
+        currentSlideAssetIds
+          .map((id) => assets.find((asset) => asset.id === id))
+          .filter(Boolean),
+      );
       showNextSpotlight();
     }
 
@@ -1594,24 +1688,25 @@
       const greeting = String(asset.greeting || '').trim();
       if (!greeting) {
         hideGreeting();
-        return;
+        return 0;
       }
 
       const author = String(asset.author || '').trim();
       greetingTrack.textContent = author ? `«${greeting}» — ${author}` : `«${greeting}»`;
-      greetingTrack.style.setProperty(
-        '--greeting-duration',
-        `${Math.max(9, Math.min(17, 7 + greeting.length * 0.07))}s`,
-      );
+      const duration = Math.max(9, Math.min(17, 7 + greeting.length * 0.07));
+      greetingTrack.style.setProperty('--greeting-duration', `${duration}s`);
       greetingTicker.hidden = false;
       greetingTrack.style.animation = 'none';
       void greetingTrack.offsetWidth;
       greetingTrack.style.removeProperty('animation');
+      resizePresentationImages();
+      return duration;
     }
 
     function hideGreeting() {
       greetingTicker.hidden = true;
       greetingTrack.textContent = '';
+      resizePresentationImages();
     }
 
     async function waitForSlideshowIdle() {
