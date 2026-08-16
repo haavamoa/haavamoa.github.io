@@ -363,9 +363,6 @@
       animation: wall-photo-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--wall-delay, 0ms) both;
     }
 
-    .wall-photo:nth-child(4n + 1) { transform: rotate(-0.7deg); }
-    .wall-photo:nth-child(4n + 3) { transform: rotate(0.65deg); }
-
     .wall-photo img {
       width: 100%;
       height: 100%;
@@ -946,7 +943,10 @@
 
       const stageRect = displayStage.getBoundingClientRect();
       const ratio = Math.max(1, stageRect.width / Math.max(stageRect.height, 1));
-      const columns = Math.max(1, Math.ceil(Math.sqrt(Math.max(assets.length, 1) * ratio)));
+      const columns = Math.max(
+        1,
+        Math.min(assets.length, Math.ceil(Math.sqrt(Math.max(assets.length, 1) * ratio / 1.35))),
+      );
       const rows = Math.max(1, Math.ceil(Math.max(assets.length, 1) / columns));
       photoWall.style.setProperty('--wall-columns', columns);
       photoWall.style.setProperty('--wall-rows', rows);

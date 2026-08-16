@@ -122,10 +122,11 @@ konfigurerte Release-en før GitHub-asseten fjernes permanent.
 ### Visning på skjerm i festlokalet
 
 Etter innlogging kan **Vis på skjerm** velges fra bildeoversikten. Nettleseren
-går i fullskjerm og viser alle bilder i rolig rotasjon. Listen oppdateres hvert
-åttende sekund. Et nytt bilde prioriteres med en egen introduksjonsanimasjon og
-konfetti før den vanlige rotasjonen fortsetter. Bildene byttes hvert ellevte
-sekund, og hele motivet vises uten beskjæring.
+går i fullskjerm og viser alle bilder samtidig i en levende bildevegg. Listen
+oppdateres hvert åttende sekund. Et nytt bilde løftes frem over veggen med en
+egen introduksjonsanimasjon og konfetti, blir stående i omtrent ett minutt og
+animeres deretter tilbake til sin flis. Flere nye bilder legges i kø. Hele
+motivet vises uten hvite felt rundt portrettbilder.
 
 Visningen bruker samme private adminøkt og offentliggjør ingen bilde-URL-er.
 Velg **Avslutt visning** for å gå tilbake til administrasjon og sletting.
