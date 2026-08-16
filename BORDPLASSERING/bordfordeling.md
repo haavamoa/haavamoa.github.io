@@ -51,16 +51,18 @@
 
 **Sum: 10**
 
-## Bord 5 - Håvards venner
+## Bord 5 - Idas venner
 
 | Personer | Antall |
 |---|---:|
-| Magnus og Andrea | 2 |
-| Marius og Kine | 2 |
-| Hallstein og Liv Jorunn | 2 |
-| Lasse og Dea | 2 |
+| Stine | 1 |
+| Christine og Max | 2 |
+| Brita og Eskil | 2 |
+| Linn og Dan | 2 |
+| Tonje og Vidar | 2 |
+| Camilla | 1 |
 
-**Sum: 8**
+**Sum: 10**
 
 ## Bord 6 - Idas venner
 
@@ -88,20 +90,18 @@
 
 **Sum: 8**
 
-## Bord 8 - Idas venner, foto og film
+## Bord 8 - Håvards venner
 
 | Personer | Antall |
 |---|---:|
-| Stine | 1 |
-| Christine og Max | 2 |
-| Brita og Eskil | 2 |
-| Linn og Dan | 2 |
-| Tonje og Vidar | 2 |
-| Camilla | 1 |
-| Fredrik | 1 |
+| Magnus og Andrea | 2 |
+| Marius og Kine | 2 |
+| Hallstein og Liv Jorunn | 2 |
+| Lasse og Dea | 2 |
 | Marte (fotograf) | 1 |
+| Fredrik | 1 |
 
-**Sum: 12**
+**Sum: 10**
 
 ## Totalt
 
