@@ -14,7 +14,6 @@
       --paper: #f8f5f0;
       --olive: #626a52;
       --gold: #bd955f;
-      --coral: #b8624f;
       --ink: #2f2e29;
       --muted: #66645d;
     }
@@ -55,48 +54,61 @@
     .menu {
       min-width: 0;
       min-height: 297mm;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
       align-items: center;
       position: relative;
-      padding: 15mm 10mm 11mm;
+      padding: 6mm 10mm;
       text-align: center;
       overflow: hidden;
     }
 
-    .menu::before {
-      content: '';
+    .frame {
       position: absolute;
       inset: 6mm;
       border: 0.35mm solid rgba(189, 149, 95, 0.72);
       pointer-events: none;
     }
 
+    .menu::before,
     .menu::after {
-      content: '';
+      content: '♥';
       position: absolute;
-      width: 16mm;
-      height: 16mm;
-      top: 2mm;
-      right: 1mm;
-      border-radius: 50%;
-      background: rgba(184, 98, 79, 0.08);
-      box-shadow: -83mm 273mm 0 rgba(98, 106, 82, 0.08);
+      width: 19mm;
+      height: 19mm;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, serif;
+      font-size: 19mm;
+      line-height: 1;
       pointer-events: none;
+    }
+
+    .menu::before {
+      top: 0;
+      right: 0;
+      color: rgba(189, 149, 95, 0.09);
+    }
+
+    .menu::after {
+      bottom: 0;
+      left: 0;
+      color: rgba(98, 106, 82, 0.08);
     }
 
     .masthead,
     .courses,
     .photo-invitation { position: relative; z-index: 1; }
 
-    .venue {
-      margin: 0 0 2.5mm;
-      color: var(--coral);
-      font-size: 8pt;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
+    .masthead { grid-row: 2; width: 100%; }
+
+    .courses { display: contents; }
+
+    .course { width: 100%; }
+    .course:first-child { grid-row: 4; }
+    .course + .course { grid-row: 6; }
+
+    .photo-invitation { grid-row: 8; }
 
     h1,
     h2,
@@ -115,12 +127,16 @@
     }
 
     .couple {
+      display: inline-block;
       margin: 0;
+      padding: 0 4mm 1mm;
+      border-bottom: 0.25mm solid rgba(189, 149, 95, 0.72);
       color: var(--olive);
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18pt;
+      font-size: 27pt;
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
+      line-height: 1;
     }
 
     .date {
@@ -162,38 +178,11 @@
 
     .course + .course {
       position: relative;
-      margin-top: 12mm;
-      padding-top: 10mm;
-    }
-
-    .course + .course::before {
-      content: '';
-      width: 35mm;
-      height: 0.2mm;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      background: var(--gold);
-      opacity: 0.7;
-      transform: translateX(-50%);
-    }
-
-    .course + .course::after {
-      content: '';
-      width: 1.6mm;
-      height: 1.6mm;
-      position: absolute;
-      top: -0.7mm;
-      left: 50%;
-      border: 0.2mm solid var(--gold);
-      background: var(--paper);
-      box-shadow: 1.5mm -1.5mm 0 -0.2mm var(--paper), 1.5mm -1.5mm 0 0 var(--gold);
-      transform: translateX(-50%) rotate(45deg);
     }
 
     .course-label {
       margin: 0 0 1.2mm;
-      color: var(--coral);
+      color: var(--gold);
       font-size: 8.5pt;
       font-weight: 700;
       letter-spacing: 0.16em;
@@ -204,7 +193,7 @@
     .course-label::after {
       content: '•';
       margin: 0 2mm;
-      color: var(--coral);
+      color: var(--gold);
       font-size: 7pt;
       vertical-align: 0.3mm;
     }
@@ -242,11 +231,8 @@
 
     .photo-invitation {
       width: 100%;
-      margin-top: 12mm;
       break-inside: avoid;
     }
-
-    .photo-invitation .ornament { margin: 4mm auto 3mm; }
 
     .photo-title {
       margin: 0;
@@ -275,9 +261,10 @@
 
     .names {
       margin: 2.5mm 0 0;
-      color: var(--coral);
-      font-size: 11pt;
+      color: var(--olive);
+      font-size: 13pt;
       font-style: italic;
+      font-weight: 600;
     }
 
     @page {
@@ -317,15 +304,15 @@
       }
 
       .sheet::after { display: block; }
-      .menu:nth-child(2) { display: flex; }
+      .menu:nth-child(2) { display: grid; }
     }
   </style>
 </head>
 <body>
   <main class="sheet" aria-label="To bryllupsmenyer klare for utskrift på ett A4-ark">
     <article class="menu">
+      <span class="frame" aria-hidden="true"></span>
       <header class="masthead">
-        <p class="venue">Jegtvolden Fjordhotell</p>
         <h1>Bryllupsmeny</h1>
         <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
         <p class="couple">Ida &amp; Håvard</p>
@@ -350,7 +337,6 @@
       </div>
 
       <footer class="photo-invitation">
-        <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
         <p class="photo-title">Del øyeblikkene med oss</p>
         <p class="photo-copy">Skann koden og last opp bilder fra dagen</p>
         <img class="qr-code" src="qr-bilder.png" alt="QR-kode til opplasting av bryllupsbilder" />
@@ -359,8 +345,8 @@
     </article>
 
     <article class="menu" aria-hidden="true">
+      <span class="frame" aria-hidden="true"></span>
       <header class="masthead">
-        <p class="venue">Jegtvolden Fjordhotell</p>
         <h1>Bryllupsmeny</h1>
         <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
         <p class="couple">Ida &amp; Håvard</p>
@@ -385,7 +371,6 @@
       </div>
 
       <footer class="photo-invitation">
-        <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
         <p class="photo-title">Del øyeblikkene med oss</p>
         <p class="photo-copy">Skann koden og last opp bilder fra dagen</p>
         <img class="qr-code" src="qr-bilder.png" alt="QR-kode til opplasting av bryllupsbilder" />

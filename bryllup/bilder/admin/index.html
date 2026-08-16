@@ -254,7 +254,9 @@
       display: grid;
       grid-template-rows: auto 1fr auto;
       overflow: hidden;
-      background: #171a15;
+      background:
+        repeating-linear-gradient(120deg, transparent 0, transparent 44px, rgba(203, 169, 121, 0.045) 44px, rgba(203, 169, 121, 0.045) 46px),
+        #171a15;
       color: var(--white);
       isolation: isolate;
     }
@@ -264,9 +266,13 @@
       position: absolute;
       z-index: -2;
       inset: 0;
-      background:
-        repeating-linear-gradient(120deg, transparent 0, transparent 44px, rgba(203, 169, 121, 0.045) 44px, rgba(203, 169, 121, 0.045) 46px),
-        #171a15;
+      background: linear-gradient(125deg, #fa3d78 0%, #fe8f3f 18%, #f4dc4b 34%, #35d49a 51%, #2f8eff 68%, #9a5cff 84%, #fa3d78 100%);
+      background-size: 350% 350%;
+      filter: saturate(1.12) brightness(0.58);
+      opacity: 0;
+      transition: opacity 1400ms ease;
+      animation: disco-background 16s ease-in-out infinite;
+      animation-play-state: paused;
     }
 
     .display-view::after {
@@ -276,6 +282,16 @@
       inset: 18px;
       border: 1px solid rgba(203, 169, 121, 0.28);
       pointer-events: none;
+    }
+
+    .display-view.party-mode::before {
+      opacity: 1;
+      animation-play-state: running;
+    }
+
+    .display-view.party-mode::after {
+      border-color: rgba(255, 255, 255, 0.52);
+      box-shadow: inset 0 0 36px rgba(255, 255, 255, 0.12);
     }
 
     .display-topbar {
@@ -317,8 +333,14 @@
       animation: live-pulse 2.2s ease-in-out infinite;
     }
 
-    .exit-display-button {
+    .display-actions {
       justify-self: end;
+      display: flex;
+      gap: 9px;
+    }
+
+    .mode-button,
+    .exit-display-button {
       min-height: 40px;
       border: 1px solid rgba(255, 255, 255, 0.28);
       border-radius: 4px;
@@ -329,6 +351,23 @@
       cursor: pointer;
     }
 
+    .mode-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .mode-button[aria-pressed="true"] {
+      border-color: rgba(255, 255, 255, 0.72);
+      background: rgba(242, 67, 146, 0.72);
+      box-shadow: 0 0 20px rgba(67, 214, 255, 0.42);
+      color: var(--white);
+    }
+
+    .mode-icon { font-size: 1rem; }
+
+    .mode-button:hover,
+    .mode-button:focus-visible,
     .exit-display-button:hover,
     .exit-display-button:focus-visible { background: var(--white); color: var(--text); }
 
@@ -339,17 +378,41 @@
     }
 
     .photo-wall {
-      --wall-columns: 4;
-      --wall-rows: 3;
       position: absolute;
       z-index: 1;
       inset: 6px 4vw 12px;
-      display: grid;
-      grid-template-columns: repeat(var(--wall-columns), minmax(0, 1fr));
-      grid-template-rows: repeat(var(--wall-rows), minmax(0, 1fr));
-      gap: clamp(5px, 0.7vw, 12px);
       transition: filter 700ms ease, transform 900ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms ease;
     }
+
+    .slideshow-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      gap: clamp(8px, 1vw, 16px);
+      opacity: 0;
+      transform: scale(1.025);
+      transition: opacity 1800ms cubic-bezier(0.4, 0, 0.2, 1), transform 2200ms cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .slideshow-slide.is-active {
+      z-index: 2;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .slideshow-slide.is-initial { transition: none; }
+
+    .slideshow-slide.is-previous { z-index: 1; }
+
+    .slideshow-slide.layout-single { grid-template: 1fr / 1fr; }
+    .slideshow-slide.layout-portraits { grid-template: 1fr / repeat(2, minmax(0, 1fr)); }
+    .slideshow-slide.layout-landscapes { grid-template: repeat(2, minmax(0, 1fr)) / 1fr; }
+    .slideshow-slide.layout-collage {
+      grid-template: repeat(2, minmax(0, 1fr)) / repeat(2, minmax(0, 1fr));
+    }
+
+    .slideshow-slide.layout-collage .wall-photo:first-child { grid-row: 1 / -1; }
 
     .wall-photo {
       min-width: 0;
@@ -360,7 +423,17 @@
       border-radius: 4px;
       background: #2a2e26;
       box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
-      animation: wall-photo-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--wall-delay, 0ms) both;
+      transition: border-color 900ms ease, box-shadow 900ms ease;
+    }
+
+    .party-mode .wall-photo {
+      border-color: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 0 18px rgba(59, 220, 255, 0.44), 0 0 36px rgba(246, 67, 159, 0.28);
+    }
+
+    .party-mode .display-brand {
+      color: var(--white);
+      text-shadow: 0 0 18px rgba(255, 84, 184, 0.8), 0 0 30px rgba(70, 214, 255, 0.6);
     }
 
     .wall-photo img {
@@ -370,8 +443,14 @@
       object-fit: cover;
     }
 
+    .slideshow-slide.layout-single .wall-photo img,
+    .slideshow-slide.layout-portraits .wall-photo img,
+    .slideshow-slide.layout-landscapes .wall-photo img {
+      object-fit: contain;
+    }
+
     .wall-photo.is-returned {
-      z-index: 2;
+      z-index: 3;
       animation: wall-photo-return 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
@@ -408,7 +487,8 @@
 
     .display-stage.has-spotlight .spotlight-scrim { opacity: 1; }
 
-    .wall-loading {
+    .wall-loading,
+    .slideshow-empty {
       display: grid;
       place-items: center;
       height: 100%;
@@ -530,7 +610,7 @@
 
     .display-footer-heart { color: var(--coral); }
 
-    .confetti {
+    .celebration-effects {
       position: absolute;
       z-index: 4;
       inset: 0;
@@ -538,25 +618,42 @@
       pointer-events: none;
     }
 
-    .confetti-piece {
+    .party-ambience {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .ambient-emoji {
+      position: absolute;
+      z-index: 1;
+      display: block;
+      font-size: var(--ambient-size, 2rem);
+      line-height: 1;
+      opacity: 0;
+      text-shadow: 0 5px 14px rgba(0, 0, 0, 0.32), 0 0 16px rgba(255, 255, 255, 0.3);
+      will-change: transform, opacity;
+    }
+
+    .effect-piece {
       --x: 50%;
       --delay: 0ms;
-      --duration: 2300ms;
+      --duration: 4600ms;
       --turn: 540deg;
-      width: 10px;
-      height: 24px;
+      --half-turn: 270deg;
       position: absolute;
       top: -40px;
       left: var(--x);
-      border-radius: 2px;
-      background: var(--gold);
+      font-size: var(--size, 1.6rem);
+      line-height: 1;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.24);
       opacity: 0;
     }
 
-    .confetti-piece:nth-child(3n + 1) { background: var(--coral); }
-    .confetti-piece:nth-child(3n + 2) { width: 7px; height: 18px; background: #7fb08a; }
-    .display-view.celebrate .confetti-piece {
-      animation: confetti-fall var(--duration) cubic-bezier(0.2, 0.65, 0.35, 1) var(--delay) both;
+    .display-view.celebrate .effect-piece {
+      animation: wedding-effect-fall var(--duration) cubic-bezier(0.2, 0.65, 0.35, 1) var(--delay) both;
     }
 
     @keyframes live-pulse {
@@ -564,9 +661,11 @@
       50% { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes wall-photo-enter {
-      from { opacity: 1; scale: 0.82; }
-      to { opacity: 1; scale: 1; }
+    @keyframes disco-background {
+      0% { background-position: 0% 50%; }
+      35% { background-position: 100% 20%; }
+      68% { background-position: 45% 100%; }
+      100% { background-position: 0% 50%; }
     }
 
     @keyframes wall-photo-return {
@@ -582,10 +681,11 @@
       100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); filter: saturate(1); }
     }
 
-    @keyframes confetti-fall {
-      0% { opacity: 0; transform: translate3d(0, -30px, 0) rotate(0); }
+    @keyframes wedding-effect-fall {
+      0% { opacity: 0; transform: translate3d(0, -30px, 0) rotate(0) scale(0.65); }
       8% { opacity: 1; }
-      100% { opacity: 0; transform: translate3d(40px, 105vh, 0) rotate(var(--turn)); }
+      45% { opacity: 1; transform: translate3d(var(--drift, 25px), 48vh, 0) rotate(var(--half-turn)) scale(1.12); }
+      100% { opacity: 0; transform: translate3d(var(--end-drift, -18px), 105vh, 0) rotate(var(--turn)) scale(0.85); }
     }
 
     button:focus-visible,
@@ -605,6 +705,10 @@
       .photo-details { padding: 11px; }
       .display-topbar { grid-template-columns: 1fr auto; padding: 16px 22px 8px; }
       .live-indicator { display: none; }
+      .display-actions { gap: 6px; }
+      .mode-button,
+      .exit-display-button { padding-inline: 10px; }
+      .mode-label { display: none; }
       .photo-wall { inset-inline: 12px; }
       .display-photo { width: calc(100% - 32px); }
       .display-view::after { inset: 10px; }
@@ -615,11 +719,13 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .display-view.party-mode::before,
       .display-photo.is-new,
       .wall-photo,
       .wall-photo.is-returned,
       .live-dot { animation: none; }
-      .confetti { display: none; }
+      .celebration-effects,
+      .party-ambience { display: none; }
     }
   </style>
 </head>
@@ -662,11 +768,18 @@
     <div class="display-topbar">
       <p class="display-brand">Ida &amp; Håvard</p>
       <p class="live-indicator"><span class="live-dot" aria-hidden="true"></span>Oppdateres automatisk</p>
-      <button class="exit-display-button" id="exitDisplayButton" type="button">Avslutt visning</button>
+      <div class="display-actions">
+        <button class="mode-button" id="partyModeButton" type="button" aria-pressed="false">
+          <span class="mode-icon" aria-hidden="true">🪩</span>
+          <span class="mode-label">Party mode</span>
+        </button>
+        <button class="exit-display-button" id="exitDisplayButton" type="button">Avslutt visning</button>
+      </div>
     </div>
 
     <div class="display-stage">
-      <div class="photo-wall" id="photoWall" aria-label="Alle opplastede bilder"></div>
+      <div class="photo-wall" id="photoWall" aria-label="Tilfeldig visning av opplastede bilder"></div>
+      <div class="party-ambience" id="partyAmbience" aria-hidden="true"></div>
       <div class="spotlight-scrim" aria-hidden="true"></div>
 
       <div class="display-empty" id="displayEmpty">
@@ -686,7 +799,7 @@
         </figcaption>
       </figure>
 
-      <div class="confetti" id="confetti" aria-hidden="true"></div>
+      <div class="celebration-effects" id="celebrationEffects" aria-hidden="true"></div>
     </div>
 
     <div class="display-footer">
@@ -699,6 +812,20 @@
   <script>
     const apiBase = document.querySelector('meta[name="admin-api"]').content;
     const sessionKey = 'bryllup-admin-session';
+    const partyModeKey = 'bryllup-party-mode';
+    const weddingEffectThemes = [
+      { name: 'flagg', symbols: ['🇳🇴'] },
+      { name: 'hjerter', symbols: ['♥️', '❤️', '💕', '💖', '💛'] },
+      { name: 'ringer', symbols: ['💍'] },
+      { name: 'brudepar', symbols: ['👰‍♀️🤵‍♂️', '👰‍♀️', '🤵‍♂️'] },
+      { name: 'blomster', symbols: ['💐', '🌸', '🌹', '🌺'] },
+      { name: 'skål', symbols: ['🥂', '🍾'] },
+    ];
+    const partyEffectThemes = [
+      { name: 'disco', symbols: ['🪩', '🕺', '💃', '🎶', '🎵'] },
+      { name: 'party', symbols: ['🎉', '🎊', '🥳', '🍾'] },
+      { name: 'neon', symbols: ['✨', '⚡', '💫', '🌟'] },
+    ];
     const loginPanel = document.getElementById('loginPanel');
     const adminView = document.getElementById('adminView');
     const loginButton = document.getElementById('loginButton');
@@ -712,6 +839,7 @@
     const displayView = document.getElementById('displayView');
     const displayStage = document.querySelector('.display-stage');
     const photoWall = document.getElementById('photoWall');
+    const partyModeButton = document.getElementById('partyModeButton');
     const exitDisplayButton = document.getElementById('exitDisplayButton');
     const displayEmpty = document.getElementById('displayEmpty');
     const displayPhoto = document.getElementById('displayPhoto');
@@ -719,32 +847,37 @@
     const displayPhotoLabel = document.getElementById('displayPhotoLabel');
     const displayPhotoTime = document.getElementById('displayPhotoTime');
     const displayCount = document.getElementById('displayCount');
-    const confetti = document.getElementById('confetti');
+    const celebrationEffects = document.getElementById('celebrationEffects');
+    const partyAmbience = document.getElementById('partyAmbience');
     const objectUrls = new Map();
+    const imageOrientations = new Map();
     let session = sessionStorage.getItem(sessionKey) || '';
     let assets = [];
     let displayActive = false;
     let currentDisplayAssetId = null;
     let displayPollTimer = null;
+    let slideshowTimer = null;
     let spotlightTimer = null;
     let celebrationTimer = null;
+    let ambientEffectTimer = null;
     let displayRefreshInProgress = false;
     let knownDisplayIds = new Set();
     let displayAssetSignature = '';
     let spotlightQueue = [];
     let spotlightTransitioning = false;
+    let slideshowDeck = [];
+    let currentSlideAssetIds = [];
+    let slideshowRendering = false;
+    let partyMode = readPartyMode();
+    let lastEffectTheme = '';
 
     loginButton.href = `${apiBase}/auth/github`;
     displayButton.addEventListener('click', startDisplay);
     refreshButton.addEventListener('click', loadAssets);
     logoutButton.addEventListener('click', () => logOut());
+    partyModeButton.addEventListener('click', togglePartyMode);
     exitDisplayButton.addEventListener('click', () => stopDisplay());
-    document.addEventListener('fullscreenchange', () => {
-      if (displayActive) requestAnimationFrame(renderPhotoWall);
-    });
-    window.addEventListener('resize', () => {
-      if (displayActive) requestAnimationFrame(renderPhotoWall);
-    });
+    applyPartyMode();
 
     const hash = new URLSearchParams(location.hash.slice(1));
     if (hash.get('session')) {
@@ -862,11 +995,14 @@
       currentDisplayAssetId = null;
       spotlightQueue = [];
       spotlightTransitioning = false;
+      slideshowDeck = [];
+      currentSlideAssetIds = [];
+      slideshowRendering = false;
       displayAssetSignature = '';
       knownDisplayIds = new Set(assets.map((asset) => asset.id));
       document.body.classList.add('display-mode');
       displayView.hidden = false;
-      createConfetti();
+      applyPartyMode();
 
       if (document.fullscreenEnabled && !document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
@@ -875,18 +1011,26 @@
       await refreshDisplayAssets(true);
       if (!displayActive) return;
       displayPollTimer = setInterval(() => refreshDisplayAssets(false), 8000);
+      scheduleNextSlideshow();
     }
 
     function stopDisplay(refreshAdmin = true) {
       displayActive = false;
       clearInterval(displayPollTimer);
+      clearTimeout(slideshowTimer);
       clearTimeout(spotlightTimer);
       clearTimeout(celebrationTimer);
+      stopPartyAmbience();
       displayPollTimer = null;
+      slideshowTimer = null;
       spotlightTimer = null;
       celebrationTimer = null;
+      ambientEffectTimer = null;
       spotlightQueue = [];
       spotlightTransitioning = false;
+      slideshowDeck = [];
+      currentSlideAssetIds = [];
+      slideshowRendering = false;
       displayAssetSignature = '';
       displayView.classList.remove('celebrate');
       displayStage.classList.remove('has-spotlight');
@@ -895,6 +1039,7 @@
       photoWall.querySelectorAll('.is-spotlight-source').forEach((tile) => {
         tile.classList.remove('is-spotlight-source');
       });
+      photoWall.replaceChildren();
       displayView.hidden = true;
       document.body.classList.remove('display-mode');
 
@@ -927,12 +1072,14 @@
         const newAssets = initialLoad
           ? []
           : incomingAssets.filter((asset) => !knownDisplayIds.has(asset.id));
+        const incomingIds = new Set(incomingAssets.map((asset) => asset.id));
+        const removedCurrentSlideAsset = currentSlideAssetIds.some((id) => !incomingIds.has(id));
 
         displayAssetSignature = incomingSignature;
         for (const asset of incomingAssets) knownDisplayIds.add(asset.id);
         assets = incomingAssets;
         updateDisplayCount();
-        renderPhotoWall();
+        updateSlideshowDeck(newAssets, incomingIds, initialLoad);
 
         if (assets.length === 0) {
           showDisplayEmpty();
@@ -940,6 +1087,10 @@
           queueNewAssets(newAssets);
         } else {
           displayEmpty.hidden = true;
+        }
+
+        if (initialLoad || removedCurrentSlideAsset || currentSlideAssetIds.length === 0) {
+          await renderNextSlideshow();
         }
       } catch (error) {
         displayCount.textContent = error.message || 'Kunne ikke oppdatere bildene';
@@ -954,55 +1105,185 @@
         .join('|');
     }
 
-    function renderPhotoWall() {
-      const activeIds = new Set(assets.map((asset) => String(asset.id)));
-      for (const tile of photoWall.querySelectorAll('.wall-photo')) {
-        if (!activeIds.has(tile.dataset.assetId)) tile.remove();
+    function updateSlideshowDeck(newAssets, activeIds, initialLoad) {
+      if (initialLoad) {
+        slideshowDeck = shuffle(assets.map((asset) => asset.id));
+        return;
       }
 
-      const stageRect = displayStage.getBoundingClientRect();
-      const ratio = Math.max(1, stageRect.width / Math.max(stageRect.height, 1));
-      const columns = Math.max(
-        1,
-        Math.min(assets.length, Math.ceil(Math.sqrt(Math.max(assets.length, 1) * ratio / 1.35))),
-      );
-      const rows = Math.max(1, Math.ceil(Math.max(assets.length, 1) / columns));
-      photoWall.style.setProperty('--wall-columns', columns);
-      photoWall.style.setProperty('--wall-rows', rows);
-
-      assets.forEach((asset, index) => {
-        let tile = photoWall.querySelector(`[data-asset-id="${asset.id}"]`);
-        if (!tile) {
-          tile = document.createElement('figure');
-          tile.className = 'wall-photo';
-          tile.dataset.assetId = asset.id;
-          tile.style.setProperty('--wall-delay', `${Math.min(index * 45, 600)}ms`);
-          const loading = document.createElement('span');
-          loading.className = 'wall-loading';
-          loading.textContent = 'Laster …';
-          tile.append(loading);
-          loadWallPhoto(asset, tile);
-        }
-
-        tile.classList.toggle('is-spotlight-source', asset.id === currentDisplayAssetId);
-        photoWall.append(tile);
-      });
-
-      displayEmpty.hidden = assets.length > 0;
+      slideshowDeck = slideshowDeck.filter((id) => activeIds.has(id));
+      for (const asset of newAssets) {
+        const insertionIndex = Math.floor(Math.random() * (slideshowDeck.length + 1));
+        slideshowDeck.splice(insertionIndex, 0, asset.id);
+      }
     }
 
-    async function loadWallPhoto(asset, tile) {
-      try {
-        const objectUrl = await getAssetObjectUrl(asset);
-        if (!displayActive || !tile.isConnected) return;
+    async function renderNextSlideshow(forcedAssetId = null) {
+      if (!displayActive || slideshowRendering || assets.length === 0) return;
+      slideshowRendering = true;
 
-        const image = document.createElement('img');
-        image.alt = asset.label || 'Opplastet bryllupsbilde';
-        image.src = objectUrl;
-        tile.replaceChildren(image);
-      } catch {
-        if (tile.isConnected) tile.replaceChildren('Kunne ikke laste');
+      try {
+        const composition = await chooseSlideshowComposition(forcedAssetId);
+        if (!displayActive || composition.assets.length === 0) return;
+
+        const nextSlide = document.createElement('div');
+        nextSlide.className = `slideshow-slide layout-${composition.layout}`;
+        const tiles = await Promise.all(
+          composition.assets.map((asset) => createSlideshowTile(asset)),
+        );
+        if (!displayActive) return;
+        nextSlide.append(...tiles);
+        photoWall.append(nextSlide);
+
+        const currentSlide = photoWall.querySelector('.slideshow-slide.is-active');
+        if (currentSlide) {
+          currentSlide.classList.remove('is-active');
+          currentSlide.classList.add('is-previous');
+          requestAnimationFrame(() => nextSlide.classList.add('is-active'));
+        } else {
+          nextSlide.classList.add('is-active', 'is-initial');
+        }
+        currentSlideAssetIds = composition.assets.map((asset) => asset.id);
+        displayEmpty.hidden = true;
+
+        setTimeout(() => {
+          currentSlide?.remove();
+          nextSlide.classList.remove('is-initial', 'is-previous');
+        }, 2400);
+      } catch (error) {
+        console.error('Kunne ikke bygge slideshow:', error);
+      } finally {
+        slideshowRendering = false;
       }
+    }
+
+    async function chooseSlideshowComposition(forcedAssetId) {
+      const forcedAsset = forcedAssetId
+        ? assets.find((asset) => asset.id === forcedAssetId)
+        : null;
+      const sample = shuffle(
+        assets.filter((asset) => !forcedAsset || asset.id !== forcedAsset.id),
+      ).slice(0, forcedAsset ? 11 : 12);
+      if (forcedAsset) sample.unshift(forcedAsset);
+      const orientations = await Promise.all(
+        sample.map(async (asset) => ({ asset, orientation: await getImageOrientation(asset) })),
+      );
+      const portraits = shuffle(
+        orientations.filter((item) => item.orientation === 'portrait').map((item) => item.asset),
+      );
+      const landscapes = shuffle(
+        orientations.filter((item) => item.orientation === 'landscape').map((item) => item.asset),
+      );
+      if (forcedAsset) {
+        const orientation = await getImageOrientation(forcedAsset);
+        if (orientation === 'square') return { layout: 'single', assets: [forcedAsset] };
+        const partners = orientation === 'portrait' ? portraits : landscapes;
+        const partner = partners.find((asset) => asset.id !== forcedAsset.id);
+        if (partner) {
+          return {
+            layout: orientation === 'portrait' ? 'portraits' : 'landscapes',
+            assets: [forcedAsset, partner],
+          };
+        }
+        return { layout: 'single', assets: [forcedAsset] };
+      }
+
+      const choices = ['single'];
+      if (portraits.length >= 2) choices.push('portraits', 'portraits');
+      if (landscapes.length >= 2) choices.push('landscapes', 'landscapes');
+      if (assets.length >= 3) choices.push('collage');
+      const layout = choices[Math.floor(Math.random() * choices.length)];
+      const count = layout === 'single' ? 1 : layout === 'collage' ? Math.min(3, assets.length) : 2;
+      const candidates = layout === 'portraits'
+        ? portraits
+        : layout === 'landscapes'
+          ? landscapes
+          : drawFromSlideshowDeck(count);
+
+      return { layout, assets: candidates.slice(0, count) };
+    }
+
+    function drawFromSlideshowDeck(count) {
+      const selected = [];
+      while (selected.length < count && assets.length > 0) {
+        if (slideshowDeck.length === 0) {
+          slideshowDeck = shuffle(
+            assets
+              .map((asset) => asset.id)
+              .filter((id) => !selected.some((asset) => asset.id === id)),
+          );
+        }
+
+        const id = slideshowDeck.shift();
+        const asset = assets.find((candidate) => candidate.id === id);
+        if (asset && !selected.some((candidate) => candidate.id === id)) selected.push(asset);
+      }
+      return selected;
+    }
+
+    async function createSlideshowTile(asset) {
+      const tile = document.createElement('figure');
+      tile.className = 'wall-photo';
+      tile.dataset.assetId = asset.id;
+      const image = document.createElement('img');
+      image.alt = asset.label || 'Opplastet bryllupsbilde';
+      image.src = await getAssetObjectUrl(asset);
+      if (!image.complete) {
+        await Promise.race([
+          new Promise((resolve) => {
+            image.addEventListener('load', resolve, { once: true });
+            image.addEventListener('error', resolve, { once: true });
+          }),
+          new Promise((resolve) => setTimeout(resolve, 1800)),
+        ]);
+      }
+      tile.append(image);
+      return tile;
+    }
+
+    async function getImageOrientation(asset) {
+      if (imageOrientations.has(asset.id)) return imageOrientations.get(asset.id);
+
+      const image = new Image();
+      image.src = await getAssetObjectUrl(asset);
+      if (!image.complete) {
+        await Promise.race([
+          new Promise((resolve) => {
+            image.addEventListener('load', resolve, { once: true });
+            image.addEventListener('error', resolve, { once: true });
+          }),
+          new Promise((resolve) => setTimeout(resolve, 1800)),
+        ]);
+      }
+
+      const ratio = image.naturalWidth / Math.max(image.naturalHeight, 1);
+      const orientation = image.naturalWidth === 0
+        ? 'square'
+        : ratio < 0.9
+          ? 'portrait'
+          : ratio > 1.1
+            ? 'landscape'
+            : 'square';
+      imageOrientations.set(asset.id, orientation);
+      return orientation;
+    }
+
+    function scheduleNextSlideshow() {
+      clearTimeout(slideshowTimer);
+      if (!displayActive || assets.length === 0) return;
+      slideshowTimer = setTimeout(async () => {
+        await renderNextSlideshow();
+        scheduleNextSlideshow();
+      }, 12000);
+    }
+
+    function shuffle(values) {
+      const shuffled = [...values];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+      }
+      return shuffled;
     }
 
     function queueNewAssets(newAssets) {
@@ -1048,7 +1329,9 @@
         void displayPhoto.offsetWidth;
         displayPhoto.classList.add('is-new');
         displayStage.classList.add('has-spotlight');
-        const sourceTile = photoWall.querySelector(`[data-asset-id="${asset.id}"]`);
+        const sourceTile = photoWall.querySelector(
+          `.slideshow-slide.is-active [data-asset-id="${asset.id}"]`,
+        );
         sourceTile?.classList.add('is-spotlight-source');
 
         celebrateNewPhoto();
@@ -1074,7 +1357,13 @@
       clearTimeout(spotlightTimer);
 
       const returningAssetId = currentDisplayAssetId;
-      const targetTile = photoWall.querySelector(`[data-asset-id="${returningAssetId}"]`);
+      clearTimeout(slideshowTimer);
+      await waitForSlideshowIdle();
+      await renderNextSlideshow(returningAssetId);
+      await new Promise((resolve) => setTimeout(resolve, 120));
+      const targetTile = photoWall.querySelector(
+        `.slideshow-slide.is-active [data-asset-id="${returningAssetId}"]`,
+      );
       const sourceRect = displayImage.getBoundingClientRect();
       const targetRect = targetTile?.getBoundingClientRect();
       const returningImage = displayImage.cloneNode();
@@ -1125,7 +1414,15 @@
       setTimeout(() => targetTile?.classList.remove('is-returned'), 1200);
       currentDisplayAssetId = null;
       spotlightTransitioning = false;
+      scheduleNextSlideshow();
       showNextSpotlight();
+    }
+
+    async function waitForSlideshowIdle() {
+      const startedAt = Date.now();
+      while (slideshowRendering && Date.now() - startedAt < 2500) {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
     }
 
     function updateDisplayCount() {
@@ -1134,24 +1431,144 @@
 
     function celebrateNewPhoto() {
       clearTimeout(celebrationTimer);
+      createCelebrationTheme();
       displayView.classList.remove('celebrate');
       void displayView.offsetWidth;
       displayView.classList.add('celebrate');
-      celebrationTimer = setTimeout(() => displayView.classList.remove('celebrate'), 3400);
+      celebrationTimer = setTimeout(() => displayView.classList.remove('celebrate'), 6500);
     }
 
-    function createConfetti() {
-      if (confetti.childElementCount > 0) return;
+    function createCelebrationTheme() {
+      const themes = partyMode
+        ? [...weddingEffectThemes, ...partyEffectThemes]
+        : weddingEffectThemes;
+      const availableThemes = themes.filter((theme) => theme.name !== lastEffectTheme);
+      const theme = availableThemes[Math.floor(Math.random() * availableThemes.length)] || themes[0];
+      lastEffectTheme = theme.name;
+      celebrationEffects.dataset.theme = theme.name;
+      celebrationEffects.replaceChildren();
 
-      for (let index = 0; index < 24; index += 1) {
+      for (let index = 0; index < 38; index += 1) {
         const piece = document.createElement('span');
-        piece.className = 'confetti-piece';
+        piece.className = 'effect-piece';
+        piece.textContent = theme.symbols[index % theme.symbols.length];
         piece.style.setProperty('--x', `${4 + ((index * 37) % 92)}%`);
-        piece.style.setProperty('--delay', `${(index % 8) * 75}ms`);
-        piece.style.setProperty('--duration', `${2100 + (index % 6) * 170}ms`);
+        piece.style.setProperty('--delay', `${(index % 10) * 65}ms`);
+        piece.style.setProperty('--duration', `${4200 + (index % 7) * 260}ms`);
         piece.style.setProperty('--turn', `${index % 2 === 0 ? 540 : -540}deg`);
-        confetti.append(piece);
+        piece.style.setProperty('--half-turn', `${index % 2 === 0 ? 270 : -270}deg`);
+        piece.style.setProperty('--drift', `${-70 + ((index * 43) % 140)}px`);
+        piece.style.setProperty('--end-drift', `${70 - ((index * 29) % 140)}px`);
+        piece.style.setProperty('--size', `${1.15 + (index % 5) * 0.22}rem`);
+        celebrationEffects.append(piece);
       }
+    }
+
+    function togglePartyMode() {
+      partyMode = !partyMode;
+      try {
+        localStorage.setItem(partyModeKey, String(partyMode));
+      } catch {}
+      applyPartyMode();
+    }
+
+    function applyPartyMode() {
+      displayView.classList.toggle('party-mode', partyMode);
+      partyModeButton.setAttribute('aria-pressed', String(partyMode));
+      partyModeButton.title = partyMode ? 'Slå av party mode' : 'Slå på party mode';
+      if (displayActive && partyMode) {
+        schedulePartyAmbience();
+      } else {
+        stopPartyAmbience();
+      }
+    }
+
+    function readPartyMode() {
+      try {
+        return localStorage.getItem(partyModeKey) === 'true';
+      } catch {
+        return false;
+      }
+    }
+
+    function schedulePartyAmbience() {
+      clearTimeout(ambientEffectTimer);
+      if (
+        !displayActive ||
+        !partyMode ||
+        matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) return;
+
+      ambientEffectTimer = setTimeout(() => {
+        const amount = Math.random() < 0.1 ? 2 : 1;
+        for (let index = 0; index < amount; index += 1) spawnAmbientEmoji();
+        schedulePartyAmbience();
+      }, 4200 + Math.random() * 4800);
+    }
+
+    function spawnAmbientEmoji() {
+      if (!displayActive || !partyMode || partyAmbience.childElementCount >= 12) return;
+
+      const symbols = ['🪩', '✨', '⚡', '🎶', '🎵', '💃', '🕺', '🎉', '🎊', '🥳', '🌈', '💫'];
+      const emoji = document.createElement('span');
+      emoji.className = 'ambient-emoji';
+      emoji.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      emoji.style.setProperty('--ambient-size', `${1.4 + Math.random() * 1.9}rem`);
+      partyAmbience.append(emoji);
+
+      const motion = Math.floor(Math.random() * 3);
+      const duration = 4200 + Math.random() * 4200;
+      let keyframes;
+
+      if (motion === 0) {
+        emoji.style.left = `${5 + Math.random() * 85}%`;
+        emoji.style.top = '0';
+        const drift = -80 + Math.random() * 160;
+        keyframes = [
+          { opacity: 0, transform: 'translate3d(0, 105vh, 0) rotate(0deg) scale(0.65)' },
+          { opacity: 0.9, offset: 0.2 },
+          { opacity: 0.85, offset: 0.72 },
+          { opacity: 0, transform: `translate3d(${drift}px, -18vh, 0) rotate(540deg) scale(1.08)` },
+        ];
+      } else if (motion === 1) {
+        emoji.style.left = '0';
+        emoji.style.top = `${12 + Math.random() * 70}%`;
+        const verticalDrift = -90 + Math.random() * 180;
+        keyframes = [
+          { opacity: 0, transform: 'translate3d(-12vw, 0, 0) rotate(-45deg) scale(0.7)' },
+          { opacity: 0.92, offset: 0.18 },
+          { opacity: 0.88, offset: 0.76 },
+          { opacity: 0, transform: `translate3d(112vw, ${verticalDrift}px, 0) rotate(420deg) scale(1.15)` },
+        ];
+      } else {
+        emoji.style.left = `${12 + Math.random() * 76}%`;
+        emoji.style.top = `${15 + Math.random() * 65}%`;
+        const driftX = -110 + Math.random() * 220;
+        const driftY = -100 + Math.random() * 80;
+        keyframes = [
+          { opacity: 0, transform: 'translate3d(0, 18px, 0) scale(0.2) rotate(-20deg)' },
+          { opacity: 0.95, transform: 'translate3d(0, 0, 0) scale(1.35) rotate(8deg)', offset: 0.28 },
+          { opacity: 0.8, offset: 0.68 },
+          { opacity: 0, transform: `translate3d(${driftX}px, ${driftY}px, 0) scale(0.75) rotate(160deg)` },
+        ];
+      }
+
+      const animation = emoji.animate(keyframes, {
+        duration,
+        easing: motion === 2 ? 'cubic-bezier(0.16, 1, 0.3, 1)' : 'linear',
+        fill: 'forwards',
+      });
+      animation.finished.catch(() => {}).finally(() => emoji.remove());
+      setTimeout(() => emoji.remove(), duration + 600);
+    }
+
+    function stopPartyAmbience() {
+      clearTimeout(ambientEffectTimer);
+      ambientEffectTimer = null;
+      for (const emoji of partyAmbience.children) {
+        emoji.getAnimations().forEach((animation) => animation.cancel());
+      }
+      partyAmbience.replaceChildren();
     }
 
     async function deleteAsset(asset, button) {

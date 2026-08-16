@@ -331,6 +331,9 @@
       .hero-content { padding-top: 62px; }
       .choice-row { grid-template-columns: 1fr; }
       .picker { min-height: 280px; }
+      .picker.has-preview { min-height: 0; }
+      .preview-wrap { height: min(34vh, 250px); min-height: 0; }
+      .preview-image { height: 100%; min-height: 0; max-height: none; }
       .form-fields { padding: 24px 20px 25px; }
     }
 
@@ -394,6 +397,7 @@
     const galleryInput = document.getElementById('galleryInput');
     const previewImage = document.getElementById('previewImage');
     const changeButton = document.getElementById('changeButton');
+    const guestNameInput = document.getElementById('guestName');
     const submitButton = document.getElementById('submitButton');
     const status = document.getElementById('status');
     const uploadClientId = getUploadClientId();
@@ -482,6 +486,7 @@
       picker.classList.add('has-preview');
       submitButton.disabled = false;
       hideStatus();
+      focusGuestNameOnMobile();
     }
 
     function resetFile(clearStatus = true) {
@@ -511,6 +516,19 @@
     function hideStatus() {
       status.textContent = '';
       status.className = 'status';
+    }
+
+    function focusGuestNameOnMobile() {
+      if (!matchMedia('(max-width: 520px)').matches) return;
+
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      guestNameInput.focus({ preventScroll: true });
+      requestAnimationFrame(() => {
+        guestNameInput.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'center',
+        });
+      });
     }
 
     function getUploadClientId() {
