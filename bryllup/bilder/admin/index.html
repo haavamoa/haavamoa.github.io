@@ -280,9 +280,10 @@
     .display-view::after {
       content: '';
       position: absolute;
-      z-index: -1;
+      z-index: 8;
       inset: 18px;
       border: 1px solid rgba(203, 169, 121, 0.28);
+      border-radius: 14px;
       pointer-events: none;
     }
 
@@ -297,6 +298,8 @@
     }
 
     .display-topbar {
+      position: relative;
+      z-index: 6;
       min-height: 84px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -312,6 +315,7 @@
       font-size: 1.65rem;
       font-weight: 600;
       letter-spacing: 0;
+      transition: color 1600ms ease, text-shadow 1600ms ease;
     }
 
     .live-indicator {
@@ -341,7 +345,6 @@
       gap: 9px;
     }
 
-    .mode-button,
     .exit-display-button {
       min-height: 40px;
       border: 1px solid rgba(255, 255, 255, 0.28);
@@ -354,22 +357,60 @@
     }
 
     .mode-button {
+      min-height: 40px;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 9px;
+      border: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.68);
+      padding: 0 4px;
+      font: 700 0.78rem/1 'Lato', sans-serif;
+      cursor: pointer;
     }
 
     .mode-button[aria-pressed="true"] {
-      border-color: rgba(255, 255, 255, 0.72);
-      background: rgba(242, 67, 146, 0.72);
-      box-shadow: 0 0 20px rgba(67, 214, 255, 0.42);
       color: var(--white);
     }
 
-    .mode-icon { font-size: 1rem; }
+    .mode-switch {
+      width: 38px;
+      height: 22px;
+      position: relative;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 999px;
+      background: rgba(10, 13, 9, 0.52);
+      transition: background 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+    }
+
+    .mode-switch::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.28);
+      transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), background 280ms ease;
+    }
+
+    .mode-button[aria-pressed="true"] .mode-switch {
+      border-color: rgba(118, 182, 129, 0.88);
+      background: rgba(76, 137, 91, 0.76);
+      box-shadow: 0 0 11px rgba(118, 182, 129, 0.28);
+    }
+
+    .mode-button[aria-pressed="true"] .mode-switch::after {
+      transform: translateX(16px);
+      background: var(--white);
+    }
 
     .mode-button:hover,
-    .mode-button:focus-visible,
+    .mode-button:focus-visible { color: var(--white); }
+
     .exit-display-button:hover,
     .exit-display-button:focus-visible { background: var(--white); color: var(--text); }
 
@@ -387,9 +428,9 @@
     }
 
     .party-lights {
-      position: absolute;
-      z-index: 2;
-      inset: -15% -8%;
+      position: fixed;
+      z-index: 4;
+      inset: -12% -8%;
       overflow: hidden;
       pointer-events: none;
     }
@@ -441,8 +482,8 @@
     }
 
     .party-mode .display-brand {
-      color: var(--white);
-      text-shadow: 0 0 18px rgba(255, 84, 184, 0.8), 0 0 30px rgba(70, 214, 255, 0.6);
+      color: var(--party-brand-color, var(--white));
+      text-shadow: 0 0 18px color-mix(in srgb, var(--party-brand-color, #ffffff) 65%, transparent);
     }
 
     .wall-photo img {
@@ -618,6 +659,8 @@
     .display-photo.is-new { animation: new-photo-enter 1300ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
     .display-footer {
+      position: relative;
+      z-index: 6;
       min-height: 58px;
       display: flex;
       align-items: center;
@@ -788,19 +831,20 @@
 
   <section class="display-view" id="displayView" aria-label="Bildevisning for festskjerm" hidden>
     <div class="display-topbar">
-      <p class="display-brand">Ida &amp; Håvard</p>
+      <p class="display-brand" id="displayBrand">Ida &amp; Håvard</p>
       <p class="live-indicator"><span class="live-dot" aria-hidden="true"></span>Oppdateres automatisk</p>
       <div class="display-actions">
         <button class="mode-button" id="partyModeButton" type="button" aria-pressed="false">
-          <span class="mode-icon" aria-hidden="true">🪩</span>
-          <span class="mode-label">Party mode</span>
+          <span class="mode-label">Party</span>
+          <span class="mode-switch" aria-hidden="true"></span>
         </button>
         <button class="exit-display-button" id="exitDisplayButton" type="button">Avslutt visning</button>
       </div>
     </div>
 
+    <div class="party-lights" id="partyLights" aria-hidden="true"></div>
+
     <div class="display-stage">
-      <div class="party-lights" id="partyLights" aria-hidden="true"></div>
       <div class="photo-wall" id="photoWall" aria-label="Tilfeldig visning av opplastede bilder"></div>
       <div class="party-ambience" id="partyAmbience" aria-hidden="true"></div>
       <div class="spotlight-scrim" aria-hidden="true"></div>
@@ -861,6 +905,7 @@
     const emptyState = document.getElementById('emptyState');
     const pageMessage = document.getElementById('pageMessage');
     const displayView = document.getElementById('displayView');
+    const displayBrand = document.getElementById('displayBrand');
     const displayStage = document.querySelector('.display-stage');
     const partyLights = document.getElementById('partyLights');
     const photoWall = document.getElementById('photoWall');
@@ -886,6 +931,7 @@
     let celebrationTimer = null;
     let ambientEffectTimer = null;
     let ambientLightTimer = null;
+    let partyBrandTimer = null;
     let displayRefreshInProgress = false;
     let knownDisplayIds = new Set();
     let displayAssetSignature = '';
@@ -896,6 +942,7 @@
     let slideshowRendering = false;
     let partyMode = readPartyMode();
     let lastEffectTheme = '';
+    let lastPartyBrandColor = '';
 
     loginButton.href = `${apiBase}/auth/github`;
     displayButton.addEventListener('click', startDisplay);
@@ -1048,12 +1095,14 @@
       clearTimeout(celebrationTimer);
       stopPartyAmbience();
       stopPartyLights();
+      stopPartyBrandColors();
       displayPollTimer = null;
       slideshowTimer = null;
       spotlightTimer = null;
       celebrationTimer = null;
       ambientEffectTimer = null;
       ambientLightTimer = null;
+      partyBrandTimer = null;
       spotlightQueue = [];
       spotlightTransitioning = false;
       slideshowDeck = [];
@@ -1558,9 +1607,11 @@
       if (displayActive && partyMode) {
         schedulePartyAmbience();
         schedulePartyLights();
+        schedulePartyBrandColor();
       } else {
         stopPartyAmbience();
         stopPartyLights();
+        stopPartyBrandColors();
       }
     }
 
@@ -1707,6 +1758,30 @@
         beam.getAnimations().forEach((animation) => animation.cancel());
       }
       partyLights.replaceChildren();
+    }
+
+    function schedulePartyBrandColor() {
+      clearTimeout(partyBrandTimer);
+      if (!displayActive || !partyMode) return;
+
+      const colors = ['#ffd166', '#74e6ff', '#ff83c5', '#98f5b2', '#c6a8ff', '#ff9b6a', '#f7f08a'];
+      const availableColors = colors.filter((color) => color !== lastPartyBrandColor);
+      const nextColor = availableColors[Math.floor(Math.random() * availableColors.length)] || colors[0];
+      lastPartyBrandColor = nextColor;
+      displayBrand.style.setProperty('--party-brand-color', nextColor);
+
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      partyBrandTimer = setTimeout(
+        () => schedulePartyBrandColor(),
+        2800 + Math.random() * 2400,
+      );
+    }
+
+    function stopPartyBrandColors() {
+      clearTimeout(partyBrandTimer);
+      partyBrandTimer = null;
+      lastPartyBrandColor = '';
+      displayBrand.style.removeProperty('--party-brand-color');
     }
 
     async function deleteAsset(asset, button) {
