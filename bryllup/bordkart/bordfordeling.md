@@ -116,6 +116,7 @@
 | Gerd | 1 | 7 | Nøtteallergi. |
 | Kristoffer | 2 | 5 | Mandler og hasselnøtter. |
 | Ida (forlover) | 2 | 6 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
+| Julie (partner til Lars) | 2 | 10 | Gravid. Ikke kamskjell til forrett, og godt stekt kjøtt. |
 | Elise | 5 | 5 | Veganer. |
 | Malin | 6 | 3 | Laktose. |
 | Hallstein | 7 | 3 | Skalldyr / bløtdyr. |
