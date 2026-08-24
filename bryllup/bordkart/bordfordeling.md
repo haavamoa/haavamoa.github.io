@@ -113,6 +113,7 @@
 
 | Person | Bord | Plass | Kommentar |
 |---|---:|---:|---|
+| Gerd | 1 | 7 | Nøtteallergi. |
 | Kristoffer | 2 | 5 | Mandler og hasselnøtter. |
 | Ida (forlover) | 2 | 6 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
 | Elise | 5 | 5 | Veganer. |

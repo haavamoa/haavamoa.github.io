@@ -46,6 +46,7 @@ Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `
 | Malin | Laktose. |
 | Elise | Veganer. |
 | Hallstein | Skalldyr / bløtdyr. |
+| Gerd | Nøtteallergi. |
 
 Merknadene skal vises ved personens bord og i allergioversikten, men ikke på utskriftsarket.
 
