@@ -36,7 +36,7 @@ Følgende to personer inngår i totalsummen på 80, men er markert som usikre:
 
 Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `Uten kanskje`, og totalen blir 78.
 
-### Merknader
+### Allergier og kosthensyn
 
 | Person | Kommentar |
 |---|---|
@@ -45,6 +45,7 @@ Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `
 | Kristoffer | Mandler og hasselnøtter. |
 | Malin | Laktose. |
 | Elise | Veganer. |
+| Hallstein | Skalldyr / bløtdyr. |
 
 Merknadene skal vises ved personens bord og i allergioversikten, men ikke på utskriftsarket.
 

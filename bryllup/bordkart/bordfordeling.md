@@ -109,15 +109,16 @@
 
 *Inkluderer Lars og Julie, som kanskje kommer. Andreas og Elise er bekreftet.*
 
-## Merknader
+## Allergier og kosthensyn
 
-| Person | Bord | Kommentar |
-|---|---:|---|
-| Ida (forlover) | 2 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
-| Kristoffer | 2 | Mandler og hasselnøtter. |
-| Elise | 5 | Veganer. |
-| Malin | 6 | Laktose. |
-| Stine | 8 | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
+| Person | Bord | Plass | Kommentar |
+|---|---:|---:|---|
+| Kristoffer | 2 | 5 | Mandler og hasselnøtter. |
+| Ida (forlover) | 2 | 6 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
+| Elise | 5 | 5 | Veganer. |
+| Malin | 6 | 3 | Laktose. |
+| Hallstein | 7 | 3 | Skalldyr / bløtdyr. |
+| Stine | 8 | 3 | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
 
 ## Valgbare alternativer
 
