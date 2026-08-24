@@ -98,6 +98,89 @@
       font-size: 0.95rem;
     }
 
+    .masthead__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .solution-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .solution-switcher {
+      display: inline-flex;
+      gap: 3px;
+      max-width: 100%;
+      padding: 3px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--paper);
+    }
+
+    .solution-button {
+      min-height: 38px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 3px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .solution-button:hover,
+    .solution-button:focus-visible {
+      background: var(--green-soft);
+      color: var(--green);
+      outline: 2px solid rgba(45, 92, 79, 0.2);
+      outline-offset: -2px;
+    }
+
+    .solution-button[aria-pressed="true"] {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .optional-toggle {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .optional-toggle:focus-within {
+      outline: 3px solid rgba(45, 92, 79, 0.2);
+      outline-offset: 2px;
+    }
+
+    .optional-toggle input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--green);
+    }
+
+    .view-switcher {
+      flex: 0 0 auto;
+    }
+
     .print-button {
       min-height: 44px;
       padding: 0 18px;
@@ -118,6 +201,66 @@
 
     main {
       padding: 32px 0 64px;
+    }
+
+    .solution-summary {
+      margin-bottom: 36px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .solution-summary h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+    }
+
+    .solution-description {
+      max-width: 820px;
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .change-summary {
+      margin-top: 24px;
+    }
+
+    .change-summary h3 {
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+
+    .change-table-wrap {
+      overflow-x: auto;
+      border-block: 1px solid var(--line);
+    }
+
+    .change-table {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.55);
+      text-align: left;
+    }
+
+    .change-table th,
+    .change-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .change-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .change-table th {
+      color: var(--green);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .change-table td {
+      font-size: 0.88rem;
     }
 
     .section-heading {
@@ -292,6 +435,46 @@
     .table-rows {
       display: grid;
       gap: 28px;
+    }
+
+    .flat-view {
+      margin-bottom: 64px;
+    }
+
+    .flat-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .flat-table-row {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.28fr) 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .flat-table-row h3 {
+      margin-bottom: 4px;
+      font-size: 1.15rem;
+    }
+
+    .flat-table-meta,
+    .flat-guest-names {
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .flat-table-meta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .flat-guest-names {
+      align-self: center;
+      color: var(--ink);
+      font-size: 0.92rem;
     }
 
     .table-row {
@@ -501,8 +684,61 @@
       }
 
       .masthead {
+        display: block;
         align-items: flex-start;
         padding-top: 28px;
+      }
+
+      .masthead__actions {
+        justify-content: flex-start;
+        margin-top: 20px;
+      }
+
+      .solution-controls {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .solution-switcher {
+        width: 100%;
+      }
+
+      .flat-table-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .solution-button {
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 52px;
+        padding: 6px 8px;
+        line-height: 1.2;
+        white-space: normal;
+      }
+
+      .optional-toggle {
+        justify-content: center;
+      }
+
+      .change-table {
+        min-width: 0;
+        table-layout: fixed;
+      }
+
+      .change-table th,
+      .change-table td {
+        padding: 9px 8px;
+        overflow-wrap: anywhere;
+      }
+
+      .change-table th:first-child {
+        width: 50%;
+      }
+
+      .change-table th:not(:first-child) {
+        width: 25%;
       }
 
       .section-heading {
@@ -556,6 +792,19 @@
 
       .print-button {
         display: none;
+      }
+
+      .solution-controls,
+      .view-switcher {
+        display: none;
+      }
+
+      .solution-summary[data-has-changes="false"] {
+        display: none;
+      }
+
+      .solution-summary[data-has-changes="true"] {
+        break-after: page;
       }
 
       main {
@@ -660,26 +909,63 @@
     <div>
       <p class="eyebrow">Bordplassering · forslag 1</p>
       <h1>Ida &amp; Håvard</h1>
-      <p class="summary">80 oppførte middagsgjester · 4 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
+      <p class="summary" id="guestSummary">80 oppførte middagsgjester · 4 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
     </div>
-    <button class="print-button" type="button" id="printButton">Skriv ut</button>
+    <div class="masthead__actions">
+      <div class="solution-controls">
+        <nav class="solution-switcher" aria-label="Velg vennefordeling">
+          <button class="solution-button" type="button" data-mix="mixed" aria-pressed="true">Miks venner</button>
+          <button class="solution-button" type="button" data-mix="before-mix" aria-pressed="false">Før miks</button>
+        </nav>
+        <label class="optional-toggle">
+          <input type="checkbox" id="withoutOptional">
+          Uten kanskje
+        </label>
+      </div>
+      <nav class="solution-switcher view-switcher" aria-label="Velg visning">
+        <button class="solution-button" type="button" data-view="map" aria-pressed="true">Kart</button>
+        <button class="solution-button" type="button" data-view="list" aria-pressed="false">Flat liste</button>
+      </nav>
+      <button class="print-button" type="button" id="printButton">Skriv ut</button>
+    </div>
   </header>
 
   <main>
-    <section class="room-section" aria-labelledby="roomTitle">
+    <section class="solution-summary" id="solutionSummary" data-has-changes="false" aria-live="polite">
+      <p class="eyebrow">Valgt løsning</p>
+      <h2 id="solutionTitle">Miks venner</h2>
+      <p class="solution-description" id="solutionDescription"></p>
+      <div class="change-summary" id="changeSummary" hidden>
+        <h3 id="changeSummaryTitle">Endringer fra Miks venner</h3>
+        <div class="change-table-wrap">
+          <table class="change-table">
+            <thead>
+              <tr>
+                <th scope="col">Personer</th>
+                <th scope="col">Fra</th>
+                <th scope="col">Til</th>
+              </tr>
+            </thead>
+            <tbody id="changeTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="room-section" id="roomSection" aria-labelledby="roomTitle">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Romoversikt</p>
-          <h2 id="roomTitle">Nærhet til brudeparet</h2>
+          <h2 id="roomTitle">Plassering mot scenen</h2>
         </div>
-        <p>Bord 2 ligger nærmest bord 1. Familie og toastmastere følger ved bord 3 og 4, mens vennebordene ligger mot danseplatten og den frie ferdselen.</p>
+        <p>Bord 1 og 2 ligger nærmest scenen, med bord 3 og 4 like ved. Bord 8 med foto og film står lengst unna.</p>
       </div>
 
       <div class="room-scroll">
         <div class="room-shell">
           <div class="door-label">Dør mot haven</div>
           <div class="room-plan" id="roomPlan">
-            <div class="open-lane">Danseplatt<br>/ fri ferdsel</div>
+            <div class="open-lane">Scene<br>/ danseplatt<br>/ fri ferdsel</div>
           </div>
           <div class="venue-labels" aria-hidden="true">
             <div class="venue-label">Havestue 1</div>
@@ -690,7 +976,7 @@
       </div>
     </section>
 
-    <section aria-labelledby="seatingTitle">
+    <section id="seatingSection" aria-labelledby="seatingTitle">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Stolplassering</p>
@@ -706,6 +992,17 @@
 
       <div class="table-rows" id="tableRows"></div>
     </section>
+
+    <section class="flat-view" id="flatView" aria-labelledby="flatViewTitle" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Listevisning</p>
+          <h2 id="flatViewTitle">Alle bord og gjester</h2>
+        </div>
+        <p>Bordene står i nummerrekkefølge, med gjestene listet i samme rekkefølge som rundt bordet.</p>
+      </div>
+      <div class="flat-list" id="flatList"></div>
+    </section>
   </main>
 
   <footer class="page-footer">
@@ -714,7 +1011,7 @@
   </footer>
 
   <script>
-    const tables = [
+    const mixedTables = [
       {
         number: 1,
         title: "Brudepar, foreldre og barn",
@@ -735,6 +1032,24 @@
       },
       {
         number: 2,
+        title: "Toastmastere og søskenbarn",
+        locked: true,
+        startAngle: 216,
+        seats: [
+          { id: "rune", name: "Rune", gender: "male" },
+          { id: "randi", name: "Randi", gender: "female", role: "key" },
+          { id: "linus", name: "Linus", gender: "male", role: "key" },
+          { id: "tone", name: "Tone", gender: "female" },
+          { id: "jan-aage", name: "Jan Åge", gender: "male" },
+          { id: "monica", name: "Monica", gender: "female" },
+          { id: "vegar", name: "Vegar", gender: "male" },
+          { id: "hege", name: "Hege", gender: "female" },
+          { id: "patrik", name: "Patrik", gender: "male" },
+          { id: "kjetil", name: "Kjetil", gender: "male" }
+        ]
+      },
+      {
+        number: 3,
         title: "Forlovere og søsken",
         locked: true,
         startAngle: 90,
@@ -752,7 +1067,61 @@
         ]
       },
       {
-        number: 3,
+        number: 7,
+        title: "Vennebord",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "max", name: "Max", gender: "male" },
+          { id: "christine", name: "Christine", gender: "female" },
+          { id: "runar", name: "Runar", gender: "male" },
+          { id: "vilde", name: "Vilde", gender: "female" },
+          { id: "levin", name: "Levin", gender: "male" },
+          { id: "marte-levin", name: "Marte", gender: "female" },
+          { id: "simon", name: "Simon", gender: "male" },
+          { id: "tore", name: "Tore", gender: "male" },
+          { id: "brita", name: "Brita", gender: "female" },
+          { id: "eskil", name: "Eskil", gender: "male" }
+        ]
+      },
+      {
+        number: 5,
+        title: "Vennebord",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "stian", name: "Stian", gender: "male" },
+          { id: "heidi", name: "Heidi", gender: "female" },
+          { id: "malin", name: "Malin", gender: "female" },
+          { id: "kristina", name: "Kristina", gender: "female" },
+          { id: "erik", name: "Erik", gender: "male" },
+          { id: "trine", name: "Trine", gender: "female" },
+          { id: "marius", name: "Marius", gender: "male" },
+          { id: "kine", name: "Kine", gender: "female" },
+          { id: "ingrid", name: "Ingrid", gender: "female" },
+          { id: "stine", name: "Stine", gender: "female" }
+        ]
+      },
+      {
+        number: 6,
+        title: "Vennebord",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "magnus", name: "Magnus", gender: "male" },
+          { id: "andrea", name: "Andrea", gender: "female" },
+          { id: "linn", name: "Linn", gender: "female" },
+          { id: "dan", name: "Dan", gender: "male" },
+          { id: "tonje", name: "Tonje", gender: "female" },
+          { id: "vidar", name: "Vidar", gender: "male" },
+          { id: "andreas", name: "Andreas?", gender: "male", optional: true },
+          { id: "elise", name: "Elise?", gender: "female", optional: true },
+          { id: "camilla", name: "Camilla", gender: "female" },
+          { id: "vilma", name: "Vilma", gender: "female" }
+        ]
+      },
+      {
+        number: 4,
         title: "Tanter og onkler",
         locked: true,
         startAngle: 0,
@@ -771,102 +1140,176 @@
         ]
       },
       {
-        number: 4,
-        title: "Toastmastere og søskenbarn",
-        locked: true,
-        startAngle: 216,
-        seats: [
-          { id: "rune", name: "Rune", gender: "male" },
-          { id: "randi", name: "Randi", gender: "female", role: "key" },
-          { id: "linus", name: "Linus", gender: "male", role: "key" },
-          { id: "tone", name: "Tone", gender: "female" },
-          { id: "jan-aage", name: "Jan Åge", gender: "male" },
-          { id: "monica", name: "Monica", gender: "female" },
-          { id: "vegar", name: "Vegar", gender: "male" },
-          { id: "hege", name: "Hege", gender: "female" },
-          { id: "patrik", name: "Patrik", gender: "male" },
-          { id: "kjetil", name: "Kjetil", gender: "male" }
-        ]
-      },
-      {
-        number: 5,
-        title: "Idas venner",
-        locked: false,
-        startAngle: 0,
-        seats: [
-          { id: "max", name: "Max", gender: "male" },
-          { id: "christine", name: "Christine", gender: "female" },
-          { id: "stine", name: "Stine", gender: "female" },
-          { id: "camilla", name: "Camilla", gender: "female" },
-          { id: "tonje", name: "Tonje", gender: "female" },
-          { id: "vidar", name: "Vidar", gender: "male" },
-          { id: "linn", name: "Linn", gender: "female" },
-          { id: "dan", name: "Dan", gender: "male" },
-          { id: "brita", name: "Brita", gender: "female" },
-          { id: "eskil", name: "Eskil", gender: "male" }
-        ]
-      },
-      {
-        number: 6,
-        title: "Idas venner",
-        locked: false,
-        startAngle: 0,
-        seats: [
-          { id: "stian", name: "Stian", gender: "male" },
-          { id: "heidi", name: "Heidi", gender: "female" },
-          { id: "malin", name: "Malin", gender: "female" },
-          { id: "kristina", name: "Kristina", gender: "female" },
-          { id: "levin", name: "Levin", gender: "male" },
-          { id: "marte-levin", name: "Marte", gender: "female" },
-          { id: "ingrid", name: "Ingrid", gender: "female" },
-          { id: "martin", name: "Martin", gender: "male" },
-          { id: "cathrine", name: "Cathrine", gender: "female" },
-          { id: "vilma", name: "Vilma", gender: "female" },
-          { id: "ebba", name: "Ebba", gender: "female" }
-        ]
-      },
-      {
-        number: 7,
-        title: "Håvards venner",
-        locked: false,
-        startAngle: 0,
-        seats: [
-          { id: "runar", name: "Runar", gender: "male" },
-          { id: "vilde", name: "Vilde", gender: "female" },
-          { id: "erik", name: "Erik", gender: "male" },
-          { id: "trine", name: "Trine", gender: "female" },
-          { id: "simon", name: "Simon", gender: "male" },
-          { id: "andreas", name: "Andreas?", gender: "male", optional: true },
-          { id: "elise", name: "Elise?", gender: "female", optional: true },
-          { id: "tore", name: "Tore", gender: "male" }
-        ]
-      },
-      {
         number: 8,
-        title: "Håvards venner",
+        title: "Vennebord · foto og film",
         locked: false,
         startAngle: 22.5,
         seats: [
-          { id: "magnus", name: "Magnus", gender: "male" },
-          { id: "andrea", name: "Andrea", gender: "female" },
-          { id: "marius", name: "Marius", gender: "male" },
-          { id: "kine", name: "Kine", gender: "female" },
-          { id: "hallstein", name: "Hallstein", gender: "male" },
-          { id: "liv-jorunn", name: "Liv Jorunn", gender: "female" },
           { id: "fredrik", name: "Fredrik", gender: "male", role: "media" },
           { id: "marte-fotograf", name: "Marte (fotograf)", gender: "female", role: "media" },
+          { id: "hallstein", name: "Hallstein", gender: "male" },
+          { id: "liv-jorunn", name: "Liv Jorunn", gender: "female" },
+          { id: "martin", name: "Martin", gender: "male" },
+          { id: "cathrine", name: "Cathrine", gender: "female" },
           { id: "lasse", name: "Lasse", gender: "male" },
-          { id: "dea", name: "Dea", gender: "female" }
+          { id: "dea", name: "Dea", gender: "female" },
+          { id: "ebba", name: "Ebba", gender: "female" }
         ]
       }
     ];
 
-    const roomOrder = [2, 4, 6, 8, 1, 3, 5, 7];
+    const roomOrder = [8, 6, 4, 2, 7, 5, 3, 1];
+    const peopleById = new Map(
+      mixedTables.flatMap((table) => table.seats).map((person) => [person.id, person])
+    );
+
+    function createAlternativeTables(overrides) {
+      return mixedTables.map((table) => {
+        const override = overrides[table.number];
+        if (!override) {
+          return table;
+        }
+
+        return {
+          ...table,
+          title: override.title || table.title,
+          seats: override.seatIds.map((id) => peopleById.get(id))
+        };
+      });
+    }
+
+    const beforeMixTables = createAlternativeTables({
+      7: {
+        title: "Idas venner",
+        seatIds: ["max", "christine", "stine", "camilla", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
+      },
+      5: {
+        title: "Håvards venner",
+        seatIds: ["runar", "vilde", "erik", "trine", "simon", "andreas", "elise", "tore"]
+      },
+      6: {
+        title: "Idas venner",
+        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "vilma", "ebba"]
+      },
+      8: {
+        title: "Håvards venner · foto og film",
+        seatIds: ["magnus", "andrea", "marius", "kine", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf", "lasse", "dea"]
+      }
+    });
+
+    const mixedWithoutOptionalTables = createAlternativeTables({
+      3: {
+        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
+      },
+      7: {
+        seatIds: ["max", "christine", "runar", "vilde", "levin", "marte-levin", "tore", "brita", "eskil"]
+      },
+      5: {
+        seatIds: ["stian", "heidi", "malin", "kristina", "erik", "trine", "marius", "kine", "stine"]
+      },
+      6: {
+        seatIds: ["magnus", "andrea", "linn", "dan", "tonje", "vidar", "simon", "ingrid", "camilla"]
+      },
+      8: {
+        seatIds: ["fredrik", "marte-fotograf", "hallstein", "liv-jorunn", "martin", "cathrine", "lasse", "dea"]
+      }
+    });
+
+    const beforeMixWithoutOptionalTables = createAlternativeTables({
+      3: {
+        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
+      },
+      5: {
+        title: "Håvards venner",
+        seatIds: ["runar", "vilde", "erik", "trine", "simon", "tore", "marius", "kine"]
+      },
+      6: {
+        title: "Idas venner",
+        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine"]
+      },
+      7: {
+        title: "Idas venner",
+        seatIds: ["max", "christine", "stine", "camilla", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
+      },
+      8: {
+        title: "Håvards venner · foto og film",
+        seatIds: ["magnus", "andrea", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf", "lasse", "dea"]
+      }
+    });
+
+    const solutions = [
+      {
+        id: "before-mix",
+        mixMode: "before-mix",
+        withoutOptional: false,
+        title: "Før miks",
+        description: "Vennegruppene slik de var fordelt før bord 5, 6, 7 og 8 ble blandet. Alle 80 gjester er med.",
+        tables: beforeMixTables,
+        changes: []
+      },
+      {
+        id: "mixed",
+        mixMode: "mixed",
+        withoutOptional: false,
+        title: "Miks venner",
+        description: "Ida og Håvards vennekretser er fordelt på fire blandede bord, med par og avtalte naboskap beholdt.",
+        tables: mixedTables,
+        changes: []
+      },
+      {
+        id: "mixed-without-optional",
+        mixMode: "mixed",
+        withoutOptional: true,
+        title: "Miks venner · uten kanskje",
+        description: "Tante- og onkelbordet beholdes uendret. De øvrige bordene har mellom 8 og 10 personer.",
+        tables: mixedWithoutOptionalTables,
+        changesTitle: "Endringer fra Miks venner",
+        changes: [
+          { people: "Lars og Julie (partner til Lars)", from: "Bord 3", to: "Kommer ikke" },
+          { people: "Andreas og Elise", from: "Bord 6", to: "Kommer ikke" },
+          { people: "Vilma", from: "Bord 6", to: "Bord 3" },
+          { people: "Ebba", from: "Bord 8", to: "Bord 3" },
+          { people: "Simon", from: "Bord 7", to: "Bord 6" },
+          { people: "Ingrid", from: "Bord 5", to: "Bord 6" }
+        ]
+      },
+      {
+        id: "before-mix-without-optional",
+        mixMode: "before-mix",
+        withoutOptional: true,
+        title: "Før miks · uten kanskje",
+        description: "Ida og Håvards vennegrupper holdes adskilt. Tante- og onkelbordet beholdes uendret.",
+        tables: beforeMixWithoutOptionalTables,
+        changesTitle: "Endringer fra Før miks",
+        changes: [
+          { people: "Lars og Julie (partner til Lars)", from: "Bord 3", to: "Kommer ikke" },
+          { people: "Andreas og Elise", from: "Bord 5", to: "Kommer ikke" },
+          { people: "Vilma og Ebba", from: "Bord 6", to: "Bord 3" },
+          { people: "Marius og Kine", from: "Bord 8", to: "Bord 5" }
+        ]
+      }
+    ];
+
     const roomPlan = document.querySelector("#roomPlan");
     const tableRows = document.querySelector("#tableRows");
     const validation = document.querySelector("#validation");
+    const guestSummary = document.querySelector("#guestSummary");
+    const solutionSummary = document.querySelector("#solutionSummary");
+    const solutionTitle = document.querySelector("#solutionTitle");
+    const solutionDescription = document.querySelector("#solutionDescription");
+    const changeSummary = document.querySelector("#changeSummary");
+    const changeSummaryTitle = document.querySelector("#changeSummaryTitle");
+    const changeTableBody = document.querySelector("#changeTableBody");
+    const solutionButtons = document.querySelectorAll("[data-mix]");
+    const withoutOptional = document.querySelector("#withoutOptional");
+    const viewButtons = document.querySelectorAll("[data-view]");
+    const roomSection = document.querySelector("#roomSection");
+    const seatingSection = document.querySelector("#seatingSection");
+    const flatView = document.querySelector("#flatView");
+    const flatList = document.querySelector("#flatList");
 
-    function renderRoomPlan() {
+    function renderRoomPlan(tables) {
+      roomPlan.querySelectorAll(".overview-table").forEach((item) => item.remove());
       roomOrder.forEach((number, index) => {
         const table = tables.find((item) => item.number === number);
         const item = document.createElement("div");
@@ -933,22 +1376,53 @@
       return card;
     }
 
-    function renderTables() {
-      for (let index = 0; index < tables.length; index += 2) {
+    function renderTables(tables) {
+      tableRows.replaceChildren();
+      const orderedTables = [...tables].sort((first, second) => first.number - second.number);
+      for (let index = 0; index < orderedTables.length; index += 2) {
         const row = document.createElement("div");
         row.className = "table-row";
-        row.append(createTableCard(tables[index]), createTableCard(tables[index + 1]));
+        row.append(createTableCard(orderedTables[index]), createTableCard(orderedTables[index + 1]));
         tableRows.appendChild(row);
       }
     }
 
-    function validateGuests() {
+    function renderFlatList(tables) {
+      flatList.replaceChildren();
+      const orderedTables = [...tables].sort((first, second) => first.number - second.number);
+
+      orderedTables.forEach((table) => {
+        const row = document.createElement("article");
+        row.className = "flat-table-row";
+        row.innerHTML = `
+          <div>
+            <h3>Bord ${table.number}</h3>
+            <p class="flat-table-meta">${table.title} · ${table.seats.length} gjester</p>
+          </div>
+          <p class="flat-guest-names">${table.seats.map((person) => person.name).join(" · ")}</p>
+        `;
+        flatList.appendChild(row);
+      });
+    }
+
+    function renderViewMode(viewMode) {
+      const showMap = viewMode === "map";
+      roomSection.hidden = !showMap;
+      seatingSection.hidden = !showMap;
+      flatView.hidden = showMap;
+      viewButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.view === viewMode));
+      });
+    }
+
+    function validateGuests(tables) {
       const people = tables.flatMap((table) => table.seats);
       const ids = new Set(people.map((person) => person.id));
-      const isValid = people.length === 80 && ids.size === 80;
+      const validTableSizes = tables.every((table) => table.seats.length >= 8 && table.seats.length <= 12);
+      const isValid = ids.size === people.length && validTableSizes;
       validation.dataset.valid = String(isValid);
       validation.textContent = isValid
-        ? "Kontrollert: 80 unike plasser"
+        ? `Kontrollert: ${people.length} unike plasser`
         : `Kontrollfeil: ${people.length} plasser, ${ids.size} unike id-er`;
 
       if (!isValid) {
@@ -956,10 +1430,62 @@
       }
     }
 
+    function renderSolution(solution) {
+      const people = solution.tables.flatMap((table) => table.seats);
+      const optionalCount = people.filter((person) => person.optional).length;
+      const optionalText = optionalCount > 0 ? `${optionalCount} kommer kanskje` : "ingen usikre gjester";
+
+      guestSummary.textContent = `${people.length} oppførte middagsgjester · ${optionalText} · 8 runde bord · seterekkefølge med klokken`;
+      solutionTitle.textContent = solution.title;
+      solutionDescription.textContent = solution.description;
+      solutionSummary.dataset.hasChanges = String(solution.changes.length > 0);
+      changeSummary.hidden = solution.changes.length === 0;
+      changeSummaryTitle.textContent = solution.changesTitle || "";
+      changeTableBody.replaceChildren();
+
+      solution.changes.forEach((change) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${change.people}</td><td>${change.from}</td><td>${change.to}</td>`;
+        changeTableBody.appendChild(row);
+      });
+
+      solutionButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.mix === solution.mixMode));
+      });
+      withoutOptional.checked = solution.withoutOptional;
+
+      renderRoomPlan(solution.tables);
+      renderTables(solution.tables);
+      renderFlatList(solution.tables);
+      validateGuests(solution.tables);
+    }
+
     document.querySelector("#printButton").addEventListener("click", () => window.print());
-    renderRoomPlan();
-    renderTables();
-    validateGuests();
+    let selectedMixMode = "mixed";
+    let selectedViewMode = "map";
+
+    function renderSelectedSolution() {
+      const solution = solutions.find((item) => (
+        item.mixMode === selectedMixMode && item.withoutOptional === withoutOptional.checked
+      ));
+      renderSolution(solution);
+    }
+
+    solutionButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedMixMode = button.dataset.mix;
+        renderSelectedSolution();
+      });
+    });
+    withoutOptional.addEventListener("change", renderSelectedSolution);
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedViewMode = button.dataset.view;
+        renderViewMode(selectedViewMode);
+      });
+    });
+    renderSelectedSolution();
+    renderViewMode(selectedViewMode);
   </script>
 </body>
 </html>
