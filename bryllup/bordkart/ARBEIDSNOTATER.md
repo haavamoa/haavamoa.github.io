@@ -1,6 +1,6 @@
 # Arbeidsnotater for bordkartet
 
-Sist oppdatert: 23. august 2026.
+Sist oppdatert: 24. august 2026.
 
 Dette dokumentet samler beslutninger, relasjoner og regler fra arbeidsøkten som opprettet bordplasseringen. Bruk det som startpunkt når løsningen skal endres senere.
 
@@ -30,12 +30,23 @@ Dette dokumentet samler beslutninger, relasjoner og regler fra arbeidsøkten som
 
 ### Usikre gjester
 
-Følgende fire personer inngår i totalsummen på 80, men er markert som usikre:
+Følgende to personer inngår i totalsummen på 80, men er markert som usikre:
 
 - Lars og Julie, partneren til Lars.
-- Andreas og Elise.
 
-Hvis Andreas og Elise ikke kommer, får bord 6 åtte personer og er fortsatt innenfor tillatt størrelse. Hvis alle fire usikre gjester uteblir, blir totalen 76.
+Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `Uten kanskje`, og totalen blir 78.
+
+### Merknader
+
+| Person | Kommentar |
+|---|---|
+| Stine | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
+| Ida (forlover) | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
+| Kristoffer | Mandler og hasselnøtter. |
+| Malin | Laktose. |
+| Elise | Veganer. |
+
+Merknadene skal vises ved personens bord og i allergioversikten, men ikke på utskriftsarket.
 
 ### Roller og navn som må skilles fra hverandre
 
@@ -51,15 +62,20 @@ Hvis Andreas og Elise ikke kommer, får bord 6 åtte personer og er fortsatt inn
 Reglene skal etterstrebes i denne prioriteringen:
 
 1. Alle registrerte par skal sitte ved siden av hverandre.
-2. Malin skal sitte ved samme bord som Kristina og Heidi. Den valgte kjeden er Stian - Heidi - Malin - Kristina.
-3. Ved bord 1 skal bruden sitte til høyre for brudgommen når alle vender inn mot bordet.
-4. Bruden skal ha sin far på sin høyre side.
-5. Brudgommen skal ha sin mor på sin venstre side.
-6. Kvinne og mann skal sitte annenhver så langt gjestesammensetningen gjør det mulig.
-7. Forlovere og nær familie skal sitte fysisk nær brudeparet.
-8. Randi og Linus er toastmastere og skal sitte ved siden av hverandre. Den valgte kjeden er Rune - Randi - Linus.
-9. Fredrik og Marte (fotograf) skal sitte ved siden av hverandre og ha enkel vei til og fra bordet.
-10. Eskil skal sitte ved siden av Max. Den valgte plasseringen er over rundingen mellom siste og første stol ved bord 7.
+2. Alle ved vennebordene bør sitte med minst én person de kjenner. Kjente avvik skal dokumenteres.
+3. Vilma og Ebba skal sitte sammen.
+4. Stine skal sitte sammen med Christine.
+5. Kristina skal sitte ved bord 6 med Heidi, Stian, Malin og Ingrid.
+6. Hallstein og Liv Jorunn skal sitte ved bord 7.
+7. Marte og Levin skal sitte sammen ved bord 8.
+8. Ved bord 4 skal bruden sitte til høyre for brudgommen når alle vender inn mot bordet.
+9. Bruden skal ha sin far på sin høyre side.
+10. Brudgommen skal ha sin mor på sin venstre side.
+11. Kvinne og mann skal sitte annenhver så langt gjestesammensetningen gjør det mulig.
+12. Forlovere og nær familie skal sitte fysisk nær brudeparet.
+13. Randi og Linus er toastmastere ved bord 3 og skal sitte ved siden av hverandre. Den valgte kjeden er Rune - Randi - Linus.
+14. Fredrik og Marte (fotograf) skal sitte ved siden av hverandre ved bord 7 og ha enkel vei til og fra bordet.
+15. Brita og Eskil skal sitte sammen ved bord 6.
 
 Kjønn for vekslingsregelen er tolket ut fra navnene. Korriger dataene hvis noen antakelser er feil.
 
@@ -80,58 +96,15 @@ Rommet har to forskjøvede rekker:
 - Det stiplede feltet til høyre er én samlet sone for scene, danseplatt og fri ferdsel.
 - Det finnes ikke et separat dansegulv eller en rød avgrensningslinje nederst.
 - Bord 1 og 2 står nærmest scenen, med bord 3 og 4 like ved.
-- Bord 1 og 3 står ved siden av hverandre, slik at forlovere og søsken er nær brudeparet og barna.
-- Bord 2 gir toastmasterne praktisk tilgang til scenen.
-- Bord 8 med foto- og filmgjestene står lengst unna scenen.
+- Bord 2 og 4 står ved siden av hverandre, slik at forlovere og søsken er nær brudeparet og barna.
+- Bord 3 gir toastmasterne praktisk tilgang til scenen.
+- Bord 7 med foto- og filmgjestene står lengst unna scenen.
 
 ## Gjeldende bord og stolrekkefølge
 
 Rekkefølgen nedenfor leses med klokken og skal samsvare med `index.html`.
 
-### Bord 1 - brudepar, foreldre og barn (låst)
-
-1. Brud
-2. Brudgom
-3. Sissel
-4. Oddvar
-5. Vilja
-6. Leon
-7. Sofie
-8. Vida
-9. Tine
-10. Idar
-
-Viktige naboskap: Tine-Idar-Brud-Brudgom-Sissel over rundingen, Sissel-Oddvar og Leon-Sofie.
-
-### Bord 2 - toastmastere og søskenbarn (låst)
-
-1. Rune
-2. Randi
-3. Linus
-4. Tone
-5. Jan Åge
-6. Monica
-7. Vegar
-8. Hege
-9. Patrik
-10. Kjetil
-
-Randi og Linus skal være naboer. Rune og Randi, Tone og Jan Åge samt Hege og Patrik er par.
-
-### Bord 3 - forlovere og søsken (låst)
-
-1. Miguel
-2. Grete
-3. Simen
-4. Siri
-5. Kristoffer
-6. Ida (forlover)
-7. Emil
-8. Julie (forlover)
-9. Lars, kommer kanskje
-10. Julie (partner til Lars), kommer kanskje
-
-### Bord 4 - tanter og onkler (låst)
+### Bord 1 - tanter og onkler (låst)
 
 1. Lillian
 2. Inge
@@ -147,69 +120,114 @@ Randi og Linus skal være naboer. Rune og Randi, Tone og Jan Åge samt Hege og P
 
 John kjenner Kjell Idar. Anne Lise sitter mellom dem, slik at begge par fortsatt sitter sammen.
 
+### Bord 2 - forlovere og søsken (låst)
+
+1. Miguel
+2. Grete
+3. Simen
+4. Siri
+5. Kristoffer
+6. Ida (forlover)
+7. Emil
+8. Julie (forlover)
+9. Lars, kommer kanskje
+10. Julie (partner til Lars), kommer kanskje
+
+### Bord 3 - toastmastere og søskenbarn (låst)
+
+1. Rune
+2. Randi
+3. Linus
+4. Tone
+5. Jan Åge
+6. Monica
+7. Vegar
+8. Hege
+9. Patrik
+10. Kjetil
+
+Randi og Linus skal være naboer. Rune og Randi, Tone og Jan Åge samt Hege og Patrik er par.
+
+### Bord 4 - brudepar, foreldre og barn (låst)
+
+1. Brud
+2. Brudgom
+3. Sissel
+4. Oddvar
+5. Vilja
+6. Leon
+7. Sofie
+8. Vida
+9. Tine
+10. Idar
+
+Viktige naboskap: Tine-Idar-Brud-Brudgom-Sissel over rundingen, Sissel-Oddvar og Leon-Sofie.
+
 ### Bord 5 - vennebord
+
+1. Erik
+2. Trine
+3. Simon
+4. Andreas
+5. Elise
+6. Vidar
+7. Tonje
+8. Martin
+9. Cathrine
+10. Camilla
+
+Tonje og Vidar, Cathrine og Martin samt Camilla representerer Idas vennekrets. Simon har ingen dokumentert kjent ved bordet etter at Runar og Vilde ble flyttet. Erik og Trine samt Cathrine og Martin har partneren sin, men ingen annen dokumentert kjent ved bordet.
+
+### Bord 6 - vennebord
 
 1. Stian
 2. Heidi
 3. Malin
 4. Kristina
-5. Erik
-6. Trine
-7. Marius
-8. Kine
-9. Ingrid
-10. Stine
+5. Ingrid
+6. Brita
+7. Eskil
+8. Runar
+9. Vilde
+10. Tore
 
-Heidi, Malin og Kristina skal sitte ved samme bord. Rekkefølgen Stian-Heidi-Malin-Kristina bevarer både paret og trioen.
+Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil sitter sammen. Runar og Vilde sitter sammen med Tore.
 
-### Bord 6 - vennebord
-
-1. Magnus
-2. Andrea
-3. Linn
-4. Dan
-5. Tonje
-6. Vidar
-7. Andreas, kommer kanskje
-8. Elise, kommer kanskje
-9. Camilla
-10. Vilma
-
-### Bord 7 - vennebord
-
-1. Max
-2. Christine
-3. Runar
-4. Vilde
-5. Levin
-6. Marte, partner til Levin
-7. Simon
-8. Tore
-9. Brita
-10. Eskil
-
-Dette bordet blander Ida og Håvards venner og beholder alle par samlet. Eskil og Max er naboer over rundingen.
-
-### Bord 8 - vennebord, foto og film
+### Bord 7 - vennebord, foto og film
 
 1. Fredrik
 2. Marte (fotograf)
 3. Hallstein
 4. Liv Jorunn
-5. Martin
-6. Cathrine
-7. Lasse
-8. Dea
-9. Ebba
+5. Magnus
+6. Andrea
+7. Marius
+8. Kine
+9. Lasse
+10. Dea
 
-Viktig naboskap: Fredrik-Marte (fotograf). Bordet blander Ida og Håvards venner og står lengst unna scenen.
+Viktige forbindelser: Fredrik-Marte (fotograf) og den dokumenterte vennekretsen Hallstein/Liv Jorunn-Magnus/Andrea-Marius/Kine-Lasse/Dea. Bordet står lengst unna scenen.
+
+### Bord 8 - vennebord
+
+1. Max
+2. Christine
+3. Stine
+4. Linn
+5. Dan
+6. Vilma
+7. Ebba
+8. Levin
+9. Marte, partner til Levin
+
+Stine sitter med Christine. Linn og Dan, Vilma og Ebba samt Marte og Levin sitter sammen.
 
 ## Valgbare løsninger på nettsiden
 
 Nettsiden har to uavhengige kontroller som gjenbruker samme rom- og bordvisning:
 
 1. **Miks venner / Før miks:** Velger om vennegruppene ved bord 5-8 skal blandes. `Miks venner` er standard.
-2. **Uten kanskje:** Fjerner Lars, Julie (partner til Lars), Andreas og Elise fra den valgte vennefordelingen.
+2. **Uten kanskje:** Fjerner Lars og Julie (partner til Lars) fra bord 2.
 
 Dette gir fire kombinasjoner: Miks venner, Før miks, Miks venner uten kanskje og Før miks uten kanskje.
 
@@ -217,25 +235,17 @@ Med **Miks venner + Uten kanskje** gjøres følgende endringer:
 
 | Personer | Fra | Til |
 |---|---|---|
-| Lars og Julie (partner til Lars) | Bord 3 | Kommer ikke |
-| Andreas og Elise | Bord 6 | Kommer ikke |
-| Vilma | Bord 6 | Bord 3 |
-| Ebba | Bord 8 | Bord 3 |
-| Simon | Bord 7 | Bord 6 |
-| Ingrid | Bord 5 | Bord 6 |
+| Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
 
-Resultatet er 10 gjester ved bord 1, 2 og 3, 11 gjester ved bord 4, 9 gjester ved bord 5, 6 og 7 og 8 gjester ved bord 8. Alle par og de spesielle nabokravene består.
+Resultatet er 11 gjester ved bord 1, 8 ved bord 2, 10 ved bord 3, 4, 5, 6 og 7 og 9 ved bord 8. Alle par og de spesielle nabokravene består.
 
 Med **Før miks + Uten kanskje** gjøres følgende endringer:
 
 | Personer | Fra | Til |
 |---|---|---|
-| Lars og Julie (partner til Lars) | Bord 3 | Kommer ikke |
-| Andreas og Elise | Bord 5 | Kommer ikke |
-| Vilma og Ebba | Bord 6 | Bord 3 |
-| Marius og Kine | Bord 8 | Bord 5 |
+| Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
 
-Resultatet er 10 gjester ved bord 1, 2, 3 og 7, 11 gjester ved bord 4, 9 gjester ved bord 6 og 8 gjester ved bord 5 og 8. Vennegruppene forblir adskilt, og alle par og spesielle nabokrav består.
+Resultatet er 11 gjester ved bord 1, 8 ved bord 2 og 5, 10 ved bord 3, 4 og 7, 12 ved bord 6 og 9 ved bord 8. Vennegruppene forblir adskilt, og alle par og spesielle nabokrav består.
 
 ## Familieforbindelser
 
@@ -261,13 +271,18 @@ Resultatet er 10 gjester ved bord 1, 2, 3 og 7, 11 gjester ved bord 4, 9 gjester
 ## Venneforbindelser
 
 - Magnus og Andrea, Marius og Kine, Simen og Siri, Hallstein og Liv Jorunn samt Lasse og Dea tilhører samme dokumenterte vennekrets.
-- Simen er forlover og sitter derfor ved bord 3 med Siri.
+- Simen er forlover og sitter derfor ved bord 2 med Siri.
 - Heidi og Stian kjenner Kristina, Ingrid, Marte og Levin, Cathrine og Martin, Camilla samt Tonje og Vidar.
-- Malin skal sitte ved samme bord som Kristina og Heidi.
-- Tonje og Linn sitter begge ved vennebord 6.
+- Kristina kjenner Heidi, Stian, Malin og Ingrid og skal sitte med dem ved bord 6.
+- Vilma og Ebba skal sitte sammen.
+- Stine skal sitte med Christine.
+- Tonje sitter ved bord 5, mens Linn sitter ved bord 8; begge har partneren sin ved bordet.
 - Runar og Vilde kjenner Simon, Erik og Trine, Andreas og Elise samt Tore.
+- Simon og Erik/Trine kjenner Runar og Vilde, men sitter nå ved bord 5 mens Runar og Vilde sitter ved bord 6.
+- Cathrine og Martin samt Camilla kjenner Heidi og Stian, men sitter nå ved bord 5 mens Heidi og Stian sitter ved bord 6.
+- Marte og Levin sitter sammen ved bord 8, mens Brita og Eskil sitter sammen ved bord 6.
 - Hallstein og Liv Jorunn er venner av både Ida og Håvard.
-- Bord 5-8 er bevisst blandet mellom Ida og Håvards vennekretser.
+- Bord 5 og 6 blander Ida og Håvards vennekretser. Bord 7 og 8 beholder sammenhengende vennegrupper.
 
 ## Visning og utskrift
 
@@ -278,7 +293,7 @@ Resultatet er 10 gjester ved bord 1, 2, 3 og 7, 11 gjester ved bord 4, 9 gjester
 - Usikre gjester markeres med spørsmålstegn og stiplet kant i HTML-en.
 - Utskrift bruker liggende A4.
 - Romoversikten får en egen side.
-- Deretter skal det være to bord i bredden og ett bordpar per side.
+- Den dedikerte utskriftssiden skal vise ett valgt bord per A4-ark.
 - Utskriftsknappen skal skjules på utskrift.
 - Mobilvisningen kan bruke horisontal rulling inne i hvert borddiagram for å bevare lesbarheten.
 - `Skriv ut` åpner `print.html` med bordene fra den aktive kombinasjonen.
@@ -295,16 +310,16 @@ Etter enhver endring skal følgende kontrolleres:
 3. Alle person-ID-er i HTML-en er unike.
 4. Ingen person mangler eller finnes to ganger.
 5. Alle registrerte par er naboer rundt sitt runde bord, inkludert over rundingen mellom siste og første stol.
-6. De spesielle nabokravene for bord 1, 2, 5, 7 og 8 består.
+6. De spesielle nabokravene for bord 1, 2, 4, 5, 7 og 8 består.
 7. Alle bord har 8-12 personer.
 8. Ingen navn overlapper eller klippes i desktop-, mobil- eller utskriftsvisning.
-9. Utskriftsmodusen viser to bord i bredden.
+9. Utskriftssiden viser bare det valgte bordet på ett A4-ark.
 10. Det stiplede feltet er eneste markering for danseplatt og fri ferdsel.
 
 ## Videre arbeid
 
 - Avklar om Lars og Julie kommer.
 - Avklar om Andreas og Elise kommer.
-- Hvis Andreas og Elise uteblir, får bord 6 åtte personer og er fortsatt innenfor tillatt størrelse.
+- Hvis Lars og Julie uteblir, skal `Uten kanskje` brukes og begge miksvariantene kontrolleres.
 - Eventuelle nye relasjoner bør skrives inn her før bordene endres.
 - Ikke endre de låste bordene 1-4 uten en uttrykkelig beslutning om å låse dem opp.

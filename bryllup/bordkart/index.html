@@ -25,11 +25,11 @@
 
     * {
       box-sizing: border-box;
-      letter-spacing: 0;
+        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "camilla", "vilma", "ebba"]
     }
 
     html {
-      background: var(--page);
+        seatIds: ["max", "christine", "stine", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
       color: var(--ink);
       font-family: "Avenir Next", Avenir, "Gill Sans", sans-serif;
     }
@@ -75,13 +75,15 @@
     h1,
     h2,
     h3,
+    h4,
     p {
       margin-top: 0;
     }
 
     h1,
     h2,
-    h3 {
+    h3,
+    h4 {
       font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
       font-weight: 600;
     }
@@ -477,6 +479,53 @@
       font-size: 0.92rem;
     }
 
+    .allergy-overview {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .allergy-table-wrap {
+      overflow-x: auto;
+      border-block: 1px solid var(--line);
+    }
+
+    .allergy-table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      background: var(--paper);
+      text-align: left;
+    }
+
+    .allergy-table th,
+    .allergy-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .allergy-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .allergy-table th {
+      color: var(--green);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .allergy-table td {
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .allergy-table td:first-child,
+    .allergy-table td:nth-child(2) {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
     .table-row {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -524,6 +573,27 @@
       margin-bottom: 0;
       color: var(--muted);
       font-size: 0.76rem;
+    }
+
+    .table-allergies {
+      padding: 14px 18px 16px;
+      border-top: 1px solid var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .table-allergies h4 {
+      margin-bottom: 7px;
+      color: var(--gold);
+      font-size: 0.92rem;
+    }
+
+    .table-allergies ul {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.78rem;
+      line-height: 1.4;
     }
 
     .table-meta {
@@ -741,6 +811,47 @@
         width: 25%;
       }
 
+      .allergy-table {
+        min-width: 0;
+      }
+
+      .allergy-table thead {
+        display: none;
+      }
+
+      .allergy-table tbody,
+      .allergy-table tr,
+      .allergy-table td {
+        display: block;
+      }
+
+      .allergy-table tr {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 8px 14px;
+        padding: 14px 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .allergy-table td {
+        padding: 0;
+        border-bottom: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .allergy-table td:nth-child(2)::before {
+        content: "Bord ";
+      }
+
+      .allergy-table td:nth-child(3)::before {
+        content: "Plass ";
+      }
+
+      .allergy-table td:nth-child(4) {
+        grid-column: 1 / -1;
+        font-size: 0.95rem;
+      }
+
       .section-heading {
         display: block;
       }
@@ -909,7 +1020,7 @@
     <div>
       <p class="eyebrow">Bordplassering · forslag 1</p>
       <h1>Ida &amp; Håvard</h1>
-      <p class="summary" id="guestSummary">80 oppførte middagsgjester · 4 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
+      <p class="summary" id="guestSummary">80 oppførte middagsgjester · 2 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
     </div>
     <div class="masthead__actions">
       <div class="solution-controls">
@@ -958,7 +1069,7 @@
           <p class="eyebrow">Romoversikt</p>
           <h2 id="roomTitle">Plassering mot scenen</h2>
         </div>
-        <p>Bord 1 og 2 ligger nærmest scenen, med bord 3 og 4 like ved. Bord 8 med foto og film står lengst unna.</p>
+        <p>Bord 1 og 2 ligger nærmest scenen, med bord 3 og 4 like ved. Bord 7 med foto og film står lengst unna.</p>
       </div>
 
       <div class="room-scroll">
@@ -1003,6 +1114,29 @@
       </div>
       <div class="flat-list" id="flatList"></div>
     </section>
+
+    <section class="allergy-overview" aria-labelledby="allergyTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Matservering</p>
+          <h2 id="allergyTitle">Allergier og kosthensyn</h2>
+        </div>
+        <p>Listen følger den valgte bordløsningen og viser hvor hver person sitter.</p>
+      </div>
+      <div class="allergy-table-wrap">
+        <table class="allergy-table">
+          <thead>
+            <tr>
+              <th scope="col">Person</th>
+              <th scope="col">Bord</th>
+              <th scope="col">Plass</th>
+              <th scope="col">Kommentar</th>
+            </tr>
+          </thead>
+          <tbody id="allergyTableBody"></tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
   <footer class="page-footer">
@@ -1014,114 +1148,6 @@
     const mixedTables = [
       {
         number: 1,
-        title: "Brudepar, foreldre og barn",
-        locked: true,
-        startAngle: -54,
-        seats: [
-          { id: "ida-brud", name: "Brud", gender: "female", role: "key" },
-          { id: "haavard", name: "Brudgom", gender: "male", role: "key" },
-          { id: "sissel", name: "Sissel", gender: "female" },
-          { id: "oddvar", name: "Oddvar", gender: "male" },
-          { id: "vilja", name: "Vilja", gender: "female" },
-          { id: "leon", name: "Leon", gender: "male" },
-          { id: "sofie", name: "Sofie", gender: "female" },
-          { id: "vida", name: "Vida", gender: "female" },
-          { id: "tine", name: "Tine", gender: "female" },
-          { id: "idar", name: "Idar", gender: "male" }
-        ]
-      },
-      {
-        number: 2,
-        title: "Toastmastere og søskenbarn",
-        locked: true,
-        startAngle: 216,
-        seats: [
-          { id: "rune", name: "Rune", gender: "male" },
-          { id: "randi", name: "Randi", gender: "female", role: "key" },
-          { id: "linus", name: "Linus", gender: "male", role: "key" },
-          { id: "tone", name: "Tone", gender: "female" },
-          { id: "jan-aage", name: "Jan Åge", gender: "male" },
-          { id: "monica", name: "Monica", gender: "female" },
-          { id: "vegar", name: "Vegar", gender: "male" },
-          { id: "hege", name: "Hege", gender: "female" },
-          { id: "patrik", name: "Patrik", gender: "male" },
-          { id: "kjetil", name: "Kjetil", gender: "male" }
-        ]
-      },
-      {
-        number: 3,
-        title: "Forlovere og søsken",
-        locked: true,
-        startAngle: 90,
-        seats: [
-          { id: "miguel", name: "Miguel", gender: "male" },
-          { id: "grete", name: "Grete", gender: "female", role: "key" },
-          { id: "simen", name: "Simen", gender: "male", role: "key" },
-          { id: "siri", name: "Siri", gender: "female" },
-          { id: "kristoffer", name: "Kristoffer", gender: "male" },
-          { id: "ida-forlover", name: "Ida (forlover)", gender: "female", role: "key" },
-          { id: "emil", name: "Emil", gender: "male" },
-          { id: "julie-forlover", name: "Julie (forlover)", gender: "female", role: "key" },
-          { id: "lars", name: "Lars?", gender: "male", optional: true },
-          { id: "julie-lars", name: "Julie (Lars)?", gender: "female", optional: true }
-        ]
-      },
-      {
-        number: 7,
-        title: "Vennebord",
-        locked: false,
-        startAngle: 0,
-        seats: [
-          { id: "max", name: "Max", gender: "male" },
-          { id: "christine", name: "Christine", gender: "female" },
-          { id: "runar", name: "Runar", gender: "male" },
-          { id: "vilde", name: "Vilde", gender: "female" },
-          { id: "levin", name: "Levin", gender: "male" },
-          { id: "marte-levin", name: "Marte", gender: "female" },
-          { id: "simon", name: "Simon", gender: "male" },
-          { id: "tore", name: "Tore", gender: "male" },
-          { id: "brita", name: "Brita", gender: "female" },
-          { id: "eskil", name: "Eskil", gender: "male" }
-        ]
-      },
-      {
-        number: 5,
-        title: "Vennebord",
-        locked: false,
-        startAngle: 0,
-        seats: [
-          { id: "stian", name: "Stian", gender: "male" },
-          { id: "heidi", name: "Heidi", gender: "female" },
-          { id: "malin", name: "Malin", gender: "female" },
-          { id: "kristina", name: "Kristina", gender: "female" },
-          { id: "erik", name: "Erik", gender: "male" },
-          { id: "trine", name: "Trine", gender: "female" },
-          { id: "marius", name: "Marius", gender: "male" },
-          { id: "kine", name: "Kine", gender: "female" },
-          { id: "ingrid", name: "Ingrid", gender: "female" },
-          { id: "stine", name: "Stine", gender: "female" }
-        ]
-      },
-      {
-        number: 6,
-        title: "Vennebord",
-        locked: false,
-        startAngle: 0,
-        seats: [
-          { id: "magnus", name: "Magnus", gender: "male" },
-          { id: "andrea", name: "Andrea", gender: "female" },
-          { id: "linn", name: "Linn", gender: "female" },
-          { id: "dan", name: "Dan", gender: "male" },
-          { id: "tonje", name: "Tonje", gender: "female" },
-          { id: "vidar", name: "Vidar", gender: "male" },
-          { id: "andreas", name: "Andreas?", gender: "male", optional: true },
-          { id: "elise", name: "Elise?", gender: "female", optional: true },
-          { id: "camilla", name: "Camilla", gender: "female" },
-          { id: "vilma", name: "Vilma", gender: "female" }
-        ]
-      },
-      {
-        number: 4,
         title: "Tanter og onkler",
         locked: true,
         startAngle: 0,
@@ -1140,7 +1166,43 @@
         ]
       },
       {
-        number: 8,
+        number: 2,
+        title: "Forlovere og søsken",
+        locked: true,
+        startAngle: 90,
+        seats: [
+          { id: "miguel", name: "Miguel", gender: "male" },
+          { id: "grete", name: "Grete", gender: "female", role: "key" },
+          { id: "simen", name: "Simen", gender: "male", role: "key" },
+          { id: "siri", name: "Siri", gender: "female" },
+          { id: "kristoffer", name: "Kristoffer", gender: "male" },
+          { id: "ida-forlover", name: "Ida (forlover)", gender: "female", role: "key" },
+          { id: "emil", name: "Emil", gender: "male" },
+          { id: "julie-forlover", name: "Julie (forlover)", gender: "female", role: "key" },
+          { id: "lars", name: "Lars?", gender: "male", optional: true },
+          { id: "julie-lars", name: "Julie (Lars)?", gender: "female", optional: true }
+        ]
+      },
+      {
+        number: 3,
+        title: "Toastmastere og søskenbarn",
+        locked: true,
+        startAngle: 216,
+        seats: [
+          { id: "rune", name: "Rune", gender: "male" },
+          { id: "randi", name: "Randi", gender: "female", role: "key" },
+          { id: "linus", name: "Linus", gender: "male", role: "key" },
+          { id: "tone", name: "Tone", gender: "female" },
+          { id: "jan-aage", name: "Jan Åge", gender: "male" },
+          { id: "monica", name: "Monica", gender: "female" },
+          { id: "vegar", name: "Vegar", gender: "male" },
+          { id: "hege", name: "Hege", gender: "female" },
+          { id: "patrik", name: "Patrik", gender: "male" },
+          { id: "kjetil", name: "Kjetil", gender: "male" }
+        ]
+      },
+      {
+        number: 7,
         title: "Vennebord · foto og film",
         locked: false,
         startAngle: 22.5,
@@ -1149,22 +1211,114 @@
           { id: "marte-fotograf", name: "Marte (fotograf)", gender: "female", role: "media" },
           { id: "hallstein", name: "Hallstein", gender: "male" },
           { id: "liv-jorunn", name: "Liv Jorunn", gender: "female" },
+          { id: "magnus", name: "Magnus", gender: "male" },
+          { id: "andrea", name: "Andrea", gender: "female" },
+          { id: "marius", name: "Marius", gender: "male" },
+          { id: "kine", name: "Kine", gender: "female" },
+          { id: "lasse", name: "Lasse", gender: "male" },
+          { id: "dea", name: "Dea", gender: "female" }
+        ]
+      },
+      {
+        number: 5,
+        title: "Vennebord",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "erik", name: "Erik", gender: "male" },
+          { id: "trine", name: "Trine", gender: "female" },
+          { id: "simon", name: "Simon", gender: "male" },
+          { id: "andreas", name: "Andreas", gender: "male" },
+          { id: "elise", name: "Elise", gender: "female" },
+          { id: "vidar", name: "Vidar", gender: "male" },
+          { id: "tonje", name: "Tonje", gender: "female" },
           { id: "martin", name: "Martin", gender: "male" },
           { id: "cathrine", name: "Cathrine", gender: "female" },
-          { id: "lasse", name: "Lasse", gender: "male" },
-          { id: "dea", name: "Dea", gender: "female" },
-          { id: "ebba", name: "Ebba", gender: "female" }
+          { id: "camilla", name: "Camilla", gender: "female" }
+        ]
+      },
+      {
+        number: 6,
+        title: "Vennebord",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "stian", name: "Stian", gender: "male" },
+          { id: "heidi", name: "Heidi", gender: "female" },
+          { id: "malin", name: "Malin", gender: "female" },
+          { id: "kristina", name: "Kristina", gender: "female" },
+          { id: "ingrid", name: "Ingrid", gender: "female" },
+          { id: "brita", name: "Brita", gender: "female" },
+          { id: "eskil", name: "Eskil", gender: "male" },
+          { id: "runar", name: "Runar", gender: "male" },
+          { id: "vilde", name: "Vilde", gender: "female" },
+          { id: "tore", name: "Tore", gender: "male" }
+        ]
+      },
+      {
+        number: 4,
+        title: "Brudepar, foreldre og barn",
+        locked: true,
+        startAngle: -54,
+        seats: [
+          { id: "ida-brud", name: "Brud", gender: "female", role: "key" },
+          { id: "haavard", name: "Brudgom", gender: "male", role: "key" },
+          { id: "sissel", name: "Sissel", gender: "female" },
+          { id: "oddvar", name: "Oddvar", gender: "male" },
+          { id: "vilja", name: "Vilja", gender: "female" },
+          { id: "leon", name: "Leon", gender: "male" },
+          { id: "sofie", name: "Sofie", gender: "female" },
+          { id: "vida", name: "Vida", gender: "female" },
+          { id: "tine", name: "Tine", gender: "female" },
+          { id: "idar", name: "Idar", gender: "male" }
+        ]
+      },
+      {
+        number: 8,
+        title: "Vennebord",
+        locked: false,
+        startAngle: 0,
+        seats: [
+          { id: "max", name: "Max", gender: "male" },
+          { id: "christine", name: "Christine", gender: "female" },
+          { id: "stine", name: "Stine", gender: "female" },
+          { id: "linn", name: "Linn", gender: "female" },
+          { id: "dan", name: "Dan", gender: "male" },
+          { id: "vilma", name: "Vilma", gender: "female" },
+          { id: "ebba", name: "Ebba", gender: "female" },
+          { id: "levin", name: "Levin", gender: "male" },
+          { id: "marte-levin", name: "Marte", gender: "female" }
         ]
       }
     ];
 
     const roomOrder = [8, 6, 4, 2, 7, 5, 3, 1];
+    const dietaryNotes = [
+      {
+        personId: "stine",
+        person: "Stine",
+        comment: "Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg»."
+      },
+      {
+        personId: "ida-forlover",
+        person: "Ida (forlover)",
+        comment: "All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter."
+      },
+      {
+        personId: "kristoffer",
+        person: "Kristoffer",
+        comment: "Mandler og hasselnøtter."
+      },
+      { personId: "malin", person: "Malin", comment: "Laktose." },
+      { personId: "elise", person: "Elise", comment: "Veganer." },
+      { personId: "hallstein", person: "Hallstein", comment: "Skalldyr / bløtdyr." }
+    ];
     const peopleById = new Map(
       mixedTables.flatMap((table) => table.seats).map((person) => [person.id, person])
     );
 
-    function createAlternativeTables(overrides) {
-      return mixedTables.map((table) => {
+    function createAlternativeTables(overrides, sourceTables = mixedTables) {
+      return sourceTables.map((table) => {
         const override = overrides[table.number];
         if (!override) {
           return table;
@@ -1179,9 +1333,9 @@
     }
 
     const beforeMixTables = createAlternativeTables({
-      7: {
+      8: {
         title: "Idas venner",
-        seatIds: ["max", "christine", "stine", "camilla", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
+        seatIds: ["max", "christine", "stine", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
       },
       5: {
         title: "Håvards venner",
@@ -1189,53 +1343,25 @@
       },
       6: {
         title: "Idas venner",
-        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "vilma", "ebba"]
+        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "camilla", "vilma", "ebba"]
       },
-      8: {
+      7: {
         title: "Håvards venner · foto og film",
         seatIds: ["magnus", "andrea", "marius", "kine", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf", "lasse", "dea"]
       }
     });
 
     const mixedWithoutOptionalTables = createAlternativeTables({
-      3: {
-        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
-      },
-      7: {
-        seatIds: ["max", "christine", "runar", "vilde", "levin", "marte-levin", "tore", "brita", "eskil"]
-      },
-      5: {
-        seatIds: ["stian", "heidi", "malin", "kristina", "erik", "trine", "marius", "kine", "stine"]
-      },
-      6: {
-        seatIds: ["magnus", "andrea", "linn", "dan", "tonje", "vidar", "simon", "ingrid", "camilla"]
-      },
-      8: {
-        seatIds: ["fredrik", "marte-fotograf", "hallstein", "liv-jorunn", "martin", "cathrine", "lasse", "dea"]
+      2: {
+        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover"]
       }
     });
 
     const beforeMixWithoutOptionalTables = createAlternativeTables({
-      3: {
-        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
-      },
-      5: {
-        title: "Håvards venner",
-        seatIds: ["runar", "vilde", "erik", "trine", "simon", "tore", "marius", "kine"]
-      },
-      6: {
-        title: "Idas venner",
-        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine"]
-      },
-      7: {
-        title: "Idas venner",
-        seatIds: ["max", "christine", "stine", "camilla", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
-      },
-      8: {
-        title: "Håvards venner · foto og film",
-        seatIds: ["magnus", "andrea", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf", "lasse", "dea"]
+      2: {
+        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover"]
       }
-    });
+    }, beforeMixTables);
 
     const solutions = [
       {
@@ -1261,16 +1387,11 @@
         mixMode: "mixed",
         withoutOptional: true,
         title: "Miks venner · uten kanskje",
-        description: "Tante- og onkelbordet beholdes uendret. De øvrige bordene har mellom 8 og 10 personer.",
+        description: "Lars og Julie er tatt ut. Alle andre bord og relasjoner beholdes uendret.",
         tables: mixedWithoutOptionalTables,
         changesTitle: "Endringer fra Miks venner",
         changes: [
-          { people: "Lars og Julie (partner til Lars)", from: "Bord 3", to: "Kommer ikke" },
-          { people: "Andreas og Elise", from: "Bord 6", to: "Kommer ikke" },
-          { people: "Vilma", from: "Bord 6", to: "Bord 3" },
-          { people: "Ebba", from: "Bord 8", to: "Bord 3" },
-          { people: "Simon", from: "Bord 7", to: "Bord 6" },
-          { people: "Ingrid", from: "Bord 5", to: "Bord 6" }
+          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" }
         ]
       },
       {
@@ -1278,14 +1399,11 @@
         mixMode: "before-mix",
         withoutOptional: true,
         title: "Før miks · uten kanskje",
-        description: "Ida og Håvards vennegrupper holdes adskilt. Tante- og onkelbordet beholdes uendret.",
+        description: "Lars og Julie er tatt ut. Ida og Håvards vennegrupper holdes ellers adskilt.",
         tables: beforeMixWithoutOptionalTables,
         changesTitle: "Endringer fra Før miks",
         changes: [
-          { people: "Lars og Julie (partner til Lars)", from: "Bord 3", to: "Kommer ikke" },
-          { people: "Andreas og Elise", from: "Bord 5", to: "Kommer ikke" },
-          { people: "Vilma og Ebba", from: "Bord 6", to: "Bord 3" },
-          { people: "Marius og Kine", from: "Bord 8", to: "Bord 5" }
+          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" }
         ]
       }
     ];
@@ -1307,6 +1425,7 @@
     const seatingSection = document.querySelector("#seatingSection");
     const flatView = document.querySelector("#flatView");
     const flatList = document.querySelector("#flatList");
+    const allergyTableBody = document.querySelector("#allergyTableBody");
     let activeSolution = null;
 
     function renderRoomPlan(tables) {
@@ -1374,6 +1493,30 @@
 
       frame.appendChild(map);
       card.append(header, frame);
+
+      const tableNotes = dietaryNotes
+        .filter((note) => table.seats.some((person) => person.id === note.personId))
+        .sort((first, second) => (
+          table.seats.findIndex((person) => person.id === first.personId)
+          - table.seats.findIndex((person) => person.id === second.personId)
+        ));
+      if (tableNotes.length > 0) {
+        const allergies = document.createElement("aside");
+        allergies.className = "table-allergies";
+        const title = document.createElement("h4");
+        title.textContent = "Allergier og kosthensyn";
+        const list = document.createElement("ul");
+        tableNotes.forEach((note) => {
+          const item = document.createElement("li");
+          const name = document.createElement("strong");
+          const seatNumber = table.seats.findIndex((person) => person.id === note.personId) + 1;
+          name.textContent = `Plass ${seatNumber} · ${note.person}: `;
+          item.append(name, note.comment);
+          list.appendChild(item);
+        });
+        allergies.append(title, list);
+        card.appendChild(allergies);
+      }
       return card;
     }
 
@@ -1403,6 +1546,40 @@
           <p class="flat-guest-names">${table.seats.map((person) => person.name).join(" · ")}</p>
         `;
         flatList.appendChild(row);
+      });
+    }
+
+    function getDietaryNotesByTable(tables) {
+      const tableByPerson = new Map(
+        tables.flatMap((table) => table.seats.map((person) => [person.id, table.number]))
+      );
+      return dietaryNotes
+        .map((note) => {
+          const table = tables.find((item) => item.seats.some((person) => person.id === note.personId));
+          return {
+            ...note,
+            table: table?.number,
+            seat: table ? table.seats.findIndex((person) => person.id === note.personId) + 1 : undefined
+          };
+        })
+        .filter((note) => note.table !== undefined)
+        .sort((first, second) => first.table - second.table || first.seat - second.seat);
+    }
+
+    function renderAllergyOverview(tables) {
+      allergyTableBody.replaceChildren();
+      getDietaryNotesByTable(tables).forEach((note) => {
+        const row = document.createElement("tr");
+        const person = document.createElement("td");
+        const table = document.createElement("td");
+        const seat = document.createElement("td");
+        const comment = document.createElement("td");
+        person.textContent = note.person;
+        table.textContent = String(note.table);
+        seat.textContent = String(note.seat);
+        comment.textContent = note.comment;
+        row.append(person, table, seat, comment);
+        allergyTableBody.appendChild(row);
       });
     }
 
@@ -1459,6 +1636,7 @@
       renderRoomPlan(solution.tables);
       renderTables(solution.tables);
       renderFlatList(solution.tables);
+      renderAllergyOverview(solution.tables);
       validateGuests(solution.tables);
     }
 

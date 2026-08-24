@@ -22,12 +22,12 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 - Bruk nøytrale bordoverskrifter. Ikke bruk personnavn som gruppenavn.
 - Ikke legg forklarende kommentarer under borddiagrammene.
 - Det stiplede feltet til høyre er den eneste sonen for danseplatt og fri ferdsel.
-- Foto og film skal sitte ved bord 8, som skal stå lengst unna scenen.
+- Foto og film skal sitte ved bord 7, som skal stå lengst unna scenen.
 
 ## Utskrift og visuell kontroll
 
 - Behold `@page` som liggende A4.
-- Behold to bord i bredden på hver detaljside.
+- Den dedikerte utskriftssiden skal vise ett valgt bord per A4-ark.
 - Romoversikten skal stå på en egen side.
 - Utskriftsknappen skal ikke vises på utskrift.
 - Utskriftssiden skal bruke A4-portrett og la brukeren velge ett bord om gangen. Bare valgt bord skal skrives ut, med fet bordtittel og ett navn per linje.
@@ -38,7 +38,10 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 
 ## Datakontroll
 
-- Gjeldende total er 80 personer, inkludert fire usikre gjester.
+- Gjeldende total er 80 personer, inkludert to usikre gjester: Lars og Julie.
+- Allergier og kosthensyn skal alltid vises ved personens bord og i den samlede listen nederst.
+- Allergivisningene på hovedsiden skal vise personens bord- og plassnummer fra aktiv løsning.
+- Utskriftssiden skal ikke vise allergier eller kosthensyn.
 - Alle HTML-ID-er for personer skal være unike.
 - Kontroller totalsum per bord og samlet total etter hver gjesteendring.
 - Kontroller alle fire kombinasjoner etter endringer i gjester, bordnumre eller stolrekkefølge.

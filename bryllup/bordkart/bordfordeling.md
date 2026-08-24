@@ -1,44 +1,6 @@
 # Bordkart
 
-## Bord 1 - brudepar, foreldre og barn
-
-| Personer | Antall |
-|---|---:|
-| Brud og Brudgom | 2 |
-| Tine og Idar | 2 |
-| Sissel og Oddvar | 2 |
-| Vilja og Vida | 2 |
-| Sofie og Leon | 2 |
-
-**Sum: 10**
-
-## Bord 2 - toastmastere og søskenbarn
-
-| Personer | Antall |
-|---|---:|
-| Rune og Randi | 2 |
-| Linus | 1 |
-| Tone og Jan Åge | 2 |
-| Kjetil | 1 |
-| Vegar og Monica | 2 |
-| Hege og Patrik | 2 |
-
-**Sum: 10**
-
-## Bord 3 - forlovere og søsken
-
-| Personer | Antall |
-|---|---:|
-| Grete og Miguel | 2 |
-| Julie (forlover) | 1 |
-| Simen og Siri | 2 |
-| Ida (forlover) og Kristoffer | 2 |
-| Emil | 1 |
-| Lars og Julie (partner til Lars, kommer kanskje) | 2 |
-
-**Sum: 10**
-
-## Bord 4 - tanter og onkler
+## Bord 1 - tanter og onkler
 
 | Personer | Antall |
 |---|---:|
@@ -51,17 +13,54 @@
 
 **Sum: 11**
 
+## Bord 2 - forlovere og søsken
+
+| Personer | Antall |
+|---|---:|
+| Grete og Miguel | 2 |
+| Julie (forlover) | 1 |
+| Simen og Siri | 2 |
+| Ida (forlover) og Kristoffer | 2 |
+| Emil | 1 |
+| Lars og Julie (partner til Lars, kommer kanskje) | 2 |
+
+**Sum: 10**
+
+## Bord 3 - toastmastere og søskenbarn
+
+| Personer | Antall |
+|---|---:|
+| Rune og Randi | 2 |
+| Linus | 1 |
+| Tone og Jan Åge | 2 |
+| Kjetil | 1 |
+| Vegar og Monica | 2 |
+| Hege og Patrik | 2 |
+
+**Sum: 10**
+
+## Bord 4 - brudepar, foreldre og barn
+
+| Personer | Antall |
+|---|---:|
+| Brud og Brudgom | 2 |
+| Tine og Idar | 2 |
+| Sissel og Oddvar | 2 |
+| Vilja og Vida | 2 |
+| Sofie og Leon | 2 |
+
+**Sum: 10**
+
 ## Bord 5 - vennebord
 
 | Personer | Antall |
 |---|---:|
-| Heidi og Stian | 2 |
-| Malin | 1 |
-| Kristina | 1 |
 | Erik og Trine | 2 |
-| Marius og Kine | 2 |
-| Ingrid | 1 |
-| Stine | 1 |
+| Simon | 1 |
+| Andreas og Elise | 2 |
+| Tonje og Vidar | 2 |
+| Cathrine og Martin | 2 |
+| Camilla | 1 |
 
 **Sum: 10**
 
@@ -69,38 +68,38 @@
 
 | Personer | Antall |
 |---|---:|
-| Magnus og Andrea | 2 |
-| Linn og Dan | 2 |
-| Tonje og Vidar | 2 |
-| Andreas og Elise (kommer kanskje) | 2 |
-| Camilla | 1 |
-| Vilma | 1 |
-
-**Sum: 10**
-
-## Bord 7 - vennebord
-
-| Personer | Antall |
-|---|---:|
-| Christine og Max | 2 |
-| Runar og Vilde | 2 |
-| Marte og Levin | 2 |
+| Heidi og Stian | 2 |
+| Malin | 1 |
+| Kristina | 1 |
+| Ingrid | 1 |
 | Brita og Eskil | 2 |
-| Simon | 1 |
+| Runar og Vilde | 2 |
 | Tore | 1 |
 
 **Sum: 10**
 
-## Bord 8 - vennebord, foto og film
+## Bord 7 - vennebord, foto og film
 
 | Personer | Antall |
 |---|---:|
 | Hallstein og Liv Jorunn | 2 |
-| Cathrine og Martin | 2 |
+| Magnus og Andrea | 2 |
+| Marius og Kine | 2 |
 | Lasse og Dea | 2 |
 | Marte (fotograf) | 1 |
 | Fredrik | 1 |
-| Ebba | 1 |
+
+**Sum: 10**
+
+## Bord 8 - vennebord
+
+| Personer | Antall |
+|---|---:|
+| Christine og Max | 2 |
+| Stine | 1 |
+| Linn og Dan | 2 |
+| Vilma og Ebba | 2 |
+| Marte og Levin | 2 |
 
 **Sum: 9**
 
@@ -108,34 +107,36 @@
 
 **80 personer**
 
-*Inkluderer Lars og Julie samt Andreas og Elise, som kanskje kommer.*
+*Inkluderer Lars og Julie, som kanskje kommer. Andreas og Elise er bekreftet.*
+
+## Merknader
+
+| Person | Bord | Kommentar |
+|---|---:|---|
+| Ida (forlover) | 2 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
+| Kristoffer | 2 | Mandler og hasselnøtter. |
+| Elise | 5 | Veganer. |
+| Malin | 6 | Laktose. |
+| Stine | 8 | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
 
 ## Valgbare alternativer
 
 - **Miks venner:** Fordelingen ovenfor, med 80 gjester. Dette er standardvalget.
 - **Før miks:** Vennegruppene vises slik de var før bord 5, 6, 7 og 8 ble blandet.
-- **Uten kanskje:** Kan kombineres med begge valgene. Lars, Julie (partner til Lars), Andreas og Elise tas da ut. Tante- og onkelbordet beholdes uendret.
+- **Uten kanskje:** Kan kombineres med begge valgene. Lars og Julie (partner til Lars) tas da ut; alle andre bord beholdes uendret.
 
 ### Uten kanskje med Miks venner
 
 | Personer | Fra | Til |
 |---|---|---|
-| Lars og Julie (partner til Lars) | Bord 3 | Kommer ikke |
-| Andreas og Elise | Bord 6 | Kommer ikke |
-| Vilma | Bord 6 | Bord 3 |
-| Ebba | Bord 8 | Bord 3 |
-| Simon | Bord 7 | Bord 6 |
-| Ingrid | Bord 5 | Bord 6 |
+| Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
 
-**Bordsummer:** Bord 1: 10, bord 2: 10, bord 3: 10, bord 4: 11, bord 5: 9, bord 6: 9, bord 7: 9, bord 8: 8. Totalt: 76.
+**Bordsummer:** Bord 1: 11, bord 2: 8, bord 3: 10, bord 4: 10, bord 5: 10, bord 6: 10, bord 7: 10, bord 8: 9. Totalt: 78.
 
 ### Uten kanskje med Før miks
 
 | Personer | Fra | Til |
 |---|---|---|
-| Lars og Julie (partner til Lars) | Bord 3 | Kommer ikke |
-| Andreas og Elise | Bord 5 | Kommer ikke |
-| Vilma og Ebba | Bord 6 | Bord 3 |
-| Marius og Kine | Bord 8 | Bord 5 |
+| Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
 
-**Bordsummer:** Bord 1: 10, bord 2: 10, bord 3: 10, bord 4: 11, bord 5: 8, bord 6: 9, bord 7: 10, bord 8: 8. Totalt: 76.
+**Bordsummer:** Bord 1: 11, bord 2: 8, bord 3: 10, bord 4: 10, bord 5: 8, bord 6: 12, bord 7: 10, bord 8: 9. Totalt: 78.
