@@ -44,6 +44,7 @@ Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `
 | Ida (forlover) | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
 | Kristoffer | Mandler og hasselnøtter. |
 | Malin | Laktose. |
+| Magnus | Laktoseintolerant. |
 | Elise | Veganer. |
 | Hallstein | Skalldyr / bløtdyr. |
 | Gerd | Nøtteallergi. |

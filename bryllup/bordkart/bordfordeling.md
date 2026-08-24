@@ -120,6 +120,7 @@
 | Elise | 5 | 5 | Veganer. |
 | Malin | 6 | 3 | Laktose. |
 | Hallstein | 7 | 3 | Skalldyr / bløtdyr. |
+| Magnus | 7 | 5 | Laktoseintolerant. |
 | Stine | 8 | 3 | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
 
 ## Valgbare alternativer
