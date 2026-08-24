@@ -6,6 +6,7 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 
 - Dette er en statisk GitHub Pages-side uten byggesteg.
 - `index.html` er den publiserte stolplanen.
+- `print.html` er utskriftssiden og mottar aktiv bordløsning fra `index.html`.
 - `index.html` har valgene `Miks venner` og `Før miks`, samt avkrysningsboksen `Uten kanskje`. Dette gir fire kombinasjoner; `Miks venner` uten avkrysning er standard.
 - Brukeren kan bytte mellom `Kart` og `Flat liste`; begge visninger skal bruke samme aktive borddata.
 - Behold den publiserte ruten `/bryllup/bordkart/`.
@@ -29,6 +30,9 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 - Behold to bord i bredden på hver detaljside.
 - Romoversikten skal stå på en egen side.
 - Utskriftsknappen skal ikke vises på utskrift.
+- Utskriftssiden skal bruke A4-portrett og la brukeren velge ett bord om gangen. Bare valgt bord skal skrives ut, med fet bordtittel og ett navn per linje.
+- Dancing Script er standardfont på utskriftssiden, men fonten skal kunne velges før utskrift.
+- Utskriftsstørrelsen kan velges som Liten, Medium, Large eller Extra large; Medium er standard, og bordtittelen skal alltid være større og fetere enn navnene.
 - Kontroller desktop, mobil og utskriftsvisning i nettleseren etter visuelle endringer.
 - Kontroller at ingen navn overlapper eller klippes.
 

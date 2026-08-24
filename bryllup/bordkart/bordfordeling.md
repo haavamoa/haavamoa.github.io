@@ -4,7 +4,7 @@
 
 | Personer | Antall |
 |---|---:|
-| Ida (brud) og Håvard | 2 |
+| Brud og Brudgom | 2 |
 | Tine og Idar | 2 |
 | Sissel og Oddvar | 2 |
 | Vilja og Vida | 2 |

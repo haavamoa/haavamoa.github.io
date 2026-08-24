@@ -37,9 +37,9 @@ Følgende fire personer inngår i totalsummen på 80, men er markert som usikre:
 
 Hvis Andreas og Elise ikke kommer, får bord 6 åtte personer og er fortsatt innenfor tillatt størrelse. Hvis alle fire usikre gjester uteblir, blir totalen 76.
 
-### Navn som må skilles fra hverandre
+### Roller og navn som må skilles fra hverandre
 
-- Ida (brud) og Ida (forlover).
+- Brud og Ida (forlover).
 - Julie (forlover) og Julie (partner til Lars).
 - Marte (partner til Levin) og Marte (fotograf).
 - Fredrik er søskenbarnet som filmer.
@@ -90,18 +90,18 @@ Rekkefølgen nedenfor leses med klokken og skal samsvare med `index.html`.
 
 ### Bord 1 - brudepar, foreldre og barn (låst)
 
-1. Idar
-2. Ida (brud)
-3. Håvard
-4. Sissel
-5. Oddvar
-6. Vilja
-7. Leon
-8. Sofie
-9. Vida
-10. Tine
+1. Brud
+2. Brudgom
+3. Sissel
+4. Oddvar
+5. Vilja
+6. Leon
+7. Sofie
+8. Vida
+9. Tine
+10. Idar
 
-Viktige naboskap: Tine-Idar over rundingen, Idar-Ida-Håvard-Sissel, Sissel-Oddvar og Leon-Sofie.
+Viktige naboskap: Tine-Idar-Brud-Brudgom-Sissel over rundingen, Sissel-Oddvar og Leon-Sofie.
 
 ### Bord 2 - toastmastere og søskenbarn (låst)
 
@@ -281,6 +281,10 @@ Resultatet er 10 gjester ved bord 1, 2, 3 og 7, 11 gjester ved bord 4, 9 gjester
 - Deretter skal det være to bord i bredden og ett bordpar per side.
 - Utskriftsknappen skal skjules på utskrift.
 - Mobilvisningen kan bruke horisontal rulling inne i hvert borddiagram for å bevare lesbarheten.
+- `Skriv ut` åpner `print.html` med bordene fra den aktive kombinasjonen.
+- Utskriftssiden bruker A4-portrett. En bordvelger viser og skriver ut ett bord om gangen, med fet `Bord X`-tittel og ett navn per linje.
+- Standardfonten er Dancing Script. Fontvelgeren tilbyr også Cormorant Garamond, Playfair Display, Montserrat og Georgia.
+- Størrelsesvelgeren tilbyr Liten, Medium, Large og Extra large, med Medium som standard. Bordtittelen er alltid større og fetere enn navnene.
 
 ## Kontroll etter endringer
 

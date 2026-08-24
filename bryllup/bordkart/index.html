@@ -1018,16 +1018,16 @@
         locked: true,
         startAngle: -54,
         seats: [
-          { id: "idar", name: "Idar", gender: "male" },
-          { id: "ida-brud", name: "Ida (brud)", gender: "female", role: "key" },
-          { id: "haavard", name: "Håvard", gender: "male", role: "key" },
+          { id: "ida-brud", name: "Brud", gender: "female", role: "key" },
+          { id: "haavard", name: "Brudgom", gender: "male", role: "key" },
           { id: "sissel", name: "Sissel", gender: "female" },
           { id: "oddvar", name: "Oddvar", gender: "male" },
           { id: "vilja", name: "Vilja", gender: "female" },
           { id: "leon", name: "Leon", gender: "male" },
           { id: "sofie", name: "Sofie", gender: "female" },
           { id: "vida", name: "Vida", gender: "female" },
-          { id: "tine", name: "Tine", gender: "female" }
+          { id: "tine", name: "Tine", gender: "female" },
+          { id: "idar", name: "Idar", gender: "male" }
         ]
       },
       {
@@ -1307,6 +1307,7 @@
     const seatingSection = document.querySelector("#seatingSection");
     const flatView = document.querySelector("#flatView");
     const flatList = document.querySelector("#flatList");
+    let activeSolution = null;
 
     function renderRoomPlan(tables) {
       roomPlan.querySelectorAll(".overview-table").forEach((item) => item.remove());
@@ -1431,6 +1432,7 @@
     }
 
     function renderSolution(solution) {
+      activeSolution = solution;
       const people = solution.tables.flatMap((table) => table.seats);
       const optionalCount = people.filter((person) => person.optional).length;
       const optionalText = optionalCount > 0 ? `${optionalCount} kommer kanskje` : "ingen usikre gjester";
@@ -1460,7 +1462,19 @@
       validateGuests(solution.tables);
     }
 
-    document.querySelector("#printButton").addEventListener("click", () => window.print());
+    document.querySelector("#printButton").addEventListener("click", () => {
+      const printData = {
+        title: activeSolution.title,
+        tables: [...activeSolution.tables]
+          .sort((first, second) => first.number - second.number)
+          .map((table) => ({
+            number: table.number,
+            names: table.seats.map((person) => person.name)
+          }))
+      };
+      const params = new URLSearchParams({ data: JSON.stringify(printData) });
+      window.location.assign(`./print.html?${params.toString()}`);
+    });
     let selectedMixMode = "mixed";
     let selectedViewMode = "map";
 

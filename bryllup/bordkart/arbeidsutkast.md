@@ -4,7 +4,7 @@
 
 - 80 middagsgjester totalt, fordelt på 8 runde bord med 8-12 personer ved hvert bord.
 - Alle som står på samme linje i gjestelisten, er foreløpig behandlet som en enhet og sitter sammen.
-- Ida (brud) og Ida (forlover) er merket særskilt. Det samme gjelder de to gjestene som heter Julie.
+- Brud og Ida (forlover) er merket særskilt. Det samme gjelder de to gjestene som heter Julie.
 - Forloverne er tolket som Grete, Julie (søskenbarn), Simen og Ida (venn). De sitter med sine partnere ved bord 3, rett ved siden av barna på bord 1.
 - En vennegruppe oppgitt på én person er tolket som en felles gruppe for alle navnene som er nevnt der.
 - Andreas og Elise er inkludert i totalen, men står som usikre gjester.
@@ -23,7 +23,7 @@
 
 | Gruppe | Personer | Antall |
 |---|---|---:|
-| Brudepar | Ida (brud) og Håvard | 2 |
+| Brudepar | Brud og Brudgom | 2 |
 | I: foreldre | Tine og Idar | 2 |
 | H: foreldre | Sissel og Oddvar | 2 |
 | Barn | Vilja og Vida | 2 |
@@ -159,6 +159,8 @@ Med `Miks venner` og `Uten kanskje` flyttes Vilma og Ebba til forloverbord 3. Si
 Alle par beholdes. Heidi, Malin og Kristina sitter fortsatt sammen, Eskil sitter ved Max, og Fredrik sitter ved Marte (fotograf).
 
 Med `Før miks` og `Uten kanskje` flyttes Vilma og Ebba fra bord 6 til bord 3, og Marius og Kine flyttes samlet fra bord 8 til bord 5. Bordstørrelsene blir 10, 10, 10, 11, 8, 9, 10 og 8. Ida og Håvards vennegrupper forblir adskilt.
+
+`Skriv ut` åpner en egen side med aktiv kombinasjon. En bordvelger viser og skriver ut ett bord om gangen på ett A4-ark, med fet bordtittel og navnene under hverandre. Dancing Script er standard, og fonten kan endres før utskrift. Størrelsen kan velges som Liten, Medium, Large eller Extra large; Medium er standard, og bordtittelen skaleres større enn navnene.
 
 ## Forslag til plassering i lokalet
 
