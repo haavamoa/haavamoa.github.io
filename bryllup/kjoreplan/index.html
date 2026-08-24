@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#465548" />
+  <title>Kjøreplan | Ida &amp; Håvard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Lato:wght@300;400;700&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --paper: #f7f5ef;
+      --surface: #ffffff;
+      --ink: #252a27;
+      --muted: #666d68;
+      --forest: #465548;
+      --forest-dark: #303b33;
+      --sage: #dfe5dc;
+      --terracotta: #b75d46;
+      --gold: #bc955c;
+      --line: #d8ddd6;
+      --warning-bg: #fff3d8;
+      --warning-ink: #79591b;
+      --fixed-bg: #e4eee6;
+      --fixed-ink: #315c3b;
+      --radius: 8px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(rgba(70, 85, 72, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 100% 36px;
+      color: var(--ink);
+      font-family: 'Lato', sans-serif;
+      line-height: 1.55;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .topbar {
+      background: var(--forest-dark);
+      color: #fff;
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 52px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .document-label {
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .print-button {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 6px;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .print-button:hover,
+    .print-button:focus-visible {
+      background: #fff;
+      color: var(--forest-dark);
+    }
+
+    .masthead {
+      position: relative;
+      min-height: 270px;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background: var(--forest);
+      color: #fff;
+    }
+
+    .masthead img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 57%;
+    }
+
+    .masthead::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(27, 37, 30, 0.93) 0%, rgba(27, 37, 30, 0.72) 52%, rgba(27, 37, 30, 0.16) 100%);
+    }
+
+    .masthead-content {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 44px 0 40px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #e7d4b5;
+      font-size: 0.77rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2.7rem, 7vw, 4.7rem);
+      font-weight: 600;
+      line-height: 0.98;
+    }
+
+    .masthead-summary {
+      max-width: 650px;
+      margin: 14px 0 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 1rem;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .day-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .day-nav a {
+      border: 1px solid var(--forest);
+      border-radius: 6px;
+      color: var(--forest-dark);
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 8px 13px;
+      text-decoration: none;
+    }
+
+    .day-nav a:hover,
+    .day-nav a:focus-visible {
+      background: var(--forest);
+      color: #fff;
+    }
+
+    .document-meta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+      padding: 22px 0 8px;
+    }
+
+    .document-meta p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .audience {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .audience span {
+      border-radius: 999px;
+      background: var(--sage);
+      color: var(--forest-dark);
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .updated {
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .day-section {
+      scroll-margin-top: 20px;
+      padding-top: 44px;
+    }
+
+    .day-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .day-heading h2 {
+      margin: 0;
+      color: var(--forest-dark);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1;
+    }
+
+    .day-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .day-number {
+      color: var(--terracotta);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .schedule-wrap {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 6px 20px rgba(48, 59, 51, 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th,
+    td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      background: var(--forest);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover {
+      background: #fafbf8;
+    }
+
+    .time-column {
+      width: 15%;
+    }
+
+    .activity-column {
+      width: 25%;
+    }
+
+    .owner-column {
+      width: 20%;
+    }
+
+    .time {
+      color: var(--forest-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .activity {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 7px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status-fixed {
+      background: var(--fixed-bg);
+      color: var(--fixed-ink);
+    }
+
+    .status-open {
+      background: var(--warning-bg);
+      color: var(--warning-ink);
+    }
+
+    .status-estimate {
+      background: #f5e5df;
+      color: #854634;
+    }
+
+    .ceremony-link {
+      display: block;
+      width: fit-content;
+      margin-top: 8px;
+      color: var(--terracotta);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .ceremony-link:hover,
+    .ceremony-link:focus-visible {
+      color: var(--forest-dark);
+      text-decoration-thickness: 2px;
+    }
+
+    .ceremony-plan {
+      margin-top: 28px;
+    }
+
+    .ceremony-plan h3 {
+      scroll-margin-top: 20px;
+      margin: 0 0 6px;
+      color: var(--forest-dark);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .ceremony-plan > p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .ceremony-plan .activity-column {
+      width: 34%;
+    }
+
+    .duration-column {
+      width: 12%;
+    }
+
+    .contact-section {
+      margin-top: 58px;
+      padding-top: 30px;
+      border-top: 4px solid var(--gold);
+    }
+
+    .contact-section h2 {
+      margin: 0;
+      color: var(--forest-dark);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1;
+    }
+
+    .contact-section > p {
+      margin: 8px 0 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .contact-card {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--forest);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .contact-card h3 {
+      margin: 0;
+      color: var(--ink);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .contact-role {
+      margin: 2px 0 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .contact-card a {
+      color: var(--terracotta);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-underline-offset: 3px;
+    }
+
+    .contact-card a:hover,
+    .contact-card a:focus-visible {
+      color: var(--forest-dark);
+      text-decoration-thickness: 2px;
+    }
+
+    footer {
+      background: var(--forest-dark);
+      color: rgba(255, 255, 255, 0.72);
+      padding: 22px 20px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner,
+      .masthead-content,
+      .page-shell {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .masthead {
+        min-height: 235px;
+      }
+
+      .masthead::after {
+        background: linear-gradient(90deg, rgba(27, 37, 30, 0.94), rgba(27, 37, 30, 0.5));
+      }
+
+      .document-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .updated {
+        text-align: left;
+      }
+
+      .day-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .schedule-wrap {
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      table,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      tbody tr {
+        margin-bottom: 10px;
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--forest);
+        border-radius: var(--radius);
+        background: var(--surface);
+        box-shadow: 0 4px 14px rgba(48, 59, 51, 0.05);
+        overflow: hidden;
+      }
+
+      tbody tr:last-child th,
+      tbody tr:last-child td,
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+      }
+
+      tbody tr > :last-child {
+        border-bottom: 0;
+      }
+
+      th,
+      td {
+        position: relative;
+        padding: 10px 12px 10px 108px;
+        min-height: 43px;
+      }
+
+      th::before,
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 12px;
+        top: 11px;
+        width: 86px;
+        color: var(--terracotta);
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .time {
+        white-space: normal;
+      }
+
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 9pt;
+      }
+
+      .topbar,
+      .day-nav,
+      .masthead img,
+      footer {
+        display: none;
+      }
+
+      .masthead {
+        min-height: 0;
+        background: #fff;
+        color: #000;
+      }
+
+      .masthead::after {
+        display: none;
+      }
+
+      .masthead-content,
+      .page-shell {
+        width: 100%;
+      }
+
+      .masthead-content {
+        padding: 0 0 6mm;
+      }
+
+      .eyebrow,
+      .masthead-summary,
+      .document-meta p,
+      .day-heading p,
+      td {
+        color: #333;
+      }
+
+      h1 {
+        font-size: 28pt;
+      }
+
+      .page-shell {
+        padding: 0;
+      }
+
+      .document-meta {
+        padding: 0 0 4mm;
+      }
+
+      .audience span,
+      .status {
+        border: 1px solid #aaa;
+        background: transparent;
+        color: #222;
+      }
+
+      .day-section {
+        padding-top: 6mm;
+        break-before: page;
+      }
+
+      .day-heading h2 {
+        font-size: 22pt;
+      }
+
+      .schedule-wrap {
+        box-shadow: none;
+      }
+
+      thead th {
+        background: #e6e6e6;
+        color: #000;
+      }
+
+      th,
+      td {
+        padding: 7px 8px;
+      }
+
+      tr {
+        break-inside: avoid;
+      }
+
+      .ceremony-plan {
+        break-before: page;
+      }
+
+      .contact-section {
+        break-before: page;
+      }
+
+      .contact-card {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <p class="document-label">Internt arbeidsdokument</p>
+      <button class="print-button" type="button" onclick="window.print()">Skriv ut</button>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <img
+      src="https://github.com/user-attachments/assets/602e7ee5-5c57-437e-9bfb-ed2efac5fe86"
+      alt="Jegtvolden Fjordhotell sett fra luften"
+    />
+    <div class="masthead-content">
+      <p class="eyebrow">Jegtvolden · 4.–6. september 2026</p>
+      <h1>Kjøreplan for bryllupshelgen</h1>
+      <p class="masthead-summary">Felles tidslinje for Ida &amp; Håvard, vigsler, forlovere, toastmastere og Jegtvolden.</p>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <nav class="day-nav" aria-label="Hopp til dag">
+      <a href="#fredag">Fredag 4. september</a>
+      <a href="#lordag">Lørdag 5. september</a>
+      <a href="#sondag">Søndag 6. september</a>
+    </nav>
+
+    <section class="document-meta" aria-label="Dokumentinformasjon">
+      <div>
+        <p>Roller som bruker kjøreplanen</p>
+        <div class="audience" aria-label="Roller">
+          <span>Brudepar</span>
+          <span>Vigsler</span>
+          <span>Forlovere</span>
+          <span>Toastmastere</span>
+          <span>Jegtvolden</span>
+        </div>
+      </div>
+      <p class="updated">Sist oppdatert <time datetime="2026-08-24">24. august 2026</time></p>
+    </section>
+
+    <section class="day-section" id="fredag">
+      <div class="day-heading">
+        <div>
+          <span class="day-number">Dag 1</span>
+          <h2>Fredag 4. september</h2>
+          <p>Rigging, pynting, teknisk gjennomgang og generalprøve.</p>
+        </div>
+      </div>
+
+      <div class="schedule-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="time-column" scope="col">Tid</th>
+              <th class="activity-column" scope="col">Aktivitet</th>
+              <th class="owner-column" scope="col">Ansvar / deltakere</th>
+              <th scope="col">Detaljer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">Formiddag</th>
+              <td class="activity" data-label="Aktivitet">Overlevering av kaker <span class="status status-open">Tid avklares</span></td>
+              <td data-label="Ansvar">Brudepar / Jegtvolden</td>
+              <td data-label="Detaljer">Bryllupskake og øvrige kaker leveres. Avtal mottaker, adkomst og oppbevaring.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">13:00–17:00</th>
+              <td class="activity" data-label="Aktivitet">Pynting og demo-bord <span class="status status-fixed">Planlagt</span></td>
+              <td data-label="Ansvar">Brudepar, forlovere og Jegtvolden</td>
+              <td data-label="Detaljer">Rigging og pynting starter. Sett først opp ett demo-bord og avklar uttrykket før resten ferdigstilles.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">13:00–17:00</th>
+              <td class="activity" data-label="Aktivitet">Lyd og teknisk utstyr <span class="status status-open">Ansvar avklares</span></td>
+              <td data-label="Ansvar">Jegtvolden / teknisk ansvarlig</td>
+              <td data-label="Detaljer">Monter og test lydanlegg for vielsen og middag/kaffeselskap. Gå gjennom prosjektorer og annet teknisk utstyr.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">17:00</th>
+              <td class="activity" data-label="Aktivitet">Generalprøve for vielsen <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Vigsler, brudepar og forlovere</td>
+              <td data-label="Detaljer">Pause i pyntingen. Gå gjennom innmarsj, plassering, seremoni, eventuelle tekniske signaler og utmarsj.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">Etter prøven</th>
+              <td class="activity" data-label="Aktivitet">Ferdigstilling <span class="status status-open">Ved behov</span></td>
+              <td data-label="Ansvar">Brudepar, forlovere og Jegtvolden</td>
+              <td data-label="Detaljer">Fortsett pynting, rigging og tekniske tester dersom noe gjenstår.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="day-section" id="lordag">
+      <div class="day-heading">
+        <div>
+          <span class="day-number">Dag 2</span>
+          <h2>Lørdag 5. september</h2>
+          <p>Vielse, fotografering, middag, kaffe og fest.</p>
+        </div>
+      </div>
+
+      <div class="schedule-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="time-column" scope="col">Tid</th>
+              <th class="activity-column" scope="col">Aktivitet</th>
+              <th class="owner-column" scope="col">Ansvar / deltakere</th>
+              <th scope="col">Detaljer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">08:00–12:00</th>
+              <td class="activity" data-label="Aktivitet">Påkledning og forberedelser</td>
+              <td data-label="Ansvar">Brudepar og respektive forlovere</td>
+              <td data-label="Detaljer">Brudeparet kler på seg, steller seg og er sammen med hver sin forlover frem mot vielsen.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">09:00</th>
+              <td class="activity" data-label="Aktivitet">Barnas hår og forberedelser</td>
+              <td data-label="Ansvar">Besteforeldre</td>
+              <td data-label="Detaljer">Brudeparets barn tas med til Inderøy av besteforeldrene for å stelle håret før vielsen.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">Før 12:00</th>
+              <td class="activity" data-label="Aktivitet">Siste klargjøring</td>
+              <td data-label="Ansvar">Jegtvolden</td>
+              <td data-label="Detaljer">Fullfør siste pynting og kontroller at seremoniområdet, skilting og teknikk er klart før gjestene ankommer.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">Før 12:00</th>
+              <td class="activity" data-label="Aktivitet">QR-koder for gjestebilder <span class="status status-fixed">Kun lørdag</span></td>
+              <td data-label="Ansvar">Jegtvolden</td>
+              <td data-label="Detaljer">Legg QR-koder på benkene ved vielsen og heng dem opp i selskapslokalet. Kodene skal ikke legges ut eller henges opp fredag, siden bildeløsningen er åpen for alle som har tilgang til dem.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">12:00–13:00</th>
+              <td class="activity" data-label="Aktivitet">
+                Vielse <span class="status status-fixed">Fast tid</span>
+                <a class="ceremony-link" href="#seremoniplan-tittel">Se kjøreplan for vielsen ↓</a>
+              </td>
+              <td data-label="Ansvar">Vigsler, brudepar, forlovere og Jegtvolden</td>
+              <td data-label="Detaljer"><strong>A:</strong> ute i hagen. <strong>B:</strong> i telt ved dårlig vær, nærmere lysthuset der det er flatere. <strong>C:</strong> inne på Jegtvolden.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">13:00</th>
+              <td class="activity" data-label="Aktivitet">Fotografering og mingling <span class="status status-fixed">Planlagt</span></td>
+              <td data-label="Ansvar">Brudepar, forlovere og toastmastere</td>
+              <td data-label="Detaljer">Gjestene mingler og det tas bilder på Jegtvolden. Brudeparet drar videre til en annen fotolokasjon.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">13:30</th>
+              <td class="activity" data-label="Aktivitet">Snitter, frukt og sosialt <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden, toastmastere og forlovere</td>
+              <td data-label="Detaljer">Servering mens gjestene venter på brudeparet. Det kan legges inn leker eller andre sosiale aktiviteter.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">15:45</th>
+              <td class="activity" data-label="Aktivitet">Gjestene går til bords <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Toastmastere</td>
+              <td data-label="Detaljer">Toastmasterne samler gjestene og sørger for at alle finner plassene sine før servering.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">16:00–18:00</th>
+              <td class="activity" data-label="Aktivitet">Middag og taler <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden og toastmastere</td>
+              <td data-label="Detaljer">Middag serveres. Toastmasterne koordinerer taler og øvrige innslag underveis.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">18:00–19:00</th>
+              <td class="activity" data-label="Aktivitet">Romskifte og omrigg <span class="status status-fixed">Planlagt</span></td>
+              <td data-label="Ansvar">Jegtvolden / avtalte hjelpere</td>
+              <td data-label="Detaljer">Middagen avsluttes og gjestene bytter rom. Lokalet gjøres om og klargjøres til kaffeselskap.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">19:00</th>
+              <td class="activity" data-label="Aktivitet">Kaffeselskap <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden og toastmastere</td>
+              <td data-label="Detaljer">Kaffegjestene ankommer. Kakebord med kaffe og avec åpnes i buffetområdet.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">Ca. 20:30</th>
+              <td class="activity" data-label="Aktivitet">Brudevals <span class="status status-estimate">Omtrentlig</span></td>
+              <td data-label="Ansvar">Brudepar og toastmastere</td>
+              <td data-label="Detaljer">Toastmasterne samler gjestene og gir signal til brudeparet og teknisk ansvarlig.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">Ca. 20:45–21:30</th>
+              <td class="activity" data-label="Aktivitet">Inger Arne Aae · sett 1 <span class="status status-estimate">Foreløpig</span></td>
+              <td data-label="Ansvar">Artist / Jegtvolden</td>
+              <td data-label="Detaljer">Første spilleøkt på 45 minutter. Starttid tilpasses avslutningen av brudevalsen.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">21:30–21:45</th>
+              <td class="activity" data-label="Aktivitet">Musikkpause</td>
+              <td data-label="Ansvar">Teknisk ansvarlig</td>
+              <td data-label="Detaljer">15 minutters pause mellom spilleøktene.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">21:45–22:30</th>
+              <td class="activity" data-label="Aktivitet">Inger Arne Aae · sett 2 <span class="status status-estimate">Foreløpig</span></td>
+              <td data-label="Ansvar">Artist / Jegtvolden</td>
+              <td data-label="Detaljer">Andre spilleøkt på 45 minutter.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">22:30–22:45</th>
+              <td class="activity" data-label="Aktivitet">Musikkpause</td>
+              <td data-label="Ansvar">Teknisk ansvarlig</td>
+              <td data-label="Detaljer">15 minutters pause mellom spilleøktene.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">22:45–23:30</th>
+              <td class="activity" data-label="Aktivitet">Inger Arne Aae · sett 3 <span class="status status-estimate">Foreløpig</span></td>
+              <td data-label="Ansvar">Artist / Jegtvolden</td>
+              <td data-label="Detaljer">Tredje og siste spilleøkt på 45 minutter.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">00:00</th>
+              <td class="activity" data-label="Aktivitet">Nattmat <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden</td>
+              <td data-label="Detaljer">Nattmat serveres.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">01:30</th>
+              <td class="activity" data-label="Aktivitet">Baren stenger <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden</td>
+              <td data-label="Detaljer">Siste servering og tydelig beskjed til gjestene.</td>
+            </tr>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">02:00</th>
+              <td class="activity" data-label="Aktivitet">Arrangementet avsluttes <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden og toastmastere</td>
+              <td data-label="Detaljer">Avslutning og praktisk informasjon til gjestene.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section class="ceremony-plan" aria-labelledby="seremoniplan-tittel">
+        <h3 id="seremoniplan-tittel">Plan for vielsen</h3>
+        <p>Seremonien starter kl. 12:00 og ledes av Elin Børve fra Human-Etisk Forbund.</p>
+
+        <div class="schedule-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="time-column" scope="col">Rekkefølge</th>
+                <th class="activity-column" scope="col">Innslag</th>
+                <th scope="col">Utøver / detaljer</th>
+                <th class="duration-column" scope="col">Varighet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="time" scope="row" data-label="Rekkefølge">1</th>
+                <td class="activity" data-label="Innslag">Innmarsj: «Canon in D»</td>
+                <td data-label="Utøver / detaljer">Marius Sunde · fele og synth</td>
+                <td data-label="Varighet">–</td>
+              </tr>
+              <tr>
+                <th class="time" scope="row" data-label="Rekkefølge">2</th>
+                <td class="activity" data-label="Innslag">Sang: «Uansett»</td>
+                <td data-label="Utøver / detaljer">Lisa Frogadottir Haugen</td>
+                <td data-label="Varighet">3 min.</td>
+              </tr>
+              <tr>
+                <th class="time" scope="row" data-label="Rekkefølge">3</th>
+                <td class="activity" data-label="Innslag">Vigselstale</td>
+                <td data-label="Utøver / detaljer">Seremonileder Elin Børve, Human-Etisk Forbund</td>
+                <td data-label="Varighet">–</td>
+              </tr>
+              <tr>
+                <th class="time" scope="row" data-label="Rekkefølge">4</th>
+                <td class="activity" data-label="Innslag">Sang: «Cornerpiece»</td>
+                <td data-label="Utøver / detaljer">Lisa Frogadottir Haugen</td>
+                <td data-label="Varighet">3 min.</td>
+              </tr>
+              <tr>
+                <th class="time" scope="row" data-label="Rekkefølge">5</th>
+                <td class="activity" data-label="Innslag">Vigselsrituale</td>
+                <td data-label="Utøver / detaljer">Opplesning av vigselsformular. Ida avgir løfte først. Eldste datter Sofie kommer med ringene. Brudeparet erklæres som rette ektefolk, etterfulgt av kyss og applaus.</td>
+                <td data-label="Varighet">–</td>
+              </tr>
+              <tr>
+                <th class="time" scope="row" data-label="Rekkefølge">6</th>
+                <td class="activity" data-label="Innslag">Utmarsj: «Viva la Vida»</td>
+                <td data-label="Utøver / detaljer">Marius Sunde · fele og synth. Retning og sted for gratulasjoner tilpasses valgt seremoniområde og været.</td>
+                <td data-label="Varighet">–</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="day-section" id="sondag">
+      <div class="day-heading">
+        <div>
+          <span class="day-number">Dag 3</span>
+          <h2>Søndag 6. september</h2>
+          <p>Felles avslutning for overnattende gjester.</p>
+        </div>
+      </div>
+
+      <div class="schedule-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="time-column" scope="col">Tid</th>
+              <th class="activity-column" scope="col">Aktivitet</th>
+              <th class="owner-column" scope="col">Ansvar / deltakere</th>
+              <th scope="col">Detaljer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="time" scope="row" data-label="Tid">10:00</th>
+              <td class="activity" data-label="Aktivitet">Felles frokost <span class="status status-fixed">Fast tid</span></td>
+              <td data-label="Ansvar">Jegtvolden</td>
+              <td data-label="Detaljer">Frokost for overnattende gjester.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="contact-section" aria-labelledby="kontakt-tittel">
+      <h2 id="kontakt-tittel">Kontaktpersoner</h2>
+      <p>Toastmastere og forlovere for bryllupsdagen.</p>
+
+      <div class="contact-grid">
+        <article class="contact-card">
+          <h3>Randi Eggen</h3>
+          <p class="contact-role">Toastmaster</p>
+          <a href="tel:+4795276375">+47 952 76 375</a>
+        </article>
+        <article class="contact-card">
+          <h3>Linus Eggen Vinge</h3>
+          <p class="contact-role">Toastmaster</p>
+          <a href="tel:+4794888725">+47 948 88 725</a>
+        </article>
+        <article class="contact-card">
+          <h3>Ida Aunan Ulvik</h3>
+          <p class="contact-role">Forlover for bruden</p>
+          <a href="tel:+4793856427">+47 938 56 427</a>
+        </article>
+        <article class="contact-card">
+          <h3>Julie Ringstad</h3>
+          <p class="contact-role">Forlover for bruden</p>
+          <a href="tel:+4798097334">+47 980 97 334</a>
+        </article>
+        <article class="contact-card">
+          <h3>Simen Løveng</h3>
+          <p class="contact-role">Forlover for brudgommen</p>
+          <a href="tel:+4792429932">+47 924 29 932</a>
+        </article>
+        <article class="contact-card">
+          <h3>Grete Moås</h3>
+          <p class="contact-role">Forlover for brudgommen</p>
+          <a href="tel:+4797984303">+47 979 84 303</a>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <strong>Ida &amp; Håvard</strong> · Jegtvolden Fjordhotell · Jektvollvegen 89, 7670 Inderøy
+  </footer>
+</body>
+</html>
