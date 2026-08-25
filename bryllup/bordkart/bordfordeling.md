@@ -73,10 +73,9 @@
 | Kristina | 1 |
 | Ingrid | 1 |
 | Brita og Eskil | 2 |
-| Runar og Vilde | 2 |
-| Tore | 1 |
+| Vilma og Ebba | 2 |
 
-**Sum: 10**
+**Sum: 9**
 
 ## Bord 7 - vennebord, foto og film
 
@@ -98,10 +97,11 @@
 | Christine og Max | 2 |
 | Stine | 1 |
 | Linn og Dan | 2 |
-| Vilma og Ebba | 2 |
 | Marte og Levin | 2 |
+| Runar og Vilde | 2 |
+| Tore | 1 |
 
-**Sum: 9**
+**Sum: 10**
 
 ## Totalt
 
@@ -118,9 +118,10 @@
 | Ida (forlover) | 2 | 6 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
 | Julie (partner til Lars) | 2 | 10 | Gravid. Ikke kamskjell til forrett, og godt stekt kjøtt. |
 | Elise | 5 | 5 | Veganer. |
-| Malin | 6 | 3 | Laktose. |
+| Malin | 6 | 3 | Laktoseintoleranse. |
+| Kristina | 6 | 4 | Godt stekt kjøtt. |
 | Hallstein | 7 | 3 | Skalldyr / bløtdyr. |
-| Magnus | 7 | 5 | Laktoseintolerant. |
+| Magnus | 7 | 5 | Laktoseintoleranse. |
 | Stine | 8 | 3 | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
 
 ## Valgbare alternativer
@@ -135,7 +136,7 @@
 |---|---|---|
 | Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
 
-**Bordsummer:** Bord 1: 11, bord 2: 8, bord 3: 10, bord 4: 10, bord 5: 10, bord 6: 10, bord 7: 10, bord 8: 9. Totalt: 78.
+**Bordsummer:** Bord 1: 11, bord 2: 8, bord 3: 10, bord 4: 10, bord 5: 10, bord 6: 9, bord 7: 10, bord 8: 10. Totalt: 78.
 
 ### Uten kanskje med Før miks
 

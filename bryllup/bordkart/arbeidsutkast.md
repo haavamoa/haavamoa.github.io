@@ -106,12 +106,11 @@ Simon har ingen dokumentert kjent ved bordet etter at Runar og Vilde ble flyttet
 | I: venn | Kristina | 1 |
 | I: venn | Ingrid | 1 |
 | I: venner | Brita og Eskil | 2 |
-| H: venner | Runar og Vilde | 2 |
-| H: venn | Tore | 1 |
+| I: søskenbarn | Vilma og Ebba | 2 |
 
-**Sum: 10**
+**Sum: 9**
 
-Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil sitter sammen. Runar/Vilde sitter med Tore.
+Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og Ebba sitter sammen.
 
 ## Bord 7 - blandet vennebord, foto og film
 
@@ -135,12 +134,13 @@ Fredrik og Marte skal sitte ved siden av hverandre. Hallstein/Liv Jorunn, Magnus
 | I: venner | Christine og Max | 2 |
 | I: venn | Stine | 1 |
 | I: venner | Linn og Dan | 2 |
-| I: søskenbarn | Vilma og Ebba | 2 |
 | I: venner | Marte og Levin | 2 |
+| H: venner | Runar og Vilde | 2 |
+| H: venn | Tore | 1 |
 
-**Sum: 9**
+**Sum: 10**
 
-Stine sitter med Christine. Linn og Dan, Vilma og Ebba samt Marte og Levin sitter sammen.
+Stine sitter med Christine. Linn og Dan, Marte og Levin samt Runar og Vilde sitter sammen. Tore sitter med Runar og Vilde.
 
 ## Alternative løsninger
 

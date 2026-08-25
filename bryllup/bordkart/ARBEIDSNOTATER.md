@@ -43,8 +43,9 @@ Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `
 | Stine | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
 | Ida (forlover) | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
 | Kristoffer | Mandler og hasselnøtter. |
-| Malin | Laktose. |
-| Magnus | Laktoseintolerant. |
+| Malin | Laktoseintoleranse. |
+| Magnus | Laktoseintoleranse. |
+| Kristina | Godt stekt kjøtt. |
 | Elise | Veganer. |
 | Hallstein | Skalldyr / bløtdyr. |
 | Gerd | Nøtteallergi. |
@@ -191,11 +192,10 @@ Tonje og Vidar, Cathrine og Martin samt Camilla representerer Idas vennekrets. S
 5. Ingrid
 6. Brita
 7. Eskil
-8. Runar
-9. Vilde
-10. Tore
+8. Vilma
+9. Ebba
 
-Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil sitter sammen. Runar og Vilde sitter sammen med Tore.
+Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og Ebba sitter sammen.
 
 ### Bord 7 - vennebord, foto og film
 
@@ -219,12 +219,13 @@ Viktige forbindelser: Fredrik-Marte (fotograf) og den dokumenterte vennekretsen 
 3. Stine
 4. Linn
 5. Dan
-6. Vilma
-7. Ebba
-8. Levin
-9. Marte, partner til Levin
+6. Levin
+7. Marte, partner til Levin
+8. Runar
+9. Vilde
+10. Tore
 
-Stine sitter med Christine. Linn og Dan, Vilma og Ebba samt Marte og Levin sitter sammen.
+Stine sitter med Christine. Linn og Dan, Marte og Levin samt Runar og Vilde sitter sammen. Tore sitter med Runar og Vilde.
 
 ## Valgbare løsninger på nettsiden
 
@@ -241,7 +242,7 @@ Med **Miks venner + Uten kanskje** gjøres følgende endringer:
 |---|---|---|
 | Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
 
-Resultatet er 11 gjester ved bord 1, 8 ved bord 2, 10 ved bord 3, 4, 5, 6 og 7 og 9 ved bord 8. Alle par og de spesielle nabokravene består.
+Resultatet er 11 gjester ved bord 1, 8 ved bord 2, 10 ved bord 3, 4, 5, 7 og 8 og 9 ved bord 6. Alle par og de spesielle nabokravene består.
 
 Med **Før miks + Uten kanskje** gjøres følgende endringer:
 
@@ -282,7 +283,7 @@ Resultatet er 11 gjester ved bord 1, 8 ved bord 2 og 5, 10 ved bord 3, 4 og 7, 1
 - Stine skal sitte med Christine.
 - Tonje sitter ved bord 5, mens Linn sitter ved bord 8; begge har partneren sin ved bordet.
 - Runar og Vilde kjenner Simon, Erik og Trine, Andreas og Elise samt Tore.
-- Simon og Erik/Trine kjenner Runar og Vilde, men sitter nå ved bord 5 mens Runar og Vilde sitter ved bord 6.
+- Simon og Erik/Trine kjenner Runar og Vilde, men sitter nå ved bord 5 mens Runar og Vilde sitter ved bord 8.
 - Cathrine og Martin samt Camilla kjenner Heidi og Stian, men sitter nå ved bord 5 mens Heidi og Stian sitter ved bord 6.
 - Marte og Levin sitter sammen ved bord 8, mens Brita og Eskil sitter sammen ved bord 6.
 - Hallstein og Liv Jorunn er venner av både Ida og Håvard.
