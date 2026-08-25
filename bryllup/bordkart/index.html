@@ -1649,13 +1649,16 @@
     }
 
     document.querySelector("#printButton").addEventListener("click", () => {
+      const getPrintName = (name) => name
+        .replace(/\s*\([^)]*\)\??$/, "")
+        .replace(/\?$/, "");
       const printData = {
         title: activeSolution.title,
         tables: [...activeSolution.tables]
           .sort((first, second) => first.number - second.number)
           .map((table) => ({
             number: table.number,
-            names: table.seats.map((person) => person.name)
+            names: table.seats.map((person) => getPrintName(person.name))
           }))
       };
       const params = new URLSearchParams({ data: JSON.stringify(printData) });
