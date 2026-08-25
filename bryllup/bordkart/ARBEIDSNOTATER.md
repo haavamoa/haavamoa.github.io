@@ -57,7 +57,7 @@ Merknadene skal vises ved personens bord og i allergioversikten, men ikke på ut
 
 - Brud og Ida (forlover).
 - Julie (forlover) og Julie (partner til Lars).
-- Marte (partner til Levin) og Marte (fotograf).
+- Marte (partner til Levin) og Marte A. (fotograf).
 - Fredrik er søskenbarnet som filmer.
 - Cathrine er riktig skrivemåte; eldre notater brukte også `Catrine`.
 - Monica er riktig skrivemåte; et eldre notat brukte `Monic`.
@@ -79,7 +79,7 @@ Reglene skal etterstrebes i denne prioriteringen:
 11. Kvinne og mann skal sitte annenhver så langt gjestesammensetningen gjør det mulig.
 12. Forlovere og nær familie skal sitte fysisk nær brudeparet.
 13. Randi og Linus er toastmastere ved bord 3 og skal sitte ved siden av hverandre. Den valgte kjeden er Rune - Randi - Linus.
-14. Fredrik og Marte (fotograf) skal sitte ved siden av hverandre ved bord 7 og ha enkel vei til og fra bordet.
+14. Fredrik og Marte A. (fotograf) skal sitte ved siden av hverandre ved bord 7 og ha enkel vei til og fra bordet.
 15. Brita og Eskil skal sitte sammen ved bord 6.
 
 Kjønn for vekslingsregelen er tolket ut fra navnene. Korriger dataene hvis noen antakelser er feil.
@@ -200,7 +200,7 @@ Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og 
 ### Bord 7 - vennebord, foto og film
 
 1. Fredrik
-2. Marte (fotograf)
+2. Marte A. (fotograf)
 3. Hallstein
 4. Liv Jorunn
 5. Magnus
@@ -210,7 +210,7 @@ Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og 
 9. Lasse
 10. Dea
 
-Viktige forbindelser: Fredrik-Marte (fotograf) og den dokumenterte vennekretsen Hallstein/Liv Jorunn-Magnus/Andrea-Marius/Kine-Lasse/Dea. Bordet står lengst unna scenen.
+Viktige forbindelser: Fredrik-Marte A. (fotograf) og den dokumenterte vennekretsen Hallstein/Liv Jorunn-Magnus/Andrea-Marius/Kine-Lasse/Dea. Bordet står lengst unna scenen.
 
 ### Bord 8 - vennebord
 

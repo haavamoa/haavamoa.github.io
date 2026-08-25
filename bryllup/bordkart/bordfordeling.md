@@ -85,7 +85,7 @@
 | Magnus og Andrea | 2 |
 | Marius og Kine | 2 |
 | Lasse og Dea | 2 |
-| Marte (fotograf) | 1 |
+| Marte A. (fotograf) | 1 |
 | Fredrik | 1 |
 
 **Sum: 10**

@@ -12,10 +12,10 @@
 - «Catrine» og «Monic» i relasjonsnotatene er tolket som Cathrine og Monica.
 - Anea deltar ikke under middagen og har derfor ingen bordplass.
 - Allergier og kosthensyn vises ved personens bord og i en samlet liste med bord- og plassnummer fra aktiv løsning. De vises ikke på utskriftsarket.
-- Marte (fotograf) er med under middagen og sitter ved bord 7. Hun er en annen person enn Marte som sitter sammen med Levin ved bord 8.
+- Marte A. (fotograf) er med under middagen og sitter ved bord 7. Hun er en annen person enn Marte som sitter sammen med Levin ved bord 8.
 - Vilma, Ebba, Linus, Vegar, Monica, Kjetil, Tone og Fredrik er voksne og trenger ikke sitte med foreldrene sine.
 - Randi og Linus er toastmastere og skal sitte ved siden av hverandre.
-- Fredrik og Marte (fotograf) skal sitte ved siden av hverandre med enkel vei ut fra bordet.
+- Fredrik og Marte A. (fotograf) skal sitte ved siden av hverandre med enkel vei ut fra bordet.
 - Malin skal sitte ved samme bord som Kristina og Heidi.
 - Brita og Eskil skal sitte sammen.
 - Alle ved vennebordene bør sitte med minst én person de kjenner; kjente avvik dokumenteres.
@@ -121,7 +121,7 @@ Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og 
 | H: venner | Marius og Kine | 2 |
 | H: venner | Lasse og Dea | 2 |
 | I: søskenbarn / filmer | Fredrik | 1 |
-| Fotograf | Marte (fotograf) | 1 |
+| Fotograf | Marte A. (fotograf) | 1 |
 
 **Sum: 10**
 
@@ -159,7 +159,7 @@ Med `Miks venner` og `Uten kanskje` fjernes Lars og Julie fra bord 2. Alle andre
 | 7 | 10 |
 | 8 | 9 |
 
-Alle par beholdes. Heidi, Malin og Kristina sitter fortsatt sammen, Brita sitter ved Eskil, og Fredrik sitter ved Marte (fotograf).
+Alle par beholdes. Heidi, Malin og Kristina sitter fortsatt sammen, Brita sitter ved Eskil, og Fredrik sitter ved Marte A. (fotograf).
 
 Med `Før miks` og `Uten kanskje` fjernes Lars og Julie fra bord 2. Bordstørrelsene blir 11, 8, 10, 10, 8, 12, 10 og 9. Ida og Håvards vennegrupper forblir adskilt.
 
