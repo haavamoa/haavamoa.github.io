@@ -20,6 +20,7 @@
       --guest-name-size: 25pt;
       --title-spacing: 14mm;
       --name-spacing: 4mm;
+      --sheet-padding-block: 24mm;
     }
 
     html[data-print-size="small"] {
@@ -37,10 +38,11 @@
     }
 
     html[data-print-size="extra-large"] {
-      --table-title-size: 58pt;
-      --guest-name-size: 35pt;
-      --title-spacing: 14mm;
-      --name-spacing: 3.5mm;
+      --table-title-size: 76pt;
+      --guest-name-size: 47pt;
+      --title-spacing: 8mm;
+      --name-spacing: 1mm;
+      --sheet-padding-block: 12mm;
     }
 
     * {
@@ -143,7 +145,7 @@
       display: flex;
       width: min(210mm, calc(100vw - 40px));
       min-height: min(297mm, calc((100vw - 40px) * 1.414));
-      padding: 24mm 20mm;
+      padding: var(--sheet-padding-block) 20mm;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -237,7 +239,7 @@
         width: 210mm;
         height: 297mm;
         min-height: 0;
-        padding: 24mm 20mm;
+        padding: var(--sheet-padding-block) 20mm;
         overflow: hidden;
         box-shadow: none;
         break-after: auto;
