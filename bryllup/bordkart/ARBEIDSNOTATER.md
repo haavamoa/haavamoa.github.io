@@ -303,6 +303,7 @@ Resultatet er 11 gjester ved bord 1, 8 ved bord 2 og 5, 10 ved bord 3, 4 og 7, 1
 - Mobilvisningen kan bruke horisontal rulling inne i hvert borddiagram for å bevare lesbarheten.
 - `Skriv ut` åpner `print.html` med bordene fra den aktive kombinasjonen.
 - Utskriftssiden bruker A4-portrett. En bordvelger viser og skriver ut ett bord om gangen, med fet `Bord X`-tittel og ett navn per linje.
+- `Skriv ut alle` viser alle åtte bord i utskriftsdialogen, ett bord per A4-ark.
 - Standardfonten er Dancing Script. Fontvelgeren tilbyr også Cormorant Garamond, Playfair Display, Montserrat og Georgia.
 - Størrelsesvelgeren tilbyr Liten, Medium, Large og Extra large, med Medium som standard. Bordtittelen er alltid større og fetere enn navnene.
 - På utskrift fjernes spørsmålstegn og parenteserte roller/identifikatorer, slik at bare personens navn står igjen.

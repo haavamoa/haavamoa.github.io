@@ -31,6 +31,7 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 - Romoversikten skal stå på en egen side.
 - Utskriftsknappen skal ikke vises på utskrift.
 - Utskriftssiden skal bruke A4-portrett og la brukeren velge ett bord om gangen. Bare valgt bord skal skrives ut, med fet bordtittel og ett navn per linje.
+- `Skriv ut alle` skal skrive ut alle åtte bord med ett eksplisitt A4-sideskift mellom hvert bord.
 - Dancing Script er standardfont på utskriftssiden, men fonten skal kunne velges før utskrift.
 - Utskriftsstørrelsen kan velges som Liten, Medium, Large eller Extra large; Medium er standard, og bordtittelen skal alltid være større og fetere enn navnene.
 - Utskriftsnavn skal være rene fornavn uten spørsmålstegn eller parenteserte roller/identifikatorer.

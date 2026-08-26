@@ -116,6 +116,11 @@
       cursor: pointer;
     }
 
+    .print-button.secondary {
+      background: var(--paper);
+      color: var(--green);
+    }
+
     .font-control {
       display: inline-flex;
       gap: 8px;
@@ -245,6 +250,16 @@
         break-after: auto;
         page-break-after: auto;
       }
+
+      html[data-print-all="true"] .print-sheet {
+        break-after: page;
+        page-break-after: always;
+      }
+
+      html[data-print-all="true"] .print-sheet:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
     }
   </style>
 </head>
@@ -276,6 +291,7 @@
         </select>
       </label>
       <button class="print-button" type="button" id="printButton">Skriv ut</button>
+      <button class="print-button secondary" type="button" id="printAllButton">Skriv ut alle</button>
     </div>
   </header>
 
@@ -356,6 +372,25 @@
     });
     document.documentElement.dataset.printSize = sizeSelect.value;
     document.querySelector("#printButton").addEventListener("click", () => window.print());
+    document.querySelector("#printAllButton").addEventListener("click", () => {
+      const selectedTable = tableSelect.value;
+      document.documentElement.dataset.printAll = "true";
+      printPages.querySelectorAll(".print-sheet").forEach((sheet) => {
+        sheet.hidden = false;
+      });
+      document.title = "Skriv ut alle bord - Ida og Håvard";
+
+      const restoreSelectedTable = () => {
+        delete document.documentElement.dataset.printAll;
+        printPages.querySelectorAll(".print-sheet").forEach((sheet) => {
+          sheet.hidden = sheet.dataset.table !== selectedTable;
+        });
+        document.title = `Skriv ut Bord ${selectedTable} - Ida og Håvard`;
+      };
+
+      window.addEventListener("afterprint", restoreSelectedTable, { once: true });
+      window.print();
+    });
   </script>
 </body>
 </html>
