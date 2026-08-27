@@ -5,8 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#6d745c" />
   <title>Bryllupsmeny · Ida og Håvard</title>
+  <script>
+    document.documentElement.classList.add(
+      new URLSearchParams(window.location.search).has('render') ? 'render-mode' : 'viewer-mode'
+    );
+  </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('fonts/cormorant-garamond-normal.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 300 600;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('fonts/cormorant-garamond-italic.woff2') format('woff2');
+      font-style: italic;
+      font-weight: 300 400;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/lato-300.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 300;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/lato-400.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: 'Lato';
+      src: url('fonts/lato-700.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
 
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -30,6 +73,47 @@
       line-height: 1.45;
     }
 
+    .print-link {
+      width: max-content;
+      display: block;
+      margin: 12mm auto -5mm;
+      padding: 10px 18px;
+      border: 1px solid var(--olive);
+      border-radius: 4px;
+      background: var(--olive);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .print-link:hover,
+    .print-link:focus-visible { background: #4d5440; }
+
+    .pdf-viewer {
+      display: none;
+      width: min(calc(100vw - 24px), 105mm);
+      aspect-ratio: 105 / 148;
+      margin: 12mm auto;
+      background: #ffffff;
+      box-shadow: 0 5mm 14mm rgba(47, 46, 41, 0.18);
+    }
+
+    .pdf-viewer a,
+    .pdf-preview {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .pdf-preview {
+      object-fit: contain;
+    }
+
+    .viewer-mode .pdf-viewer { display: block; }
+    .viewer-mode .sheet { display: none; }
+    .render-mode .print-link { display: none; }
+
     .sheet {
       width: 105mm;
       min-height: 148mm;
@@ -43,19 +127,41 @@
       min-width: 0;
       min-height: 148mm;
       display: grid;
-      grid-template-rows: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+      grid-template-rows: 1fr auto 1fr auto 3fr auto 1fr auto 1fr;
       align-items: center;
       position: relative;
-      padding: 3mm 6mm;
+      padding: 2mm 5mm;
       text-align: center;
       overflow: hidden;
     }
 
     .frame {
       position: absolute;
-      inset: 3mm;
+      inset: 0.8mm;
       border: 0.3mm solid rgba(189, 149, 95, 0.72);
       pointer-events: none;
+    }
+
+    .floral {
+      position: absolute;
+      z-index: 0;
+      display: block;
+      width: 28mm;
+      height: auto;
+      opacity: 0.54;
+      pointer-events: none;
+    }
+
+    .floral-top {
+      top: 1.5mm;
+      left: 1.5mm;
+    }
+
+    .floral-bottom {
+      right: 1.5mm;
+      bottom: 1.5mm;
+      width: 36mm;
+      transform: rotate(180deg);
     }
 
     .menu::before,
@@ -189,7 +295,7 @@
       margin: 0;
       color: var(--olive);
       font-size: 16pt;
-      font-weight: 400;
+      font-weight: 600;
       line-height: 1.08;
     }
 
@@ -248,7 +354,7 @@
 
     @page {
       size: 105mm 148mm;
-      margin: 6mm;
+      margin: 0;
     }
 
     @media screen and (max-width: 850px) {
@@ -260,10 +366,13 @@
     }
 
     @media print {
+      .print-link,
+      .pdf-viewer { display: none; }
+
       html,
       body {
-        width: 93mm;
-        height: 135mm;
+        width: 105mm;
+        height: 148mm;
         min-height: 0;
         margin: 0;
         padding: 0;
@@ -275,12 +384,12 @@
       }
 
       .sheet {
-        width: 93mm;
-        height: 135mm;
+        width: 95mm;
+        height: 138mm;
         min-height: 0;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 5mm;
+        left: 5mm;
         margin: 0;
         overflow: hidden;
         box-shadow: none;
@@ -298,9 +407,17 @@
   </style>
 </head>
 <body>
+  <a class="print-link" href="bryllupsmeny-a6-utskrift.pdf" target="_blank">Åpne eller skriv ut A6-PDF</a>
+  <main class="pdf-viewer" aria-label="Forhåndsvisning av bryllupsmenyen som PDF">
+    <a href="bryllupsmeny-a6-utskrift.pdf" target="_blank" aria-label="Åpne bryllupsmenyen som PDF">
+      <img class="pdf-preview" src="bryllupsmeny-a6-forhandsvisning.png" alt="Forhåndsvisning av bryllupsmenyen i A6-format" />
+    </a>
+  </main>
   <main class="sheet" aria-label="Bryllupsmeny klar for utskrift på A6">
     <article class="menu">
       <span class="frame" aria-hidden="true"></span>
+      <img class="floral floral-top" src="floral-corner.svg" alt="" aria-hidden="true" />
+      <img class="floral floral-bottom" src="floral-corner.svg" alt="" aria-hidden="true" />
       <header class="masthead">
         <h1>Bryllupsmeny</h1>
         <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
@@ -321,7 +438,7 @@
           <p class="course-label">Hovedrett</p>
           <h2>Indrefilet av storfe</h2>
           <p class="description">Serveres med potet duchesse gratinert med Parmigiano Reggiano, sesongens grønnsaker, radicchio, portvins- og rødvinssaus og sprø jordskokkchips.</p>
-          <p class="allergens"><strong>Allergener:</strong> melk · sulfitt</p>
+          <p class="allergens"><strong>Allergener:</strong> melk · egg · sulfitt</p>
         </section>
       </div>
 
