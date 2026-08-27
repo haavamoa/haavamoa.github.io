@@ -31,29 +31,17 @@
     }
 
     .sheet {
-      width: 210mm;
-      min-height: 297mm;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      width: 148mm;
+      min-height: 210mm;
       position: relative;
       margin: 12mm auto;
       background: var(--paper);
       box-shadow: 0 5mm 14mm rgba(47, 46, 41, 0.18);
     }
 
-    .sheet::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      border-left: 0.2mm dashed rgba(47, 46, 41, 0.28);
-      pointer-events: none;
-    }
-
     .menu {
       min-width: 0;
-      min-height: 297mm;
+      min-height: 210mm;
       display: grid;
       grid-template-rows: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
       align-items: center;
@@ -85,14 +73,14 @@
     }
 
     .menu::before {
-      top: 0;
-      right: 0;
+      top: 2mm;
+      right: 2mm;
       color: rgba(189, 149, 95, 0.09);
     }
 
     .menu::after {
-      bottom: 0;
-      left: 0;
+      bottom: 2mm;
+      left: 2mm;
       color: rgba(98, 106, 82, 0.08);
     }
 
@@ -111,8 +99,7 @@
     .photo-invitation { grid-row: 8; }
 
     h1,
-    h2,
-    .names {
+    h2 {
       font-family: 'Cormorant Garamond', Georgia, serif;
     }
 
@@ -207,7 +194,7 @@
     }
 
     .description {
-      max-width: 77mm;
+      max-width: 108mm;
       margin: 2.2mm auto 0;
       color: var(--muted);
       font-size: 9.5pt;
@@ -259,57 +246,53 @@
       image-rendering: pixelated;
     }
 
-    .names {
-      margin: 2.5mm 0 0;
-      color: var(--olive);
-      font-size: 13pt;
-      font-style: italic;
-      font-weight: 600;
-    }
-
     @page {
-      size: A4 portrait;
-      margin: 0;
+      size: A5 portrait;
+      margin: 8mm;
     }
 
     @media screen and (max-width: 850px) {
       .sheet {
-        width: min(100% - 24px, 105mm);
+        width: min(100% - 24px, 148mm);
         min-height: 0;
-        grid-template-columns: 1fr;
         margin: 12px auto;
       }
-
-      .sheet::after { display: none; }
-      .menu:nth-child(2) { display: none; }
     }
 
     @media print {
       html,
       body {
-        width: 210mm;
-        height: 297mm;
+        width: auto;
+        height: auto;
+        min-height: 0;
+        margin: 0;
         background: var(--paper);
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
       }
 
       .sheet {
-        width: 210mm;
-        grid-template-columns: repeat(2, 1fr);
-        margin: 0;
+        width: 132mm;
+        height: 192mm;
+        min-height: 0;
+        margin: 1mm 0;
+        overflow: hidden;
         box-shadow: none;
+        page-break-inside: avoid;
         break-after: avoid;
         break-inside: avoid;
       }
 
-      .sheet::after { display: block; }
-      .menu:nth-child(2) { display: grid; }
+      .menu {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="sheet" aria-label="To bryllupsmenyer klare for utskrift på ett A4-ark">
+  <main class="sheet" aria-label="Bryllupsmeny klar for utskrift på A5">
     <article class="menu">
       <span class="frame" aria-hidden="true"></span>
       <header class="masthead">
@@ -340,41 +323,6 @@
         <p class="photo-title">Del øyeblikkene med oss</p>
         <p class="photo-copy">Skann koden og last opp bilder fra dagen</p>
         <img class="qr-code" src="qr-bilder.png" alt="QR-kode til opplasting av bryllupsbilder" />
-        <p class="names">Ida &amp; Håvard</p>
-      </footer>
-    </article>
-
-    <article class="menu" aria-hidden="true">
-      <span class="frame" aria-hidden="true"></span>
-      <header class="masthead">
-        <h1>Bryllupsmeny</h1>
-        <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
-        <p class="couple">Ida &amp; Håvard</p>
-        <p class="date">5. september 2026</p>
-        <div class="ornament" aria-hidden="true"><span class="ornament-mark"></span></div>
-      </header>
-
-      <div class="courses">
-        <section class="course">
-          <p class="course-label">Forrett</p>
-          <h2>Kamskjelltartar</h2>
-          <p class="description">Smaksatt med frisk chimichurri, eplecoulis, sprø salat og confiterte cherrytomater.</p>
-          <p class="allergens"><strong>Allergener:</strong> bløtdyr · sulfitt</p>
-        </section>
-
-        <section class="course">
-          <p class="course-label">Hovedrett</p>
-          <h2>Indrefilet av storfe</h2>
-          <p class="description">Serveres med potet duchesse gratinert med Parmigiano Reggiano, sesongens grønnsaker, radicchio, portvins- og rødvinssaus og sprø jordskokkchips.</p>
-          <p class="allergens"><strong>Allergener:</strong> melk · sulfitt</p>
-        </section>
-      </div>
-
-      <footer class="photo-invitation">
-        <p class="photo-title">Del øyeblikkene med oss</p>
-        <p class="photo-copy">Skann koden og last opp bilder fra dagen</p>
-        <img class="qr-code" src="qr-bilder.png" alt="QR-kode til opplasting av bryllupsbilder" />
-        <p class="names">Ida &amp; Håvard</p>
       </footer>
     </article>
   </main>

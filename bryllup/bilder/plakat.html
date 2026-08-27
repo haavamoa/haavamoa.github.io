@@ -6,13 +6,16 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Del dagen med oss | Ida &amp; Håvard</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; }
 
     :root {
       --paper: #ffffff;
-      --ink: #000000;
+      --olive: #626a52;
+      --gold: #bd955f;
+      --ink: #2f2e29;
+      --muted: #66645d;
     }
 
     html { background: var(--paper); }
@@ -65,17 +68,25 @@
     .masthead {
       position: relative;
       align-self: end;
-      padding: 0 22mm 18mm;
+      padding: 0 22mm 12mm;
       text-align: center;
     }
 
     h1 {
       margin: 0;
-      color: var(--ink);
-      font-size: 45pt;
-      font-weight: 400;
-      letter-spacing: 0.04em;
+      color: var(--olive);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 34pt;
+      font-weight: 600;
+      letter-spacing: 0;
       line-height: 1;
+    }
+
+    .photo-copy {
+      margin: 3mm 0 0;
+      color: var(--muted);
+      font-size: 13pt;
+      line-height: 1.4;
     }
 
     .qr-section {
@@ -86,25 +97,18 @@
     }
 
     .qr-frame {
-      width: 100mm;
-      height: 100mm;
+      width: 104mm;
+      height: 104mm;
     }
 
     .qr-code {
       width: 100%;
       height: 100%;
       display: block;
+      padding: 5mm;
+      border: 0.4mm solid rgba(189, 149, 95, 0.72);
+      background: #ffffff;
       image-rendering: pixelated;
-    }
-
-    .camera-icon {
-      width: 0.72em;
-      height: 0.72em;
-      display: inline-block;
-      margin-left: 0.16em;
-      color: var(--ink);
-      stroke-width: 2;
-      vertical-align: 0;
     }
 
     .footer {
@@ -114,16 +118,21 @@
     }
 
     .names {
+      display: inline-block;
       margin: 0;
-      color: var(--ink);
-      font-size: 28pt;
+      padding: 0 5mm 1.5mm;
+      border-bottom: 0.3mm solid rgba(189, 149, 95, 0.72);
+      color: var(--olive);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 34pt;
+      font-style: italic;
       font-weight: 400;
       line-height: 1;
     }
 
     .date {
       margin: 3mm 0 0;
-      color: var(--ink);
+      color: var(--muted);
       font-size: 9pt;
       font-weight: 400;
       letter-spacing: 0.14em;
@@ -145,18 +154,19 @@
         transform-origin: top left;
       }
 
-      .masthead { padding: 0 10.5vw 8.6vw; }
-      h1 { font-size: clamp(1.7rem, 8vw, 45pt); white-space: nowrap; }
+      .masthead { padding: 0 10.5vw 5.7vw; }
+      h1 { font-size: clamp(1.45rem, 6.4vw, 34pt); white-space: nowrap; }
+      .photo-copy { margin-top: 1.4vw; font-size: clamp(0.65rem, 2.7vw, 13pt); }
 
       .qr-section { padding: 0 10.5vw; }
 
       .qr-frame {
-        width: 47.6vw;
-        height: 47.6vw;
+        width: 49.5vw;
+        height: 49.5vw;
       }
 
       .footer { padding: 8.6vw 10.5vw 0; }
-      .names { font-size: clamp(1.45rem, 6.2vw, 28pt); }
+      .names { padding: 0 2.4vw 0.7vw; font-size: clamp(1.65rem, 7vw, 34pt); }
       .date { margin-top: 1.4vw; font-size: clamp(0.48rem, 2.1vw, 9pt); }
 
       .print-button {
@@ -196,10 +206,8 @@
 
   <main class="poster" aria-label="A4-plakat for deling av bryllupsbilder">
     <header class="masthead">
-      <h1>Del dagen med oss<svg class="camera-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M14.5 4h-5L7.7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.7l-1.8-3Z" />
-          <circle cx="12" cy="13" r="3" />
-        </svg></h1>
+      <h1>Del øyeblikkene med oss</h1>
+      <p class="photo-copy">Skann koden og last opp bilder fra dagen</p>
     </header>
 
     <section class="qr-section" aria-label="Skann QR-koden for å dele bilder">
