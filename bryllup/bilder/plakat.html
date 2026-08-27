@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Del dagen med oss | Ida &amp; Håvard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --paper: #ffffff;
+      --ink: #000000;
+    }
+
+    html { background: var(--paper); }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 300;
+    }
+
+    .print-button {
+      position: fixed;
+      z-index: 2;
+      top: 18px;
+      right: 18px;
+      min-height: 42px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--ink);
+      color: #fff;
+      padding: 0 18px;
+      font: 700 0.84rem/1 'Lato', sans-serif;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+    }
+
+    .print-button:hover,
+    .print-button:focus-visible { background: #333333; }
+
+    .print-button:focus-visible {
+      outline: 3px solid rgba(0, 0, 0, 0.25);
+      outline-offset: 3px;
+    }
+
+    .poster {
+      position: relative;
+      width: 210mm;
+      min-height: 297mm;
+      display: grid;
+      grid-template-rows: 1fr auto 1fr;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .masthead {
+      position: relative;
+      align-self: end;
+      padding: 0 22mm 18mm;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 45pt;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .qr-section {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      padding: 0 22mm;
+    }
+
+    .qr-frame {
+      width: 100mm;
+      height: 100mm;
+    }
+
+    .qr-code {
+      width: 100%;
+      height: 100%;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .camera-icon {
+      width: 0.72em;
+      height: 0.72em;
+      display: inline-block;
+      margin-left: 0.16em;
+      color: var(--ink);
+      stroke-width: 2;
+      vertical-align: 0;
+    }
+
+    .footer {
+      position: relative;
+      padding: 18mm 22mm 0;
+      text-align: center;
+    }
+
+    .names {
+      margin: 0;
+      color: var(--ink);
+      font-size: 28pt;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .date {
+      margin: 3mm 0 0;
+      color: var(--ink);
+      font-size: 9pt;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 860px) {
+      body { display: block; }
+
+      .poster {
+        width: 100%;
+        min-height: 141.43vw;
+        box-shadow: none;
+        transform-origin: top left;
+      }
+
+      .masthead { padding: 0 10.5vw 8.6vw; }
+      h1 { font-size: clamp(1.7rem, 8vw, 45pt); white-space: nowrap; }
+
+      .qr-section { padding: 0 10.5vw; }
+
+      .qr-frame {
+        width: 47.6vw;
+        height: 47.6vw;
+      }
+
+      .footer { padding: 8.6vw 10.5vw 0; }
+      .names { font-size: clamp(1.45rem, 6.2vw, 28pt); }
+      .date { margin-top: 1.4vw; font-size: clamp(0.48rem, 2.1vw, 9pt); }
+
+      .print-button {
+        position: sticky;
+        top: 10px;
+        float: right;
+        margin: 10px;
+      }
+    }
+
+    @media print {
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        min-height: 0;
+        background: var(--paper);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .print-button { display: none; }
+
+      .poster {
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        box-shadow: none;
+        break-after: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-button" type="button" onclick="window.print()">Skriv ut A4</button>
+
+  <main class="poster" aria-label="A4-plakat for deling av bryllupsbilder">
+    <header class="masthead">
+      <h1>Del dagen med oss<svg class="camera-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14.5 4h-5L7.7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3.7l-1.8-3Z" />
+          <circle cx="12" cy="13" r="3" />
+        </svg></h1>
+    </header>
+
+    <section class="qr-section" aria-label="Skann QR-koden for å dele bilder">
+      <div class="qr-frame">
+        <img class="qr-code" src="../meny/qr-bilder.png" alt="QR-kode til opplasting av bryllupsbilder" />
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="names">Ida &amp; Håvard</p>
+      <p class="date">5. september</p>
+    </footer>
+  </main>
+</body>
+</html>
