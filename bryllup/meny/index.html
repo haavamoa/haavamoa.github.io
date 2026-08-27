@@ -248,7 +248,7 @@
 
     @page {
       size: 105mm 148mm;
-      margin: 5mm;
+      margin: 6mm;
     }
 
     @media screen and (max-width: 850px) {
@@ -262,19 +262,25 @@
     @media print {
       html,
       body {
-        width: auto;
-        height: auto;
+        width: 93mm;
+        height: 135mm;
         min-height: 0;
         margin: 0;
+        padding: 0;
+        position: relative;
+        overflow: hidden;
         background: var(--paper);
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
       }
 
       .sheet {
-        width: 95mm;
-        height: 138mm;
+        width: 93mm;
+        height: 135mm;
         min-height: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
         margin: 0;
         overflow: hidden;
         box-shadow: none;
