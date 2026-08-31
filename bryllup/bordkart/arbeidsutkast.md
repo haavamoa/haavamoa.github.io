@@ -142,11 +142,9 @@ Fredrik og Marte A. skal sitte ved siden av hverandre. Hallstein/Liv Jorunn, Mag
 
 Stine sitter med Christine. Linn og Dan, Marte og Levin samt Runar og Vilde sitter sammen. Tore sitter med Runar og Vilde.
 
-## Alternative løsninger
+## Uten kanskje
 
-Den publiserte siden kan velge mellom `Miks venner` og `Før miks`. Avkrysningsboksen `Uten kanskje` kan brukes med begge og fjerner Lars og Julie (partner til Lars). Det gir fire kombinasjoner totalt.
-
-Med `Miks venner` og `Uten kanskje` fjernes Lars og Julie fra bord 2, Vilma og Ebba flyttes fra bord 6 til bord 2, og Camilla flyttes fra bord 5 til bord 6. Resultatet er:
+Med `Uten kanskje` fjernes Lars og Julie fra bord 2, Vilma og Ebba flyttes fra bord 6 til bord 2, og Camilla flyttes fra bord 5 til bord 6. Resultatet er:
 
 | Bord | Antall |
 |---|---:|
@@ -157,11 +155,9 @@ Med `Miks venner` og `Uten kanskje` fjernes Lars og Julie fra bord 2, Vilma og E
 | 5 | 9 |
 | 6 | 8 |
 | 7 | 8 |
-| 8 | 9 |
+| 8 | 10 |
 
 Alle par beholdes. Heidi, Malin og Kristina sitter fortsatt sammen, Brita sitter ved Eskil, og Fredrik sitter ved Marte A. (fotograf).
-
-Med `Før miks` og `Uten kanskje` fjernes Lars og Julie fra bord 2, og Vilma og Ebba flyttes fra bord 6 til bord 2. Bordstørrelsene blir 11, 10, 10, 10, 8, 10, 8 og 9. Ida og Håvards vennegrupper forblir adskilt.
 
 `Skriv ut` åpner en egen side med aktiv kombinasjon. En bordvelger viser og skriver ut ett bord om gangen på ett A4-ark, med fet bordtittel og navnene under hverandre. Dancing Script er standard, og fonten kan endres før utskrift. Størrelsen kan velges som Liten, Medium, Large eller Extra large; Medium er standard, og bordtittelen skaleres større enn navnene.
 

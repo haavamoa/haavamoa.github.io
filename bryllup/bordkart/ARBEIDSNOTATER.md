@@ -146,10 +146,10 @@ John kjenner Kjell Idar. Anne Lise sitter mellom dem, slik at begge par fortsatt
 3. Linus
 4. Tone
 5. Jan Åge
-6. Monica
-7. Vegar
-8. Hege
-9. Patrik
+6. Hege
+7. Patrik
+8. Monica
+9. Vegar
 10. Kjetil
 
 Randi og Linus skal være naboer. Rune og Randi, Tone og Jan Åge samt Hege og Patrik er par.
@@ -174,12 +174,12 @@ Viktige naboskap: Tine-Idar-Brud-Brudgom-Sissel over rundingen, Sissel-Oddvar og
 1. Erik
 2. Trine
 3. Simon
-4. Andreas
-5. Elise
-6. Vidar
-7. Tonje
-8. Martin
-9. Cathrine
+4. Elise
+5. Andreas
+6. Tonje
+7. Vidar
+8. Cathrine
+9. Martin
 10. Camilla
 
 Tonje og Vidar, Cathrine og Martin samt Camilla representerer Idas vennekrets. Simon har ingen dokumentert kjent ved bordet etter at Runar og Vilde ble flyttet. Erik og Trine samt Cathrine og Martin har partneren sin, men ingen annen dokumentert kjent ved bordet.
@@ -213,11 +213,11 @@ Viktige forbindelser: Fredrik-Marte A. (fotograf) og den dokumenterte vennekrets
 
 ### Bord 8 - vennebord
 
-1. Max
-2. Christine
+1. Christine
+2. Max
 3. Stine
-4. Linn
-5. Dan
+4. Dan
+5. Linn
 6. Levin
 7. Marte, partner til Levin
 8. Runar
@@ -228,14 +228,7 @@ Stine sitter med Christine. Linn og Dan, Marte og Levin samt Runar og Vilde sitt
 
 ## Valgbare løsninger på nettsiden
 
-Nettsiden har to uavhengige kontroller som gjenbruker samme rom- og bordvisning:
-
-1. **Miks venner / Før miks:** Velger om vennegruppene ved bord 5-8 skal blandes. `Miks venner` er standard.
-2. **Uten kanskje:** Fjerner Lars og Julie (partner til Lars) fra bord 2.
-
-Dette gir fire kombinasjoner: Miks venner, Før miks, Miks venner uten kanskje og Før miks uten kanskje.
-
-Med **Miks venner + Uten kanskje** gjøres følgende endringer:
+Nettsiden viser gjeldende bordplassering. Avkrysningsboksen **Uten kanskje** gjør følgende endringer:
 
 | Personer | Fra | Til |
 |---|---|---|
@@ -244,15 +237,6 @@ Med **Miks venner + Uten kanskje** gjøres følgende endringer:
 | Camilla | Bord 5 | Bord 6 |
 
 Resultatet er 11 gjester ved bord 1, 10 ved bord 2, 3, 4 og 8, 9 ved bord 5 og 8 ved bord 6 og 7. Totalt: 76. Alle par og de spesielle nabokravene består.
-
-Med **Før miks + Uten kanskje** gjøres følgende endringer:
-
-| Personer | Fra | Til |
-|---|---|---|
-| Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
-| Vilma og Ebba | Bord 6 | Bord 2 |
-
-Resultatet er 11 gjester ved bord 1, 10 ved bord 2, 3, 4 og 6, 8 ved bord 5 og 7 og 9 ved bord 8. Totalt: 76. Vennegruppene forblir adskilt, og alle par og spesielle nabokrav består.
 
 ## Familieforbindelser
 

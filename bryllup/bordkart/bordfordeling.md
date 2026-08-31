@@ -118,20 +118,16 @@
 | Kristoffer | 2 | 5 | Mandler og hasselnøtter. |
 | Ida (forlover) | 2 | 6 | All rød fisk, alt av skalldyr/bløtdyr, kiwi, sukkererter, avocado, mandler og hasselnøtter. |
 | Julie (partner til Lars) | 2 | 10 | Gravid. Ikke kamskjell til forrett, og godt stekt kjøtt. |
-| Elise | 5 | 5 | Veganer. |
+| Elise | 5 | 4 | Veganer. |
 | Malin | 6 | 3 | Laktoseintoleranse. |
 | Kristina | 6 | 4 | Godt stekt kjøtt. |
 | Hallstein | 7 | 3 | Skalldyr / bløtdyr. |
 | Magnus | 7 | 5 | Laktoseintoleranse. |
 | Stine | 8 | 3 | Egg og nøtter. Går bra at andre får det servert, men hun må ikke få det i seg. Heller ikke «kan inneholde spor av egg». |
 
-## Valgbare alternativer
+## Uten kanskje
 
-- **Miks venner:** Fordelingen ovenfor, med 78 gjester. Dette er standardvalget.
-- **Før miks:** Vennegruppene vises slik de var før bord 5, 6, 7 og 8 ble blandet.
-- **Uten kanskje:** Kan kombineres med begge valgene. Lars og Julie (partner til Lars) tas da ut; alle andre bord beholdes uendret.
-
-### Uten kanskje med Miks venner
+Når `Uten kanskje` velges, tas Lars og Julie (partner til Lars) ut og bordene balanseres slik:
 
 | Personer | Fra | Til |
 |---|---|---|
@@ -140,12 +136,3 @@
 | Camilla | Bord 5 | Bord 6 |
 
 **Bordsummer:** Bord 1: 11, bord 2: 10, bord 3: 10, bord 4: 10, bord 5: 9, bord 6: 8, bord 7: 8, bord 8: 10. Totalt: 76.
-
-### Uten kanskje med Før miks
-
-| Personer | Fra | Til |
-|---|---|---|
-| Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
-| Vilma og Ebba | Bord 6 | Bord 2 |
-
-**Bordsummer:** Bord 1: 11, bord 2: 10, bord 3: 10, bord 4: 10, bord 5: 8, bord 6: 10, bord 7: 8, bord 8: 9. Totalt: 76.

@@ -1024,10 +1024,6 @@
     </div>
     <div class="masthead__actions">
       <div class="solution-controls">
-        <nav class="solution-switcher" aria-label="Velg vennefordeling">
-          <button class="solution-button" type="button" data-mix="mixed" aria-pressed="true">Miks venner</button>
-          <button class="solution-button" type="button" data-mix="before-mix" aria-pressed="false">Før miks</button>
-        </nav>
         <label class="optional-toggle">
           <input type="checkbox" id="withoutOptional">
           Uten kanskje
@@ -1044,10 +1040,10 @@
   <main>
     <section class="solution-summary" id="solutionSummary" data-has-changes="false" aria-live="polite">
       <p class="eyebrow">Valgt løsning</p>
-      <h2 id="solutionTitle">Miks venner</h2>
+      <h2 id="solutionTitle">Gjeldende bordplassering</h2>
       <p class="solution-description" id="solutionDescription"></p>
       <div class="change-summary" id="changeSummary" hidden>
-        <h3 id="changeSummaryTitle">Endringer fra Miks venner</h3>
+        <h3 id="changeSummaryTitle">Endringer</h3>
         <div class="change-table-wrap">
           <table class="change-table">
             <thead>
@@ -1194,10 +1190,10 @@
           { id: "linus", name: "Linus", gender: "male", role: "key" },
           { id: "tone", name: "Tone", gender: "female" },
           { id: "jan-aage", name: "Jan Åge", gender: "male" },
-          { id: "monica", name: "Monica", gender: "female" },
-          { id: "vegar", name: "Vegar", gender: "male" },
           { id: "hege", name: "Hege", gender: "female" },
           { id: "patrik", name: "Patrik", gender: "male" },
+          { id: "monica", name: "Monica", gender: "female" },
+          { id: "vegar", name: "Vegar", gender: "male" },
           { id: "kjetil", name: "Kjetil", gender: "male" }
         ]
       },
@@ -1226,12 +1222,12 @@
           { id: "erik", name: "Erik", gender: "male" },
           { id: "trine", name: "Trine", gender: "female" },
           { id: "simon", name: "Simon", gender: "male" },
-          { id: "andreas", name: "Andreas", gender: "male" },
           { id: "elise", name: "Elise", gender: "female" },
-          { id: "vidar", name: "Vidar", gender: "male" },
+          { id: "andreas", name: "Andreas", gender: "male" },
           { id: "tonje", name: "Tonje", gender: "female" },
-          { id: "martin", name: "Martin", gender: "male" },
+          { id: "vidar", name: "Vidar", gender: "male" },
           { id: "cathrine", name: "Cathrine", gender: "female" },
+          { id: "martin", name: "Martin", gender: "male" },
           { id: "camilla", name: "Camilla", gender: "female" }
         ]
       },
@@ -1276,11 +1272,11 @@
         locked: false,
         startAngle: 0,
         seats: [
-          { id: "max", name: "Max", gender: "male" },
           { id: "christine", name: "Christine", gender: "female" },
+          { id: "max", name: "Max", gender: "male" },
           { id: "stine", name: "Stine", gender: "female" },
-          { id: "linn", name: "Linn", gender: "female" },
           { id: "dan", name: "Dan", gender: "male" },
+          { id: "linn", name: "Linn", gender: "female" },
           { id: "levin", name: "Levin", gender: "male" },
           { id: "marte-levin", name: "Marte", gender: "female" },
           { id: "runar", name: "Runar", gender: "male" },
@@ -1338,91 +1334,38 @@
       });
     }
 
-    const beforeMixTables = createAlternativeTables({
-      8: {
-        title: "Idas venner",
-        seatIds: ["max", "christine", "stine", "tonje", "vidar", "linn", "dan", "brita", "eskil"]
-      },
-      5: {
-        title: "Håvards venner",
-        seatIds: ["runar", "vilde", "erik", "trine", "simon", "andreas", "elise", "tore"]
-      },
-      6: {
-        title: "Idas venner",
-        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "camilla", "vilma", "ebba"]
-      },
-      7: {
-        title: "Håvards venner · foto og film",
-        seatIds: ["magnus", "andrea", "marius", "kine", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf"]
-      }
-    });
-
     const mixedWithoutOptionalTables = createAlternativeTables({
       2: {
         seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
       },
       5: {
-        seatIds: ["erik", "trine", "simon", "andreas", "elise", "vidar", "tonje", "martin", "cathrine"]
+        seatIds: ["erik", "trine", "simon", "elise", "andreas", "tonje", "vidar", "cathrine", "martin"]
       },
       6: {
         seatIds: ["stian", "heidi", "malin", "kristina", "ingrid", "brita", "eskil", "camilla"]
       }
     });
 
-    const beforeMixWithoutOptionalTables = createAlternativeTables({
-      2: {
-        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
-      },
-      6: {
-        title: "Idas venner",
-        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "camilla"]
-      }
-    }, beforeMixTables);
-
     const solutions = [
       {
-        id: "before-mix",
-        mixMode: "before-mix",
+        id: "current",
         withoutOptional: false,
-        title: "Før miks",
-        description: "Vennegruppene slik de var fordelt før bord 5, 6, 7 og 8 ble blandet. Alle 78 middagsgjester er med.",
-        tables: beforeMixTables,
-        changes: []
-      },
-      {
-        id: "mixed",
-        mixMode: "mixed",
-        withoutOptional: false,
-        title: "Miks venner",
+        title: "Gjeldende bordplassering",
         description: "Ida og Håvards vennekretser er fordelt på fire blandede bord, med par og avtalte naboskap beholdt.",
         tables: mixedTables,
         changes: []
       },
       {
-        id: "mixed-without-optional",
-        mixMode: "mixed",
+        id: "current-without-optional",
         withoutOptional: true,
-        title: "Miks venner · uten kanskje",
+        title: "Gjeldende bordplassering · uten kanskje",
         description: "Lars og Julie er tatt ut. Alle andre bord og relasjoner beholdes uendret.",
         tables: mixedWithoutOptionalTables,
-        changesTitle: "Endringer fra Miks venner",
+        changesTitle: "Endringer",
         changes: [
           { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" },
           { people: "Vilma og Ebba", from: "Bord 6", to: "Bord 2" },
           { people: "Camilla", from: "Bord 5", to: "Bord 6" }
-        ]
-      },
-      {
-        id: "before-mix-without-optional",
-        mixMode: "before-mix",
-        withoutOptional: true,
-        title: "Før miks · uten kanskje",
-        description: "Lars og Julie er tatt ut. Ida og Håvards vennegrupper holdes ellers adskilt.",
-        tables: beforeMixWithoutOptionalTables,
-        changesTitle: "Endringer fra Før miks",
-        changes: [
-          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" },
-          { people: "Vilma og Ebba", from: "Bord 6", to: "Bord 2" }
         ]
       }
     ];
@@ -1437,7 +1380,6 @@
     const changeSummary = document.querySelector("#changeSummary");
     const changeSummaryTitle = document.querySelector("#changeSummaryTitle");
     const changeTableBody = document.querySelector("#changeTableBody");
-    const solutionButtons = document.querySelectorAll("[data-mix]");
     const withoutOptional = document.querySelector("#withoutOptional");
     const viewButtons = document.querySelectorAll("[data-view]");
     const roomSection = document.querySelector("#roomSection");
@@ -1647,9 +1589,6 @@
         changeTableBody.appendChild(row);
       });
 
-      solutionButtons.forEach((button) => {
-        button.setAttribute("aria-pressed", String(button.dataset.mix === solution.mixMode));
-      });
       withoutOptional.checked = solution.withoutOptional;
 
       renderRoomPlan(solution.tables);
@@ -1675,22 +1614,13 @@
       const params = new URLSearchParams({ data: JSON.stringify(printData) });
       window.location.assign(`./print.html?${params.toString()}`);
     });
-    let selectedMixMode = "mixed";
     let selectedViewMode = "map";
 
     function renderSelectedSolution() {
-      const solution = solutions.find((item) => (
-        item.mixMode === selectedMixMode && item.withoutOptional === withoutOptional.checked
-      ));
+      const solution = solutions.find((item) => item.withoutOptional === withoutOptional.checked);
       renderSolution(solution);
     }
 
-    solutionButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        selectedMixMode = button.dataset.mix;
-        renderSelectedSolution();
-      });
-    });
     withoutOptional.addEventListener("change", renderSelectedSolution);
     viewButtons.forEach((button) => {
       button.addEventListener("click", () => {

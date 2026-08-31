@@ -7,7 +7,7 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 - Dette er en statisk GitHub Pages-side uten byggesteg.
 - `index.html` er den publiserte stolplanen.
 - `print.html` er utskriftssiden og mottar aktiv bordløsning fra `index.html`.
-- `index.html` har valgene `Miks venner` og `Før miks`, samt avkrysningsboksen `Uten kanskje`. Dette gir fire kombinasjoner; `Miks venner` uten avkrysning er standard.
+- `index.html` viser gjeldende bordplassering og har avkrysningsboksen `Uten kanskje`.
 - Brukeren kan bytte mellom `Kart` og `Flat liste`; begge visninger skal bruke samme aktive borddata.
 - Behold den publiserte ruten `/bryllup/bordkart/`.
 - Den gamle ruten `/bordplassering/` skal videresende hit.
@@ -46,7 +46,7 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 - Utskriftssiden skal ikke vise allergier eller kosthensyn.
 - Alle HTML-ID-er for personer skal være unike.
 - Kontroller totalsum per bord og samlet total etter hver gjesteendring.
-- Kontroller alle fire kombinasjoner etter endringer i gjester, bordnumre eller stolrekkefølge.
+- Kontroller både standardvisningen og `Uten kanskje` etter endringer i gjester, bordnumre eller stolrekkefølge.
 - Kontroller både kart- og listevisning etter endringer.
 - Kontroller alle par og spesielle naboskap etter endringer i stolrekkefølgen.
 - Oppdater totalsum og avbudsberegninger dersom gjestelisten endres.
