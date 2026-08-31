@@ -84,11 +84,10 @@
 | Hallstein og Liv Jorunn | 2 |
 | Magnus og Andrea | 2 |
 | Marius og Kine | 2 |
-| Lasse og Dea | 2 |
 | Marte A. (fotograf) | 1 |
 | Fredrik | 1 |
 
-**Sum: 10**
+**Sum: 8**
 
 ## Bord 8 - vennebord
 
@@ -105,9 +104,11 @@
 
 ## Totalt
 
-**80 personer**
+**78 personer**
 
 *Inkluderer Lars og Julie, som kanskje kommer. Andreas og Elise er bekreftet.*
+
+*Lasse og Dea skal ikke være med på middagen.*
 
 ## Allergier og kosthensyn
 
@@ -126,7 +127,7 @@
 
 ## Valgbare alternativer
 
-- **Miks venner:** Fordelingen ovenfor, med 80 gjester. Dette er standardvalget.
+- **Miks venner:** Fordelingen ovenfor, med 78 gjester. Dette er standardvalget.
 - **Før miks:** Vennegruppene vises slik de var før bord 5, 6, 7 og 8 ble blandet.
 - **Uten kanskje:** Kan kombineres med begge valgene. Lars og Julie (partner til Lars) tas da ut; alle andre bord beholdes uendret.
 
@@ -135,13 +136,16 @@
 | Personer | Fra | Til |
 |---|---|---|
 | Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
+| Vilma og Ebba | Bord 6 | Bord 2 |
+| Camilla | Bord 5 | Bord 6 |
 
-**Bordsummer:** Bord 1: 11, bord 2: 8, bord 3: 10, bord 4: 10, bord 5: 10, bord 6: 9, bord 7: 10, bord 8: 10. Totalt: 78.
+**Bordsummer:** Bord 1: 11, bord 2: 10, bord 3: 10, bord 4: 10, bord 5: 9, bord 6: 8, bord 7: 8, bord 8: 10. Totalt: 76.
 
 ### Uten kanskje med Før miks
 
 | Personer | Fra | Til |
 |---|---|---|
 | Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
+| Vilma og Ebba | Bord 6 | Bord 2 |
 
-**Bordsummer:** Bord 1: 11, bord 2: 8, bord 3: 10, bord 4: 10, bord 5: 8, bord 6: 12, bord 7: 10, bord 8: 9. Totalt: 78.
+**Bordsummer:** Bord 1: 11, bord 2: 10, bord 3: 10, bord 4: 10, bord 5: 8, bord 6: 10, bord 7: 8, bord 8: 9. Totalt: 76.

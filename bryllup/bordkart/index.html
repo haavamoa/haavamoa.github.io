@@ -1020,7 +1020,7 @@
     <div>
       <p class="eyebrow">Bordplassering · forslag 1</p>
       <h1>Ida &amp; Håvard</h1>
-      <p class="summary" id="guestSummary">80 oppførte middagsgjester · 2 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
+      <p class="summary" id="guestSummary">78 oppførte middagsgjester · 2 kommer kanskje · 8 runde bord · seterekkefølge med klokken</p>
     </div>
     <div class="masthead__actions">
       <div class="solution-controls">
@@ -1214,9 +1214,7 @@
           { id: "magnus", name: "Magnus", gender: "male" },
           { id: "andrea", name: "Andrea", gender: "female" },
           { id: "marius", name: "Marius", gender: "male" },
-          { id: "kine", name: "Kine", gender: "female" },
-          { id: "lasse", name: "Lasse", gender: "male" },
-          { id: "dea", name: "Dea", gender: "female" }
+          { id: "kine", name: "Kine", gender: "female" }
         ]
       },
       {
@@ -1355,19 +1353,29 @@
       },
       7: {
         title: "Håvards venner · foto og film",
-        seatIds: ["magnus", "andrea", "marius", "kine", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf", "lasse", "dea"]
+        seatIds: ["magnus", "andrea", "marius", "kine", "hallstein", "liv-jorunn", "fredrik", "marte-fotograf"]
       }
     });
 
     const mixedWithoutOptionalTables = createAlternativeTables({
       2: {
-        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover"]
+        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
+      },
+      5: {
+        seatIds: ["erik", "trine", "simon", "andreas", "elise", "vidar", "tonje", "martin", "cathrine"]
+      },
+      6: {
+        seatIds: ["stian", "heidi", "malin", "kristina", "ingrid", "brita", "eskil", "camilla"]
       }
     });
 
     const beforeMixWithoutOptionalTables = createAlternativeTables({
       2: {
-        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover"]
+        seatIds: ["miguel", "grete", "simen", "siri", "kristoffer", "ida-forlover", "emil", "julie-forlover", "vilma", "ebba"]
+      },
+      6: {
+        title: "Idas venner",
+        seatIds: ["stian", "heidi", "malin", "kristina", "levin", "marte-levin", "ingrid", "martin", "cathrine", "camilla"]
       }
     }, beforeMixTables);
 
@@ -1377,7 +1385,7 @@
         mixMode: "before-mix",
         withoutOptional: false,
         title: "Før miks",
-        description: "Vennegruppene slik de var fordelt før bord 5, 6, 7 og 8 ble blandet. Alle 80 gjester er med.",
+        description: "Vennegruppene slik de var fordelt før bord 5, 6, 7 og 8 ble blandet. Alle 78 middagsgjester er med.",
         tables: beforeMixTables,
         changes: []
       },
@@ -1399,7 +1407,9 @@
         tables: mixedWithoutOptionalTables,
         changesTitle: "Endringer fra Miks venner",
         changes: [
-          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" }
+          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" },
+          { people: "Vilma og Ebba", from: "Bord 6", to: "Bord 2" },
+          { people: "Camilla", from: "Bord 5", to: "Bord 6" }
         ]
       },
       {
@@ -1411,7 +1421,8 @@
         tables: beforeMixWithoutOptionalTables,
         changesTitle: "Endringer fra Før miks",
         changes: [
-          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" }
+          { people: "Lars og Julie (partner til Lars)", from: "Bord 2", to: "Kommer ikke" },
+          { people: "Vilma og Ebba", from: "Bord 6", to: "Bord 2" }
         ]
       }
     ];

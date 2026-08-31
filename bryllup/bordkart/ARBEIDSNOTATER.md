@@ -17,7 +17,7 @@ Dette dokumentet samler beslutninger, relasjoner og regler fra arbeidsøkten som
 
 ## Gjeldende status
 
-- 80 personer er oppført til middagen.
+- 78 personer er oppført til middagen.
 - Det brukes 8 runde bord.
 - Tillatt størrelse er 8-12 personer per bord; 10 er optimalt.
 - Bord 1-4 er låst. Ikke flytt personer til eller fra disse uten uttrykkelig beskjed.
@@ -27,6 +27,7 @@ Dette dokumentet samler beslutninger, relasjoner og regler fra arbeidsøkten som
 
 - Anea er barnepass og venn av Sofie, men skal ikke være med under middagen.
 - Maria skal ikke komme i bryllupet og er fjernet fra alle bord.
+- Lasse og Dea skal ikke være med på middagen og er fjernet fra alle bord.
 
 ### Usikre gjester
 
@@ -34,7 +35,7 @@ Følgende to personer inngår i totalsummen på 80, men er markert som usikre:
 
 - Lars og Julie, partneren til Lars.
 
-Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `Uten kanskje`, og totalen blir 78.
+Andreas og Elise er bekreftet. Hvis Lars og Julie uteblir, brukes alternativet `Uten kanskje`, og totalen blir 76.
 
 ### Allergier og kosthensyn
 
@@ -207,10 +208,8 @@ Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og 
 6. Andrea
 7. Marius
 8. Kine
-9. Lasse
-10. Dea
 
-Viktige forbindelser: Fredrik-Marte A. (fotograf) og den dokumenterte vennekretsen Hallstein/Liv Jorunn-Magnus/Andrea-Marius/Kine-Lasse/Dea. Bordet står lengst unna scenen.
+Viktige forbindelser: Fredrik-Marte A. (fotograf) og den dokumenterte vennekretsen Hallstein/Liv Jorunn-Magnus/Andrea-Marius/Kine. Bordet står lengst unna scenen.
 
 ### Bord 8 - vennebord
 
@@ -241,16 +240,19 @@ Med **Miks venner + Uten kanskje** gjøres følgende endringer:
 | Personer | Fra | Til |
 |---|---|---|
 | Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
+| Vilma og Ebba | Bord 6 | Bord 2 |
+| Camilla | Bord 5 | Bord 6 |
 
-Resultatet er 11 gjester ved bord 1, 8 ved bord 2, 10 ved bord 3, 4, 5, 7 og 8 og 9 ved bord 6. Alle par og de spesielle nabokravene består.
+Resultatet er 11 gjester ved bord 1, 10 ved bord 2, 3, 4 og 8, 9 ved bord 5 og 8 ved bord 6 og 7. Totalt: 76. Alle par og de spesielle nabokravene består.
 
 Med **Før miks + Uten kanskje** gjøres følgende endringer:
 
 | Personer | Fra | Til |
 |---|---|---|
 | Lars og Julie (partner til Lars) | Bord 2 | Kommer ikke |
+| Vilma og Ebba | Bord 6 | Bord 2 |
 
-Resultatet er 11 gjester ved bord 1, 8 ved bord 2 og 5, 10 ved bord 3, 4 og 7, 12 ved bord 6 og 9 ved bord 8. Vennegruppene forblir adskilt, og alle par og spesielle nabokrav består.
+Resultatet er 11 gjester ved bord 1, 10 ved bord 2, 3, 4 og 6, 8 ved bord 5 og 7 og 9 ved bord 8. Totalt: 76. Vennegruppene forblir adskilt, og alle par og spesielle nabokrav består.
 
 ## Familieforbindelser
 
@@ -275,7 +277,7 @@ Resultatet er 11 gjester ved bord 1, 8 ved bord 2 og 5, 10 ved bord 3, 4 og 7, 1
 
 ## Venneforbindelser
 
-- Magnus og Andrea, Marius og Kine, Simen og Siri, Hallstein og Liv Jorunn samt Lasse og Dea tilhører samme dokumenterte vennekrets.
+- Magnus og Andrea, Marius og Kine, Simen og Siri samt Hallstein og Liv Jorunn tilhører samme dokumenterte vennekrets.
 - Simen er forlover og sitter derfor ved bord 2 med Siri.
 - Heidi og Stian kjenner Kristina, Ingrid, Marte og Levin, Cathrine og Martin, Camilla samt Tonje og Vidar.
 - Kristina kjenner Heidi, Stian, Malin og Ingrid og skal sitte med dem ved bord 6.

@@ -2,7 +2,7 @@
 
 ## Rammer og antakelser
 
-- 80 middagsgjester totalt, fordelt på 8 runde bord med 8-12 personer ved hvert bord.
+- 78 middagsgjester totalt, fordelt på 8 runde bord med 8-12 personer ved hvert bord.
 - Alle som står på samme linje i gjestelisten, er foreløpig behandlet som en enhet og sitter sammen.
 - Brud og Ida (forlover) er merket særskilt. Det samme gjelder de to gjestene som heter Julie.
 - Forloverne er tolket som Grete, Julie (søskenbarn), Simen og Ida (venn). De sitter med sine partnere ved bord 2, rett ved siden av brudeparet og barna på bord 4.
@@ -11,6 +11,7 @@
 - Lars og Julie (partner til Lars) er inkludert i totalen, men står som usikre gjester.
 - «Catrine» og «Monic» i relasjonsnotatene er tolket som Cathrine og Monica.
 - Anea deltar ikke under middagen og har derfor ingen bordplass.
+- Lasse og Dea deltar ikke under middagen og har derfor ingen bordplass.
 - Allergier og kosthensyn vises ved personens bord og i en samlet liste med bord- og plassnummer fra aktiv løsning. De vises ikke på utskriftsarket.
 - Marte A. (fotograf) er med under middagen og sitter ved bord 7. Hun er en annen person enn Marte som sitter sammen med Levin ved bord 8.
 - Vilma, Ebba, Linus, Vegar, Monica, Kjetil, Tone og Fredrik er voksne og trenger ikke sitte med foreldrene sine.
@@ -119,13 +120,12 @@ Kristina sitter med Heidi, Stian, Malin og Ingrid. Brita og Eskil samt Vilma og 
 | I og H: venner | Hallstein og Liv Jorunn | 2 |
 | H: venner | Magnus og Andrea | 2 |
 | H: venner | Marius og Kine | 2 |
-| H: venner | Lasse og Dea | 2 |
 | I: søskenbarn / filmer | Fredrik | 1 |
 | Fotograf | Marte A. (fotograf) | 1 |
 
-**Sum: 10**
+**Sum: 8**
 
-Fredrik og Marte skal sitte ved siden av hverandre. Hallstein/Liv Jorunn, Magnus/Andrea, Marius/Kine og Lasse/Dea tilhører samme dokumenterte vennekrets.
+Fredrik og Marte A. skal sitte ved siden av hverandre. Hallstein/Liv Jorunn, Magnus/Andrea og Marius/Kine tilhører samme dokumenterte vennekrets.
 
 ## Bord 8 - blandet vennebord
 
@@ -146,22 +146,22 @@ Stine sitter med Christine. Linn og Dan, Marte og Levin samt Runar og Vilde sitt
 
 Den publiserte siden kan velge mellom `Miks venner` og `Før miks`. Avkrysningsboksen `Uten kanskje` kan brukes med begge og fjerner Lars og Julie (partner til Lars). Det gir fire kombinasjoner totalt.
 
-Med `Miks venner` og `Uten kanskje` fjernes Lars og Julie fra bord 2. Alle andre bord beholdes uendret. Resultatet er:
+Med `Miks venner` og `Uten kanskje` fjernes Lars og Julie fra bord 2, Vilma og Ebba flyttes fra bord 6 til bord 2, og Camilla flyttes fra bord 5 til bord 6. Resultatet er:
 
 | Bord | Antall |
 |---|---:|
 | 1 | 11 |
-| 2 | 8 |
+| 2 | 10 |
 | 3 | 10 |
 | 4 | 10 |
-| 5 | 10 |
-| 6 | 10 |
-| 7 | 10 |
+| 5 | 9 |
+| 6 | 8 |
+| 7 | 8 |
 | 8 | 9 |
 
 Alle par beholdes. Heidi, Malin og Kristina sitter fortsatt sammen, Brita sitter ved Eskil, og Fredrik sitter ved Marte A. (fotograf).
 
-Med `Før miks` og `Uten kanskje` fjernes Lars og Julie fra bord 2. Bordstørrelsene blir 11, 8, 10, 10, 8, 12, 10 og 9. Ida og Håvards vennegrupper forblir adskilt.
+Med `Før miks` og `Uten kanskje` fjernes Lars og Julie fra bord 2, og Vilma og Ebba flyttes fra bord 6 til bord 2. Bordstørrelsene blir 11, 10, 10, 10, 8, 10, 8 og 9. Ida og Håvards vennegrupper forblir adskilt.
 
 `Skriv ut` åpner en egen side med aktiv kombinasjon. En bordvelger viser og skriver ut ett bord om gangen på ett A4-ark, med fet bordtittel og navnene under hverandre. Dancing Script er standard, og fonten kan endres før utskrift. Størrelsen kan velges som Liten, Medium, Large eller Extra large; Medium er standard, og bordtittelen skaleres større enn navnene.
 

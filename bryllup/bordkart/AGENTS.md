@@ -40,7 +40,7 @@ Les `ARBEIDSNOTATER.md` før du endrer filer i denne mappen.
 
 ## Datakontroll
 
-- Gjeldende total er 80 personer, inkludert to usikre gjester: Lars og Julie.
+- Gjeldende total er 78 personer, inkludert to usikre gjester: Lars og Julie.
 - Allergier og kosthensyn skal alltid vises ved personens bord og i den samlede listen nederst.
 - Allergivisningene på hovedsiden skal vise personens bord- og plassnummer fra aktiv løsning.
 - Utskriftssiden skal ikke vise allergier eller kosthensyn.
