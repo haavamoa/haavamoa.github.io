@@ -482,6 +482,7 @@
     addCameraButton.addEventListener('click', () => cameraInput.click());
     addGalleryButton.addEventListener('click', () => galleryInput.click());
     changeButton.addEventListener('click', resetFiles);
+    window.addEventListener('pageshow', restoreFileStateIfNeeded);
 
     for (const eventName of ['dragenter', 'dragover']) {
       picker.addEventListener(eventName, (event) => {
@@ -502,7 +503,10 @@
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
+      restoreFileStateIfNeeded();
+
       if (selectedImages.length === 0) {
+        resetFiles(false);
         showStatus('Velg minst ett bilde først.', 'error');
         return;
       }
@@ -544,7 +548,8 @@
       }
     });
 
-    function addFiles(fileList) {
+    function addFiles(fileList, options = {}) {
+      const { focusOnMobile = true, clearStatusOnSuccess = true } = options;
       const files = Array.from(fileList || []);
       if (files.length === 0) return;
 
@@ -570,17 +575,15 @@
         selectedImages.push({ file, previewUrl: URL.createObjectURL(file) });
       }
 
-      cameraInput.value = '';
-      galleryInput.value = '';
       renderSelectedImages();
 
       if (messages.length > 0) {
         showStatus(messages[0], 'error');
-      } else {
+      } else if (clearStatusOnSuccess) {
         hideStatus();
       }
 
-      if (hadNoImages && selectedImages.length > 0) focusGuestNameOnMobile();
+      if (focusOnMobile && hadNoImages && selectedImages.length > 0) focusGuestNameOnMobile();
     }
 
     function resetFiles(clearStatus = true) {
@@ -605,6 +608,18 @@
       addCameraButton.disabled = isUploading;
       addGalleryButton.disabled = isUploading;
       changeButton.disabled = isUploading;
+    }
+
+    function restoreFileStateIfNeeded() {
+      if (selectedImages.length > 0) return;
+
+      const inputFiles = [...cameraInput.files, ...galleryInput.files];
+      if (inputFiles.length > 0) {
+        addFiles(inputFiles, { focusOnMobile: false, clearStatusOnSuccess: false });
+        return;
+      }
+
+      if (picker.classList.contains('has-preview')) resetFiles(false);
     }
 
     async function uploadBatch(batch, name, greeting) {
@@ -675,7 +690,9 @@
       }
 
       picker.classList.add('has-preview');
-      previewSummary.textContent = `${selectedImages.length} ${selectedImages.length === 1 ? 'bilde' : 'bilder'} klare for opplasting`;
+      previewSummary.textContent = selectedImages.length === 1
+        ? '1 bilde klart for opplasting'
+        : `${selectedImages.length} bilder klare for opplasting`;
       updateSubmitButton();
     }
 
