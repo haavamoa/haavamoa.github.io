@@ -1,7 +1,7 @@
-const MAX_FILE_BYTES = 15 * 1024 * 1024;
-const MAX_FILES = 12;
-const MAX_TOTAL_FILE_BYTES = 60 * 1024 * 1024;
-const MAX_REQUEST_BYTES = MAX_TOTAL_FILE_BYTES + 2 * 1024 * 1024;
+const MAX_FILE_BYTES = 30 * 1024 * 1024;
+const MAX_FILES = 30;
+const MAX_TOTAL_FILE_BYTES = 80 * 1024 * 1024;
+const MAX_REQUEST_BYTES = MAX_TOTAL_FILE_BYTES + 10 * 1024 * 1024;
 const ADMIN_SESSION_SECONDS = 18 * 60 * 60;
 
 export default {
@@ -72,7 +72,7 @@ export default {
     const contentLength = Number(request.headers.get("Content-Length") ?? 0);
     if (contentLength > MAX_REQUEST_BYTES) {
       return jsonResponse(
-        { error: "Opplastingen er for stor. Maks 12 bilder og 60 MB totalt." },
+        { error: "Opplastingen er for stor. Velg færre bilder og prøv igjen." },
         413,
         corsHeaders,
       );
@@ -91,7 +91,7 @@ export default {
     }
 
     if (images.length > MAX_FILES) {
-      return jsonResponse({ error: "Du kan laste opp maks 12 bilder samtidig." }, 413, corsHeaders);
+      return jsonResponse({ error: "Denne delopplastingen har for mange bilder. Prøv igjen." }, 413, corsHeaders);
     }
 
     let totalBytes = 0;
@@ -103,7 +103,7 @@ export default {
 
       if (image.size > MAX_FILE_BYTES) {
         return jsonResponse(
-          { error: `Bilde ${index + 1} er for stort. Maks størrelse er 15 MB per bilde.` },
+          { error: `Bilde ${index + 1} er for stort. Maks størrelse er 30 MB per bilde.` },
           413,
           corsHeaders,
         );
@@ -112,7 +112,7 @@ export default {
       totalBytes += image.size;
       if (totalBytes > MAX_TOTAL_FILE_BYTES) {
         return jsonResponse(
-          { error: "Bildene er for store samlet. Maks total størrelse er 60 MB." },
+          { error: "Denne delopplastingen ble for stor. Prøv igjen." },
           413,
           corsHeaders,
         );

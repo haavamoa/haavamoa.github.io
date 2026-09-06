@@ -18,11 +18,12 @@ Worker-en begrenser automatisk antall opplastinger per nettleser og per
 Cloudflare-lokasjon. Gjestene trenger ikke gjøre noe for denne kontrollen.
 Gjestene kan ta eller velge flere bilder før de trykker **Last opp**. Hvert
 bilde lagres som en egen Release-asset, men navn og hilsen brukes på alle
-bildene i samme opplasting. En opplasting kan inneholde maks 12 bilder, maks
-15 MB per bilde og maks 60 MB samlet. På mobil vises valgte bilder som en
-kompakt miniatyrkø. Etter første bildevalg får navnefeltet fokus og scrolles
-mykt til midten av skjermen, slik at navn og opplastingsknapp er tilgjengelige
-uten manuell scrolling.
+bildene i samme opplasting. Gjestene kan velge en stor bildekø; nettsiden deler
+den automatisk i trygge delopplastinger på maks 30 bilder eller 80 MB hver.
+Enkeltbilder kan være opptil 30 MB. På mobil vises valgte bilder som en kompakt
+miniatyrkø. Etter første bildevalg får navnefeltet fokus og scrolles mykt til
+midten av skjermen, slik at navn og opplastingsknapp er tilgjengelige uten
+manuell scrolling.
 Alle opplastede bilder vises med 10 piksler avrundede hjørner i
 forhåndsvisning, administrasjon, slideshow, spotlight og returanimasjon.
 Gjestene kan også skrive en valgfri hilsen på inntil 140 tegn. Navn og hilsen
@@ -67,8 +68,8 @@ npx wrangler secret put GITHUB_TOKEN
 npx wrangler deploy
 ```
 
-Rate limiting-bindingene i `wrangler.toml` tillater 10 opplastingsforsøk per
-nettleser og 100 totalt per Cloudflare-lokasjon per minutt. De bruker to unike
+Rate limiting-bindingene i `wrangler.toml` tillater 30 delopplastinger per
+nettleser og 300 totalt per Cloudflare-lokasjon per minutt. De bruker to unike
 numeriske namespace-ID-er og opprettes sammen med Worker-en ved publisering.
 
 ## 4. Koble til nettsiden
@@ -194,6 +195,42 @@ fjernet eller endret.
 
 Visningen bruker samme private adminøkt og offentliggjør ingen bilde-URL-er.
 Velg **Avslutt visning** for å gå tilbake til administrasjon og sletting.
+
+## iCloud-synk av bilder
+
+`sync-icloud.js` holder styr på hvilke GitHub Release-assets som allerede er
+importert i iCloud-albumet. Scriptet bruker [icloud-sync-status.json](icloud-sync-status.json)
+som statusfil og `gh` for å hente private Release-assets fra GitHub.
+
+Kjør fra repo-roten:
+
+```sh
+node workers/bryllupsbilder/sync-icloud.js status
+node workers/bryllupsbilder/sync-icloud.js download-new
+```
+
+`download-new` tømmer staging-mappen først og laster deretter kun ned bilder som
+ikke er markert importert i iCloud. Nye bilder legges her:
+
+```text
+~/Downloads/bryllupsbilder-2026/til-icloud
+```
+
+Når bildene i `til-icloud` er lagt inn i iCloud-albumet, kjør:
+
+```sh
+node workers/bryllupsbilder/sync-icloud.js mark-imported
+```
+
+Da markeres pending-bildene som importert, staging-mappen tømmes, og de lokale
+filene flyttes til arkivet:
+
+```text
+~/Downloads/bryllupsbilder-2026/importert
+```
+
+Neste `download-new` vil derfor igjen gi en ren mappe med bare nye bilder som
+skal inn i iCloud.
 
 ## Etter bryllupet
 

@@ -456,9 +456,10 @@
   </main>
 
   <script>
-    const MAX_FILE_BYTES = 15 * 1024 * 1024;
-    const MAX_FILES = 12;
-    const MAX_TOTAL_FILE_BYTES = 60 * 1024 * 1024;
+    const MAX_FILE_BYTES = 30 * 1024 * 1024;
+    const MAX_SELECTION_FILES = 250;
+    const MAX_UPLOAD_BATCH_FILES = 30;
+    const MAX_UPLOAD_BATCH_BYTES = 80 * 1024 * 1024;
     const SUPPORTED_IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|heic|heif|avif)$/i;
     const uploadEndpoint = document.querySelector('meta[name="upload-endpoint"]').content;
     const form = document.getElementById('uploadForm');
@@ -511,33 +512,33 @@
         return;
       }
 
-      const formData = new FormData();
-      for (const selectedImage of selectedImages) {
-        formData.append('images', selectedImage.file, selectedImage.file.name);
-      }
-      formData.append('name', document.getElementById('guestName').value);
-      formData.append('greeting', document.getElementById('greeting').value);
+      const uploadBatches = buildUploadBatches(selectedImages);
+      const name = document.getElementById('guestName').value;
+      const greeting = document.getElementById('greeting').value;
+      const uploadedImages = [];
 
       setUploading(true);
-      showStatus('Laster opp bildet …');
 
       try {
-        const response = await fetch(uploadEndpoint, {
-          method: 'POST',
-          headers: { 'X-Upload-Client': uploadClientId },
-          body: formData,
-        });
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok) {
-          throw new Error(result.error || 'Opplastingen mislyktes. Prøv igjen.');
+        for (const [index, batch] of uploadBatches.entries()) {
+          showStatus(`Laster opp ${batch.length} ${batch.length === 1 ? 'bilde' : 'bilder'} (${index + 1} av ${uploadBatches.length}) …`);
+          await uploadBatch(batch, name, greeting);
+          uploadedImages.push(...batch);
         }
 
-        showStatus(result.message || 'Bildet er lastet opp. Tusen takk!', 'success');
+        showStatus(getUploadSuccessText(uploadedImages.length), 'success');
         form.reset();
         resetFiles(false);
       } catch (error) {
-        showStatus(error.message || 'Kunne ikke laste opp bildet. Sjekk nettet og prøv igjen.', 'error');
+        if (uploadedImages.length > 0) {
+          removeSelectedImages(uploadedImages);
+          showStatus(
+            `${uploadedImages.length} ${uploadedImages.length === 1 ? 'bilde ble' : 'bilder ble'} lastet opp. ${selectedImages.length} ${selectedImages.length === 1 ? 'bilde ligger' : 'bilder ligger'} igjen. ${error.message || 'Prøv igjen.'}`,
+            'error',
+          );
+        } else {
+          showStatus(error.message || 'Kunne ikke laste opp bildene. Sjekk nettet og prøv igjen.', 'error');
+        }
       } finally {
         setUploading(false);
       }
@@ -548,12 +549,11 @@
       if (files.length === 0) return;
 
       const hadNoImages = selectedImages.length === 0;
-      let totalBytes = getSelectedTotalBytes();
       const messages = [];
 
       for (const file of files) {
-        if (selectedImages.length >= MAX_FILES) {
-          messages.push('Du kan laste opp maks 12 bilder samtidig.');
+        if (selectedImages.length >= MAX_SELECTION_FILES) {
+          messages.push(`Du kan velge maks ${MAX_SELECTION_FILES} bilder om gangen. Last opp disse først.`);
           break;
         }
 
@@ -563,16 +563,10 @@
         }
 
         if (file.size > MAX_FILE_BYTES) {
-          messages.push(`${file.name || 'Et bilde'} er for stort. Maks 15 MB per bilde.`);
+          messages.push(`${file.name || 'Et bilde'} er for stort. Maks 30 MB per bilde.`);
           continue;
         }
 
-        if (totalBytes + file.size > MAX_TOTAL_FILE_BYTES) {
-          messages.push('Bildene er for store samlet. Maks 60 MB per opplasting.');
-          continue;
-        }
-
-        totalBytes += file.size;
         selectedImages.push({ file, previewUrl: URL.createObjectURL(file) });
       }
 
@@ -613,6 +607,52 @@
       changeButton.disabled = isUploading;
     }
 
+    async function uploadBatch(batch, name, greeting) {
+      const formData = new FormData();
+      for (const selectedImage of batch) {
+        formData.append('images', selectedImage.file, selectedImage.file.name);
+      }
+      formData.append('name', name);
+      formData.append('greeting', greeting);
+
+      const response = await fetch(uploadEndpoint, {
+        method: 'POST',
+        headers: { 'X-Upload-Client': uploadClientId },
+        body: formData,
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Opplastingen mislyktes. Prøv igjen.');
+      }
+    }
+
+    function buildUploadBatches(images) {
+      const batches = [];
+      let batch = [];
+      let batchBytes = 0;
+
+      for (const selectedImage of images) {
+        const fileBytes = selectedImage.file.size;
+        const wouldExceedBatch = batch.length > 0 && (
+          batch.length >= MAX_UPLOAD_BATCH_FILES ||
+          batchBytes + fileBytes > MAX_UPLOAD_BATCH_BYTES
+        );
+
+        if (wouldExceedBatch) {
+          batches.push(batch);
+          batch = [];
+          batchBytes = 0;
+        }
+
+        batch.push(selectedImage);
+        batchBytes += fileBytes;
+      }
+
+      if (batch.length > 0) batches.push(batch);
+      return batches;
+    }
+
     function renderSelectedImages() {
       previewGrid.replaceChildren();
 
@@ -639,14 +679,23 @@
       updateSubmitButton();
     }
 
-    function getSelectedTotalBytes() {
-      return selectedImages.reduce((sum, selectedImage) => sum + selectedImage.file.size, 0);
-    }
-
     function isSelectableImageFile(file) {
       if (file.type.startsWith('image/')) return true;
 
       return SUPPORTED_IMAGE_EXTENSIONS.test(file.name || '');
+    }
+
+    function removeSelectedImages(imagesToRemove) {
+      const uploaded = new Set(imagesToRemove);
+      for (const selectedImage of imagesToRemove) URL.revokeObjectURL(selectedImage.previewUrl);
+      selectedImages = selectedImages.filter((selectedImage) => !uploaded.has(selectedImage));
+      renderSelectedImages();
+    }
+
+    function getUploadSuccessText(count) {
+      return count === 1
+        ? 'Bildet er lastet opp. Tusen takk!'
+        : `${count} bilder er lastet opp. Tusen takk!`;
     }
 
     function updateSubmitButton() {
