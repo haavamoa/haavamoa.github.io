@@ -178,7 +178,8 @@
 
     .choice-button,
     .submit-button,
-    .change-button {
+    .change-button,
+    .preview-action {
       min-height: 48px;
       display: inline-flex;
       align-items: center;
@@ -219,31 +220,74 @@
       display: none;
       width: 100%;
       min-height: 220px;
+      padding: 18px;
       position: relative;
+      color: var(--white);
     }
 
-    .has-preview .preview-wrap { display: grid; place-items: center; }
+    .has-preview .preview-wrap { display: block; }
     .has-preview .picker-actions { display: none; }
 
-    .preview-image {
-      width: auto;
-      height: auto;
-      max-width: 100%;
-      max-height: 430px;
-      display: block;
-      border-radius: var(--image-radius);
-      object-fit: contain;
+    .preview-summary {
+      margin: 0 0 12px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-align: left;
     }
 
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(82px, 1fr));
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .preview-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: var(--image-radius);
+      background: #11140f;
+    }
+
+    .preview-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: var(--image-radius);
+      object-fit: cover;
+    }
+
+    .preview-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .preview-action,
     .change-button {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
       min-height: 42px;
       padding: 0 17px;
       background: rgba(255, 255, 255, 0.94);
       color: var(--text);
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .preview-actions .preview-action,
+    .preview-actions .change-button {
+      min-width: 0;
+      padding: 0 9px;
+      font-size: 0.68rem;
+      letter-spacing: 0;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .preview-action.secondary {
+      background: rgba(255, 255, 255, 0.78);
     }
 
     .form-fields { padding: 28px 30px 30px; }
@@ -257,6 +301,9 @@
       font-size: 0.86rem;
       font-weight: 700;
     }
+
+    .choice-button,
+    .preview-action { margin-bottom: 0; }
 
     .optional {
       color: var(--muted);
@@ -342,8 +389,8 @@
       .choice-row { grid-template-columns: 1fr; }
       .picker { min-height: 280px; }
       .picker.has-preview { min-height: 0; }
-      .preview-wrap { height: min(34vh, 250px); min-height: 0; }
-      .preview-image { width: auto; height: auto; max-width: 100%; max-height: 100%; min-height: 0; }
+      .preview-wrap { height: min(36vh, 270px); min-height: 0; overflow-y: auto; }
+      .preview-grid { max-height: 118px; }
       .form-fields { padding: 24px 20px 25px; }
     }
 
@@ -374,13 +421,18 @@
         </div>
 
         <div class="preview-wrap">
-          <img class="preview-image" id="previewImage" alt="Forhåndsvisning av valgt bilde" />
-          <button class="change-button" id="changeButton" type="button">Bytt bilde</button>
+          <p class="preview-summary" id="previewSummary"></p>
+          <div class="preview-grid" id="previewGrid" aria-live="polite"></div>
+          <div class="preview-actions">
+            <button class="preview-action" id="addCameraButton" type="button">ta flere</button>
+            <button class="preview-action secondary" id="addGalleryButton" type="button">velg flere</button>
+            <button class="change-button" id="changeButton" type="button">tøm</button>
+          </div>
         </div>
       </div>
 
       <input class="file-input" id="cameraInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif" capture="environment" />
-      <input class="file-input" id="galleryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif" />
+      <input class="file-input" id="galleryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/avif" multiple />
 
       <div class="form-fields">
         <div class="field">
@@ -405,23 +457,30 @@
 
   <script>
     const MAX_FILE_BYTES = 15 * 1024 * 1024;
+    const MAX_FILES = 12;
+    const MAX_TOTAL_FILE_BYTES = 60 * 1024 * 1024;
+    const SUPPORTED_IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|heic|heif|avif)$/i;
     const uploadEndpoint = document.querySelector('meta[name="upload-endpoint"]').content;
     const form = document.getElementById('uploadForm');
     const picker = document.getElementById('picker');
     const cameraInput = document.getElementById('cameraInput');
     const galleryInput = document.getElementById('galleryInput');
-    const previewImage = document.getElementById('previewImage');
+    const previewSummary = document.getElementById('previewSummary');
+    const previewGrid = document.getElementById('previewGrid');
+    const addCameraButton = document.getElementById('addCameraButton');
+    const addGalleryButton = document.getElementById('addGalleryButton');
     const changeButton = document.getElementById('changeButton');
     const guestNameInput = document.getElementById('guestName');
     const submitButton = document.getElementById('submitButton');
     const status = document.getElementById('status');
     const uploadClientId = getUploadClientId();
-    let selectedFile = null;
-    let previewUrl = null;
+    let selectedImages = [];
 
-    cameraInput.addEventListener('change', () => selectFile(cameraInput.files[0]));
-    galleryInput.addEventListener('change', () => selectFile(galleryInput.files[0]));
-    changeButton.addEventListener('click', resetFile);
+    cameraInput.addEventListener('change', () => addFiles(cameraInput.files));
+    galleryInput.addEventListener('change', () => addFiles(galleryInput.files));
+    addCameraButton.addEventListener('click', () => cameraInput.click());
+    addGalleryButton.addEventListener('click', () => galleryInput.click());
+    changeButton.addEventListener('click', resetFiles);
 
     for (const eventName of ['dragenter', 'dragover']) {
       picker.addEventListener(eventName, (event) => {
@@ -437,13 +496,13 @@
       });
     }
 
-    picker.addEventListener('drop', (event) => selectFile(event.dataTransfer.files[0]));
+    picker.addEventListener('drop', (event) => addFiles(event.dataTransfer.files));
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      if (!selectedFile) {
-        showStatus('Velg et bilde først.', 'error');
+      if (selectedImages.length === 0) {
+        showStatus('Velg minst ett bilde først.', 'error');
         return;
       }
 
@@ -453,7 +512,9 @@
       }
 
       const formData = new FormData();
-      formData.append('image', selectedFile, selectedFile.name);
+      for (const selectedImage of selectedImages) {
+        formData.append('images', selectedImage.file, selectedImage.file.name);
+      }
       formData.append('name', document.getElementById('guestName').value);
       formData.append('greeting', document.getElementById('greeting').value);
 
@@ -474,7 +535,7 @@
 
         showStatus(result.message || 'Bildet er lastet opp. Tusen takk!', 'success');
         form.reset();
-        resetFile(false);
+        resetFiles(false);
       } catch (error) {
         showStatus(error.message || 'Kunne ikke laste opp bildet. Sjekk nettet og prøv igjen.', 'error');
       } finally {
@@ -482,46 +543,119 @@
       }
     });
 
-    function selectFile(file) {
-      if (!file) return;
+    function addFiles(fileList) {
+      const files = Array.from(fileList || []);
+      if (files.length === 0) return;
 
-      if (!file.type.startsWith('image/')) {
-        showStatus('Velg en bildefil.', 'error');
-        return;
+      const hadNoImages = selectedImages.length === 0;
+      let totalBytes = getSelectedTotalBytes();
+      const messages = [];
+
+      for (const file of files) {
+        if (selectedImages.length >= MAX_FILES) {
+          messages.push('Du kan laste opp maks 12 bilder samtidig.');
+          break;
+        }
+
+        if (!isSelectableImageFile(file)) {
+          messages.push(`${file.name || 'En fil'} er ikke et bilde.`);
+          continue;
+        }
+
+        if (file.size > MAX_FILE_BYTES) {
+          messages.push(`${file.name || 'Et bilde'} er for stort. Maks 15 MB per bilde.`);
+          continue;
+        }
+
+        if (totalBytes + file.size > MAX_TOTAL_FILE_BYTES) {
+          messages.push('Bildene er for store samlet. Maks 60 MB per opplasting.');
+          continue;
+        }
+
+        totalBytes += file.size;
+        selectedImages.push({ file, previewUrl: URL.createObjectURL(file) });
       }
 
-      if (file.size > MAX_FILE_BYTES) {
-        showStatus('Bildet er for stort. Maks størrelse er 15 MB.', 'error');
-        return;
+      cameraInput.value = '';
+      galleryInput.value = '';
+      renderSelectedImages();
+
+      if (messages.length > 0) {
+        showStatus(messages[0], 'error');
+      } else {
+        hideStatus();
       }
 
-      selectedFile = file;
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-      previewUrl = URL.createObjectURL(file);
-      previewImage.src = previewUrl;
-      picker.classList.add('has-preview');
-      submitButton.disabled = false;
-      hideStatus();
-      focusGuestNameOnMobile();
+      if (hadNoImages && selectedImages.length > 0) focusGuestNameOnMobile();
     }
 
-    function resetFile(clearStatus = true) {
-      selectedFile = null;
+    function resetFiles(clearStatus = true) {
+      for (const selectedImage of selectedImages) URL.revokeObjectURL(selectedImage.previewUrl);
+      selectedImages = [];
       cameraInput.value = '';
       galleryInput.value = '';
       picker.classList.remove('has-preview');
-      submitButton.disabled = true;
-      previewImage.removeAttribute('src');
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-      previewUrl = null;
+      previewGrid.replaceChildren();
+      previewSummary.textContent = '';
+      updateSubmitButton();
       if (clearStatus) hideStatus();
     }
 
     function setUploading(isUploading) {
-      submitButton.disabled = isUploading || !selectedFile;
-      submitButton.textContent = isUploading ? 'Laster opp …' : 'Last opp bilde';
+      submitButton.disabled = isUploading || selectedImages.length === 0;
+      submitButton.textContent = isUploading
+        ? `Laster opp ${selectedImages.length} ${selectedImages.length === 1 ? 'bilde' : 'bilder'} …`
+        : getSubmitText();
       cameraInput.disabled = isUploading;
       galleryInput.disabled = isUploading;
+      addCameraButton.disabled = isUploading;
+      addGalleryButton.disabled = isUploading;
+      changeButton.disabled = isUploading;
+    }
+
+    function renderSelectedImages() {
+      previewGrid.replaceChildren();
+
+      if (selectedImages.length === 0) {
+        picker.classList.remove('has-preview');
+        previewSummary.textContent = '';
+        updateSubmitButton();
+        return;
+      }
+
+      for (const selectedImage of selectedImages) {
+        const item = document.createElement('div');
+        item.className = 'preview-item';
+        const image = document.createElement('img');
+        image.className = 'preview-image';
+        image.src = selectedImage.previewUrl;
+        image.alt = selectedImage.file.name || 'Valgt bilde';
+        item.append(image);
+        previewGrid.append(item);
+      }
+
+      picker.classList.add('has-preview');
+      previewSummary.textContent = `${selectedImages.length} ${selectedImages.length === 1 ? 'bilde' : 'bilder'} klare for opplasting`;
+      updateSubmitButton();
+    }
+
+    function getSelectedTotalBytes() {
+      return selectedImages.reduce((sum, selectedImage) => sum + selectedImage.file.size, 0);
+    }
+
+    function isSelectableImageFile(file) {
+      if (file.type.startsWith('image/')) return true;
+
+      return SUPPORTED_IMAGE_EXTENSIONS.test(file.name || '');
+    }
+
+    function updateSubmitButton() {
+      submitButton.disabled = selectedImages.length === 0;
+      submitButton.textContent = getSubmitText();
+    }
+
+    function getSubmitText() {
+      return selectedImages.length > 1 ? `Last opp ${selectedImages.length} bilder` : 'Last opp bilde';
     }
 
     function showStatus(message, type = '') {

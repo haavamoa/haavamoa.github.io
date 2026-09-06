@@ -1,5 +1,7 @@
 const MAX_FILE_BYTES = 15 * 1024 * 1024;
-const MAX_REQUEST_BYTES = MAX_FILE_BYTES + 1024 * 1024;
+const MAX_FILES = 12;
+const MAX_TOTAL_FILE_BYTES = 60 * 1024 * 1024;
+const MAX_REQUEST_BYTES = MAX_TOTAL_FILE_BYTES + 2 * 1024 * 1024;
 const ADMIN_SESSION_SECONDS = 18 * 60 * 60;
 
 export default {
@@ -69,7 +71,11 @@ export default {
 
     const contentLength = Number(request.headers.get("Content-Length") ?? 0);
     if (contentLength > MAX_REQUEST_BYTES) {
-      return jsonResponse({ error: "Bildet er for stort. Maks størrelse er 15 MB." }, 413, corsHeaders);
+      return jsonResponse(
+        { error: "Opplastingen er for stor. Maks 12 bilder og 60 MB totalt." },
+        413,
+        corsHeaders,
+      );
     }
 
     let formData;
@@ -79,74 +85,156 @@ export default {
       return jsonResponse({ error: "Kunne ikke lese opplastingen." }, 400, corsHeaders);
     }
 
-    const image = formData.get("image");
-    if (!(image instanceof File) || image.size === 0) {
-      return jsonResponse({ error: "Velg et bilde først." }, 400, corsHeaders);
+    const images = getUploadedImages(formData);
+    if (images.length === 0) {
+      return jsonResponse({ error: "Velg minst ett bilde først." }, 400, corsHeaders);
     }
 
-    if (image.size > MAX_FILE_BYTES) {
-      return jsonResponse({ error: "Bildet er for stort. Maks størrelse er 15 MB." }, 413, corsHeaders);
+    if (images.length > MAX_FILES) {
+      return jsonResponse({ error: "Du kan laste opp maks 12 bilder samtidig." }, 413, corsHeaders);
     }
 
-    const imageType = await detectImageType(image);
-    if (!imageType) {
-      return jsonResponse(
-        { error: "Filtypen støttes ikke. Bruk JPEG, PNG, WebP, HEIC eller AVIF." },
-        415,
-        corsHeaders,
-      );
+    let totalBytes = 0;
+    const uploadImages = [];
+    for (const [index, image] of images.entries()) {
+      if (image.size === 0) {
+        return jsonResponse({ error: `Bilde ${index + 1} er tomt.` }, 400, corsHeaders);
+      }
+
+      if (image.size > MAX_FILE_BYTES) {
+        return jsonResponse(
+          { error: `Bilde ${index + 1} er for stort. Maks størrelse er 15 MB per bilde.` },
+          413,
+          corsHeaders,
+        );
+      }
+
+      totalBytes += image.size;
+      if (totalBytes > MAX_TOTAL_FILE_BYTES) {
+        return jsonResponse(
+          { error: "Bildene er for store samlet. Maks total størrelse er 60 MB." },
+          413,
+          corsHeaders,
+        );
+      }
+
+      const imageType = await detectImageType(image);
+      if (!imageType) {
+        return jsonResponse(
+          { error: `Bilde ${index + 1} har en filtype som ikke støttes.` },
+          415,
+          corsHeaders,
+        );
+      }
+
+      uploadImages.push({ image, imageType });
     }
 
     const guestName = cleanGuestName(formData.get("name"));
     const greeting = cleanGreeting(formData.get("greeting"));
-    const date = new Date().toISOString().slice(0, 10);
-    const assetName = `bryllup-${date}-${crypto.randomUUID()}.${imageType.extension}`;
     const assetLabel = greeting
       ? `Hilsen fra ${guestName || "en gjest"}: ${greeting}`
       : guestName
         ? `Bilde fra ${guestName}`
         : "Bilde fra en gjest";
-    const uploadUrl = new URL(
-      `https://uploads.github.com/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/releases/${encodeURIComponent(env.GITHUB_RELEASE_ID)}/assets`,
+
+    const uploadedAssetIds = [];
+    for (const { image, imageType } of uploadImages) {
+      const uploadResult = await uploadReleaseAsset(env, image, imageType, assetLabel);
+      if (!uploadResult.ok) {
+        console.error(`GitHub-opplasting feilet (${uploadResult.status}): ${uploadResult.error}`);
+        const cleanupSucceeded = await deleteReleaseAssets(env, uploadedAssetIds);
+        return jsonResponse(
+          {
+            error: cleanupSucceeded
+              ? "GitHub tok ikke imot alle bildene. Ingen bilder ble lagret. Prøv igjen om litt."
+              : `${uploadedAssetIds.length} av ${uploadImages.length} bilder kan ha blitt lagret. Sjekk bildeoversikten før du prøver igjen.`,
+            uploaded: cleanupSucceeded ? 0 : uploadedAssetIds.length,
+          },
+          502,
+          corsHeaders,
+        );
+      }
+      if (uploadResult.assetId) uploadedAssetIds.push(uploadResult.assetId);
+    }
+
+    return jsonResponse(
+      {
+        message: uploadImages.length === 1
+          ? "Bildet er lastet opp. Tusen takk!"
+          : `${uploadImages.length} bilder er lastet opp. Tusen takk!`,
+        uploaded: uploadImages.length,
+      },
+      201,
+      corsHeaders,
     );
-    uploadUrl.searchParams.set("name", assetName);
-    uploadUrl.searchParams.set("label", assetLabel);
-
-    let githubResponse;
-    try {
-      githubResponse = await fetch(uploadUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-          "Content-Type": imageType.contentType,
-          "User-Agent": "bryllupsbilder-worker",
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
-        body: image.stream(),
-      });
-    } catch (error) {
-      console.error("Kunne ikke kontakte GitHub:", error);
-      return jsonResponse(
-        { error: "Kunne ikke kontakte GitHub. Prøv igjen om litt." },
-        502,
-        corsHeaders,
-      );
-    }
-
-    if (!githubResponse.ok) {
-      const githubError = await githubResponse.text();
-      console.error(`GitHub-opplasting feilet (${githubResponse.status}): ${githubError}`);
-      return jsonResponse(
-        { error: "GitHub tok ikke imot bildet. Prøv igjen om litt." },
-        502,
-        corsHeaders,
-      );
-    }
-
-    return jsonResponse({ message: "Bildet er lastet opp. Tusen takk!" }, 201, corsHeaders);
   },
 };
+
+function getUploadedImages(formData) {
+  const images = formData.getAll("images").filter((value) => value instanceof File);
+  if (images.length > 0) return images;
+
+  return formData.getAll("image").filter((value) => value instanceof File);
+}
+
+async function uploadReleaseAsset(env, image, imageType, assetLabel) {
+  const date = new Date().toISOString().slice(0, 10);
+  const assetName = `bryllup-${date}-${crypto.randomUUID()}.${imageType.extension}`;
+  const uploadUrl = new URL(
+    `https://uploads.github.com/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/releases/${encodeURIComponent(env.GITHUB_RELEASE_ID)}/assets`,
+  );
+  uploadUrl.searchParams.set("name", assetName);
+  uploadUrl.searchParams.set("label", assetLabel);
+
+  try {
+    const response = await fetch(uploadUrl, {
+      method: "POST",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+        "Content-Type": imageType.contentType,
+        "User-Agent": "bryllupsbilder-worker",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: image.stream(),
+    });
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        status: response.status,
+        error: await response.text().catch(() => "Ukjent GitHub-feil."),
+      };
+    }
+
+    const asset = await response.json().catch(() => ({}));
+    return { ok: true, assetId: Number(asset.id) || null };
+  } catch (error) {
+    console.error("Kunne ikke kontakte GitHub:", error);
+    return { ok: false, status: 502, error: "Kunne ikke kontakte GitHub." };
+  }
+}
+
+async function deleteReleaseAssets(env, assetIds) {
+  let cleanupSucceeded = true;
+
+  for (const assetId of assetIds) {
+    const response = await githubFetch(
+      `https://api.github.com/repos/${encodeURIComponent(env.GITHUB_OWNER)}/${encodeURIComponent(env.GITHUB_REPO)}/releases/assets/${assetId}`,
+      env.GITHUB_TOKEN,
+      "application/vnd.github+json",
+      { method: "DELETE" },
+    );
+
+    if (!response.ok) {
+      cleanupSucceeded = false;
+      console.error(`Kunne ikke rydde opp GitHub-asset ${assetId} (${response.status}): ${await response.text()}`);
+    }
+  }
+
+  return cleanupSucceeded;
+}
 
 function getAllowedOrigin(origin, configuredOrigins = "") {
   const origins = configuredOrigins

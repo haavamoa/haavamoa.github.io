@@ -1,8 +1,8 @@
 # Opplasting av bryllupsbilder
 
 Gjestene laster opp fra GitHub Pages uten GitHub-konto. En Cloudflare Worker
-validerer forespørselen og sender bildet videre som en asset i en GitHub Release.
-GitHub-tokenet finnes bare som en Worker-hemmelighet.
+validerer forespørselen og sender hvert bilde videre som en egen asset i en
+GitHub Release. GitHub-tokenet finnes bare som en Worker-hemmelighet.
 
 Oppsettet kan hostes gratis for normal bruk i et bryllup:
 
@@ -16,9 +16,13 @@ Oppsettet kan hostes gratis for normal bruk i et bryllup:
 Cloudflare- og GitHub-konto kreves bare av den som setter opp løsningen.
 Worker-en begrenser automatisk antall opplastinger per nettleser og per
 Cloudflare-lokasjon. Gjestene trenger ikke gjøre noe for denne kontrollen.
-På mobil begrenses bildeforhåndsvisningen til 250 piksler. Etter bildevalg får
-navnefeltet fokus og scrolles mykt til midten av skjermen, slik at navn og
-opplastingsknapp er tilgjengelige uten manuell scrolling.
+Gjestene kan ta eller velge flere bilder før de trykker **Last opp**. Hvert
+bilde lagres som en egen Release-asset, men navn og hilsen brukes på alle
+bildene i samme opplasting. En opplasting kan inneholde maks 12 bilder, maks
+15 MB per bilde og maks 60 MB samlet. På mobil vises valgte bilder som en
+kompakt miniatyrkø. Etter første bildevalg får navnefeltet fokus og scrolles
+mykt til midten av skjermen, slik at navn og opplastingsknapp er tilgjengelige
+uten manuell scrolling.
 Alle opplastede bilder vises med 10 piksler avrundede hjørner i
 forhåndsvisning, administrasjon, slideshow, spotlight og returanimasjon.
 Gjestene kan også skrive en valgfri hilsen på inntil 140 tegn. Navn og hilsen
