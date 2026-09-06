@@ -18,9 +18,11 @@ Worker-en begrenser automatisk antall opplastinger per nettleser og per
 Cloudflare-lokasjon. Gjestene trenger ikke gjøre noe for denne kontrollen.
 Gjestene kan ta eller velge flere bilder før de trykker **Last opp**. Hvert
 bilde lagres som en egen Release-asset, men navn og hilsen brukes på alle
-bildene i samme opplasting. Gjestene kan velge en stor bildekø; nettsiden deler
-den automatisk i trygge delopplastinger på maks 30 bilder eller 80 MB hver.
-Enkeltbilder kan være opptil 30 MB. På mobil vises valgte bilder som en kompakt
+bildene i samme opplasting. Gjestene kan velge en stor bildekø; nettsiden sender
+ett bilde per delopplasting med både gammelt og nytt skjemafelt (`image` og
+`images`), slik at den fungerer mot både gammel og ny Worker-kontrakt.
+Enkeltbilder kan være opptil 30 MB. Hvis rate limit nås, venter siden og prøver
+neste delopplasting igjen. På mobil vises valgte bilder som en kompakt
 miniatyrkø. Etter første bildevalg får navnefeltet fokus og scrolles mykt til
 midten av skjermen, slik at navn og opplastingsknapp er tilgjengelige uten
 manuell scrolling.

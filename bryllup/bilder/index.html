@@ -458,8 +458,8 @@
   <script>
     const MAX_FILE_BYTES = 30 * 1024 * 1024;
     const MAX_SELECTION_FILES = 250;
-    const MAX_UPLOAD_BATCH_FILES = 30;
-    const MAX_UPLOAD_BATCH_BYTES = 80 * 1024 * 1024;
+    const MAX_UPLOAD_BATCH_FILES = 1;
+    const MAX_UPLOAD_BATCH_BYTES = 30 * 1024 * 1024;
     const SUPPORTED_IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|heic|heif|avif)$/i;
     const uploadEndpoint = document.querySelector('meta[name="upload-endpoint"]').content;
     const form = document.getElementById('uploadForm');
@@ -625,17 +625,28 @@
     async function uploadBatch(batch, name, greeting) {
       const formData = new FormData();
       for (const selectedImage of batch) {
+        formData.append('image', selectedImage.file, selectedImage.file.name);
         formData.append('images', selectedImage.file, selectedImage.file.name);
       }
       formData.append('name', name);
       formData.append('greeting', greeting);
 
-      const response = await fetch(uploadEndpoint, {
-        method: 'POST',
-        headers: { 'X-Upload-Client': uploadClientId },
-        body: formData,
-      });
-      const result = await response.json().catch(() => ({}));
+      let response;
+      let result;
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        response = await fetch(uploadEndpoint, {
+          method: 'POST',
+          headers: { 'X-Upload-Client': uploadClientId },
+          body: formData,
+        });
+        result = await response.json().catch(() => ({}));
+
+        if (response.status !== 429 || attempt > 0) break;
+
+        const retryAfterSeconds = Math.min(Number(response.headers.get('Retry-After')) || 60, 90);
+        showStatus(`Det lastes opp mange bilder akkurat nå. Venter ${retryAfterSeconds} sekunder før neste forsøk …`);
+        await wait(retryAfterSeconds * 1000);
+      }
 
       if (!response.ok) {
         throw new Error(result.error || 'Opplastingen mislyktes. Prøv igjen.');
@@ -713,6 +724,10 @@
       return count === 1
         ? 'Bildet er lastet opp. Tusen takk!'
         : `${count} bilder er lastet opp. Tusen takk!`;
+    }
+
+    function wait(milliseconds) {
+      return new Promise((resolve) => setTimeout(resolve, milliseconds));
     }
 
     function updateSubmitButton() {
